@@ -31,8 +31,10 @@ class ChangePasswordRequest extends FormRequest {
 
         return [
             'current_password' => 'required|current_password_match',
-            'new_password' => 'required|min:6|max:12|regex:/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'confirm_password' => 'required|min:6|max:12|regex:/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/|same:new_password'
+            //'new_password' => 'required|min:6|max:12|regex:/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            //'confirm_password' => 'required|min:6|max:12|regex:/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/|same:new_password'
+            'new_password' => 'required|min:6|max:12',
+            'confirm_password' => 'required|min:6|max:12|same:new_password'
         ];
     }
 

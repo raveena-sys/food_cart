@@ -42,36 +42,5 @@ class User extends Authenticatable
     {
         return  'Asia/kolkata';
     }
-    public function companyDetails()
-    {
-        return $this->hasOne('App\Models\Company', 'user_id');
-    }
 
-    public function employeeDetails()
-    {
-        return $this->hasOne('App\Models\Employee', 'user_id');
-    }
-
-    public function managerDetails()
-    {
-        return $this->hasOne('App\Models\Manager', 'user_id');
-    }
-
-    public function userAvialbility()
-    {
-        return $this->hasOne('App\Models\UserAvailability', 'user_id');
-    }
-
-    public function userAvialbilities()
-    {
-        return $this->hasMany('App\Models\UserAvailability', 'user_id');
-    }
-    public function userRating()
-    {
-        return $this->hasOne('App\Models\Reviews', 'to_id');
-    }
-    public function userJobBids()
-    {
-        return $this->hasMany('App\Models\JobBid', 'user_id');
-    }
 }

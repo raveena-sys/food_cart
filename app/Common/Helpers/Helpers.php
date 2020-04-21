@@ -9,13 +9,6 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
-use App\Models\Company;
-use App\Models\Manager;
-use App\Models\Reviews;
-use App\Models\Employee;
-use App\Models\JobBid;
-use App\Models\Job;
-use App\Models\JobInvitation;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 

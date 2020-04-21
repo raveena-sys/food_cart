@@ -57,7 +57,7 @@
                             </button>
                         </div>
                     </form>
-                    {!! JsValidator::formRequest('Modules\Store\Http\Requests\ChangePasswordRequest','#change_password_form') !!}
+                    {!! JsValidator::formRequest('Modules\Admin\Http\Requests\ChangePasswordRequest','#change_password_form') !!}
                 </div>
             </div>
             <!-- xx -->

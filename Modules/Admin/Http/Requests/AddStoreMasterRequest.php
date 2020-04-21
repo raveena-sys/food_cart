@@ -66,8 +66,7 @@ class AddStoreMasterRequest extends FormRequest
             'image' => 'nullable|mimes:jpeg,jpg,png,gif',
             // 'image' => 'required',
         ];
-   /*     Rule::unique('users')->where(function ($query) use ($request) {
-return $query->where('company_id', $request->comp   any_id); })],*/
+   
     }
 
     public function messages()

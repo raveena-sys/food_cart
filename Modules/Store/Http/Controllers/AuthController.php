@@ -6,12 +6,12 @@ use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Store\Http\Requests\LoginRequest;
+use Modules\Admin\Http\Requests\LoginRequest;
 
-use Modules\Store\Http\Requests\ChangePasswordRequest;
-use Modules\Store\Http\Requests\UpdateProfileRequest;
+use Modules\Admin\Http\Requests\ChangePasswordRequest;
+use Modules\Admin\Http\Requests\UpdateProfileRequest;
 use App\Repositories\UserRepository;
-use Modules\Store\Http\Requests\ResetPasswordRequest;
+use Modules\Admin\Http\Requests\ResetPasswordRequest;
 use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use File;

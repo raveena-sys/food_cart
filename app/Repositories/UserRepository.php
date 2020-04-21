@@ -5,13 +5,6 @@ namespace App\Repositories;
 use App\EmailQueue\CreateVerifyAccount;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 use App\Models\User;
-use App\Models\Company;
-use App\Models\Manager;
-use App\Models\Employee;
-use App\Models\UserAvailability;
-use App\Models\Job;
-use App\Models\UserReferral;
-use App\Models\UserSubscriptionPayment;
 use App\Models\StoreMaster;
 use File;
 use DB;
@@ -34,17 +27,11 @@ class UserRepository
      * @return string
      *  Return the model
      */
-    private $user, $company, $manager, $employee, $userAvailability, $userReferral;
+    private $user;
 
-    public function __construct(User $user, Company $company, Manager $manager, Employee $employee, UserAvailability $userAvailability, UserReferral $userReferral, UserSubscriptionPayment $userSubscriptionPayment)
+    public function __construct(User $user)
     {
         $this->user = $user;
-        $this->company = $company;
-        $this->manager = $manager;
-        $this->employee = $employee;
-        $this->userAvailability = $userAvailability;
-        $this->userReferral = $userReferral;
-        $this->userSubscriptionPayment = $userSubscriptionPayment;
     }
 
     /**
@@ -132,7 +119,8 @@ class UserRepository
             }
             $user->name = $request->name;
             $user->save();
-            return redirect('store/profile-setting')->with('success', 'Profile updated successfully.');
+            $segment = $request->segment(1);
+            return redirect($segment.'/profile-setting')->with('success', 'Profile updated successfully.');
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -214,7 +202,8 @@ class UserRepository
         try {
             $user = Auth::user();
             $user->update(array('password' => bcrypt($request['new_password'])));
-            return redirect('store/change-password')->with('success', 'Password updated successfully.');
+            $segment = $request->segment(1);
+            return redirect($segment.'/change-password')->with('success', 'Password updated successfully.');
         } catch (\Exception $e) {
             return json_encode(array('success' => false, 'message' => $e->getMessage()));
         }

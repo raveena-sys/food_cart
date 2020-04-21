@@ -117,7 +117,9 @@
           ${{Session::get('delCharge')}}
         </div>
       </div>
-            
+      @php 
+        $subtotal +=  Session::get('delCharge');
+      @endphp
       @endif
       <div class="totalPrice__inner">
         <div class="left">

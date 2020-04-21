@@ -43,7 +43,7 @@
                         </button>
                     </div>
                 </form>
-                {!! JsValidator::formRequest('Modules\Store\Http\Requests\LoginRequest','#loginForm') !!}
+                {!! JsValidator::formRequest('Modules\Admin\Http\Requests\LoginRequest','#loginForm') !!}
             </div>
             <div class="common forgot_password">
                 <h6>Forgot Password</h6>
@@ -64,7 +64,7 @@
                     </button>
                     </div>
                 </form>
-                {!! JsValidator::formRequest('Modules\Store\Http\Requests\ForgotPasswordRequest','#forgotPasswordForm') !!}
+                {!! JsValidator::formRequest('Modules\Admin\Http\Requests\ForgotPasswordRequest','#forgotPasswordForm') !!}
             </div>
         </div>
     </main>

@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('profile-setting', ['as' => 'profile-setting', 'uses' => 'AuthController@index']);
     Route::post('profile-update', ['as' => 'profile-update', 'uses' => 'AuthController@updateProfile']);
     Route::get('/change-password', function () {
-        return view('store::change-password.index');
+        return view('admin::change-password.index');
     });
 
     Route::post('update-password', ['as' => 'update-password', 'uses' => 'AuthController@updatePassword']);
@@ -42,10 +42,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('getStateList', 'StoreMasterController@getStateList');
     Route::get('getCityList', 'StoreMasterController@getCityList');
     
-    /*================ End Manage Company Routes ================*/
-
-
-
+    Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
     /*================ Start Manage CMS Routes ================*/
     Route::group(['prefix' => 'manage-cms'], function () {
         Route::get('/', ['as' => 'manage-cms', 'uses' => 'CmsController@index']);
