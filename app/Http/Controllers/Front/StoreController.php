@@ -304,9 +304,9 @@ class StoreController extends Controller
           }
         }
       }
-
+      $subcategory = SubCategory::where(['category_id' => Session::get('category_id'), 'status' => 'active'])->orderby('id')->get();
       $html = view('front.ajax.cart_item', compact('products'))->render();
-      $product_html = view('front.ajax.product_item', compact('products'))->render();
+      $product_html = view('front.ajax.product_item', compact('products', 'subcategory'))->render();
       if($seg == 'checkout'){
         $html = view('front.ajax.checkout_item', compact('products'))->render();
       }
@@ -367,8 +367,10 @@ class StoreController extends Controller
           }
         }
       }
+
+      $subcategory = SubCategory::where(['category_id' => Session::get('category_id'), 'status' => 'active'])->orderby('id')->get();
       $html = view('front.ajax.cart_item', compact('products'))->render();
-      $product_html = view('front.ajax.product_item', compact('products'))->render();
+      $product_html = view('front.ajax.product_item', compact('products', 'subcategory'))->render();
       if($seg == 'checkout'){
         $html = view('front.ajax.checkout_item', compact('products'))->render();
       }
