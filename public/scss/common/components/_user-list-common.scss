@@ -1,0 +1,275 @@
+.common-user-list{
+	&.nouser-avtar{
+		ul{
+			li{
+				 &:first-child{
+				 	padding-left: 45px;
+				 	.icon{
+				 		left: 0;
+				 	}
+				 }
+			}
+		}
+	}
+  	ul{
+	    li{
+			position: relative; max-width: 25%;
+			&:not(:first-child){
+				border-left: 1px solid $border-color;margin-left: 30px; padding-left: 65px;
+			}
+			&:not(:last-child){
+				margin-bottom: 10px;
+			}
+			.user-image {
+				position: absolute;left: 0; top: -4px; height: 50px;width: 50px; border-radius: 50%;overflow: hidden;
+				img{
+				  height: 100%;width: 100%;
+				}
+			}
+			.icon{
+				position: absolute;left: 20px;transform: translate(0,-50%);top: 50%;
+				i{
+				 font-size: 28px; color: $border-color;
+				}
+			}
+			span{
+				display: block; font-size: 13px; font-family: $font-med; color: $grey-light;
+			}
+			strong{
+				font-size: 18px; font-family:$font-black; @include text-overflow(); width: 100%; display: block;
+			}
+			&.list-user{
+				padding-left: 70px;
+			}
+	    }
+	    &.without-icon{
+	      li{
+	        &:not(:first-child){
+	          padding-left: 30px;
+	        }
+	      }
+	    }
+	}
+	&.active{
+		ul{
+		  li{
+		    .icon{
+		      i{
+		        color: $theme-color;
+		      }
+		    }
+		  }
+		}
+	}
+	&.borrower-detail{
+		padding-left: 0; padding-top: 0;
+		ul{
+		  li{
+		    &:first-child{
+		      padding-left: 40px;
+		      .icon{
+		        left: 0;
+		      }
+		    }
+		  }
+		}
+	}
+	@media(max-width:1800px){
+	  	ul{
+		    li{
+		      &:not(:first-child){
+		        margin-left: 20px; padding-left: 45px;
+		      }
+		      .icon{
+		        position: absolute;left: 10px;
+		      }
+		    }
+		    &.without-icon{
+		      li{
+		        &:not(:first-child){
+		          padding-left: 20px;
+		        }
+		      }
+		    }
+		}
+  	}
+  	@media(max-width:1600px){
+	  	ul{
+		    li{
+				&:not(:first-child){
+					margin-left: 15px; padding-left: 40px;
+				}
+				.icon{
+					i{
+						font-size: 20px;
+					}
+				}
+				&.list-user{
+					padding-left: 50px;
+				}
+				.user-image {
+					height: 40px;width: 40px;
+				}
+		    }
+		}
+		&.borrower-detail{
+			ul{
+				li{
+					&:first-child{
+					  padding-left: 30px;
+					}
+				}
+			}
+		}
+  	}
+  	@media(max-width:1440px){
+	  	ul{
+	  		padding: 0;
+		    li{
+		    	width: 46%; max-width: 50%;
+		    	&:nth-child(odd) {
+				   border: 0;
+				}
+				&:not(:first-child){
+					margin-left: 0px; padding-left: 40px;
+				}
+				&:not(:last-child){
+					margin-bottom: 15px;
+				}
+				.icon{
+					i{
+						font-size: 20px;
+					}
+				}
+				.user-image {
+					top: 0;
+				}
+
+				strong{
+					font-size: 16px;
+				}
+		    }
+		    &.without-icon{
+				li{
+					&:not(:first-child){
+					  padding-left: 15px;
+					}
+				}
+		    }
+		}
+		&.nouser-avtar{
+			ul{
+				li{
+					&:first-child{
+						padding-left: 40px;
+						.icon{
+					       left: 10px;
+					    }
+				 	}
+				}
+			}
+		}
+  	}
+  	@media (min-width:992px) and (max-width:1440px){
+		ul{
+			&.without-icon{
+				li{
+					width: 32%;
+					&:nth-child(3n) {
+					   border-left: 1px solid $border-color;
+					}
+				}
+			}
+		}
+		&.borrower-detail{
+			ul{
+				li{
+					width: 32%;
+					&:nth-child(3n) {
+					   border-left: 1px solid $border-color;
+					}
+				}
+			}
+		}
+  	}
+  	@include media-breakpoint-down(md){
+  		ul{
+		    li{
+				strong{
+					font-size: 15px;
+				}
+		    }
+		    &.without-icon{
+				li{
+					&:nth-child(3){
+					  padding-left: 0;
+					}
+				}
+		    }
+		}
+		&.borrower-detail{
+			ul{
+				li{
+					&:nth-child(3n) {
+						padding-left: 30px;
+					   .icon{
+					   	left: 0;
+					   }
+					}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(sm){
+  		ul{
+		    li{
+				strong{
+					font-size: 14px;
+				}
+		    }
+		}
+	}
+	@media(max-width:375px){
+  		ul{
+		    li{
+		    	width: 100%;border: 0; max-width: 100%;
+				&:not(:last-child){
+					margin-bottom: 10px;
+				}
+				&:not(:first-child){
+					border: 0; padding-left: 30px;
+				}
+				.icon{
+					left: 0;
+				}
+		    }
+		    &.without-icon{
+				li{
+					&:not(:first-child){
+					  padding-left: 0;
+					}
+				}
+		    }
+		}
+		&.borrower-detail{
+			ul{
+			  li{
+			    &:first-child{
+			      padding-left:30px;
+			    }
+			  }
+			}
+		}
+		&.nouser-avtar{
+			ul{
+				li{
+					&:first-child{
+						.icon{
+					       left: 0px;
+					    }
+				 	}
+				}
+			}
+		}
+	}
+}

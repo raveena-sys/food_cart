@@ -1,0 +1,237 @@
+.login-body{
+    .login-page{
+        min-height:100vh;
+        /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#3cc9d7+0,11c5d6+100 */
+        background: #3cc9d7; /* Old browsers */
+        background: -moz-linear-gradient(top,  #3cc9d7 0%, #11c5d6 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top,  #3cc9d7 0%,#11c5d6 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,  #3cc9d7 0%,#11c5d6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3cc9d7', endColorstr='#11c5d6',GradientType=0 ); /* IE6-9 */
+
+        background-repeat:no-repeat;
+        .login-wrap{
+            position: relative;
+            .logo{
+                margin-bottom:40px;
+                img{max-height:80px;}
+            }
+            .login-header{ 
+                position: absolute;width:320px;background-color:$theme-color;top:0;left:0;right:0;margin:0 auto; padding: 15px 0;
+                @include translate(0, -50%);height: 85px;
+                img{
+                    max-width:220px;
+                }
+            }
+            .common{
+                padding:30px 20px; background-color:white;width:360px;border-radius: 20px;
+                @include box-shadow(0, 0 ,30px , lighten($black , 80%));
+                .title{font-size:26px; color:#6F5655; margin-bottom:25px; font-family: $font-black;}z-index: 2;
+                .forgotpassword{ 
+                    position: absolute; right: -40px;  bottom: -10px;vertical-align:middle;
+                    font-size: 16px;color:$theme-color; font-family:$font-med;z-index: 3;
+                    a{
+                        background-color:$theme-color;  width: 38px;  height: 38px;  border-radius: 50%;  border: 4px solid white;
+                        display: inline-block;     text-align: center;    line-height: 32px;vertical-align:middle;
+                        &:before{
+                            content:"\ed78";font-family: 'icomoon'; font-size: 16px;color: white;
+                        }
+                    }
+                    &.forgotpassword_hover{
+                        a{
+                            background-color:$grey;
+                            &:before{content:"\ea64";} 
+                        }
+                    }
+                }
+                .form-group{
+                    &:not(:last-child){
+                        margin-bottom: 20px;
+                    }
+                    .custom-checkbox {
+                        .custom-control-label {
+                            span{
+                                top: 1px;
+                            }
+                        }
+                    }
+                    .form-control{
+                        background-color:white; border:0; border-bottom:1px solid $grey; border-radius: 0;
+                        padding-left:0; font-size: 14px;
+                    }
+                }
+                .btn-success{
+                    margin-top:10px;
+                    min-width: 130px;
+                }
+                .btn-danger{
+                    // @include absolutecenter(x);  bottom: -15px;  
+                    border-radius: 30px;  padding: 10px 30px; 
+                }
+                &.forgot_password{
+                    h6{font-size:26px; color:#6F5655; margin-bottom: 40px; font-family: $font-black;} 
+                    @include absolutecenter(y); right: 0; z-index: 1;width: 390px; padding-left: 40px; padding-right: 40px;
+                    visibility: hidden; opacity: 0; @include transition(all 0.5s);
+                    &.open{
+                        right: -375px; visibility: visible; opacity: 1;
+                    }
+                }
+                &.disabled{
+                    position: relative;
+                    &:before{
+                        content: "";background: white;opacity: 0.8; width: 100%;height: 100%; pointer-events:none;position: absolute;
+                        top: 0; left: 0;z-index: 2;border-radius: 30px;
+                   }
+                   input, .btn, .custom-checkbox{pointer-events:none;}
+                }
+            }
+            .login-footer{
+                background:$theme-color;text-align: center;
+                a{
+                    display:inline-block;color:white;font-family:$font-black;display:block;padding:20px 10px;
+                    i{
+                        margin-left:5px;right:0px;position:relative;@include transition(0.3s);
+                    }
+                    &:hover{
+                        text-decoration:none;
+                        i{
+                            right:-5px;@include transition(0.3s);
+                        }
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(lg){
+            .login-wrap{
+                .logo{
+                    margin-bottom:20px;
+                    img{max-height:70px;}
+                }
+                .login{
+                    display:block;
+                    &.disabled{display:none;}
+                }
+                .login-header{
+                    height: auto;
+                    img{
+                        max-width:110px;
+                    }
+                }
+                .login-footer{
+                    a{
+                        padding:18px 10px;
+                    }
+                }
+                .forgot_password{
+                    &.open{
+                        .forgotpassword{
+                           bottom:-35px;
+                        }   
+                    }
+                    &.forgot_password{
+                        right:0;
+                        &.open{z-index:2;right: -25px;}
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-between(md, lg){
+            .login-wrap{
+                width:350px;
+                .login-header{
+                    width:320px;
+                }
+                .login-field{
+                    padding:70px 20px 20px;
+                }
+                .common{
+                    .title{
+                        font-size:24px;margin-bottom:20px;
+                    }
+                    .forgotpassword{
+                        span{font-size:15px;}
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(sm){
+            .login-wrap{
+                width:300px;
+                .logo{
+                    margin-bottom:25px;
+                    img{max-height:60px;}
+                }
+                &.shadow_body{
+                    h1{
+                        font-size:15px;
+                    }
+                }
+                .common {
+                    width:100%;
+                        &.forgot_password{
+                            padding-left:15px;
+                            padding-right:15px;
+                            h6{margin-bottom:25px;font-size:22px;}
+                        }
+                    .title{font-size:22px;}
+                    .forgot_password {
+                        font-size:22px;margin-bottom:20px;padding-left:25px;padding-right:25px;
+                        
+                        .forgotpassword{
+                            font-size:14px;right: -30px;
+                        }
+                    }
+                    .form-group {
+                        .custom-checkbox {
+                            .custom-control-label {
+                                font-size:14px;
+                                span{
+                                    font-size:14px;
+                                }
+                            }
+                        }
+                    }
+                    .forgotpassword{
+                        right: -10px;bottom: -4px;
+                        span{font-size:14px;}
+                        a{
+                             width:30px;height:30px;line-height:27px;border:2px solid white;
+                                &:before{
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                    }
+                .forgot_password{
+                    &.forgot_password{
+                            width:100%;
+                            &.open{
+                            right:0;
+                        }
+                    }
+                }
+                .login-header{
+                    width:270px;
+                }
+                .login-field{
+                    padding:40px 20px 10px;
+                    .btn-success{
+                        margin-top:0;
+                    }
+                }
+                .login-footer{
+                    a{
+                        padding:15px 10px;font-size: 13px;
+                    }
+                }
+            }
+        } 
+        @media (min-width:415px)and(max-width:736px) {
+            .login-wrap{
+                margin-top:20px;margin-bottom:20px;
+            }
+        } 
+    }
+}
+
+
+

@@ -1,0 +1,14 @@
+<svg id="loader" xmlns="http://www.w3.org/2000/svg" width="67" height="67" viewBox="0 0 67 67">
+  <g id="Group_2" data-name="Group 2">
+    <g id="Group_1" data-name="Group 1">
+      <path id="Path_1" data-name="Path 1" d="M33.5,0A2.5,2.5,0,0,0,31,2.5v17a2.5,2.5,0,0,0,5,0V2.5A2.5,2.5,0,0,0,33.5,0Z" fill="#3cc9d7"/>
+      <path id="Path_2" data-name="Path 2" d="M33.5,45A2.5,2.5,0,0,0,31,47.5v17a2.5,2.5,0,0,0,5,0v-17A2.5,2.5,0,0,0,33.5,45Z" fill="#3cc9d7"/>
+      <path id="Path_3" data-name="Path 3" d="M22,33.619a2.5,2.5,0,0,0-2.5-2.5H2.5a2.5,2.5,0,0,0,0,5h17A2.5,2.5,0,0,0,22,33.619Z" fill="#3cc9d7"/>
+      <path id="Path_4" data-name="Path 4" d="M64.5,31.119h-17a2.5,2.5,0,0,0,0,5h17a2.5,2.5,0,0,0,0-5Z" fill="#3cc9d7"/>
+      <path id="Path_5" data-name="Path 5" d="M14.079,9.6a2.5,2.5,0,1,0-3.535,3.535L22.565,25.156A2.5,2.5,0,1,0,26.1,21.621Z" fill="#3cc9d7"/>
+      <path id="Path_6" data-name="Path 6" d="M45.9,41.42a2.5,2.5,0,0,0-3.535,3.535L54.384,56.976a2.5,2.5,0,1,0,3.536-3.535Z" fill="#3cc9d7"/>
+      <path id="Path_7" data-name="Path 7" d="M22.564,42.127l-12.02,12.02a2.5,2.5,0,0,0,3.536,3.535L26.1,45.662a2.5,2.5,0,1,0-3.536-3.535Z" fill="#3cc9d7"/>
+      <path id="Path_8" data-name="Path 8" d="M42.363,25.863a2.5,2.5,0,0,0,3.536,0L57.92,13.842a2.5,2.5,0,1,0-3.535-3.535L42.363,22.328A2.5,2.5,0,0,0,42.363,25.863Z" fill="#3cc9d7"/>
+    </g>
+  </g>
+</svg>

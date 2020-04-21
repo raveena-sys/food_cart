@@ -1,0 +1,201 @@
+// form controls
+.form-group{
+  margin-bottom:25px;
+}
+.form-group, .input-group{
+  label{font-family:$font-black;color:#666666;font-size:12px;}
+     .form-control{
+        height:44px;color:black;font-size:14px; border-color:#e4e5ec; background-color:$white;
+        &:placeholder{
+          color:#777777;
+        }
+        &:focus{
+            outline:none;box-shadow:none;border-color:$theme-color;
+        }
+        &:valid, &:invalid{
+            &:focus{
+                outline:none;box-shadow:none;
+            }
+        } 
+        &[readonly]{
+          background-color:$light-gray;
+          &:focus{
+            border-color:$black;
+          }
+        }
+    }
+
+     textarea.form-control{height: auto;resize:none}
+    @include placeholder{
+        color:#777777;
+    }
+    .custom-file{
+      height: 44px;
+      label{
+        background-color:$white; height: 44px; border-color: #E2E2E2; padding:10px 10px; font-size: 14px; margin-bottom: 0;color:$grey;
+        &:after{
+          background-image: url("../images/input-file.png"); content: "" !important; background-repeat: no-repeat; background-position:center center;
+          border: 0;background-color:transparent; width: 40px; height: 44px;border-radius:50%;
+        }
+      }
+      .custom-file-input{cursor:pointer;}
+      .custom-file-input:focus ~ label{
+        border-color: $theme-color; box-shadow: none;
+      }
+    }
+    // for icon
+    .icon{
+      .form-control{
+        background-repeat:no-repeat;background-position: center right 9px;padding-right:30px;
+      }
+      &.calender-icon{
+        .form-control{
+          background-image:url('#{$imageurl}/calender.png');
+        }
+      }
+    }
+    @include media-breakpoint-down (sm){
+      margin-bottom: 15px;
+      .form-control{
+        height: 40px;
+      }
+      .custom-file{
+      height: 40px;
+      label{
+        height: 40px;line-height: 18px;
+        &:after{
+          height: 40px;
+        }
+      }
+    }
+    }
+    
+}
+
+// custom radio and checkbox
+.custom-checkbox,.custom-radio{
+    margin-top: 0px; padding-left: 0;
+    &.custom-control-inline{
+       &:last-child{margin-right: 0;}
+    }
+    .custom-control-input {
+      &:focus {
+        ~.custom-control-label {
+          &:before {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+    &.interactive-effect {
+      .custom-control-label {
+        &:after {
+          animation: radius-shadow 0.4s;
+        }
+      }
+    }
+    .custom-control-input:checked~.custom-control-label {
+      &:after {
+        background-image: none;
+       background-image: none;border-left: 2px solid $theme-color !important;border-bottom: 2px solid $theme-color !important;transform: rotate(-53deg);width: 12px;height: 7px;top: 7px;left: 5px;
+      }
+      &:before {
+        border-color: $theme-color !important;border-radius:3px;
+        background: transparent !important;
+      }
+    }
+    .custom-control-label {
+      width: 100%;
+      cursor: pointer;
+      color: #282828 !important;
+      position: initial;padding-left: 28px;
+      font-family: $font-book;font-size: 16px;
+      &:before {
+         content: ""; position: absolute; left: 0px; display: block; width: 22px;
+         height: 22px; border-radius: 3px; background: white; top: 1px; border: 2px solid #E2E2E2 !important;
+         cursor: pointer; transition: all 0.3s;
+
+      }
+      &:after {
+        content: ""; position: absolute; display: block; left:3px; top:4px; transition: all 0.3s; cursor: pointer;
+      }
+    }
+
+    &.custom-radio{
+      .custom-control-input:checked~.custom-control-label {
+        &:after {
+          background-color:$theme-color;background-image:none;
+        }
+        &:before {
+          border-color: $theme-color;border-radius:50%;background-color:transparent;
+        }
+      }
+        .custom-control-label {
+          &:before,&:after {
+            border-radius:50%;
+          }
+
+        &:after{
+          width:10px;height:10px;background-color:transparent;left:6px;top:7px;
+        }
+          
+        }
+    }
+}
+
+.uploaded-image-list{
+    position: relative;height: 96px; width: 96px; border-radius: 3px; display: inline-block; margin-bottom:10px;
+  &:not(:last-child){
+    margin-right: 10px;
+  }
+    label{
+      input{
+        position: absolute;left: 0;width: 100%;top: 0;height: 100%;z-index: 1;opacity: 0;
+        &:checked ~ .check-icon{
+          visibility: visible;
+        }
+      }
+      img{
+        width: 100%; border-radius: 3px;
+      }
+      .check-icon{
+          height: 40px;width: 40px;border-radius: 50px;position: absolute;top: 50%;left: 50%;text-align: center;font-size: 12px;line-height: 21px;cursor: pointer;z-index: 2;transform: translate(-50%,-50%);text-align: center;line-height: 40px;background: rgba(225,225,225,0.5);visibility: hidden;
+        img{
+          max-width: 25px;
+        }
+      }
+      &:hover{
+        .remove-icon{
+          opacity: 1;
+        }
+      }
+    }
+     .remove-icon{
+        height: 20px;width: 20px;background: $theme-color;color: white;border-radius: 50px;position: absolute;top: 5px;right: -10px;
+        text-align: center;font-size: 8px;line-height: 23px;text-align: center; cursor: pointer; z-index:2; @include transition(all 0.4s);
+      }
+  }
+.common-upload-box{
+  &.drag_drop{
+        padding:30px 42px;position: relative;border:2px dashed #EBEBEB;border-radius:3px;
+       p{
+      position: relative;  font-size: 14px; display: inline-block;  font-family: $font-black ; 
+        text-align: center; line-height: normal;margin:15px 0;
+      // font-family:$font-book;
+      span{
+        font-size:16px; cursor:pointer;
+      }
+    
+    }
+    a{
+      color: #858585;
+    }
+        input{
+          position: absolute; margin: 0; padding: 0;
+          width: 100%; height: 100%;  outline: none;  opacity: 0;
+          left:0;  top:0; z-index: 2;cursor:pointer;
+        }
+  }
+}
+
+

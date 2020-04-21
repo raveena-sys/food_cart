@@ -1,0 +1,318 @@
+.setting-page{
+    .setting-header{
+        padding: 40px 30px; background:$white; border-radius: 6px;
+        .setting-links{
+            text-align: right;
+            a{
+                color: $dark-blue; font-size: 15px; font-family: $font-heavy; text-decoration: underline;
+                &:hover{
+                    color: $theme-color;
+                }
+                &:not(:last-child){
+                    margin-right: 25px;
+                }
+            }
+        }
+        ul{
+            padding: 35px 0 0; margin-bottom: 0;
+            li{
+               position: relative; padding: 0 40px; vertical-align: top;
+                label{
+                    color: $grey-light; font-size: 14px; font-family:$font-med; margin-bottom: 0;
+                }
+                span{
+                    font-size: 20px; font-family:$font-heavy; display: block;
+                    max-width: 230px;
+                }
+                &:not(:last-child){
+                    &:after{
+                        position: absolute;content: '';right: 0;top: 0;width: 1px;background-color: #E9E9E9;height: 55px;
+                    }
+                }
+                &.user-item{
+                    padding-left: 160px;min-height: 93px;
+                    .user-image{
+                        height: 130px;width: 130px;position: absolute;overflow: hidden;border-radius: 50%;
+                        border: 2px solid $white; @include box-shadow(0,5px,11px,rgba(#111111,0.23));
+                        left: 0;top: -37px;
+                        img{
+                            height: 100%; width: 100%;
+                        }
+                    }
+                    @include media-breakpoint-only (md){
+                        + li{
+                            width: 100%;
+                            &:after{display: none;}
+                        }
+                    }
+                }
+                .switch{
+                    line-height: 0;
+                }
+                h5{
+                    color: $grey-dark;
+                }
+            }
+        }
+        .company-progress{
+            border-top: 1px solid $border-color; padding-top: 45px; margin-top: 40px;position: relative;
+            padding-right: 100px;
+            &.profile-progress{
+                padding-right: 160px;
+            }
+            .profile-right{
+                position: absolute;right: 0;bottom: 0;
+                .logout{
+                    font-size: 20px; font-family:$font-black; color: $theme-color;
+                    &:hover{
+                        color: $dark-blue;
+                    }
+                }
+                .delete-profile{
+                    color: #A2A2A2; font-size: 18px;
+                    &:hover{
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+        .bank-details{
+            ul{
+                margin: 0; padding: 0; display: flex;
+                li{
+                    padding: 0;border-right: 0; flex: 1 1 auto;
+                    &:not(:last-child){
+                        margin-right: 15px;
+                        &::after{
+                            display: none;
+                        }
+                    }
+                    span{
+                        max-width: 200px;
+                    }
+                }
+            }
+        }
+        .edit-btn{
+            color: $dark-blue; text-decoration: underline; font-family: $font-heavy;
+            &:hover{
+                color: $theme-color;
+            }
+        }
+    }
+    @media(max-width:1800px){
+        .setting-header{
+            ul{
+                li{
+                  padding: 0 30px;
+                }
+            }
+        }
+    }
+    @media(max-width:1600px){
+        .setting-header{
+            ul{
+                padding: 27px 0 0;
+                li{
+                    padding: 0 20px;
+                    span{
+                        font-size: 20px;
+                    }
+                    &.user-item{
+                        padding-left: 140px;
+                        .user-image{
+                            height: 110px;width: 110px; top: -30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width:1400px){
+        .setting-header{
+            ul{
+                padding: 23px 0 0;
+                li{
+                    padding-right: 15px; padding-left: 0;
+                    &.user-item{
+                        padding-left: 125px; min-height: 74px;
+                        .user-image{
+                            height: 100px;width: 100px; top: -26px;
+                        }
+                    }
+                    &:not(:last-child){
+                        margin-right: 15px;
+                    }
+                    label{
+                        font-size: 13px;
+                    }
+                    span{
+                        font-size: 16px;
+                        max-width: 200px;
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(lg){
+        .setting-header{
+            padding:30px 20px;
+            ul{
+                padding:0;
+                li{
+                    &.user-item{
+                        padding: 20px 0; padding-left: 110px; width: 100%; margin-right: 0; border: 0; margin-bottom: 15px; min-height: 90px;
+                        &:after{
+                            display: none;
+                        }
+                        .user-image{
+                            height: 90px;width:90px; top: 0;
+                        }
+                    }
+                    span{
+                        max-width: 100%;
+                    }
+                }
+            }
+            .company-progress{
+                padding-top: 30px; margin-top: 30px; padding-right: 80px;
+                .profile-right{
+                    .logout{
+                        font-size: 18px;
+
+                    }
+                }
+            }
+        }  
+    }
+    @include media-breakpoint-down(md){
+        .setting-header{
+            ul{
+                li{
+                    &:not(:last-child){
+                        margin-bottom: 15px;
+                    }
+                    span{
+                        font-size: 16px;
+                    }
+                }
+            }
+            .company-progress{
+                padding-top: 25px; margin-top: 25px; padding-right: 70px;
+                &.profile-progress{
+                    padding-right: 130px;
+                }
+                .profile-right{
+                    .logout,.delete-profile{
+                        font-size: 16px;
+                    }
+                }
+            }
+            .bank-details{
+                ul{
+                    flex-wrap: wrap;
+                    li{
+                        max-width: 50%;
+                    }
+                }
+            }
+            .setting-links{
+                a{
+                    &:not(:last-child){
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }  
+        .common-table{
+            .table-head{
+                .right-side{
+                    >li.filter-field-show{
+                        form{
+                            .form-group{margin-bottom: 10px;}
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(sm){
+        .setting-header{
+            padding: 20px 15px;
+            ul{
+                li{
+                    &:not(:last-child){
+                        margin-bottom: 15px;
+                    }
+                    span{
+                        font-size: 14px;
+                    }
+                    label{
+                        font-size: 13px;
+                    }
+                    &.user-item{
+                        padding:14px 0; padding-left: 85px;min-height: 70px;
+                        .user-image{
+                            height: 70px;width:70px;
+                        }
+                    }
+                }
+            }
+            .company-progress{
+                &.profile-progress{
+                    padding-right: 115px;
+                }
+                padding-top: 15px; margin-top: 15px; padding-right: 60px;
+                .logout,.delete-profile{
+                    font-size: 14px;
+
+                }
+            }
+            .setting-links{
+                a{
+                   font-size: 14px;
+                }
+            }
+        }  
+    }
+    @include media-breakpoint-down(xs){
+        .setting-header{
+            ul{
+                li{
+                    padding-right: 10px;
+                    &:not(:last-child){
+                        margin-right: 10px;
+                    }
+                }
+            }
+            .bank-details{
+                ul{
+                    li{
+                        &:not(:last-child){
+                            margin-right: 10px;
+                        }   
+                    }
+                }
+            }
+        }  
+    }
+    @media(max-width: 380px){
+        .setting-header{
+            padding: 20px 15px;
+            ul{
+                li{
+                    &.user-item{
+                        &:after{
+                            display: none;
+                        }
+                        + li{
+                            &:after{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

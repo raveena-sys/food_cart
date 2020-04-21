@@ -1,0 +1,204 @@
+.common-address-list {
+    ul {
+        margin-bottom: 0;
+        li {
+            vertical-align: top;max-width: 56%;
+            label {
+                font-size: 13px;font-family: $font-med;color: $grey-light;padding-left: 26px;margin-bottom: 0;
+            }
+
+            .addres-content {
+                position: relative;padding-left: 26px;
+                i {
+                    font-size: 16px;position: absolute;left: 0;top: 3px;
+                    &.icon-license {
+                        font-size: 18px;
+                    }
+                }
+                &.license-number {
+                    word-break: break-all;
+                }
+            }
+            p {
+                margin-bottom: 0;font-size: 14px;font-family: $font-med;
+            }
+
+            &:not(:last-child) {
+                border-right: 1px solid $border-color;margin-right: 30px;padding-right: 30px;margin-bottom: 10px;
+            }
+
+            &.attachment-list {
+                a {
+                   display: inline-block;width: 17px;height: 19px;background-image: url('../images/pdf-pair.svg');background-repeat: no-repeat;margin-top: 4px;transition: none;
+                    background-position: -24px center;
+                     &:hover {
+                        background-position: 0 center;
+                    }
+                    &:not(:last-child) {
+                        margin-right: 7px;
+                    }
+                    &.pdf{
+                        background-position: -24px center;
+                         &:hover {
+                            background-position: 0 center;
+                        }
+                    }
+                    &.excel{
+                            background-position:-72px center;
+                         &:hover {
+                            background-position: -48px center;
+                        }
+                    }  
+                    &.images{
+                            background-position:-120px center;
+                         &:hover {
+                            background-position: -96px center;
+                        }
+                    }
+                    &.video{
+                            background-position:-168px center;
+                         &:hover {
+                            background-position: -144px center;
+                        }
+                    }
+                    &.music{
+                            background-position:-216px center;
+                         &:hover {
+                            background-position: -192px center;
+                        }
+                    }
+                    &.doc{
+                        background-position: -264px center;
+                         &:hover {
+                            background-position:-240px center;
+                        }
+                    }
+                    &.env{
+                            background-position:-312px center;
+                        &:hover {
+                            background-position:-288px center;
+                        }
+                    }
+                    &.text{
+                            background-position:-456px center;
+                         &:hover {
+                            background-position:-432px center;
+                        }
+                    }
+                    &.xml{
+                        background-position:-360px center;
+                         &:hover {
+                           background-position:-336px center;
+                        }
+                    }
+                    &.csv{
+                            background-position:-408px center;
+                        &:hover {
+                            background-position:-384px center;
+                        }
+                    }
+                }
+            }
+
+            &.borrow-name {
+                .avtar {
+                    margin-right: 15px;
+                    img {
+                        height: 38px;width: 38px;border-radius: 50%;
+                    }
+                }
+
+                label,
+                .addres-content {
+                    padding-left: 0;
+                }
+            }
+        }
+
+        &.two-line-address {
+            ul {
+                li {
+                    max-width: 75%;
+                }
+            }
+        }
+    }
+
+    @media(max-width:1600px) {
+        ul {
+            li {
+                &:not(:last-child) {
+                    margin-right: 15px; padding-right: 15px;
+                }
+            }
+        }
+    }
+
+    @media(max-width:1366px) {
+        ul {
+            li {
+                max-width: inherit; width: 46%;
+                &:nth-child(2n) {
+                    border: 0;
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        ul {
+            li {
+                &:not(:last-child) {
+                    margin-right: 10px; padding-right: 10px;
+                }
+            }
+        }
+
+        &.two-line-address {
+            ul {
+                li {
+                    width: 20%;
+
+                    &:first-child {
+                        width: 75%;
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        &.two-line-address {
+            ul {
+                li {
+                    width: 30%;
+                    &:first-child {
+                        width: 66%;
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(xs) {
+        ul {
+            li {
+                width: 100%; max-width: 100%;
+                &:not(:last-child) {
+                    margin-bottom: 10px;border-right: 0;padding-right: 0;
+                }
+            }
+        }
+
+        &.two-line-address {
+            ul {
+                li {
+                    width: 100%;
+                    &:first-child {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

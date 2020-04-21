@@ -1,0 +1,59 @@
+.btn{
+    padding:14px 27px;font-size: 20px;cursor:pointer;font-family:$font-black; border-radius: 6px;
+    @media (max-width: 1400px){
+        font-size:16px;padding:10px 25px;
+    }
+    @include media-breakpoint-down(lg){
+        font-size:15px;
+    }
+    @include media-breakpoint-down(md){
+        font-size:14px;padding:10px 20px;
+    }
+
+    &:focus{
+        box-shadow: none !important; outline: none !important;
+    }
+    
+    &.btn-primary , &.btn-success{
+        border-color: $theme-color;color: $white;background-color:$theme-color;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken($theme-color, 5%);
+            background: darken($theme-color, 5%);color: $white;
+        }
+    }
+    &.btn-secondary{
+        border-color: $yellow;color: $light-black;background-color:$yellow;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color: darken($yellow, 5%);color: $light-black;
+           background: darken($yellow, 5%);
+        }
+    }
+    &.btn-outline-secondary{
+        border-color:#E9E9E9;color: #707070;background-color:transparent;
+        &:focus{
+            border-color:#E9E9E9;color: #707070;background-color:transparent;
+        }
+        &:hover,&:active,&:not(:disabled):not(.disabled):active{
+            border-color: darken($theme-color, 5%);color: $white;
+            background: darken($theme-color, 5%);
+        }
+    }
+    &.btn-outline-warning{
+        border-color:#E9E9E9;color: #707070;background-color:transparent;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color: darken($yellow, 5%);color: $black;
+            background: darken($yellow, 5%);
+        }
+    }
+    &.btn-info , &.btn-warning{
+        border-color:$black;color: $white;background-color:$black;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color: darken($theme-color, 5%);color: $white;
+            background: darken($theme-color, 5%);
+        }
+    }
+    &.disabled , &:not(:disabled):not(.disabled):active{
+        background-color:$grey-light;border-color:$grey-light;
+        color:$light-black;
+    }
+}

@@ -1,0 +1,269 @@
+.view-page{
+   .view-detail{
+        border-radius: 5px; @include box-shadow(0,0,20px,rgba($black,0.04));background: $white;
+        .view-detail-header{
+            padding: 30px; position: relative; padding-left: 140px;min-height: 145px;
+            .customer-img{
+                height: 85px;width: 85px; position: absolute; overflow: hidden; left: 30px;top: 30px;
+                img{
+                    height: 100%;width: 100%;
+                }
+            }
+            .view-detail-content{
+                .view-detail-name{
+                    font-size: 24px; font-family: $font-black; margin-bottom: 5px;
+                }
+                ul{
+                    li{
+                        &:not(:last-child){
+                            margin-right: 25px; margin-bottom: 10px;
+                        }
+                        i{
+                            margin-right: 5px; font-size: 18px; vertical-align:middle;
+                        }
+                        img{
+                            margin-right: 5px;
+                        }
+                    }
+                    &.d_block{
+                        li{
+                            &:not(:last-child){
+                                margin-bottom:10px;
+                            }
+                        }
+                    }
+                }
+            }
+            .edit-btn-view{ 
+                position: absolute;
+                background:$theme-color;color: #fff;height: 36px;
+                width: 36px;border-radius: 50%;
+                right: 30px;top: -18px;text-align: center;font-size: 17px;line-height: 36px;
+                @include box-shadow(0,0,20px,rgba($black,0.04));
+                &:hover , &:active , &:focus {
+                    background-color:darken( $theme-color, 5% );
+                }
+            }
+        }
+        .customer-info-list{
+            .role-list{
+                li{
+                    margin-bottom:10px;
+                    &:not(:last-child){
+                        margin-right:30px; 
+                    }
+                    // span{font-size:15px;display:block;}
+                    strong{ font-size:15px;} 
+                }  
+             }
+            ul{
+                li{
+                    font-size: 15px;  flex: 1 1 auto;
+                    strong{
+                        display: block; font-size: 18px; font-family: $font-black; color: $black; margin-top: 5px;
+                    }
+                }
+            }
+            &.history-info{
+                padding-left: 1.5em;
+            }
+            &.sales-team-info{
+                ul{
+                    li{
+                        &:not(:last-child){
+                            margin-right: 30px;
+                        }
+                    }
+                }
+            }
+        }
+        .info-list{
+            h3{
+                font-size:20px; font-family: $font-black; margin-bottom: 15px; color: $dark-blue;
+            }
+            ul{
+                li{
+                    font-size: 14px;font-family: $font-black; color:$grey; flex: 1 1 auto;
+                    strong{
+                        display: block; font-size: 15px; font-family: $font-black; color: $dark-blue; margin-top: 5px;
+                    }
+                    &:not(:last-child){
+                        margin-right: 30px;
+                    }
+                }
+                &:not(:last-child){
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        @include media-breakpoint-down(lg){
+            .view-detail-header{
+                .view-detail-content{
+                    .view-detail-name{
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(md){
+            margin-top:0px;
+            .view-detail-header{
+                padding: 20px; padding-left: 115px;min-height: 115px;
+                .customer-img{
+                    height: 75px; width: 75px; top: 20px;left: 20px;
+                }
+                .view-detail-content{
+                    ul{
+                        li{
+                            &:not(:last-child){
+                                margin-right: 15px;
+                            }
+                        }
+                    }
+                    .view-detail-left{
+                        h5{
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .info-list{
+                h3{
+                    font-size:18px;
+                }
+                ul{
+                    li{
+                        &:not(:last-child){
+                            margin-right: 20px;
+                        }
+                    }
+                    &:not(:last-child){
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(sm){
+            .view-detail-header{
+                padding: 15px; padding-left:95px ; min-height: 95px;
+                .customer-img{
+                    height: 65px; width: 65px; left: 15px;top: 15px;
+                }
+                .view-detail-content{
+                    ul{
+                        li{
+                            margin-bottom: 5px;
+                            &:not(:last-child){
+                                margin-right:10px;
+                            }
+                        }
+                    }
+                    .view-detail-name{
+                        font-size: 17px;
+                    }
+
+                }
+            }
+            .info-list{
+                h3{
+                    font-size:16px; margin-bottom: 10px;
+                }
+                ul{
+                    li{
+                        &:not(:last-child){
+                            margin-right: 15px;
+                        }
+                    }
+                    &:not(:last-child){
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+            .customer-info-list{
+                .role-list{
+                    li{
+                        &:not(:last-child){
+                            margin-right:20px; 
+                        }
+                        strong{ font-size:14px;} 
+                    }  
+                 }
+                ul{
+                    li{
+                        font-size:14px; flex: 1 1 auto;
+                        strong{
+                            font-size:16px;
+                        }
+                    }
+                }
+                &.history-info{
+                    padding-left:0;
+                    .d-flex{
+                    }
+                    display:block !important;width:100%;overflow-x:auto;white-space:nowrap;
+                    ul>li{
+                        &:not(:last-child){margin-right:15px;}
+                    }
+                }
+                &.sales-team-info{
+                    ul{
+                        li{
+                            &:not(:last-child){
+                                margin-right:15px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(xs){
+            .view-detail-header{
+                padding-left: 15px; min-height: inherit;
+                .customer-img{
+                    height: 50px; width:50px; position: static; margin-bottom: 10px;
+                }
+                .view-detail-content{
+                    ul{
+                    li{
+                        display:block;
+                        &:not(:last-child){
+                            margin-right:0;
+                        }
+                    }
+                        &.d_block{
+                            li{
+                                &:not(:last-child){
+                                    margin-bottom:5px;
+                                }
+                            }
+                        }
+                    }
+                     .view-detail-name{
+                        font-size: 16px;
+                    }
+                }
+            }
+            .info-list{
+                h3{
+                    font-size:15px;
+                }
+                ul{
+                    li{
+                        width: 100%;
+                        &:not(:last-child){
+                            margin-right: 0px;
+                        }
+                        strong{
+                            font-size:14px;
+                        }
+                    }
+                    &:not(:last-child){
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+

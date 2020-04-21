@@ -1,0 +1,161 @@
+.modal-backdrop.show {
+    opacity: 0.65;
+}
+
+.modal-effect {
+  // display: block !important;
+  visibility: hidden;
+  @include backface-visibility(hidden);
+  @include transition(all 0.3s);
+  .modal-content {
+    @include scale(0.7);
+    opacity: 0;
+    @include transition(all 0.3s);
+  }
+  &.show {
+    visibility: visible;
+    .modal-content {
+      @include scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.modal {
+    .modal-header {
+        padding:40px 40px 0;
+        border: 0px;
+        .close {
+            position:absolute;right:40px;height:40px;
+            width:40px;top:53px;opacity:1;
+            border-radius:50%;line-height:0px;cursor:pointer;z-index:5;color:#A3A3A3;font-size:14px;padding:0;
+
+            i{transition:all 0.5s;font-size: 18px;}
+
+            &:hover , &:focus{
+                opacity: 1;outline:0;
+                i{color:$theme-color;}
+            }
+        }
+
+        @include media-breakpoint-down(lg) {
+            padding:30px 30px 0;
+            .close {font-size:10px;right:34px;top:38px;}
+            .modal-title{
+                font-size:18px;
+            }
+        }
+        @include media-breakpoint-down(md){
+            padding:25px 25px 0;
+        }
+        @include media-breakpoint-down(sm){
+            padding: 15px 15px 0;
+            .modal-title{
+                font-size:16px;
+            }
+            .close {
+                right:17px;top:23px;
+            }
+        }
+    }
+    .modal-lg {
+        @include media-breakpoint-up(xl) {
+            max-width: 1350px;
+        }
+        @media(min-width:1281px)and(max-width:1366px) {
+            max-width: 1250px;
+        }
+        @media(min-width:1200px)and(max-width:1280px) {
+            max-width: 1200px;
+        }
+        @include media-breakpoint-only(lg) {
+            max-width: 950px;
+        }
+    }
+
+    .modal-md {
+        max-width:780px;
+        @include media-breakpoint-only(md) {
+            max-width: 750px;
+        }
+
+        @include media-breakpoint-only(sm) {
+            max-width: 550px;
+        }
+    }
+
+    .modal-sm {
+        max-width: 540px;
+    }
+    .modal-content{
+        .modal-body{
+            padding: 40px;
+        }
+        @include media-breakpoint-down(lg){
+            .modal-body{
+                padding:30px;
+            }
+        }
+        @include media-breakpoint-down(md){
+            .modal-body{
+                padding:25px;
+            }
+        }
+        @include media-breakpoint-down(sm){
+            .modal-body{
+                padding:15px;
+            }
+        }
+    }
+
+}
+.calendar_info{
+    .calender_info{
+        .custom_calender{
+            padding-left:20px;padding-right:20px;
+        }
+        ul{
+            flex-wrap: wrap; margin-bottom: 0;
+           li{
+                padding-left:20px;position:relative;font-size:14px; margin-bottom: 5px;
+                &:after{
+                    content:'';
+                    position:absolute;left:0;top:6px;width:10px;height:10px;border-radius:50%;background-color:$black;
+                }
+                &.blue-light{&:after{background-color:$theme-color;}}
+                &.blue-dark{&:after{background-color:$dark-blue;}}
+                &.color-green{&:after{background-color:#A7BF56;}}
+                &.color-brown{&:after{background-color:#BF7D56;}}
+           } 
+        }
+    }
+    
+}
+
+//
+.chat-doc-dtl{
+    .file-name{
+        margin-bottom: 25px;
+        > span{
+            color: #C5C5C5;
+        }
+        h6{
+            font-size: 18px;
+            span,a{
+                vertical-align: middle;display: inline-block;
+            }
+            a{
+                color: $theme-color;padding-left: 7px;margin-top: 7px;
+            }
+        }
+    }
+    .form-control{
+        min-height: 200px;
+    }
+}
+
+@import 'document-modal';
+@import 'subscription-modal';
+@import 'thanks-modal';
+@import 'bootbox-modal';
+@import 'rating-modal';

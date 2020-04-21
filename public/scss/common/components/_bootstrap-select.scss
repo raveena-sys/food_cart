@@ -1,0 +1,163 @@
+.bootstrap-select {
+	height:auto; // btn
+    .dropdown-toggle {
+        font-size:18px;font-family:$font-med;border-color:$grey-light;padding:16px 15px;
+        height:60px;border-radius: 6px;transition:none;
+        color: $black;background-color:transparent; 
+        box-shadow: none !important; outline: none !important;
+        &:hover,&:focus,&:active:focus,&:active, &:active:hover, &:not(:disabled),&:not(.disabled):active {
+           background-color: transparent !important;outline: none !important;color: $black;box-shadow: none !important;
+        }
+        .filter-option-inner-inner{
+        	color:$black;@include text-overflow
+        }
+
+        &:after {
+            content: "\e901"; position: relative;top: 4px;right: 3px;font-size: 11px;color:$theme-color; font-family: icomoon; border: 0;
+        }
+        
+        &.bs-placeholder{
+            .filter-option-inner-inner{
+                color:$grey-dark;
+            }
+        }
+        
+    } // when show class add
+
+    &.form-control{z-index: initial;}
+
+    &.show{
+        .dropdown-toggle{
+            border-radius:6px 6px 0 0 ;border-color: $theme-color;
+        }
+
+        .dropdown-menu {
+            min-width: 100% !important;border-color: $theme-color;width: 100%;
+            background-color: $white;margin-top: 0px; 
+            padding: 0;border-top: 0;border-radius: 0 0 6px 6px;z-index: 3;
+            .inner {
+                li {
+                    &.active,&:active,&.selected {
+                        a {
+                            background-color: $theme-color; color: $white; outline: none;
+                        }
+                    }
+                    a {
+                        padding: 5px 15px;font-size:15px;white-space: normal;
+                    }
+                }
+            }
+        }
+    }
+    &.show-tick{
+        .dropdown-menu{
+            .inner{
+                li{
+                    &.selected{
+                        border-bottom:1px solid rgba(112,112,112,0.12);
+                    }
+                }
+            }
+        }
+
+    }
+    // when dropup class add
+    &.dropup {
+        .dropdown-menu.show{
+            >.inner.show{padding-top: 1px;border-top:1px solid $theme-color;} 
+        }
+        &.show{
+            .dropdown-toggle {
+                border-radius: 0 0 6px 6px;
+            }
+        }
+        .dropdown-menu {
+            padding: 0;margin-bottom: 0;
+            border-bottom:0;border-top:0;
+            border-radius: 6px 6px 0 0;
+            
+        }
+    }
+    //phone code field
+    &.phone-code-field{
+        .dropdown-menu{
+            width: auto;
+            &.inner{
+                &.show{
+                    border-top: 1px solid $theme-color;
+                }
+                li{
+                    a{
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+        &.show{
+            .dropdown-toggle{
+                    border-bottom-color: transparent;
+                }
+                &.dropup{
+                .dropdown-toggle{
+                    border-bottom-color: $theme-color;
+                    border-top-color: transparent;
+                }
+                .dropdown-menu{
+                    &.inner{
+                        &.show{
+                            border-top: 0;
+                            border-bottom: 1px solid $theme-color;
+                        }
+                    }
+                }       
+            }
+        }
+    }
+
+    @media(max-width: 1366px) {
+        .dropdown-toggle {
+            height:50px;padding-top:12px;padding-bottom: 12px; font-size: 16px;
+            &:after{font-size:13px;}
+            +.dropdown-menu {
+                .inner {
+                    li {
+                        a{font-size:16px;}
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .dropdown-toggle {
+           line-height: 25px; font-size: 14px;
+            &:after{font-size:12px; top: 0px;}
+            +.dropdown-menu {
+                .inner {
+                    li {
+                        a{font-size:14px;}
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        .dropdown-toggle {
+           height: 45px; padding:13px 15px;line-height: 19px;
+           &:after{font-size:11px;}
+           +.dropdown-menu {
+                .inner {
+                    li {
+                        a{font-size:14px;} 
+                    }
+                }
+            }
+        }
+         &.phone-code-field{
+            .dropdown-toggle {
+                padding-left: 8px;padding-right: 8px; font-size: 13px;
+            }
+         }
+    }
+}

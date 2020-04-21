@@ -1,0 +1,81 @@
+
+$switch-checked-lever-bg: #CBEFDA;
+$switch-bg-color: #00D816;
+$switch-bg-color: $theme-color;
+$switch-unchecked-lever-bg: #D7D7D7; 
+$switch-radius: 15px;
+$switch-unchecked-bg: #858585;
+$input-disabled-solid-color: 1px solid #DDD;
+
+.switch,
+.switch * {
+    -webkit-tap-highlight-color: transparent;user-select: none;
+}
+
+.switch label {
+    cursor: pointer;margin: 0px;
+    font-size: 15px; color: #9d9d9d;  
+} 
+
+.switch label input[type=checkbox] {
+    opacity: 0;width: 0;height: 0;
+    +.lever{
+        &:after{
+            animation: switch-shadow 0.4s;
+        }    
+    }
+
+    &:checked+.lever {
+        background-color:$theme-color;border-color:$theme-color;box-shadow: 0 0 20px rgba($theme-color,  0.4); 
+        &:before,
+            &:after {
+            left: 30px;
+        }
+        &:after {
+            background-color:$white;animation: switch-shadow-color 0.4s;border-color:$white;
+        }
+    }
+}
+
+.switch label .lever {
+    content: "";display: inline-block;position: relative;width:50px;height:22px;
+    border-radius: $switch-radius;transition: background 0.3s ease;vertical-align: middle;
+    border:1px solid $grey-light;
+    &:before,&:after {
+        content: "";position:absolute;display:inline-block;width:15px;height:15px;@include transition(all 0.3s);
+        border-radius:50%;left:4px;top:50%;transform:translateY(-50%);border:1px solid;
+    }
+    &:after {
+        border-color:$grey-light;
+
+
+    }
+    @include media-breakpoint-down(sm){
+        height: 18px;
+        &:before,&:after {
+            height: 13px;width: 13px;
+        }
+    }
+}
+
+// Switch active style
+input[type=checkbox]:checked:not(:disabled)~.lever:active::before,
+input[type=checkbox]:checked:not(:disabled).tabbed:focus~.lever::before {
+    background-color: $switch-bg-color;
+}
+ 
+input[type=checkbox]:not(:disabled)~.lever:active:before,
+input[type=checkbox]:not(:disabled).tabbed:focus~.lever::before {
+    background-color: rgba(0, 0, 0, .08);
+}
+
+// Disabled Styles
+.switch input[type=checkbox][disabled]+.lever {
+    cursor: default;
+    background-color: rgba(0, 0, 0, .12);
+}
+
+.switch label input[type=checkbox][disabled]+.lever:after,
+.switch label input[type=checkbox][disabled]:checked+.lever:after {
+    background-color: $input-disabled-solid-color;
+}

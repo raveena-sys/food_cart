@@ -1,0 +1,46 @@
+
+// for thanks modal
+.thanks-popup{
+    .modal-body{
+        >i{
+            font-size: 130px; color: $theme-color; display: block; margin-bottom: 30px;
+        }
+        h4{
+            font-size: 22px; font-family:$font-med; color: $grey-dark; margin-bottom: 45px;
+        }
+        .btn{
+            min-width: 120px;
+        }
+        .btn-row{
+           .btn{
+            + .btn{
+                margin-left:10px;
+            }
+           } 
+        }
+        @include media-breakpoint-down(lg){
+            >i{
+                font-size:115px;
+            }
+            h4{
+                font-size:20px;margin-bottom:35px;
+            }
+        }
+        @include media-breakpoint-down(md){
+            >i{
+                font-size:110px; margin-bottom:25px;
+            }
+            h4{
+                font-size:18px;margin-bottom: 25px;
+            }
+        }
+        @include media-breakpoint-down(sm){
+            >i{
+                font-size: 90px; margin-bottom: 20px;
+            }
+            h4{
+                font-size:16px;margin-bottom: 20px;
+            }
+        }
+    }
+}

@@ -1,0 +1,608 @@
+.message-page{
+    .card-header{
+        height:60px;position: relative;z-index: 3; border-radius: 6px 6px 0  0;overflow: hidden;
+        &.card_msg_h{
+            padding:20px 60px;height:auto;
+            .profile{top:0 !important;} 
+        }
+        .nav-tabs{
+            li{
+                a{
+                    color: #C5C5C5;font-family: $font-heavy;font-size: 18px;
+                    &.active{
+                        background-color: $theme-color;font-family: $font-black;color: $white;
+                    }
+                }
+            }
+        }       
+    }
+
+    .profile{
+        padding-left:70px;padding-top:5px;position: relative;display:block;z-index: 2;
+        .user-img{
+            position: absolute;display: inline-block;left:0;top:0;
+            img{width:50px;height:50px;}
+            .status{
+                display: block;width:15px;height:15px;border:3px solid $white;background-color: #A5A5A5;
+                position: absolute;right:0;top:0;
+                &.online{background-color: #2CD220;}
+                &.online-b-12{background-color: #2CD220;border-color:#2CD220;width:12px;height:12px;}
+            }
+        }
+        .info{
+            h6{
+                margin-bottom:3px;position: relative;padding-right: 70px;color:$black;font-size:18px;
+                .time{position: absolute;right:0;color:$grey-dark;font-size:12px;font-family:$font-med;}
+            }
+            .last-msg{
+                color:$grey-dark;font-size: 14px;font-family:$font-med;display: block;@include text-overflow;
+            }
+        }
+    }
+    .users-section{
+        border-radius: 6px;height:100%;background-color:$white;
+        .card-header{
+        }
+        // xxxxxxxxxx
+        .card-body{
+            .search{
+                position: relative;
+                .form-control{
+                    border:0 ;color:$black;height:60px;
+                    border-radius:0;padding:15px 15px 15px 50px;
+                    font-family:$font-med;
+                    &:focus{
+                        border-bottom-color:transparent;box-shadow: none;
+                    }
+                }
+                @include placeholder{font-size:18px;color:#737373;}
+                .search_btn{
+                    @include absolutecenter(y); left:20px;color:$grey-light; font-size:18px; display: block;line-height:10px;
+                    &:hover{color:$yellow;}
+                }
+            }
+            ul.user-list{
+                max-height:700px;
+                li{
+                    padding: 20px;border-bottom: 1px solid rgba(#E9EFE9,0.5);background-color:$white;transition:all 0.4s;
+                    position: relative;
+                    &.active,&:hover{
+                        border-bottom-color: transparent; 
+                        &:after{
+                            content: '';display: block;width: 100%;height: 100%;
+                            position: absolute;left: 0;top:0;z-index: 1; border-bottom-color: transparent; 
+                            background-color:$white;@include box-shadow(5px,5px,50px,rgba(#958A8A,0.16));
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    // xxxxxxxxxxxxxxxxxxxxx
+    .message-section{
+        border-radius: 0 0 12px 12px;
+        .toggle-icon{display: none;}
+        .overlay-screen{position: absolute;left: 15px;z-index: 4; top: 52px;}
+        .card-header{
+            .profile{
+                top:6px;
+                .info{
+                    h6{
+                        padding-right: 0;
+                    }
+                    .badge{
+                        font-size: 11px;font-family:$font-book; color: $white; vertical-align: top; padding: 3px 6px;
+                        &.badge-primary{
+                            background:$theme-color;
+                        }
+                        &.badge-secondry{
+                            background:$yellow;
+                        }
+                    }
+                }
+
+                .dropdown{
+                    .dropdown-toggle{
+                        &:after{display: none;}
+                        padding:10px 0;
+                        i{
+                            font-size: 24px;color:$yellow;
+                        }
+                    }
+
+                    .dropdown-menu{
+                        border: 0;box-shadow: 0 -5px 40px rgba($black, 0.1);border-radius: 3px;margin-top: 18px;padding:0;margin-top:5px;border-radius: 10px;
+                         
+                        &:before{
+                            content:"";position: absolute;top: -8px;right:5px;border-left: 8px solid transparent;
+                            border-right:8px solid transparent;border-bottom: 8px solid $white;
+                        }
+                         
+                        a{
+                            @include transition (all, 0.5s);
+                            border-radius: 0 0 10px 10px;
+                            &:focus,&:hover{
+                                background-color:$yellow;
+                            }
+                            &:not(:last-child){
+                                border-radius:10px 10px 0 0 ;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // xxxxx
+
+        .card-body{
+            padding:60px 0 0 60px;background-color:$white;
+            .msg-wrap{
+                max-height:555px;
+                .mCSB_container{padding-right:60px;}
+                .msg-body{
+                    display: inline-block;max-width:540px;margin-bottom: 20px; position:relative;
+                    .img_wrap{
+                        position:absolute;bottom:20px;
+                        img{width:50px;height:50px;overflow:hidden;}
+                    }
+                    .msg{
+                        color:$grey-dark;font-size: 14px;padding:30px;display: block;font-family:$font-med;
+                        &.attach_bg{background-color:#d5d6da1a !important;}
+                    }
+                    .time{
+                        font-size: 12px;color: #7E7E7E;display: block;margin-top: 5px;
+                    }
+                }
+               .attach{
+                    .attachment_file{
+                        padding:20px;border-radius:5px;max-width:330px;min-width:330px;
+                        background-color:#bbbcc31a;margin-top:10px;
+                        position:relative;
+                        .user-img{
+                            img{width:40px;height:40px;border-radius:10px;position:absolute;left:15px;top:15px;}
+                            .status{padding-left:45px;display:inline-block;}
+                        }
+                        .download{
+                            a{font-size:18px;}
+                            &.blue{a{color:#4694F9;&:hover{color:darken(#4694F9 , 5%);}}}
+                            &.light_blue{a{color:#3CC9D7;&:hover{color:darken(#3CC9D7 , 5%);}}}
+                        }
+                    }
+                }
+                .rcv-msg{
+                    .img_wrap{
+                        left:0;
+                    }
+                    .chat_box{padding-left:80px;}
+                    .msg-body{
+                        .msg{
+                            background-color:rgba($theme-color,0.1);border-radius: 25px 25px 25px 0;
+                            a{
+                                color: $theme-color;margin-top: 15px;display: block;
+                            }
+                        }
+                        .time{text-align: right;}
+                    }
+                }
+                .send-msg{
+                    text-align: right;
+                    .img_wrap{
+                        right:0;
+                    }
+                    .chat_box{padding-right:80px;}
+                    .msg-body{
+                        text-align: left;
+                        .msg{
+                            background-color:rgba(#0D72A7,0.11);border-radius: 25px 25px 0 25px;
+                        }
+                    }
+                   
+                }
+            }
+            
+             @media (max-width:1499px){
+                .msg-wrap{
+                    .rcv-msg {.chat_box{
+                        padding-left:50px;
+                    }} 
+                    .send-msg {.chat_box{
+                        padding-right:50px;
+                    }} 
+                    .attach {
+                       .attachment_file{
+                            padding:15px;min-width:280px;
+                            .user-img{
+                                .status{
+                                    padding-left: 40px;
+                                }
+                                img{
+                                    width:30px;height:30px;top:14px;
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+            @include media-breakpoint-down(md)   {
+                .msg-wrap{
+                    .attach {
+                       .attachment_file{
+                           min-width:200px;max-width:240px;padding:10px;
+                            .user-img{
+                                .status{
+                                    padding-left:40px;
+
+                                }
+                                img{
+                                    width:30px;height:30px;top:8px;left:10px;
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+        
+        // xxxxx
+
+        .card-footer{
+            background-color:$white;border-color:rgba(#EBEBEB,0.5); border-radius: 0  0 6px 6px;
+            padding:12px 45px;
+            .form-group{
+                width: 100%;
+                textarea{
+                    border:0;resize: none;width:100%;font-size:16px;
+                }
+            }
+
+            .options{
+                min-width:220px;text-align: right;
+                ul{
+                    li{
+                        vertical-align: middle;
+                        &:not(:last-child){
+                            margin-right: 20px;
+                        }
+                        .attachment{ 
+                            input{
+                                width:0.1px;height:0.1px;opacity: 0;overflow: hidden;position: absolute;left: 0;cursor: pointer !important;
+                            }
+                            label{cursor:pointer;}
+                        }
+                        a{
+                            display: inline-block;line-height:normal;vertical-align: bottom;
+                            i{
+                                color:#707070;font-size:26px;transition: all 0.4s;vertical-align:middle;
+                            }
+                            &:hover{
+                                i{color:#616161}
+                            }
+                        }
+                    }
+                }
+            }
+            @include media-breakpoint-down(md){
+                .options{
+                    ul{
+                        li{
+                            a{
+                                i{
+                                font-size:20px;
+                            }
+                            img{height:20px;}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // xxxxxxxxxxxxxxxx
+    @media (max-width:1499px){
+        .profile{
+            padding-left:45px;
+            .user-img{
+                top:2px;
+                img{width:35px;height:35px;}
+                .status{
+                    width:12px;height:12px;border: 2px solid #fff;right:-6px;
+                }
+            }
+            .info{
+                h6{
+                    padding-right:50px;font-size:14px;
+                    .time{font-size: 10px;}
+                }
+                .last-msg{font-size: 13px;}
+            }
+        }
+
+        .users-section{
+            .card-header{padding:0 15px;height:50px;}
+            .card-body{
+                ul.user-list{
+                    max-height:420px;min-height:420px; 
+                    li{padding:15px;}
+                }
+                .search{
+                    font-size: 16px;
+                    .search_btn{left:15px;font-size:16px;}
+                    .form-control{
+                        padding:12px 12px 12px 40px;font-size:14px;
+                    }
+                    @include placeholder{font-size:14px;}
+                }
+            }
+        }
+
+        // xxxxxxxxxxxxxxxxxxxxx
+
+        .message-section{ 
+            .card-header{
+                padding:15px;
+                .profile{
+                    .dropdown{
+                        .dropdown-toggle{
+                            i{font-size: 20px;}
+                        }
+
+                        .dropdown-menu{
+                            &:before{
+                                top: -6px;right:5px;border-left: 6px solid transparent;
+                                border-right:6px solid transparent;border-bottom: 6px solid $white;
+                            }
+                            a{
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+            .card_msg_h{
+                padding:10px 20px;
+            }
+            // xxxxx
+
+            .card-body{
+                padding-top:20px;padding-left:20px;
+                .msg-wrap{
+                    max-height:370px;min-height:370px;
+                    .mCSB_container{
+                        padding-right:15px;       
+                    }
+                    .msg-body{
+                            max-width:460px;   
+                        .img_wrap{
+                            img{width:35px;height:35px;}
+                        }
+                        .msg{
+                             padding:20px;
+                        }
+                    }
+                }
+                @include media-breakpoint-down(md){
+                    .msg-wrap{
+                        .mCSB_container{
+                            padding-right:10px;       
+                        }
+                        .msg-body{
+                            max-width:300px;   
+                        }
+                    }
+                }
+            }
+            
+            // xxxxx
+
+            .card-footer{
+                padding:0px 15px;
+                .form-group{
+                    textarea{font-size:14px;padding:10px;}
+                }
+            }
+        }
+    }
+    @include media-breakpoint-between(md,lg){
+
+        .custom-gutters {
+          margin-right: -8px;
+          margin-left: -8px;
+
+          > .col,
+          > [class*="col-"] {
+            padding-right: 8px;
+            padding-left: 8px;
+          }
+        }
+    }
+
+    @include media-breakpoint-down(md){
+        .card-header{
+            height:50px;
+            .search{top:10px;}
+            .nav-tabs{
+                li{
+                    a{
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        .profile{
+            padding-left:45px;
+            .user-img{
+                top:2px;
+                img{width:35px;height:35px;}
+                &.status{width:10px;height:10px;border-width: 1px;}
+            }
+            .info{
+                h6{
+                    padding-right:40px;font-size:13px;
+                }
+                .badge{
+                    font-size: 9px !important;
+                }
+                .last-msg{font-size: 12px;}
+            }
+        }
+        
+        .users-section{
+            .card-header{
+                padding:0 10px;
+                .search{
+                    top:10px;
+                    .form-control{
+                        font-size: 12px;padding-right:20px;
+                    }
+                    @include placeholder{font-size: 12px;}
+                    .search_btn{font-size:20px;}
+                }
+            }
+            .card-body{
+                ul.user-list{
+                    max-height:460px;min-height:460px;
+                    li{padding:10px;}
+                }
+            }
+        }
+
+        // xxxxxxxxxxxxxxxxxxxxx
+
+        .message-section{
+            .card-header{
+                padding:6px 15px;
+                .search{
+                    .form-control{
+                        font-size: 14px;
+                    }
+                    @include placeholder{font-size: 14px;}
+                    .search_btn{font-size: 20px;}
+                }
+                .profile{
+                    .info{
+                        .last-msg{font-size: 10px;}
+                    }
+                    .dropdown{
+                        .dropdown-toggle{padding:5px 0;}
+                        .dropdown-menu{
+                            a{padding:4px 10px;font-size:13px;}
+                        }
+                    }
+                }
+            }
+
+            // xxxxx
+
+            .card-body{
+                padding-top:10px;padding-left:10px;
+                .msg-wrap{
+                    .msg-body{
+                        .msg{font-size: 13px;padding:10px;}
+                        .time{font-size: 10px;}
+                    }
+                }
+            }
+            
+            // xxxxx
+
+            .card-footer{
+                .form-group{
+                    textarea{margin-bottom:10px;padding:10px 0;}
+                }
+            }
+        }
+    }
+
+
+    @include media-breakpoint-down(sm){
+        .users-section{
+            position: absolute;left:-290px;z-index:5;transition:left 0.4s;top: 52px;
+            .card-header{border-radius: 0; height: 45px;}
+            .card-body{
+                ul.user-list{
+                    padding-bottom:0px;max-height:402px;min-height:402px;
+                }
+            }
+        }
+        .card-header{
+            .nav-tabs{
+                li{
+                    a{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .message-section{
+            .toggle-icon{
+                display:inline-block;top: 18px;left:0;z-index: 5;position: relative;cursor:pointer;
+                a{
+                    width:20px;display:block;
+                    span{
+                        background-color: #405668; display: block;
+                        height:2px; width: 100%;@include transition (all, 0.1s);
+                        &:nth-child(2){
+                            margin:4px 0;width: 70%;
+                        }
+                    }
+                    &:hover{
+                        span{
+                            width: 70%; background-color:$theme-color;
+                            &:nth-child(2){
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+            .card-header{
+                padding:6px 10px;
+                height: 52px;padding-top:0;padding-bottom:0;
+                .profile{
+                    padding-left: 85px;top:-15px !important;
+                    .user-img{left:35px}
+                }
+            }
+            .card-footer{
+                padding:0 10px;
+                .form-group{
+                    textarea{margin-bottom:5px;padding:5px 0;}
+                }
+                .options{
+                ul{
+                    li{
+                        &:not(:last-child){
+                                margin-right:15px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .profile{
+            .info{
+                .last-msg{max-width:220px;}
+            }
+        }
+           
+
+        .close-bar{
+            .users-section{
+                left: 15px;transition:left 0.4s;
+            }
+            .message-section{
+                .overlay-screen{
+                    visibility: visible;background-color: rgba(0, 0, 0, 0.5);
+                    position: absolute;width: calc(100% - 30px);left: 15px;z-index: 4;
+                    height: calc(100% - 50px); top: 52px;
+                }
+            }
+        }
+    }
+}

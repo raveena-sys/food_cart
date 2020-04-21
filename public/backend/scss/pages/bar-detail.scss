@@ -1,0 +1,499 @@
+.bar-detail-page{
+    .bar-detail-content{
+        background: white; padding:0 30px 20px; 
+        .google-map .agm-map{height: 400px;}
+        &.feedback-cnt{
+            .feedback-header {
+                border-bottom:1px solid #c1c1c1;font-size: 15px;
+            }
+            .feedback-body {
+                h4{margin-bottom:8px;color:black;} 
+                p{margin-bottom:20px;}
+            }
+        }
+        &.bar-document{
+            position: relative;
+            &::after{
+                content: ""; position: absolute; background: rgba(#CBEFDA,0.20); top: 0;left: 0;width:50%;height: 100%;border-radius: 5px 0 0 5px;
+            }
+             .row{
+                z-index: 1; position: relative;
+            }
+            .document-head{
+                margin-bottom: 15px;
+                .add-btn {
+                    height: 36px; width: 36px; padding: 0; text-align: center; line-height: 40px;
+                }
+            }
+        }
+        h4{
+            color:  #666666; font-size: 16px; font-family: $font-med; margin-bottom:12px;
+        }
+        h3{
+            font-size: 17px;
+        }
+        p{
+            color:black;
+        }
+        .code-inline-list{
+          li{
+              &:not(:last-child){
+                  margin-right:20px;margin-bottom: 8px;
+              }
+              span{margin-left:10px;}
+              label{margin-bottom: 2px;font-size:14px;}
+          }
+        }
+        .amenities-list{
+            ul{
+                li{
+                    color: black; font-family:$font-med; width: 48%; margin-bottom: 10px;
+                    img{
+                        margin-right: 15px;
+                    }
+                    &.cdk-drag{
+                        cursor: move;
+                    }
+                }
+            }
+        }
+        .bar-colarge{
+            display: flex; flex-wrap: wrap; margin:0 -2px;
+            crystal-gallery{
+                .cg-wrapper{
+                    .cg-image{
+                       cursor: pointer;
+                        background-color:transparent !important;
+                        img{
+                            border-radius: 5px; width: auto !important; max-width: inherit; max-height: 125px;
+                        }
+                    }
+                }
+            } 
+        }
+        
+        .bar-timings-list{
+            ul{
+                display: flex;background: #FEF8F3; border: 1px solid #FCECDC; border-radius: 5px;
+                li{
+                    flex: 1 1 auto; color: #D58E4E; font-size: 15px; padding: 15px;
+                    &:not(:last-child){
+                         border-right: 1px solid #FCECDC;
+                    }
+                    strong{
+                         font-size: 16px; font-family: $font-med; display: block;
+                    }
+                }
+            }
+        }
+        .edit-btn{
+            position: absolute; background: $theme-color; color: white; height: 36px;width: 36px;border-radius: 50%;right: 15px;
+            top: -15px;text-align: center;font-size: 17px;line-height: 36px;box-shadow: 0px 4px 29px -6px rgba(229,54,0,0.7);
+            &:hover{
+                background: darken($theme-color, 5%);
+            }
+        }
+        .bank-detail-list{
+            margin: 15px 0;
+            ul{
+                li{
+                    font-size: 16px;font-family: $font-med;color: #666666; margin-bottom: 15px; width: 32%; vertical-align: top;
+                    strong {
+                        display: block;font-size: 18px;font-family: $font-med;
+                        color: black;margin-top: 5px;
+                    }
+                    &:not(:last-child) {
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+        .aboutbar-head{
+            position: relative; margin-bottom: 20px;
+            .edit-btn{
+                top: 0;
+            }
+        }
+        
+        @media (max-width:400px){
+            .xs-row-column{
+             [class^="col-"]{
+                 max-width:100%;flex:0 0 100%;
+             } 
+            }
+        }
+        .document-img{
+            position: relative; display: inline-block;padding: 5px;border-radius: 3px;background: white;@include box-shadow(0px,2px,10px,rgba(black,0.15)); @include transition(all 0.3s ease);
+            .dowbload-btn{
+                height: 30px; width: 30px; background: $theme-color; color: white; @include box-shadow(0px,2px,3px,rgba(black,0.2)); border-radius: 50%;
+                    font-size: 14px;  text-align: center; line-height: 30px; ; @include transition(all 0.3s ease); position: absolute; bottom: -8px; right: 10px; opacity: 0;
+            }
+            &:hover{
+                @include box-shadow(0px,10px,50px,rgba(black,0.15));
+                .dowbload-btn{
+                    opacity: 1;
+                }
+            }
+            &.barcode-img{
+                margin-top: 15px;
+                img{
+                    max-height: 200px;
+                }
+            }
+            &.document-pdf{
+                .dowbload-btn{
+                   height: 25px;width: 25px;line-height:27px; font-size: 12px;
+                    &.delete-document{
+                        right: 40px;
+                    }
+                }
+            }
+        }
+        .show-document-img{
+            margin-bottom: 25px;
+            .document-img {
+                height: 176px; width: 100%; margin-bottom: 0;
+                crystal-gallery{
+                    .cg-image{
+                        cursor: pointer;background-color:transparent !important;
+                    }
+                }
+                img{
+                    border-radius: 3px;max-width:100%;max-height:160px; 
+                }
+                .documents-btn{
+                    position: absolute; right: 10px;bottom:0px;
+                    .dowbload-btn{
+                        display: inline-block; position: static; opacity: 1; vertical-align: top; bottom: 0; right: 0;
+                        &:not(:last-child){
+                            margin-right: 10px;
+                        }
+                        &.edit-document{
+                            background: #666; position: relative;
+                            input{
+                                position: absolute; height: 100%;width: 100%;left: 0;top: 0;opacity: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.payment-info-content{
+            h4{
+                font-size: 20px; color: #333;
+            }
+        }
+        @media (max-width:1680px){
+            .bar-colarge{
+                crystal-gallery{
+                    .cg-wrapper{
+                        .cg-image{
+                            img{
+                                max-width: inherit;width: auto !important;max-height: 126px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @media (max-width:1440px){
+            .document-img{
+                img{
+                    max-height:108px;
+                }
+            }
+            .amenities-list{
+                ul{
+                    li{
+                        width: 47%;
+                    }
+                }
+            }
+            .bank-detail-list{
+                ul{
+                    li{
+                        width: 31%;
+                    }
+                }
+            }
+            .show-document-img{
+                .document-img {
+                    height: 125px;
+                    img{
+                       max-height:110px; 
+                    }
+                }
+                
+                .common-upload-box{
+                    padding: 31px 0; background:white;
+                }
+            }
+        }
+        @include media-breakpoint-down(lg){
+            padding:30px;
+            &.payment-info-content{
+                h4{
+                    font-size: 18px;
+                }
+            }
+            &.bar-document{
+                &:after{
+                    width: 50%;
+                }
+            }
+            .bar-timings-list{
+                ul{
+                    li{
+                        padding: 10px;
+                    }
+                }
+            }
+            .document-img {
+                margin-bottom: 20px;
+                .dowbload-btn{
+                    height: 25px; width: 25px; font-size: 12px;   line-height: 27px;
+                }
+            }
+            .bank-detail-list{
+                ul{
+                    li{
+                        strong {
+                            font-size: 17px;
+                        }
+                    }
+                }
+            }
+            .show-document-img{
+                margin-bottom: 20px;
+                .document-img {
+                    img{
+                      height:110px !important;
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(md){
+            padding:25px 20px;
+            &.feedback-cnt{
+                .feedback-header {
+                    font-size: 14px;
+                }
+                .feedback-body {
+                    p{margin-bottom:15px;}
+                }
+            }
+            &.payment-info-content{
+                h4{
+                    font-size: 17px;
+                }
+            }
+            h4{
+                margin-bottom: 10px;
+            }
+            h3{
+                font-size: 16px;
+            }
+            .bar-timings-list{
+                ul{
+                   overflow-x:auto;
+                   li{
+                    min-width: 130px; font-size: 14px;
+                    strong{
+                        font-size: 15px;
+                    }
+                   }
+                }
+            }
+            .document-img {
+                margin-bottom: 15px;
+            }
+            // .google-map{
+            //     margin-bottom: 15px;
+            // }
+            .bank-detail-list{
+                ul{
+                    li{
+                        strong {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .show-document-img{
+                margin-bottom: 15px;
+                .document-img {
+                    height: 150px;
+                    img{
+                     max-height: 135px; height: auto !important;
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down(sm){
+            padding:20px 15px;
+           
+            &.payment-info-content{
+                h4{
+                    font-size: 16px;
+                }
+            }
+            h3{
+                font-size: 15px;
+            }
+          
+            .bar-timings-list{
+                ul{
+                   li{
+                       font-size: 15px; margin-bottom: 10px;
+                    strong{
+                        font-size: 14px;
+                    }
+                   }
+                }
+            }
+            h4{
+                margin-bottom: 5px;font-size:14px;
+            }
+            .edit-btn{
+                right: 15px;height: 30px;width: 30px; line-height: 32px;font-size: 13px;top: -15px;
+            }
+            .bank-detail-list{
+                margin: 10px 0;
+                ul{
+                    li{
+                        font-size:14px; margin-bottom:10px;width:48%;
+                        strong {
+                            font-size: 15px; margin-top: 0;
+                        }
+                        &:not(:last-child){
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+            .show-document-img{
+                .document-img {
+                    height: auto;
+                    img{
+                      height:auto !important; max-height: 115px;
+                    }
+                }
+            }
+        }
+         @include media-breakpoint-down(xs){
+            &.bar-document{
+                &:after{
+                    width: 100%;
+                }
+            }
+            .bank-detail-list{
+                ul{
+                    li{
+                        width: 100%;
+                        strong{
+                            font-size: 14px; margin-top: 0;
+                        }
+                    }
+                }
+            }
+            .show-document-img{
+                .document-img{
+                    img{
+                        max-height: 90px;
+                    }
+                }
+            }
+         }
+         @media (max-width:400px){
+            .show-document-img{
+                .document-img{
+                    img{
+                        max-height: 120px;
+                    }
+                }
+            }
+         }
+         @media(max-width:480px){
+            .document-img{
+                img{
+                    max-height:inherit;
+                }
+            }
+            .amenities-list{
+                ul{
+                    li{
+                        width: 100%;
+                    }
+                }
+            }
+         }
+         &.bar-admin-detail{
+             margin-top: 0;
+            .baradmin-top-detail{
+                margin-bottom: 30px;
+            }
+        }
+    }
+    &.customer-info{
+        .view-detail{
+            .orderId{
+                padding-top: 30px;padding-left: 30px;
+            }
+            @include media-breakpoint-down(md){
+                .orderId{
+                    padding-top: 15px;padding-left: 15px;
+                }
+            }
+
+        }
+    }
+    .common-table{
+        &.menu-table{
+            .table{
+                tbody{
+                    tr{
+                        cursor: pointer;
+                        td{
+                            &.bottle-price{
+                                padding: 0;
+                                .bottle-price-list{
+                                    display: flex;text-align: center;
+                                    span{
+                                    padding: 15px 25px;
+                                        font-family: $font-med; font-style: 14px;
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .support-attachment{
+        ul{
+            li{
+                position: relative; margin-bottom: 10px;
+                .support-attachment-img{
+                    border-radius: 5px; @include box-shadow(0px,5px,10px,rgba(black,0.16));
+                    img{
+                        border-radius: 5px;
+                    }
+                }
+
+                .dowbload-btn{
+                    position: absolute; height: 30px; width: 30px; background: $theme-color; color: white; @include box-shadow(0px,2px,3px,rgba($black,0.2)); border-radius: 50%;
+                    font-size: 14px;  text-align: center; line-height: 30px;  right: 5px;  bottom: -10px; opacity: 0; @include transition(all 0.3s ease)
+                 }
+
+                 &:hover{
+                    .dowbload-btn{
+                        opacity: 1;
+                    }
+                 }
+            }
+        }
+    }
+}

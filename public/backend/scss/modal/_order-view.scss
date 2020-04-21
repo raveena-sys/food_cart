@@ -1,0 +1,22 @@
+.order-view{
+.modal-content{
+  .modal-body{
+  padding:25px;
+  .order-dtl{
+   p{font-size:13px;margin-bottom:3px;}
+   h3{font-size:20px;}
+  }
+  
+}
+.modal-footer{
+  padding:15px 25px 25px;  
+  &.common-table{
+    .table{
+      tr{
+        td, th{padding:7px 10px 7px 0;border:0px;}
+      }
+    }
+  }
+}
+}
+}

@@ -1,0 +1,350 @@
+.dashboard-page{
+	.dashboard-wraper{
+		.search-filter{
+			.search-box{
+				background: $white; padding:20px 10px;border-radius: 6px; padding-right: 170px; position: relative;
+				.form-control{
+					width: 49%;border: 0; padding: 9px 15px;display: inline-block; height: auto; border-radius: 0;
+					background-image: url('../images/map.png'); background-repeat: no-repeat;background-position: 15px center;
+    				padding-left: 50px; font-size: 18px; font-family: $font-med;
+					&.search{
+						border-right: 1px solid $grey-light; background-image: url('../images/search.png');
+					}
+					&:focus{
+						box-shadow: none;
+					}
+				}
+				.btn-info{
+					right: 10px;top: 10px;position: absolute;
+				}
+			}
+			.search-tag{
+				margin-top: 20px;
+				ul{
+					li{
+						.tag{
+							background: $border-color; color: #A2A2A2; font-size: 14px; border-radius: 4px; padding:4px 8px;
+							font-family: $font-med; display: inline-block;
+						}
+						.tag-close{
+							color: $grey-dark; font-size:16px; font-family: $font-med; display: inline-block; margin-left: 5px;
+						}
+						&:not(:last-child){
+							margin-right: 25px; margin-bottom: 5px;
+						}
+						&:hover{
+							.tag-close{
+								color: $theme-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		.dashboard-content{
+			background: $white; padding: 25px; border-radius: 6px; margin-top: 35px;
+			.dashboard-content-list{
+				padding-left: 50px; position: relative;
+				&:not(:last-child){
+					margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid $border-color;
+				}
+				.like-it,.close-job-list{
+					position: absolute; left: 0;top:3px;
+				}
+				.close-job-list{
+					a{
+						font-size: 18px; color: $border-color;
+						&:hover{
+							color:$theme-color;
+						}
+					}
+				}
+				.list-body{
+					margin-bottom: 35px;
+					.list-body-content{
+						margin-bottom:25px; padding-left: 65px; position: relative; min-height: 57px;
+						.list-body-image {
+						    position: absolute;border-radius: 6px; display: inline-block;overflow: hidden;
+						    left: 0;top: 4px;width:47px;height:47px;
+						    a>img{width:100%;height:100%;}
+						    i{
+						    	position: absolute; @include transition(all 0.5s ease); height: 24px; width: 24px;
+						    	background: $yellow; border-radius: 50%; color: $light-black;top: 50%;left: 50%;
+						    	font-size: 13px; text-align:center;line-height: 24px; transform: scale(0); margin-top: -12px; margin-left: -12px;
+						    }
+						    &:hover{
+						    	i{
+						    		transform: scale(1);
+						    	}
+						    }
+						}
+						p{
+							font-family: $font-med;
+						}
+					}
+				}
+				&.active{
+					.common-user-list{
+						ul{
+							li{
+								.icon{
+									i{
+										color: $theme-color;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			.table-head{
+				padding: 0 0 25px; margin-bottom: 30px; border-bottom: 1px solid $border-color;
+			}
+		}
+	}
+
+	@media(max-width:1600px){
+		.dashboard-wraper{
+			.dashboard-content{
+				.dashboard-content-list{
+					padding-left: 30px; position: relative;
+					.like-it{
+						label{
+							span{
+								font-size: 20px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@media (max-width:1399px){
+		.dashboard-wraper{
+			.dashboard-content{
+				.table-head{
+					.right-side,.right-side-two{
+						li{
+							&.search{
+								right: -10px;top: 34px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@media (min-width:1200px) and (max-width: 1440px){
+		.dashboard-wraper{
+			.search-filter{
+				.search-box{
+					padding:15px;padding-right: 15px; text-align: center;
+					.form-control {
+						width: 100%; border-radius: 4px; border: 1px solid $grey-light; margin-bottom: 15px;
+						background-size:14px;
+						&.search{
+							background-size: 18px;
+						}
+						&:focus{
+				            outline:none;box-shadow:none;border-color:$theme-color;
+				        }
+					}
+					.btn-info{
+						position: static;
+					}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(lg){
+		.dashboard-wraper{
+			.search-filter{
+				.search-box{
+					padding:11px 10px;padding-right: 145px;
+					.form-control{
+						font-size: 16px; background-size: 15px;
+						&.search{
+							background-size: 18px;
+						}
+					}
+				}
+			}
+			.dashboard-content{
+				padding: 20px; margin-top: 25px;
+				.dashboard-content-list{
+					&:not(:last-child){
+						margin-bottom: 30px;padding-bottom: 30px;
+					}
+					.list-body{
+						margin-bottom: 30px;
+					}
+					.close-job-list{
+						a{
+							font-size: 16px; 
+						}
+					}
+				}
+				.table-head{
+					margin-bottom: 25px;padding-bottom: 20px;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(md){
+		.dashboard-wraper{
+			.search-filter{
+				.search-box{
+					.form-control {
+						background-position: 10px center; padding-left: 35px; font-size: 16px;
+					}
+				}
+				.search-tag{
+					margin-top: 15px;
+					ul{
+						li{
+							.tag{
+								font-size: 12px; padding: 5px 7px;
+							}
+							&:not(:last-child){
+								margin-right: 15px; margin-bottom: 10px;
+							}
+						}
+					}
+				}
+			}
+			.dashboard-content{
+				margin-top: 20px;
+				.dashboard-content-list{
+					padding: 0;
+					&:not(:last-child){
+						margin-bottom: 20px;padding-bottom: 20px;
+					}
+					.list-body{
+						margin-bottom: 20px;
+						.list-body-content{
+							padding-left: 60px; margin-bottom: 15px;
+							p{
+								margin-bottom: 0;
+							}
+						}
+					}
+					
+					.like-it,.close-job-list{
+						top: 0;
+						+ .common-list-head{
+							padding-left: 30px;
+						}
+					}
+				}
+				.table-head{
+					margin-bottom: 20px;padding-bottom: 15px;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-between(md, md) {
+		.dashboard-wraper{
+			.search-filter{
+				.search-box{
+					padding:15px;padding-right: 15px; text-align: center;
+					.form-control {
+						width: 100%; border-radius: 4px; border: 1px solid $grey-light; margin-bottom: 15px;
+						&:focus{
+				            outline:none;box-shadow:none;border-color:$theme-color;
+				        }
+					}
+					.btn-info{
+						position: static;
+					}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(sm){
+		.dashboard-wraper{
+			.search-filter{
+				.search-box{
+					padding:11px 10px;padding-right: 118px;
+					.form-control{
+						font-size: 14px;
+					}
+				}
+			}
+			.dashboard-content{
+				margin-top: 15px; padding: 15px;
+				.dashboard-content-list{
+					&:not(:last-child){
+						margin-bottom: 15px;padding-bottom: 15px;
+					}
+					.list-body{
+						.list-body-content{
+							margin-bottom: 10px;
+						}
+					}
+					.close-job-list{
+						top: 1px;
+						a{
+							font-size: 14px; 
+						}
+					}
+				}
+				.table-head{
+					margin-bottom: 15px;
+					.right-side,.right-side-two{
+						li{
+							&.search{
+								right: -6px;top: 40px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(xs){
+		.dashboard-wraper{
+			.search-filter{
+				.search-box{
+					padding:15px;padding-right: 15px; text-align: center;
+					.form-control {
+						width: 100%; border-radius: 4px; border: 1px solid $grey-light; margin-bottom: 15px;
+						&:focus{
+				            outline:none;box-shadow:none;border-color:$theme-color;
+				        }
+					}
+					.btn-info{
+						position: static;
+					}
+				}
+			}
+			.dashboard-content{
+				.dashboard-content-list{
+					.btn{
+						margin-top: 10px;padding:10px 15px;font-size:12px;
+					}
+				}
+				.table-head{
+					.right-side,.right-side-two{
+						margin-top: 0;
+						li{
+							.icon{
+								position: static;
+							}
+							span{
+								margin-right: 5px;
+							}
+							&.search{
+								right: -10px;
+								.dropdown-menu{
+									margin-top: 38px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// btn-outline-secondary

@@ -1,0 +1,512 @@
+.inner-page{
+   padding: 40px 0 60px;
+   .common-content-box{
+    	// position: relative;padding-left: 370px;padding-right: 370px;
+	    display: flex;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+    	&.right-side-left-0{
+    		.right-side-bar{
+    			left: 0;
+    		}
+    	}
+   }
+   .common-padding-box{
+		background:$white; padding: 25px; border-radius: 6px;
+	}
+	.common-list-head{
+		margin-bottom: 15px;
+		span{
+			font-size: 13px; color:$grey-dark;
+		}
+		.list-heading{
+			max-width: calc(100% - 200px);
+			> h4{max-width:500px;@include text-overflow();}
+			a{
+				color: $light-black; @include transition (all 0.5s);
+				&:hover{color: $theme-color;}
+			}
+		}
+		.status{color: #A7BF56}
+		.edit-head{
+			font-size:20px; font-family: $font-black; color: $theme-color;
+			&:hover{
+				color: darken($theme-color, 5%);
+			}
+		}
+		.unavailable{
+			color: #707070;
+		}
+		.list-btn{
+			padding-left: 10px;
+			.btn{
+				white-space: nowrap;
+				vertical-align: top;
+				&:not(:last-child){
+					margin-right: 5px;
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+	.mb-40{
+		margin-bottom: 40px;
+	}
+	.common-detail-box{
+		.detail-content{
+			p{
+				font-family: $font-med; margin-bottom: 25px;
+			}
+		}
+		.property-list{
+			&.bid-property-list{
+				margin-top: 40px;
+			}
+			margin-bottom:20px;
+			ul{
+				margin-bottom: 0;
+				li{
+					&:not(:last-child){
+						margin-right: 25px;
+					}
+					a{
+						display: block; height: 76px;width: 84px;border-radius: 6px; position: relative; overflow: hidden;
+						i{
+					    	position: absolute; @include transition(all 0.5s ease); height: 35px; width: 35px;
+					    	background: $yellow; border-radius: 50%; color: $light-black;top: 50%;left: 50%;
+					    	font-size: 14px; text-align:center;line-height: 35px; transform: scale(0); margin-top: -17px; margin-left: -17px;
+					    }
+					    &:hover{
+					    	i{
+					    		transform: scale(1);
+					    	}
+					    }
+					    img{
+					    	height: 100%; width: 100%;
+					    }
+					}
+				}
+			}
+		}
+
+		.status-wrap{
+			.status-list{
+				padding-left: 100px;min-height: 140px;position: relative;
+				&:not(:last-child){
+					margin-bottom: 40px;
+				}
+				&:last-child{
+					&:after{
+						display: none;
+					}
+				}
+				&:before,&:after{
+					position: absolute;content: '';left:5px;
+				}
+				&:before{
+					height: 38px;width: 38px;border-radius: 50%;border:2px solid #DCDFE8;background-color: $white;z-index: 2;top: -5px;font-size: 18px;
+					text-align: center; line-height: 37px;
+				}
+				&:after{
+					height: 120%;width:2px;background-color: #DBDEE7;top:25px;left:23px;
+				}
+				&.active{
+					&:before,&:after{
+						background-color: $green;
+					}
+					&:before{
+						border-color: $green;content: "\e903";font-family: 'icomoon';color: $white;
+					}
+				}
+				&.desabled{
+					.list-head{
+						h4{color: #C5C5C5}
+					}
+				}
+				.list-head{
+					margin-bottom: 15px;
+					span{color: #737373;font-size: 13px;}
+				}
+				a{color: $theme-color;font-family: $font-med}
+			}
+		}
+	}
+
+	.detail-left{
+		.divider{
+			margin: 40px 0; border-top:1px solid $border-color;
+		}
+		.request-list{
+			max-height: 275px;
+			.mCustomScrollBox{
+				padding-right: 15px;
+			}
+			ul{
+				display: flex; margin-bottom: 25px; flex-wrap: wrap; justify-content: space-between;
+				li{
+					&:not(:last-child){
+						margin-bottom: 10px; margin-right: 15px;
+					}
+					label{
+						color: $grey-light; font-size: 13px; font-family: $font-med; margin-bottom: 0;
+					}
+					span{
+						display: block; font-size: 18px; font-family: $font-black;
+						a{
+							i{
+								color: $theme-color;padding-left: 7px;display: inline-block;vertical-align: middle;margin-top: 3px;
+							}
+						}
+					}
+				}
+			}
+			.sub-request-list{
+				border-left: 1px solid $grey-light; padding-left: 30px;
+			}
+		}
+	}
+	.bid-user-detail{
+		.common-list-head{
+			.list-heading{
+				max-width: 80%;
+			}
+		}
+	}
+	@media(max-width:1800px){
+		.bid-user-detail{
+			.common-list-head{
+				.list-heading{
+					max-width: 75%;
+				}
+			}
+		}
+	}
+	@media (max-width: 1400px){
+		.detail-left{
+			.request-list{
+				ul{
+					li{
+						span{
+							display: block; font-size: 16px; font-family: $font-black;
+						}
+					}
+				}
+				.sub-request-list{
+					padding-left: 20px;
+				}
+			}
+		}
+		.bid-user-detail{
+			.common-list-head{
+				.list-heading{
+					max-width: 70%;
+					> h4{max-width:300px;}
+				}
+			}
+		}
+		.common-list-head{
+			.list-heading{
+				max-width: calc(100% - 150px);
+			}
+		}
+	}
+	@include media-breakpoint-down(lg){
+		padding:30px 0 40px;
+		.common-content-box{
+			padding-left: 0;
+			&.right-side-left-0{
+	    		padding-left: 280px;
+	    	}
+	    	.status-wrap{
+				.status-list{
+					padding-left: 50px;min-height: 70px;
+					.list-head{
+						margin-bottom: 10px;
+					}
+					&:not(:last-child){
+						margin-bottom: 15px;
+					}
+					&:before{
+						height: 30px;width: 30px;font-size: 14px; line-height: 29px; left: 0;top:0;
+					}
+					&:after{left: 15px; top: 0;}
+				}
+			}
+		}
+		.mb-40{
+			margin-bottom: 30px;
+		}
+		.common-padding-box{
+			padding: 20px;
+		}
+		.detail-left{
+			.divider{
+				margin: 30px 0;
+			}
+			.request-list{
+				ul{
+					margin-bottom: 20px;
+					li{
+						span{
+							font-size: 15px;
+						}
+					}
+				}
+				.sub-request-list{
+					padding-left: 15px;
+				}
+			}
+		}
+		.common-list-head{ 
+			.edit-head{
+				font-size:18px;
+			}
+		}
+		.common-detail-box{
+			.property-list{
+				&.bid-property-list{
+					margin-top:30px;
+				}
+				ul{
+					li{
+						&:not(:last-child){
+							margin-right: 10px;
+						}
+					}
+				}
+			}
+		}
+		.bid-user-detail{
+			.common-list-head{
+				.list-heading{
+					max-width: 68%;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(md){
+		padding:25px 0 30px;
+		.common-content-box{
+			&.right-side-left-0{
+	    		padding-left: 250px;
+	    	}
+	    	.status-wrap{
+				.status-list{
+					p{
+						margin-bottom: 10px;
+					}
+					&:not(:last-child){
+						margin-bottom: 20px;
+					}
+				}
+			}
+		}
+		.mb-40{
+			margin-bottom: 25px;
+		}
+		.common-list-head{
+			.list-heading{
+				h4{
+					margin-bottom: 3px;
+				}
+			}
+			.edit-head{
+				font-size:16px;
+			}
+		}
+		.common-detail-box{
+			.detail-content{
+				p{
+					margin-bottom: 20px;
+				}
+			}
+			.property-list{
+				&.bid-property-list{
+					margin-top: 25px;
+				}
+				ul{
+					li{
+						&:not(:last-child){
+							margin-right: 15px;
+						}
+					}
+				}
+			}
+		}
+		.detail-left{
+			margin-top: 25px;
+			.divider{
+				margin: 20px 0;
+			}
+		}
+		.bid-user-detail{
+			.common-list-head{
+				.list-heading{
+					max-width: 57%;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(sm){
+		padding: 20px 0;
+		.common-content-box{
+			padding-right:0;
+			&.right-side-left-0{
+	    		padding-left: 0;
+	    	}
+		}
+		.mb-40{
+			margin-bottom: 15px;
+		}
+		.common-padding-box{
+			padding: 15px;
+		}
+		.common-detail-box{
+			.detail-content{
+				p{
+					margin-bottom: 15px;
+				}
+			}
+			.property-list{
+				margin-bottom:10px;
+				&.bid-property-list{
+					margin-top: 20px;
+				}
+				ul{
+					li{
+						&:not(:last-child){
+							margin-right: 10px;
+						}
+						a{
+							height: 70px; width: 74px;
+						}
+					}
+				}
+			}
+		}
+		.common-list-head{
+			.edit-head{
+				font-size:14px;
+			}
+		}
+		.detail-left{
+			margin-top: 15px;
+			.divider{
+				margin: 15px 0;
+			}
+			.request-list{
+				ul{
+					margin-bottom: 15px;
+					li{
+						label{
+							font-size: 12px;
+						}
+						span{
+							font-size: 13px; @include text-overflow();
+						}
+					}
+				}
+				.sub-request-list{
+					padding-left: 15px;
+				}
+			}
+			.mb-40{
+				margin-bottom: 15px;
+			}
+		}
+		.bid-user-detail{
+			.common-list-head{
+				.list-heading{
+					max-width: 65%;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(xs){
+		.common-list-head{
+			.btn{
+				margin-top: 10px;
+			}
+			.list-heading{
+				max-width: 100%;
+			}
+		}
+		.bid-user-detail{
+			.common-list-head{
+				.list-heading{
+					max-width: 100%;
+					>h4{max-width: 100%;}
+				}
+			}
+		}
+	}
+
+	// upload_file_list
+	.upload_file_list{
+		.user-image{
+			width:58px;height:58px; border:1px solid #F6F6F6;border-radius:4px;
+			img{height:32px;max-width:32px;}
+		}	
+		.list-file{
+			border:1px solid #F6F6F6;border-radius:4px;padding:10px;position:relative;
+			&:not(:last-child){margin-right:20px;}
+			strong , span {
+				display:block;overflow: hidden;max-width:160px;text-overflow: ellipsis;white-space: nowrap;
+			}
+		    strong{
+			    font-size: 18px; font-family:$font-black ;
+			}
+			span{
+			    font-size: 13px; font-family:$font-med; color:$grey-light;
+			}
+			.close_btn{
+				position:absolute;top:-13px;right:0;
+				i{color:#A7A7A7;font-size:10px;}
+				&:hover{
+					color:$theme-color;
+					i{color:$theme-color;}
+				}
+			}
+		}
+		@include media-breakpoint-down(lg){
+			.list-file{
+				&:not(:last-child){margin-right:15px;}
+			    strong{
+				    font-size: 16px; 
+				}
+			}
+		}
+		@include media-breakpoint-down(md){
+			.list-file{
+			    strong{
+				    font-size: 15px; 
+				}
+			}
+		}
+		@include media-breakpoint-down(sm){
+			.user-image{
+				width:45px;height:45px;
+				img{height:25px;max-width:25px;}
+			}	
+			.list-file{
+			    strong{
+				    font-size: 14px; 
+				}
+			}
+		}
+	}
+
+	// 
+	.edit-next-availability{
+		@include media-breakpoint-down(xs){
+			.calender-radio{
+			    display:initial !important;
+			    .custom-control-inline{display:inline-block !important; }
+			}
+		}
+	}
+	@import 'user-list-common';
+	@import 'address-list-common';
+}

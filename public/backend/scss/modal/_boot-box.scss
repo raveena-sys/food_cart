@@ -1,0 +1,50 @@
+.bootbox-confirm{
+    .modal-dialog{
+      top: 50%;
+      transform: translate(0,-50%) !important;
+      margin: 0 auto;
+    }
+    .modal-content{
+        max-width: 400px;
+        .modal-body{
+            padding-bottom: 15px;
+            .bootbox-body{
+                text-align: center;font-size: 18px;
+            }
+            .bootbox-close-button{
+                display: none;
+            }
+        }
+        .modal-footer{
+            justify-content: center; border: 0; padding-top: 0;padding-bottom: 30px;
+            .btn{
+                min-width: 100px;
+                text-transform: uppercase;
+                &.bootbox-cancel{
+                    border-color: #D7D7D7;color: $grey;background-color:transparent; margin-right: 10px;
+                    &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+                        border-color:darken(#D7D7D7, 5%);
+                        outline: none;box-shadow: none;background: transparent;color:$grey;
+                    }
+                }
+                &.bootbox-accept{
+                    border-color: $theme-color;color: $white;background-color:$theme-color;
+                    &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+                        border-color: darken($theme-color, 5%);color: $white;
+                        outline: none;box-shadow: none;background: darken($theme-color, 5%);
+                    }
+                }
+            }
+        }
+        @include media-breakpoint-down (xs){
+          max-width: 300px;
+          margin: 0 auto;
+          .modal-footer{
+            padding-bottom: 20px;
+            .btn{
+              min-width:80px;
+            }
+          }
+        }
+    }
+}

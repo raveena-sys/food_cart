@@ -1,0 +1,70 @@
+.my-candidacies-page{
+	.custom-tabs{
+		margin-bottom: 40px;
+	}
+	.candidate-sidebar{
+		.common-user-list{
+			.user-left{
+				max-width: 70%;
+				ul{
+					li{
+						max-width:100%;width: inherit;
+					}
+				}
+			}
+			ul{
+				width: 100%;
+				li{
+					max-width: inherit;
+				}
+			}
+		}
+	}
+	@media (min-width:992px) and (max-width:1440px){
+		.candidate-sidebar{
+			.common-user-list{
+				ul{
+					li{
+						width: 46%;
+						&:nth-child(3){
+							border: 0; padding-left: 30px;
+							.icon{
+								left: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(md){
+		.custom-tabs{
+			margin-bottom:30px;
+		}
+	}
+	@include media-breakpoint-down(sm){
+		.custom-tabs{
+			margin-bottom:25px;
+		}
+		.candidate-sidebar{
+			.common-user-list{
+				ul{
+					li{
+						width: 46%;
+					}
+				}
+			}
+		}
+	}
+	@media(max-width:375px){
+		.candidate-sidebar{
+			.common-user-list{
+				ul{
+					li{
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}

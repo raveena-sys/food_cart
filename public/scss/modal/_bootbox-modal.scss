@@ -1,0 +1,51 @@
+.bootbox{
+    display: flex !important;align-items: center;justify-content: center;width: 100%;
+    .modal-content{
+        padding:40px;
+        .modal-footer{
+            border-top:none;justify-content:center;padding:0;
+            .btn{
+                min-width:120px;
+                + .btn{
+                    margin-left:10px;
+                }
+            }
+        }
+        .modal-body{
+            padding:0;text-align:center;
+            .bootbox-close-button{display:none;}
+            .bootbox-body{
+                font-size: 22px; font-family:$font-med; color: $grey-dark; margin-bottom:40px;
+            }
+        }
+        @include media-breakpoint-down(lg){
+            padding:30px;
+            .modal-body{
+                .bootbox-body{
+                    font-size:20px;margin-bottom:35px;
+                }
+            }
+        }
+        @include media-breakpoint-down(md){
+            padding:25px;
+            .modal-body{
+                .bootbox-body{
+                    font-size:18px;margin-bottom: 25px;
+                }
+            }
+        }
+        @include media-breakpoint-down(sm){
+            padding:15px;
+            .modal-footer{
+                .btn{
+                    min-width:90px;
+                }
+            }
+            .modal-body{
+                .bootbox-body{
+                    font-size:16px;margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}

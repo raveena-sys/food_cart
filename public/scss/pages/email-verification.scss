@@ -1,0 +1,23 @@
+.verification-page{
+    .verificationBox {
+        background: $white;
+        border-radius: 6px;
+        padding: 30px;
+        margin: 30px auto;
+        max-width: 500px;
+        &__body{
+            .otp-msg{
+                font-size: 16px;
+                a{
+                    color:$theme-color;  text-decoration: underline; 
+                }
+            }
+        }
+        @include media-breakpoint-down(md){
+            margin: 15px auto; padding: 20px;
+        }
+        @include media-breakpoint-down(sm){
+            margin: 0 auto; padding: 15px;
+        }
+    }
+}

@@ -1,0 +1,109 @@
+.place-bid-lender-company{
+	.praposals-section{
+		.list-header{
+			padding-bottom: 20px;
+		}
+		.praposals-list{
+			padding-bottom: 40px;position: relative;margin-bottom: 40px;
+			&:after{
+				content: '';position: absolute;height: 1px;width: calc(100% - 65px);right: 0;bottom:0;background-color: #E9E9E9;
+			}
+			&:last-child{
+				margin-bottom: 25px;
+			}
+			.head{
+				display: flex; justify-content: space-between;
+				.user-dtl{
+					.avtar{
+						margin-right: 15px;
+						img{
+							height: 50px;width: 50px;border-radius: 50%;
+						}
+					}
+					.dtl{
+						.rating{
+							margin-top: 10px;
+						}
+					}
+				}
+			}
+			.body{
+				margin-top: 15px;padding-left: 65px;
+			}
+		}
+		.load-more{
+			a{
+				color: $theme-color; @include transition (all 0.5);
+				&:hover{
+					color: darken($theme-color, 10%);
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(md){
+		.common-table{
+			.table-head{
+				.right-side>{
+					li{
+						&.filter-field-show{
+							form{
+								.form-group{
+									width: 152px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		//
+		.praposals-section{
+			.praposals-list{
+				margin-bottom: 15px;padding-bottom:15px;
+				&:after{
+					width: calc(100% - 50px);
+				}
+				&:last-child{
+					margin-bottom:10px;
+				}
+				.head{
+					display: block;
+					.user-dtl{
+						.avtar{
+							img{
+								height: 35px;width: 35px;
+							}
+						}
+						.dtl{
+							.rating{
+								margin-top: 7px;
+							}
+						}
+					}
+					.right-btn{
+						margin-top: 10px; padding-left: 50px;
+					}
+				}
+				.body{
+					padding-left: 50px;
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(xs){
+		.common-table{
+			position: relative;
+			.table-head{
+				position: static;
+			}
+		}
+		.praposals-list{
+			.head{
+				.right-btn{
+					margin-top: 5px; padding-left: 50px;
+				}
+			}
+		}
+	}
+}

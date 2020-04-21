@@ -1,0 +1,52 @@
+.contracts-page{
+	.contracts-wrapper,.candidacie-wrapper{
+		.candidate-sidebar{
+			.common-user-list{
+				display: flex; align-items: center; justify-content: space-between;
+				.user-left{
+					max-width: 45%;
+				}
+			}
+		}
+		.btn-row{
+			padding-left: 15px;
+			.btn{
+				margin-bottom: 10px;
+			}
+		}
+	}
+	@media (max-width:1440px){
+		.contracts-wrapper{
+			.candidate-sidebar{
+				.common-user-list{
+					display: block;
+					.user-left{
+						max-width: 100%;
+					}
+					.btn-row{
+						margin-top: 15px;
+					}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-up(md){
+		.candidacie-wrapper{
+			.btn-row{
+				padding-left: 0;
+			}	
+		}
+	}
+	@include media-breakpoint-between(sm,md){
+		.contracts-wrapper{
+			.candidate-sidebar{
+				.common-user-list{
+					display: flex;
+					.btn-row{
+						margin-top: 0px;
+					}
+				}
+			}
+		}
+	}
+}

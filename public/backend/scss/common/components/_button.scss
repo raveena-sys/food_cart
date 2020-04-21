@@ -1,0 +1,81 @@
+.btn{
+    padding:11px 20px;cursor:pointer;border-radius:.25rem; font-size: 13px; font-family: $font-black;
+    i{font-size:17px;}
+	&.min-w130{
+		min-width: 130px;
+    }
+    &.btn-small{
+        padding-top: 7px;  padding-bottom: 7px;
+    }
+    &.btn-danger{
+        border-color: $theme-color;color: white;background-color:$theme-color;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken($theme-color, 5%);
+            outline: none;box-shadow: none;background: darken($theme-color, 5%);color: white;
+        }
+        &.btn-danger-shadow{
+            box-shadow: 0px 4px 29px -6px rgba(229,54,0,0.7);
+            &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+                box-shadow: 0px 4px 29px -6px rgba(229,54,0,0.7);
+            }
+        }
+
+        &.disabled{
+            border-color: $theme-color !important; 
+            color: white !important;
+            background-color:$theme-color !important;
+        }
+
+    }
+    &.btn-success{
+        background-color:$green; color:white;border-color:$green;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken($green, 5%);
+            outline: none;box-shadow: none;background: darken($green, 5%);color: white;
+        }
+    }
+    &.btn-secondary{
+        border-color: black;color: white;background-color:black;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken(black, 5%);
+            outline: none;box-shadow: none;background:rgba(black, 0.7);color: white;
+        }
+    }
+     &.btn-outline-danger{
+        border-color:$theme-color;color: $theme-color;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken($theme-color, 5%);
+            outline: none;box-shadow: none;background-color:rgba($theme-color, 0.1);color: $theme-color;
+        }
+
+    }
+    &.btn-light{
+        border-color:#e2e2e2;color: $grey;background-color:#f4f4f4;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken(#e2e2e2, 5%);
+            outline: none;box-shadow: none;background: darken(#f4f4f4, 5%);color: $grey;
+        }
+    }
+
+     &.btn-outline-light{
+        border-color:#D7D7D7;color:$grey;
+        &:hover,&:focus,&:active,&:not(:disabled):not(.disabled):active {
+            border-color:darken(#D7D7D7, 5%);
+            outline: none;box-shadow: none;color: $grey;
+        }
+    }
+	
+
+	@include media-breakpoint-down(md){
+		padding:7px 15px;
+        &.min-w130{
+            min-width: 110px;
+        }
+	}
+    @include media-breakpoint-down(xs){
+        font-size:12px;
+         &.min-w130{
+            min-width: 80px;
+        }
+    }
+}

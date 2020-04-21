@@ -1,0 +1,44 @@
+//path
+$fonturl     : '../fonts';
+$imageurl    : '../images';
+
+//fonts
+// $font-reg    : 'TitilliumWeb-Regular';
+// $font-semi   : 'TitilliumWeb-SemiBold';
+// $font-bold   : 'TitilliumWeb-Bold';
+
+//fonts
+$font-book   : 'AvenirLTStdBook';
+$font-med    : 'AvenirLTStdMedium';
+$font-black  : 'AvenirLTStdBlack';
+$font-heavy  : 'AvenirLTStdHeavy';
+ 
+//variables
+$theme-color   : #3CC9D7; 
+$yellow   		: #F3D61A;
+$dark-blue     : #233266;
+$light-black   :#2E2E2E;
+$grey 		   : #AAAAAA;
+$light-gray    : #E8E8E8;
+$green		   : #AAC74A;
+$black		   : #000;
+$white         : #fff;
+$grey-light	: #C5C5C5;
+$grey-dark:#737373;
+$border-color:#E9E9E9;
+$orange-color:#FE840E;
+$red:#ff0000;
+
+
+//Fonts Family
+
+// @include font-face($font-reg , '#{$fonturl}/TitilliumWeb-Regular', 'normal', 'normal');
+// @include font-face($font-semi , '#{$fonturl}/TitilliumWeb-SemiBold', 'normal', 'normal'); 
+// @include font-face($font-bold , '#{$fonturl}/TitilliumWeb-Bold', 'normal', 'normal');
+
+// //Fonts Family 
+@include font-face($font-book , '#{$fonturl}/AvenirLTStdBook', 'normal', 'normal'); 
+@include font-face($font-med , '#{$fonturl}/AvenirLTStdMedium', 'normal', 'normal'); 
+@include font-face($font-black , '#{$fonturl}/AvenirLTStdBlack', 'normal', 'normal');
+@include font-face($font-heavy , '#{$fonturl}/AvenirLTStdHeavy', 'normal', 'normal'); 
+

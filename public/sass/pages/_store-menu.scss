@@ -1,0 +1,327 @@
+.itemListing{
+    &__box{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        right: 0px;
+        left: 0px;
+        max-width: 100%;
+        flex-basis: auto;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 2px 4px 0px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        border-radius: 3px;
+        margin: 0rem;
+        margin-bottom: 3rem;
+        .imgWrapper{
+            position: relative;
+            &__typ{
+                font-size: 2rem;
+                position: absolute;
+                top: 0.5rem;
+                left: 0.6rem;
+                min-width: 0.3em;
+                min-height: 0.3em;
+                background-size: 100% 100%;
+                width: 1.5rem;
+                height: 1.5rem;
+                background-repeat: no-repeat;
+                &.nonveg{
+                        background-image: url(#{$imageurl}/non_veg.svg);
+                }
+                &.veg{
+                    background-image: url(#{$imageurl}/veg.svg);
+                }
+            }
+            &__img-txt{
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: rgb(255, 255, 255);
+                position: absolute;
+                bottom: 15px;
+                left: 0.6rem;
+                &__wpr{
+                    background-image: url(#{$imageurl}/shadow.svg);
+                    min-width: 0.3em;
+                    min-height: 0.3em;
+                    background-size: 100% 100%;
+                    width: 15rem;
+                    height: 7rem;
+                    position: absolute;
+                    bottom: 0px;
+                    background-repeat: no-repeat;
+                }
+                
+            }
+
+            .price{
+                &:before {
+                    content: "$ ";
+                }
+            }
+        }
+
+        &__info{
+            flex-basis: auto;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0.8rem; 
+            .item-desc{
+                height: 9rem;
+                margin-bottom: 1rem;
+                display: flex;
+                flex-direction: column;
+                border-bottom: 1px solid rgb(233, 233, 233);
+                &__name{
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                &__desc{
+                    flex-basis: auto;
+                    line-height: 1.4;
+                    font-size: 13px;
+                    color: rgba(122, 122, 122, 0.87);
+                    margin-top: 0.5rem;
+                    width: 90%;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                &__adCrt{
+                    display: flex;
+                    -webkit-box-pack: justify;
+                    justify-content: space-between;
+                    flex-direction: row-reverse;
+                    margin-top: 0.5rem;
+                    position: relative;
+                    button{
+                        cursor: pointer;
+                        color: rgb(0, 171, 0);
+                        background-color: rgb(255, 255, 255);
+                        padding: 0.433rem;
+                        border-width: 1px;
+                        border-style: solid;
+                        border-color: rgb(0, 171, 0);
+                        border-image: initial;
+                        font-size: 10px;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        border-radius: 3px;
+                       
+                    }
+                }
+            }
+        }
+    }
+}
+
+.crt-hdr-ln{
+    border-width: 1.6px;
+    border-style: solid;
+    border-color: rgb(130, 187, 55);
+    border-image: initial;
+    margin: 0px;
+}
+
+.cartCnt__wrp{
+    padding: 0px 1rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 2px 4px 0px;
+    background: rgb(255, 255, 255);
+    transition: all 1s ease 0s;
+    position: relative;
+    
+}
+
+.cartItem{
+    min-height: 28rem;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-bottom: 150px;
+   
+}
+
+.cartBx{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed rgb(192, 216, 233);
+    &__img{
+        display: flex;
+        height: 11rem;
+        position: relative;
+        flex: 1 1 0%;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    &__description{
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+        flex: 4 1 0%;
+    }
+
+    &__title{
+         font-size: 16px;
+         font-weight: 600;
+    }
+
+    &__txt{
+        font-size: 14px;
+    }
+}
+
+.qty-prc{
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-top: 1rem;
+    
+    .price{
+        font-weight: 700;
+        font-size: 16px;
+    }
+}
+
+.quantity{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    max-width: 8rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(186, 186, 186);
+    border-image: initial;
+    border-radius: 3px;
+    .decrease{
+        background-image: url(#{$imageurl}/minus.svg);
+        min-width: 1em;
+        min-height: 1em;
+        background-size: 100% 100%;
+        width: 2rem;
+        height: 0.9rem;
+        margin: 0px 0.3rem;
+        background-repeat: no-repeat;
+    }
+    .cntr-val{
+        font-weight: 600;
+        border-left: 1px solid rgb(186, 186, 186);
+        border-right: 1px solid rgb(186, 186, 186);
+        padding: 0.32rem 0.8rem;
+    }
+    .increase{
+        background-image: url(#{$imageurl}/plus.svg);
+        min-width: 1em;
+        min-height: 1em;
+        background-size: 100% 100%;
+        width: 2rem;
+        height: 0.9rem;
+        margin: 0px 0.3rem;
+        background-repeat: no-repeat;
+    }
+}
+
+.cartFooter{
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    padding: 15px;  
+    box-shadow: rgba(0, 0, 0, 0.12) 0px -0.56rem 0.62rem 0px;
+    background: rgb(239, 245, 251);
+   
+    .chkot-ftr-prc{
+        display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    margin-bottom: 15px;
+    .sb-ttl-hdn {
+        font-size: 18px;
+        font-weight: bold;
+       
+    }
+    .sb-ttl {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    }
+
+  
+}
+
+.checkoutBtn{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    padding: 0.7em 1.5em;
+    background: rgb(130, 187, 55);
+    padding: 10px 10px;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+
+.cartLeft{
+    padding: 30px 0 200px;
+}
+.cartRight{
+    padding: 30px 0;
+    &__heading{
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    .priceDetail{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0.5rem 1rem 1rem;
+        background-color: rgb(255, 255, 255);
+        width: 100%;
+        border-radius: 3px;
+        margin: 0px;
+        border: 1px solid rgb(233, 237, 239);
+
+        .txt-wpr{
+            display: flex;
+            flex-direction: row;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.3rem 0px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            &.brd{
+                border-bottom: 1px dashed rgb(233, 237, 239);
+                border-top: 1px dashed rgb(233, 237, 239);
+                padding: 10px 0;
+            }
+
+            .leftTxt{
+                display: flex;
+                -webkit-box-pack: start;
+                justify-content: start;
+                -webkit-box-align: center;
+                align-items: center;
+            }
+            .rightTxt{
+                display: flex;
+                padding: 0.3rem 0.5rem 0.3rem 0.3rem;
+            }
+        }
+      
+    } 
+}

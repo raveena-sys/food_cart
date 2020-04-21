@@ -1,0 +1,128 @@
+.footer-sec{
+	background:$white;
+	padding: 35px 0 20px;
+	.footer-logo{
+		margin-bottom: 30px;
+	}
+	.footer-links{
+		padding-left: 60px;
+		.footer-links-box{
+			width: 25%;
+			h4{
+				color: #233266; font-size:24px; margin-bottom: 20px;
+			}
+			ul{
+				margin-bottom: 0;
+				li{
+					&:not(last-child){
+						margin-bottom: 10px;
+					}
+					a{
+						color: $grey-dark; font-size: 18px; @include transition(all 0.5s); font-family: $font-med;
+						&:hover{
+							color: $theme-color;
+						}
+					}
+				}
+			}
+			&.footer-info{
+				a{
+					font-size: 30px;font-family: $font-black; color: $theme-color; display: inline-block;margin-top: 40px;
+				}
+			}
+		}
+	}
+	p{
+		font-size: 18px; color: $grey-dark; margin-bottom: 0; font-family: $font-med;
+	}
+	@media (max-width:1440px){
+		.footer-logo{
+			margin-bottom: 20px;
+		}
+		p{font-size:16px;}
+		.footer-links{
+			padding-left:30px;
+			.footer-links-box{
+				h4{
+                  font-size:20px;
+				}
+				ul{
+					li{
+						a{
+							font-size:16px;
+						}
+					}
+				}
+				&.footer-info{
+					a{font-size:25px;margin-top:30px;}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(lg){
+		padding:20px 0;
+		.footer-logo{
+			margin-bottom: 10px;
+		}
+		p{font-size:15px;}
+		.footer-links{
+			padding-left:0px;
+			.footer-links-box{
+				h4{
+                  font-size:16px;margin-bottom:10px;
+				}
+				ul{
+					li{
+						a{
+							font-size:15px;
+						}
+					}
+				}
+				&.footer-info{
+					a{font-size:20px;margin-top:20px;}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(md){
+		.footer-links{
+          margin-top:20px;
+		}
+	}
+	@include media-breakpoint-down(sm){
+		padding:15px 0;
+		.footer-logo{
+			img{width:130px;}
+		}
+		p{font-size:14px;}
+		.footer-links{
+			padding-left:0px;
+			.footer-links-box{
+				h4{
+                  font-size:15px;margin-bottom:10px;
+				}
+				ul{
+					li{
+						a{
+							font-size:14px;
+						}
+						&:not(:last-child){
+							margin-bottom:6px;
+						}
+					}
+				}
+				&.footer-info{
+					a{font-size:15px;margin-top:10px;}
+				}
+			}
+		}
+	}
+	@include media-breakpoint-down(xs){
+		padding:15px 0 10px;
+		.footer-links{
+			.footer-links-box{
+				width:50%;margin-bottom:5px;
+			}
+		}
+	}
+}

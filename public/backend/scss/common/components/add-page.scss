@@ -1,0 +1,61 @@
+.add-page{
+	.card{
+    border:0px;max-width:880px;margin:60px auto 0;min-height:580px;
+    @include box-shadow(0, 0, 20px,rgba($black,0.05));border-radius:5px;
+		.card-header{
+			padding:40px 30px 20px;background-color:$white;position:relative;
+      h4{font-size:18px;font-family:$font-black; color:$black;}
+      .add-category-header{
+        margin:55px auto 0px;max-width:500px;
+        .input-group{
+          .btn{
+            padding:8px 13px;
+          }
+        }
+        .row{
+          margin:0 -8px;
+          [class^="col-"]{
+            padding:0 8px;
+          }
+        }
+      }
+		}
+    // card header end
+    // card body start
+		.card-body{
+			padding:20px 30px 40px;
+      .inner_cnt{
+        max-width:500px;margin:0 auto;
+        .btn_row{
+          margin-top:25px;
+          .btn{
+            min-width:130px;
+            &:not(:last-child){
+              margin-right:12px;
+            }
+          }
+        }
+      }
+		}
+	}
+  @include media-breakpoint-down(lg){
+    .card{
+      max-width:100%;margin:0;min-height:auto;
+    }
+  }
+  @include media-breakpoint-down(sm){
+    .card{
+      .card-header{
+        padding:15px 15px 0;
+      }
+      .card-body{
+        padding:15px;
+        .inner_cnt {
+          .btn_row {
+            .btn{min-width:110px;}
+          }
+        }
+      }
+    }
+  }
+}

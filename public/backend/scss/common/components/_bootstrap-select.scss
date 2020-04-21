@@ -1,0 +1,147 @@
+.bootstrap-select {
+    height:auto; 
+    .dropdown-toggle {
+        font-size:14px;font-family: $font-book;border-color: #E6E6E6;
+        border-radius: .25rem;transition:none;
+        color: black;background-color:transparent; 
+        padding:11px 12px;height:44px;
+        box-shadow: none !important; outline: none !important;
+        // &.btn-light{
+        //     border-color: #E6E6E6 !important; 
+        // }
+        &:hover,&:focus,&:active:focus,&:active, &:active:hover, &:not(:disabled),&:not(.disabled):active {
+            background-color:transparent !important;
+            outline: none !important;color: $grey;
+            box-shadow: none !important;
+            border-color:#e4e5ec;
+
+        }
+        .filter-option-inner{
+            padding-right:0px;
+        }
+
+        .filter-option-inner-inner{
+            color:black;@include text-overflow();
+            display: inline-block;
+             width: 100%; padding-right: 23px;
+        }
+
+        &:after {
+            content: "\ea60";
+            font-family: 'icomoon';
+            border: none;
+            position: relative;color:#8E9199;
+             vertical-align:middle;right:0px;
+            top:-4px;font-size:19px;
+        }
+        
+        &.bs-placeholder{
+            .filter-option-inner-inner{
+                color:#888888;
+            }
+        }
+        
+    } // when show class add
+    &.disabled {
+        background-color:#E8E8E8 !important;
+        .dropdown-toggle{
+            &.btn-light{
+                &:focus{border-color:#e2e2e2 !important;} 
+            }
+            .bs-placeholder .filter-option-inner-inner{
+                color:black;
+            }
+        }
+    }
+    &.form-control{z-index: initial;}
+
+    &.show{
+        .dropdown-toggle{
+            border-radius:.25rem .25rem 0 0 ;border-color:$theme-color;
+            &.btn-light{
+            border-color:$theme-color !important;
+        }
+        }
+
+        .dropdown-menu {
+            min-width: 100% !important;border-color: $theme-color;width: 100%;
+            background-color: white;margin-top: 0px; 
+            padding: 0;border-top: 0;border-radius: 0 0 .25rem .25rem;z-index: 3;
+            ul{display:block !important;}
+            .inner {
+                li {
+                    &.active,&:active, &.selected{
+                        a {
+                            background-color: $theme-color;
+                            color: white;
+                            span{
+                                top: 10px;
+                            }
+                        }
+                    }
+                    a {
+                        padding: 10px 15px;font-size:14px;white-space: normal;line-height: normal;
+                        &:hover{
+                            background-color: $theme-color;
+                            color: white;
+                            span{
+                                top: 10px;
+                            }
+                        }
+                    }
+                    span{
+                         white-space: nowrap;overflow: hidden; text-overflow:ellipsis;width: 100%;
+                    }
+                }
+            }
+        }
+    } 
+    // when dropup class add
+    &.dropup {
+        .dropdown-menu.show{
+            >.inner.show{padding-top: 1px;border-top:1px solid $theme-color;} 
+        }
+        &.show{
+            .dropdown-toggle {
+                border-radius: 0 0 .25rem .25rem;
+            }
+        }
+        .dropdown-menu {
+            padding: 0;margin-bottom: 0;
+            border-bottom:0;border-top:0;
+            border-radius: .25rem .25rem 0 0;
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        .dropdown-toggle {
+            // &:after{top:-6px}
+            +.dropdown-menu {
+                .inner {
+                    li {
+                        a{font-size:14px;}
+                    }
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .dropdown-toggle {
+            &:after{font-size:20px;top:-5px;}
+        }
+    }
+    @include media-breakpoint-down(sm) {
+        .dropdown-toggle {
+           height: 40px; font-size:14px;padding:9px 12px; 
+           +.dropdown-menu {
+                .inner {
+                    li {
+                        a{font-size:14px;} 
+                    }
+                }
+            }
+           &:after{font-size:16px;top: -2px;}
+        }
+    }
+}
