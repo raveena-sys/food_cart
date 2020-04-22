@@ -131,8 +131,7 @@ class OrderController extends Controller
 
             }else{
             	DB::rollback();
-		    	return redirect('/');
-	    		Session::flash('error', 'Order Couldn\'t be prosessed');
+		    	Session::flash('error', 'Order Couldn\'t be prosessed');
 		    	return redirect('/save_user_detail');
             }
 
