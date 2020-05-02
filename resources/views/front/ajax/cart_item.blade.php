@@ -84,15 +84,15 @@
         ${{$subtotal}}
       </div>
     </div>
-    <a href="{{url('checkout')}}" class="btn btn-success btn-block">Checkout</a>
+    <a href="{{url('checkout')}}" class="btn btn-success btn-block">CHECKOUT</a>
   </div>
   @else
   @if(!empty($products) && count($products)>0)
-  <div class="totalPrice"> 
-    <div class="" style="color:#337ab7">
-    <h3>Your Cart is empty</h3>
-      <p>Please add some items from the menu.</p>
-    </div>
+  <div class="totalPrice emptyCart"> 
+    <div class="">
+      <h3>Your Cart is empty</h3>
+        <p>Please add some items from the menu.</p>
+      </div>
     <!-- <a href="javascript:void(0);" class="btn btn-success btn-block">Add Item</a> -->
   </div>
   @endif
