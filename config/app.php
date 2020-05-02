@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        ConsoleTVs\Charts\ChartsServiceProvider::class,
+        //ConsoleTVs\Charts\ChartsServiceProvider::class,
     ],
 
     /*
@@ -230,7 +230,7 @@ return [
         'Datatables' => Yajra\Datatables\Datatables::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        //'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
     ],
 
 ];

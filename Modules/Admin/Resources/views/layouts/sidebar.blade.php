@@ -52,11 +52,11 @@
                             <span>Size Master</span>
                         </a>
                     </li>
-                    <li class="ripple-effect {{(Request::segment(2) == 'manage-drink-master') ? 'active' : ''}}">
+                    <!-- <li class="ripple-effect {{(Request::segment(2) == 'manage-drink-master') ? 'active' : ''}}">
                         <a class="nav-link" href="{{ URL::To('admin/manage-drink-master') }}">
                             <span>Drink Master</span>
                         </a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </li>
@@ -122,104 +122,12 @@
                 </a>
             </li>
 
-            <!-- <li class="{{(Request::segment(2) == 'manage-company') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" role="button" data-toggle="collapse" href="#ManageCompanies" aria-expanded="false" aria-controls="ManageCompanies">
-                    <span class="nav_icon"><i class="icon-apartment"></i></span>
-                    <span class="nav_title">Manage Companies</span>
-                </a>
-                <ul class="list-unstyled collapse in-collapse " data-parent="#sideSubMenu" id="ManageCompanies">
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-company' && Request::segment(2) == 'lender') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-company/lender') }}"><span>Lender</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(2) == 'manage-company' && Request::segment(3) == 'appraiser') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-company/appraiser') }}"><span>Appraiser</span></a>
-                    </li>
-                </ul>
-            </li>
-
-         <li class="{{(Request::segment(2) == 'manage-manager') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" role="button" data-toggle="collapse" href="#Managemanager" aria-expanded="false" aria-controls="Managemanager">
-                    <span class="nav_icon"><i class="icon-manager"></i></span>
-                    <span class="nav_title">Manage Manager</span>
-                </a>
-                <ul class="list-unstyled collapse in-collapse " data-parent="#sideSubMenu" id="Managemanager">
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-manager' && Request::segment(2) == 'lender') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-manager/lender') }}"><span>Lender</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-manager' && Request::segment(2) == 'appraiser') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-manager/appraiser') }}"><span>Appraiser</span></a>
-                    </li>
-                </ul>
-            </li>
-             <li class="{{(Request::segment(2) == 'manage-employee') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" role="button" data-toggle="collapse" href="#ManageEmployees" aria-expanded="false" aria-controls="manageUser">
-                    <span class="nav_icon"><i class="icon-a-employees"></i></span>
-                    <span class="nav_title">Manage Employees</span>
-                </a>
-                <ul class="list-unstyled collapse in-collapse " data-parent="#sideSubMenu" id="ManageEmployees">
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-manager' && Request::segment(2) == 'lender') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-employee/lender') }}"><span>Lender</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-manager' && Request::segment(2) == 'appraiser') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-employee/appraiser') }}"><span>Appraiser</span></a>
-                    </li>
-                </ul>
-            </li>
-             <li class="{{(Request::segment(2) == 'manage-individual') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" role="button" data-toggle="collapse" href="#ManageIndividuals" aria-expanded="false" aria-controls="manageUser">
-                    <span class="nav_icon"><i class="icon-a-user"></i></span>
-                    <span class="nav_title">Manage Individuals</span>
-                </a>
-                <ul class="list-unstyled collapse in-collapse " data-parent="#sideSubMenu" id="ManageIndividuals">
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-individual' && Request::segment(2) == 'lender') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-individual/lender') }}"><span>Lender</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-individual' && Request::segment(2) == 'appraiser') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-individual/appraiser') }}"><span>Appraiser</span></a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="{{(Request::segment(2) == 'manage-job') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" href="{{ URL::To('admin/manage-job') }}" aria-expanded="false">
-                    <span class="nav_icon"><i class="icon-a-manage-jobs"></i> </span>
-                    <span class="nav_title">Manage Jobs</span>
-                </a>
-            </li>
-
-
-            <li class="{{(Request::segment(2) == 'my-earning') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" href="{{ URL::To('admin/my-earning') }}" aria-expanded="false">
-                    <span class="nav_icon"><i class="icon-my-earnings"></i> </span>
-                    <span class="nav_title">My Earnings</span>
-                </a>
-            </li>
-             <li class="{{(Request::segment(2) == 'manage-report') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" role="button" data-toggle="collapse" href="#ManageCMST" aria-expanded="false" aria-controls="manageUser">
-                    <span class="nav_icon"><i class="icon-s-report"></i></span>
-                    <span class="nav_title">Manage Reports</span>
-                </a>
-                <ul class="list-unstyled collapse in-collapse " data-parent="#sideSubMenu" id="ManageCMST">
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-report' && Request::segment(2) == 'total-revenue') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-report/total-revenue') }}"><span>Total Revenue</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-report' && Request::segment(2) == 'registered-companies') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-report/registered-companies') }}"><span>Registered Companies</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-report' && Request::segment(2) == 'registered-individuals') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-report/registered-individuals') }}"><span>Registered Individuals</span></a>
-                    </li>
-                    <li class="ripple-effect {{(Request::segment(1) == 'manage-report' && Request::segment(2) == 'total-jobs') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ URL::To('admin/manage-report/total-jobs') }}"><span>Total Jobs</span></a>
-                    </li>
-                </ul>
-            </li>
-             <li class="{{(Request::segment(2) == 'manage-cms' || Request::segment(2) == 'edit-cms') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" href="{{ URL::To('admin/manage-cms') }}" aria-expanded="false">
+            <li class="{{(Request::segment(2) == 'manage-cms' || Request::segment(2) == 'edit-cms') ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('admin/manage-social') }}" aria-expanded="false">
                     <span class="nav_icon"><i class="icon-a-manage-cms"></i> </span>
-                    <span class="nav_title">Manage CMS</span>
+                    <span class="nav_title">Social</span>
                 </a>
-            </li> -->
+            </li>
         </ul>
     </div>
 </aside>

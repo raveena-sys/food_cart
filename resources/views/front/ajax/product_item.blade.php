@@ -3,14 +3,13 @@
   $subtotal = 0;
 @endphp
 
-
-
-
 @if(!empty($products) && count($products)>0)
   @if(!empty($subcategory))
       
   @foreach($subcategory as $value)  
-  <div class="row col-md-12 subcategory" id="{{str_replace(' ', '_', $value->name)}}">{{$value->name}}</div><hr>
+  <div class="row col-md-12 subcategory" id="{{str_replace(' ', '_', $value->name)}}"><b>
+    {{$value->name}}</b>
+  </div><hr>
   <div class="row"> 
     @foreach($products as $val)
     @php 
@@ -19,7 +18,7 @@
     @endphp
     
     @if($val->sub_category_id == $value->id)
-    <div class="col-lg-4" id="prod_{{$val->sub_category_id}}">
+    <div class="col-lg-4 col-sm-6 col-xs-12" id="prod_{{$val->sub_category_id}}">
       <div class="card listGrid">
         <div class="imgWrapper">
           <div class="img-header">
@@ -34,7 +33,9 @@
               <img src="{{asset('img/favorite.svg')}}" />                 
             </a> -->
           </div>
+          <div class="img-div-wrap">
           <img class="card-img-top img-responsive" src="{{asset('uploads/products')}}/{{isset($val->image)?$val->image:''}}" alt="">
+          </div>
           <div class="img-footer">
             <div class="price">
               ${{isset($val->custom_price)?round($val->custom_price, 2):(isset($val->price)?round($val->price, 2):'')}}
@@ -50,7 +51,24 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">{{isset($val->name)?$val->name:''}}</h5>
-          <p>{{isset($val->description)?$val->description:''}} </p>
+          <?php 
+            if(isset($val->description)){
+              $string = strip_tags($val->description);
+              if (strlen($string) > 50) {
+
+                  // truncate string
+                  $stringCut = substr($string, 0, 50);
+                  $endPoint = strrpos($stringCut, ' ');
+
+                  //if the string doesn't contain any space then it will cut without word basis.
+                  $string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                  $string .= "... <a href='javascript:void(0)' class='read_less' id=".$val->id.">Read More</a>";
+              }
+            }
+            
+            ?>
+            {!!isset($val->description)?'<p class="content_'.$val->id.'" style="display: none;">'.$val->description.' <a href="javascript:void(0)"  class="read_less" id='.$val->id.'>Read less</a></p>':''!!} 
+          <p class="short_content_{{$val->id}}">{!!isset($string)?$string:''!!} </p>
         </div>
         <div class="card-footer">
           @if(!empty($cartArray) && count($cartArray)>0)
@@ -110,3 +128,9 @@
   </div>   
   </div>
 @endif  
+
+<style>
+  .img-responsive{
+    width:100%;
+  }
+</style>

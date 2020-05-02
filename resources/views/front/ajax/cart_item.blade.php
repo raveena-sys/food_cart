@@ -18,7 +18,7 @@
         <p>{{isset($v['description'])?$v['description']:''}}</p>
       </div>
     </div>
-    <div class="container">
+    <div class="containers">
 
       {!!isset($v['size_master_name'])?'<p><strong>Pizza Size:</strong> '.$v['size_master_name'].'</p>':''!!}
 

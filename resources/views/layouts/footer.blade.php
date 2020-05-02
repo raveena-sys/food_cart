@@ -1,3 +1,4 @@
+<div id="footer">
 <footer>
     <div class="container">
         <ul class="foot_nav">
@@ -29,3 +30,4 @@
     Developed By <a href="https://integratedmarketing.pro"><img src="{{asset('img/integrated_marketting.png')}}"></a></br>
     Copy Right @ <?php echo date('Y'); ?> | All Rights Reserved
 </section>
+</div>

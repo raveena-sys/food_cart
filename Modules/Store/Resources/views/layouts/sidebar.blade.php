@@ -53,11 +53,11 @@
                             <span>Size Master</span>
                         </a>
                     </li>
-                    <li class="ripple-effect {{(Request::segment(2) == 'manage-drink-master') ? 'active' : ''}}">
+                    <!-- <li class="ripple-effect {{(Request::segment(2) == 'manage-drink-master') ? 'active' : ''}}">
                         <a class="nav-link" href="{{ URL::To('store/manage-drink-master') }}">
                             <span>Drink Master</span>
                         </a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </li>

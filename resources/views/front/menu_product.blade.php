@@ -9,7 +9,7 @@
  <div class="container store_list_inner">
 
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-xs-12">
         <section class="">
          @if(!empty($subcategory))
       
@@ -24,19 +24,19 @@
         </section>
       </div>
     </div>
-    <div class="row">
+<div class="row">
       <div class="col-lg-8">
-        <div class="row product_item">
+        <div class="product_item">
           {!!view('front.ajax.product_item', compact('products', 'subcategory'))->render()!!}    
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="cartRight cart_item">
+        <div class="cartRight cart_item" style="margin-top:40px">
           {!!view('front.ajax.cart_item', compact('products'))->render()!!}
         </div>
       </div>
     </div>
-  </div>
+    </div>
 
   <div class="sideMenu">
   </div>

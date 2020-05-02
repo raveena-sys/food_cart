@@ -5,10 +5,11 @@ namespace Modules\Store\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Charts, DB, Auth;
+use DB, Auth;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Category;
+use ConsoleTVs\Charts\Facades\Charts;
 
 class DashboardController extends Controller
 {

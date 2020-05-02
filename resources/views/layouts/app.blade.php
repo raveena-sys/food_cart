@@ -5,8 +5,9 @@
 <body>
    
     @include('layouts.header')
-
+    <div id="mainContent">
     @yield('content')
+    </div>
 
     <!-- <div class="clearfix"></div> -->
 

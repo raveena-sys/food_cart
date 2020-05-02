@@ -23,8 +23,8 @@
   color: black;
   padding: 8px;">
     <th style="min-width:40%;">Product Name</th>
-    <th style="min-width:20%;">Price</th>
     <th style="min-width:20%;">Quantity</th>
+    <th style="min-width:20%;">Price</th>
     <th style="min-width:20%;">SubTotal</th>
   </tr>
   @if($orderdata->cart_item)
@@ -79,7 +79,7 @@
   <tr style="padding: 8px;">
     <td>Delivery Charge:</td>
     <td>&nbsp;</td>
-    <td>{{isset($orderdata->delivery_charge)?$orderdata->delivery_charge:''}}</td>
+    <td>{{isset($orderdata->delivery_charge)?'$'.$orderdata->delivery_charge:''}}</td>
   </tr>
   <tr style="padding: 8px;">
     <td></td>

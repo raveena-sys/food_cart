@@ -409,5 +409,16 @@ $(document).on('click', ".subcategory", function() {
         'slow');
 });
 
+$(document).on('click', '.read_less', function(){
+  id = $(this).attr('id');
+  if($('.short_content_'+id).is(':visible')){
+
+    $('.content_'+id).show();
+    $('.short_content_'+id).hide();
+  }else{
+    $('.short_content_'+id).show();
+    $('.content_'+id).hide();
+  }
+});
 
 

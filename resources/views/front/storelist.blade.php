@@ -38,18 +38,20 @@
 
 
                         <h2><?php echo $val->name; ?></h2>
-                        <ul class="ratting">
+                        <div class="ratting">
                             <!-- <li><img src="{{asset('img/star.png')}}"></li>
                             <li><img src="{{asset('img/star.png')}}"></li>
                             <li><img src="{{asset('img/star.png')}}"></li>
                             <li><img src="{{asset('img/star.png')}}"></li>
                             <li><img src="{{asset('img/star.png')}}"></li> -->
-                            <p>
-                                {{isset($val->address1)?'#'.$val->address1. ', '. $val->city->name.' '.$val->state->name.' | ':''}} {{isset($val->phone_number)?$val->phone_number:''}}
+                            <span><i class="fa fa-map-signs" aria-hidden="true"></i> {{isset($val->address1)? $val->address1. ', '. $val->city->name.' '.$val->state->name:''}} 
                                
-                            </p>
-                        </ul>
-                        <p>
+                            </span>
+                            <span><i class="fa fa-phone" aria-hidden="true"></i> {{isset($val->phone_number)?$val->phone_number:''}}
+                               
+                            </span>
+                        </div>
+                        <span><i class="fa fa-calendar-o" aria-hidden="true"></i>
                             <?php 
                                 date_default_timezone_set('Asia/Kolkata');
         
@@ -69,14 +71,16 @@
                                             if($str!='No' && $currentTime >$value &&  $currentTime <$v){
                                                 $showOrderNow = true;
                                             }
+                                            echo '<span>';
                                             echo $string[$key] = ucfirst($key) .' '.date("g:i a", strtotime($value)).' to '.date("g:i a", strtotime($v)). '</br>'; 
+                                            echo '</span>';
                                         }                
                                     }
                                 }
                                
 
                             ?>
-                        </p>
+                        </span>
                     </div>
                     @if($showOrderNow)
                     <a href="{{ URL::To('order_type/'.$val->id) }}">

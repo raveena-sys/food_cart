@@ -1,7 +1,7 @@
 
 @if(Request::segment(1)=='menu' || Request::segment(1)=='checkout' || Request::segment(1)=='save_user_detail')
 
-<nav class="navbar navbar-default navbar-me">
+<nav class="navbar navbar-default navbar-me" id="header">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -60,10 +60,27 @@
       </div><!-- /.navbar-collapse -->
     </div>
 </nav>
+<script>
+    $(document).ready(function(){
+        var headerHeight = $('#header, header').height();
+        var footerHeight = $('#footer').height();
+        var winHeight = $(window).height() - (headerHeight+footerHeight);
+        $('#mainContent').css('min-height', winHeight);
+    })
+</script>
 @else
 <header>
     <a href="{{ URL::To('/') }}">
         <img  src="{{ asset('img/logo.png')}}" class="logo"/>
     </a>
 </header>
+<script>
+    $(document).ready(function(){
+        var footerHeight = $('#footer').height();
+        var winHeight = $(window).height() - footerHeight;
+        $('#mainContent').css('min-height', winHeight);
+    })
+</script>
 @endif
+
+

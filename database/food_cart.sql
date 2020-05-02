@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 20, 2020 at 11:56 AM
--- Server version: 5.7.23-23
--- PHP Version: 7.2.7
+-- Host: 127.0.0.1
+-- Generation Time: Apr 29, 2020 at 07:48 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.2.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `csuiteal_foodcart`
+-- Database: `food_cart`
 --
 
 -- --------------------------------------------------------
@@ -36,8 +36,8 @@ CREATE TABLE `category` (
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
   `description` varchar(255) DEFAULT NULL,
   `store_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -68,8 +68,8 @@ CREATE TABLE `checkout` (
   `city` varchar(250) NOT NULL,
   `province` varchar(250) NOT NULL,
   `province1` varchar(250) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -48065,7 +48065,7 @@ CREATE TABLE `cms_pages` (
   `page_slug` enum('privacy_policy','terms_and_condition','about_us','security','home_page','store_list','order_type','menu_list','menu_products','faq','career') CHARACTER SET utf8 DEFAULT NULL,
   `page_name` varchar(255) DEFAULT NULL,
   `page_title` varchar(100) DEFAULT NULL,
-  `page_content` longtext,
+  `page_content` longtext DEFAULT NULL,
   `header_image` varchar(255) DEFAULT NULL,
   `side_image` varchar(255) DEFAULT NULL,
   `background_image` varchar(255) DEFAULT NULL,
@@ -48102,8 +48102,8 @@ CREATE TABLE `contact_us` (
   `email` varchar(250) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
   `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -48387,8 +48387,8 @@ CREATE TABLE `drink_master` (
   `image` varchar(250) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48410,8 +48410,8 @@ CREATE TABLE `food_type_master` (
   `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48493,17 +48493,17 @@ CREATE TABLE `orders` (
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `zipcode` varchar(255) NOT NULL,
-  `additional_notes` longtext,
+  `additional_notes` longtext DEFAULT NULL,
   `cart_item` longtext NOT NULL,
-  `extra_item` text,
+  `extra_item` text DEFAULT NULL,
   `subtotal` varchar(255) NOT NULL DEFAULT '0',
   `total` varchar(255) NOT NULL DEFAULT '0',
-  `delivery_ins` text,
+  `delivery_ins` text DEFAULT NULL,
   `delivery_charge` varchar(255) NOT NULL DEFAULT '0',
-  `notified` int(11) NOT NULL DEFAULT '0' COMMENT '0=>new, 1=>read',
+  `notified` int(11) NOT NULL DEFAULT 0 COMMENT '0=>new, 1=>read',
   `status` enum('placed','processing','out for delivery','delivered','completed','cancelled','on-hold','deleted') NOT NULL DEFAULT 'placed',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -48515,7 +48515,10 @@ INSERT INTO `orders` (`id`, `store_id`, `order_type`, `payment_method`, `categor
 (2, 1, 'pickup', 'cod', 1, 'testing', '9826812087', 'web.development@integratedmarketing.pro', '3 KRISHNODAY NAGAR KHANDWA NAKA', 'INDORE', 'Madhya Pradesh', '452001', NULL, '[{\"custom\":\"custom\",\"crust_master\":\"1\",\"crust_master_price\":\"5.00\",\"crust_master_name\":\"Classic Hand Tossed\",\"sauce_master\":\"5\",\"sauce_master_name\":\"Butter Chicken\",\"sauce_master_price\":7,\"dip_master_price\":46,\"dip_master_name\":[\"Cheddar Chipotle\",\"Creamy Garlic\",\"Ranch\",\"Marinara\"],\"product_id\":1,\"price\":690,\"quantity\":5,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":\"{\\\"custom\\\":\\\"custom\\\",\\\"crust_master\\\":\\\"1\\\",\\\"crust_master_price\\\":\\\"5.00\\\",\\\"crust_master_name\\\":\\\"Classic Hand Tossed\\\",\\\"sauce_master\\\":\\\"5\\\",\\\"sauce_master_name\\\":\\\"Butter Chicken\\\",\\\"sauce_master_price\\\":7,\\\"dip_master_price\\\":46,\\\"dip_master_name\\\":[\\\"Cheddar Chipotle\\\",\\\"Creamy Garlic\\\",\\\"Ranch\\\",\\\"Marinara\\\"]}\"}]', '\"{\\\"custom\\\":\\\"custom\\\",\\\"crust_master\\\":\\\"1\\\",\\\"crust_master_price\\\":\\\"5.00\\\",\\\"crust_master_name\\\":\\\"Classic Hand Tossed\\\",\\\"sauce_master\\\":\\\"5\\\",\\\"sauce_master_name\\\":\\\"Butter Chicken\\\",\\\"sauce_master_price\\\":7,\\\"dip_master_price\\\":46,\\\"dip_master_name\\\":[\\\"Cheddar Chipotle\\\",\\\"Creamy Garlic\\\",\\\"Ranch\\\",\\\"Marinara\\\"]}\"', '690', '690', 'test', '0', 1, 'placed', '2020-04-15 22:49:50', '2020-04-15 23:19:54'),
 (3, 1, 'pickup', 'cod', 1, 'testing', '00000000', 'web.development@integratedmarketing.pro', 'testing', 'testing', 'testing', '89676', 'testing', '[{\"custom\":\"custom\",\"crust_master\":\"2\",\"crust_master_price\":\"4.00\",\"crust_master_name\":\"Thick Crust\",\"sauce_master\":\"2\",\"sauce_master_name\":\"BBQ\",\"sauce_master_price\":7,\"dip_master_price\":25,\"dip_master_name\":[\"Cheddar Chipotle\",\"Creamy Garlic\",\"Ranch\",\"Marinara\"],\"product_id\":1,\"price\":232,\"quantity\":2,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":\"{\\\"custom\\\":\\\"custom\\\",\\\"crust_master\\\":\\\"2\\\",\\\"crust_master_price\\\":\\\"4.00\\\",\\\"crust_master_name\\\":\\\"Thick Crust\\\",\\\"sauce_master\\\":\\\"2\\\",\\\"sauce_master_name\\\":\\\"BBQ\\\",\\\"sauce_master_price\\\":7,\\\"dip_master_price\\\":25,\\\"dip_master_name\\\":[\\\"Cheddar Chipotle\\\",\\\"Creamy Garlic\\\",\\\"Ranch\\\",\\\"Marinara\\\"]}\"},{\"custom\":\"custom\",\"dip_master_price\":17,\"dip_master_name\":[\"Cheddar Chipotle\",\"Creamy Garlic\",\"Ranch\",\"Marinara\"],\"product_id\":1,\"price\":97,\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":\"{\\\"custom\\\":\\\"custom\\\",\\\"dip_master_price\\\":17,\\\"dip_master_name\\\":[\\\"Cheddar Chipotle\\\",\\\"Creamy Garlic\\\",\\\"Ranch\\\",\\\"Marinara\\\"]}\"}]', '\"{\\\"custom\\\":\\\"custom\\\",\\\"dip_master_price\\\":17,\\\"dip_master_name\\\":[\\\"Cheddar Chipotle\\\",\\\"Creamy Garlic\\\",\\\"Ranch\\\",\\\"Marinara\\\"]}\"', '329', '329', 'test', '0', 1, 'placed', '2020-04-15 23:04:08', '2020-04-15 23:34:14'),
 (4, 1, 'pickup', 'card_payment', 1, 'testing', '9826812087', 'reenaprajapat135@gmail.com', '3 KRISHNODAY NAGAR KHANDWA NAKA', 'INDORE', 'Madhya Pradesh', '452001', NULL, '[{\"product_id\":1,\"price\":\"80.00\",\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":[]}]', '[]', '80', '80', NULL, '0', 1, 'placed', '2020-04-15 23:05:36', '2020-04-15 23:35:45'),
-(5, 1, 'pickup', 'cod', 2, 'test', '1111111111', 'raveenajadon304@gmail.com', 'test', 'test', 'test', '111111', NULL, '[{\"product_id\":1,\"price\":\"80.00\",\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":[]}]', '[]', '80', '80', 'Gate code,', '0', 1, 'placed', '2020-04-16 10:20:40', '2020-04-16 10:50:45');
+(5, 1, 'pickup', 'cod', 2, 'test', '1111111111', 'raveenajadon304@gmail.com', 'test', 'test', 'test', '111111', NULL, '[{\"product_id\":1,\"price\":\"80.00\",\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":[]}]', '[]', '80', '80', 'Gate code,', '0', 1, 'placed', '2020-04-16 10:20:40', '2020-04-16 10:50:45'),
+(6, 1, 'pickup', 'cod', 1, 'test', '1111111111', 'raveenajadon304@gmail.com', 'test', 'test', 'test', '111111', NULL, '[{\"product_id\":1,\"price\":\"80.00\",\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":[]}]', '[]', '80', '80', NULL, '0', 0, 'placed', '2020-04-22 10:05:22', '2020-04-22 04:35:22'),
+(7, 1, 'pickup', 'cod', 1, 'test', '1111111111', 'raveenajadon304@gmail.com', 'test', 'test', 'test', '111111', NULL, '[{\"product_id\":1,\"price\":\"80.00\",\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":[]}]', '[]', '80', '80', NULL, '0', 0, 'placed', '2020-04-22 10:07:46', '2020-04-22 04:37:46'),
+(8, 1, 'pickup', 'cod', 1, 'test', '1111111111', 'raveenajadon304@gmail.com', 'test', 'test', 'test', '111111', NULL, '[{\"product_id\":1,\"price\":\"80.00\",\"quantity\":1,\"image\":\"1586969224.jpg\",\"name\":\"MEATZZA PIZZA\",\"description\":\"Pepperoni, Ham, Beef, Bacon & Cheese\",\"extra\":[]}]', '[]', '80', '80', NULL, '0', 0, 'placed', '2020-04-22 10:07:55', '2020-04-22 04:37:55');
 
 -- --------------------------------------------------------
 
@@ -48527,8 +48530,8 @@ CREATE TABLE `order_type` (
   `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48543,11 +48546,11 @@ CREATE TABLE `pizza_crust_master` (
   `id` int(11) NOT NULL,
   `store_id` int(11) DEFAULT NULL,
   `name` varchar(250) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
   `description` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48574,7 +48577,7 @@ CREATE TABLE `pizza_extra_cheese` (
   `price` decimal(10,2) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -48587,11 +48590,11 @@ CREATE TABLE `pizza_sauce_master` (
   `id` int(11) NOT NULL,
   `store_id` int(11) DEFAULT NULL,
   `name` varchar(250) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
   `description` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48617,12 +48620,12 @@ CREATE TABLE `pizza_size_master` (
   `id` int(11) NOT NULL,
   `store_id` int(11) DEFAULT NULL,
   `name` varchar(250) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `size_master_id` int(11) NOT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
   `description` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48650,15 +48653,15 @@ CREATE TABLE `product` (
   `size_master_id` int(11) DEFAULT NULL,
   `food_type` enum('veg','non_veg') NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `thumb_image` text NOT NULL,
   `image` text NOT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
   `price` decimal(10,4) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT '0',
+  `quantity` int(11) DEFAULT 0,
   `topping_from` enum('none','topping_pizza','topping_wing_flavour','topping_donair_shawarma_mediterranean','topping_dips') NOT NULL DEFAULT 'none',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48685,7 +48688,9 @@ INSERT INTO `product` (`id`, `store_id`, `sub_category_id`, `size_master_id`, `f
 (15, NULL, 4, 1, 'non_veg', 'Tandoori Chicken', 'Skinless chicken marinated in yogurt sauce and spices.', '1587377697.jpg', '1587377697.jpg', 'active', '11.9500', 1, 'none', '2020-04-20 16:14:57', '2020-04-20 16:14:57', 1, 1),
 (16, NULL, 5, 1, 'veg', 'Aloo Gobi', 'Combination of fresh cauliflower and potatoes cooked in exotic spices, tossed with tomatoes and fresh coriander leaves.', '1587377949.jpg', '1587377949.jpg', 'active', '10.0000', 2, 'none', '2020-04-20 16:19:09', '2020-04-20 16:19:09', 1, 1),
 (17, NULL, 5, 1, 'veg', 'Aloo Mutter', 'Curried potatoes & green peas.', '1587378037.jpg', '1587378037.jpg', 'active', '10.9500', 3, 'none', '2020-04-20 16:20:37', '2020-04-20 16:20:37', 1, 1),
-(18, NULL, 5, 1, 'veg', 'Baingan Bharta', 'Roasted eggplant pulp sauteed with fresh onions, tomatoes and cooked with spices.', '1587378088.jpg', '1587378088.jpg', 'active', '11.9500', 2, 'none', '2020-04-20 16:21:28', '2020-04-20 16:21:28', 1, 1);
+(18, NULL, 5, 1, 'veg', 'Baingan Bharta', 'Roasted eggplant pulp sauteed with fresh onions, tomatoes and cooked with spices.', '1587378088.jpg', '1587378088.jpg', 'active', '11.9500', 2, 'none', '2020-04-20 16:21:28', '2020-04-20 16:21:28', 1, 1),
+(19, 1, 1, 1, 'veg', 'test', 'test', '1587406272.png', '1587406272.png', 'active', '12.0000', 1, 'topping_pizza', '2020-04-20 12:41:12', '2020-04-20 12:42:04', 7, 7),
+(20, NULL, 1, NULL, 'veg', 'test2', 'test2', '1587407798.png', '1587407798.png', 'active', '12.0000', NULL, 'topping_pizza', '2020-04-20 13:06:38', '2020-04-20 13:13:34', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -48702,8 +48707,8 @@ CREATE TABLE `size_master` (
   `image` varchar(250) NOT NULL,
   `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
   `description` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -48727,7 +48732,7 @@ INSERT INTO `size_master` (`id`, `name`, `short_name`, `value`, `thumb_image`, `
 CREATE TABLE `states` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `country_id` int(11) NOT NULL DEFAULT '1'
+  `country_id` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -52839,7 +52844,7 @@ CREATE TABLE `store_category` (
   `cat_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -52886,8 +52891,8 @@ CREATE TABLE `store_master` (
   `pickup_delivery` enum('pickup','delivery','both') NOT NULL,
   `delivery_charge` varchar(100) DEFAULT NULL,
   `free_del_upto` varchar(120) DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -52897,8 +52902,8 @@ CREATE TABLE `store_master` (
 --
 
 INSERT INTO `store_master` (`id`, `name`, `short_name`, `address1`, `address2`, `city_id`, `state_id`, `country_id`, `pincode`, `email`, `password`, `phone_number`, `phone_number_country`, `phone_number_country_code`, `mobile_number`, `mobile_number_country`, `mobile_number_country_code`, `latitude`, `longitude`, `thumb_image`, `image`, `status`, `description`, `open_time`, `close_time`, `pickup_delivery`, `delivery_charge`, `free_del_upto`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1, 'Snackies Cafe', 'Snackies Cafe', '7555 Pawnee Drive North Hollywood, CA 91605', '7555 Pawnee Drive North Hollywood, CA 91605', '10093', '663', '38', '91605', 'web.development@integratedmarketing.pro', '$2y$10$f0qJVF0zcX7Jt3otaCtHF.TyI.PZ3FkOfjuo06dSCtBB5nAFD8hWG', '0000000000', '', '00', '', '', '', '', '', '1586967609.jpg', '1586967609.jpg', 'active', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', '{\"open_time\":{\"sunday\":\"00:30\",\"monday\":\"02:30\",\"tuesday\":\"02:30\",\"wednesday\":\"02:00\",\"thursday\":\"00:00\",\"friday\":\"15:00\",\"saturday\":\"14:00\"}}', '{\"close_time\":{\"sunday\":\"23:30\",\"monday\":\"23:30\",\"tuesday\":\"23:30\",\"wednesday\":\"23:30\",\"thursday\":\"23:30\",\"friday\":\"23:30\",\"saturday\":\"23:30\"}}', 'both', '25', NULL, '2020-04-15 22:15:09', '2020-04-20 13:34:26', 1, 1),
-(2, 'Coolpuk', 'Coolpuk', '4668 Wallace Street', '4668 Wallace Street', '10094', '663', '38', '4532', 'coolpuk@integratedmarketing.pro', '$2y$10$tHmCaEdjjs1QaUIwJni3AezY9ahynKbhWJWvsXSbab9exJz22PUj2', '0000000001', '', '0987766555', '', '', '', '', '', '1587030284.jpg', '1587030284.jpg', 'active', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', '{\"open_time\":{\"sunday\":\"00:30\",\"monday\":\"00:30\",\"tuesday\":\"00:30\",\"wednesday\":\"00:30\",\"thursday\":\"00:30\",\"friday\":\"00:30\",\"saturday\":\"00:30\"}}', '{\"close_time\":{\"sunday\":\"23:30\",\"monday\":\"23:30\",\"tuesday\":\"23:30\",\"wednesday\":\"23:30\",\"thursday\":\"23:30\",\"friday\":\"23:30\",\"saturday\":\"23:30\"}}', 'pickup', NULL, NULL, '2020-04-16 15:44:44', '2020-04-16 15:44:44', 1, 1);
+(1, 'Snackies Cafe', 'Snackies Cafe', '7555 Pawnee Drive North Hollywood, CA 91605', '7555 Pawnee Drive North Hollywood, CA 91605', '10093', '663', '38', '91605', 'web.development@integratedmarketing.pro', '$2y$10$f0qJVF0zcX7Jt3otaCtHF.TyI.PZ3FkOfjuo06dSCtBB5nAFD8hWG', '0000000000', '', '00', '', '', '', '', '', '1586967609.jpg', '1586967609.jpg', 'active', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', '{\"open_time\":{\"sunday\":\"00:00\",\"monday\":\"00:00\",\"tuesday\":\"00:00\",\"wednesday\":\"02:00\",\"thursday\":\"00:00\",\"friday\":\"15:00\",\"saturday\":\"14:00\"}}', '{\"close_time\":{\"sunday\":\"23:30\",\"monday\":\"23:30\",\"tuesday\":\"23:30\",\"wednesday\":\"23:30\",\"thursday\":\"23:30\",\"friday\":\"23:30\",\"saturday\":\"23:30\"}}', 'both', '25', NULL, '2020-04-15 22:15:09', '2020-04-20 13:09:46', 1, 1),
+(2, 'Coolpuk', 'Coolpuk', '4668 Wallace Street', '4668 Wallace Street', '10094', '663', '38', '4532', 'coolpuk@integratedmarketing.pro', '$2y$10$tHmCaEdjjs1QaUIwJni3AezY9ahynKbhWJWvsXSbab9exJz22PUj2', '0000000001', '', '0987766555', '', '', '', '', '', '1587030284.jpg', '1587030284.jpg', 'active', 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.', '{\"open_time\":{\"sunday\":\"00:30\",\"monday\":\"00:00\",\"tuesday\":\"00:00\",\"wednesday\":\"00:30\",\"thursday\":\"00:30\",\"friday\":\"00:30\",\"saturday\":\"00:30\"}}', '{\"close_time\":{\"sunday\":\"23:30\",\"monday\":\"23:30\",\"tuesday\":\"23:30\",\"wednesday\":\"23:30\",\"thursday\":\"23:30\",\"friday\":\"23:30\",\"saturday\":\"23:30\"}}', 'pickup', '0', NULL, '2020-04-16 15:44:44', '2020-04-20 13:09:16', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -52910,10 +52915,10 @@ CREATE TABLE `store_pizza_cheese` (
   `id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `cheese_id` int(11) NOT NULL,
-  `custom_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `custom_price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -52929,7 +52934,7 @@ CREATE TABLE `store_pizza_crust` (
   `custom_price` decimal(10,2) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -52954,7 +52959,7 @@ CREATE TABLE `store_pizza_sauce` (
   `custom_price` int(11) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -52981,7 +52986,7 @@ CREATE TABLE `store_pizza_size` (
   `custom_price` decimal(10,2) NOT NULL,
   `status` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -53006,7 +53011,7 @@ CREATE TABLE `store_product_price` (
   `custom_price` decimal(10,2) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -53031,7 +53036,8 @@ INSERT INTO `store_product_price` (`id`, `store_id`, `product_id`, `custom_price
 (15, 1, 15, '11.95', 'active', '2020-04-20 10:15:31', '2020-04-20 16:15:31'),
 (16, 1, 16, '10.00', 'active', '2020-04-20 10:19:22', '2020-04-20 16:19:22'),
 (17, 1, 17, '10.95', 'active', '2020-04-20 10:21:40', '2020-04-20 16:21:40'),
-(18, 1, 18, '11.95', 'active', '2020-04-20 10:21:40', '2020-04-20 16:21:40');
+(18, 1, 18, '11.95', 'active', '2020-04-20 10:21:40', '2020-04-20 16:21:40'),
+(19, 1, 19, '12.00', 'active', '2020-04-20 18:11:12', '2020-04-20 12:42:04');
 
 -- --------------------------------------------------------
 
@@ -53043,10 +53049,10 @@ CREATE TABLE `store_topping_dips` (
   `id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `top_dip_id` int(11) NOT NULL,
-  `custom_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `custom_price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -53069,10 +53075,10 @@ CREATE TABLE `store_topping_donair` (
   `id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `top_donair_id` int(11) NOT NULL,
-  `custom_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `custom_price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -53085,10 +53091,10 @@ CREATE TABLE `store_topping_pizza` (
   `id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `top_pizza_id` int(11) NOT NULL,
-  `custom_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `custom_price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -53109,10 +53115,10 @@ CREATE TABLE `store_topping_wing` (
   `id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `top_wing_id` int(11) NOT NULL,
-  `custom_price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `custom_price` decimal(10,2) NOT NULL DEFAULT 0.00,
   `status` varchar(255) NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -53129,8 +53135,8 @@ CREATE TABLE `sub_category` (
   `image` varchar(250) NOT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
   `description` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53155,7 +53161,7 @@ INSERT INTO `sub_category` (`id`, `category_id`, `name`, `thumb_image`, `image`,
 
 CREATE TABLE `threads` (
   `id` int(11) NOT NULL,
-  `is_blocked` tinyint(1) DEFAULT '0',
+  `is_blocked` tinyint(1) DEFAULT 0,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `blocked_by` int(11) DEFAULT NULL
@@ -53187,8 +53193,8 @@ CREATE TABLE `topping_dips` (
   `image` varchar(250) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53219,8 +53225,8 @@ CREATE TABLE `topping_donair_shawarma_mediterranean` (
   `image` varchar(250) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53241,8 +53247,8 @@ CREATE TABLE `topping_master` (
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'pending',
   `parent_topping_master` int(11) DEFAULT NULL,
   `is_parent` bit(1) NOT NULL DEFAULT b'0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53263,8 +53269,8 @@ CREATE TABLE `topping_pizza` (
   `image` varchar(250) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53293,8 +53299,8 @@ CREATE TABLE `topping_wing_flavour` (
   `image` varchar(250) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status` enum('pending','active','inactive','deleted') NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53312,11 +53318,11 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `verify_token` varchar(255) DEFAULT NULL,
   `online_offline` enum('online','offline') NOT NULL DEFAULT 'offline',
-  `is_visibility` tinyint(4) DEFAULT '1',
+  `is_visibility` tinyint(4) DEFAULT 1,
   `user_type` enum('admin','appraiser','lender','store') DEFAULT NULL,
   `user_role` enum('individual','company','manager','employee','store') DEFAULT 'individual',
   `availability` date DEFAULT NULL,
-  `is_subscribed` tinyint(4) NOT NULL DEFAULT '0',
+  `is_subscribed` tinyint(4) NOT NULL DEFAULT 0,
   `referral_code` varchar(20) DEFAULT NULL,
   `referred_by` varchar(20) DEFAULT NULL,
   `status` enum('pending','active','inactive','deleted') DEFAULT 'active',
@@ -53327,8 +53333,8 @@ CREATE TABLE `users` (
   `phone_number` varchar(13) DEFAULT NULL,
   `store_id` int(11) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -53338,9 +53344,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `verify_token`, `online_offline`, `is_visibility`, `user_type`, `user_role`, `availability`, `is_subscribed`, `referral_code`, `referred_by`, `status`, `last_login_time`, `profile_image`, `phone_number_country`, `phone_number_country_code`, `phone_number`, `store_id`, `remember_token`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-(1, 'admin', 'raveena@mailinator.com', '$2y$10$83PM6tNMkYYLH7XlMTvsfOhE3f9tdx0GgGCYuiWJfX.ArsxJDwEv6', 'HnTzBEPidbGM7w8ApuUrm8sqzYmN0Z', 'offline', 0, 'admin', 'company', NULL, 0, NULL, NULL, 'active', NULL, 'download (1).jpg', NULL, NULL, NULL, NULL, 'LiySjlzv9NscuIpRJdFk7CeZ1UguMwduJIENY6SzvYVZKaIWg5buNUZMWa9a', '2019-09-14 18:45:05', '2020-01-24 18:16:56', NULL, NULL),
-(7, 'Snackies Cafe', 'web.development@integratedmarketing.pro', '$2y$10$Ds.CiEhrjtTtbOi6nyQg7.0c7/q178M6NjNSJz6nCl19NBLcTfdl2', NULL, 'offline', 1, 'store', 'store', NULL, 0, NULL, NULL, 'active', NULL, NULL, NULL, '00', '0000000000', 1, NULL, '2020-04-15 22:15:09', '2020-04-15 22:15:09', NULL, NULL),
-(8, 'Coolpuk', 'coolpuk@integratedmarketing.pro', '$2y$10$VGQrlKChcf0A2PRbnaqkhe3./1iZytnHO9PxB7v7yB9yQ4vkCaOx2', NULL, 'offline', 1, 'store', 'store', NULL, 0, NULL, NULL, 'active', NULL, NULL, NULL, '09877', '0000000001', 2, NULL, '2020-04-16 15:44:44', '2020-04-16 15:44:44', NULL, NULL);
+(1, 'admin', 'raveena@mailinator.com', '$2y$10$vTzUShCHH4tSrJBlCA3ut.lUPGQNB99acFYYZZNoquU83KFiN/Yhi', 'HnTzBEPidbGM7w8ApuUrm8sqzYmN0Z', 'offline', 0, 'admin', 'company', NULL, 0, NULL, NULL, 'active', NULL, 'download (1).jpg', NULL, NULL, NULL, NULL, 'iLHvVyOSFaVyrfBJCKacsZoQ1N01azK0BfMFODGdIbQE1FuurKdQ2MfIZIqw', '2019-09-14 18:45:05', '2020-04-21 02:03:25', NULL, NULL),
+(7, 'Snackies Cafe', 'web.development@integratedmarketing.pro', '$2y$10$GSkKCEkLsKxP6SRRDZguE.H4F8xYRJJ9.qNbfP0lwr1duCnZWABKW', NULL, 'offline', 1, 'store', 'store', NULL, 0, NULL, NULL, 'active', NULL, NULL, NULL, '00', '0000000000', 1, NULL, '2020-04-15 22:15:09', '2020-04-21 02:15:01', NULL, NULL),
+(8, 'Coolpuk', 'coolpuk@integratedmarketing.pro', '$2y$10$VGQrlKChcf0A2PRbnaqkhe3./1iZytnHO9PxB7v7yB9yQ4vkCaOx2', NULL, 'offline', 1, 'store', 'store', NULL, 0, NULL, NULL, 'active', NULL, NULL, NULL, '09877', '0000000001', 2, NULL, '2020-04-16 15:44:44', '2020-04-20 13:09:16', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -53633,7 +53639,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_type`
@@ -53669,7 +53675,7 @@ ALTER TABLE `pizza_size_master`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `size_master`
@@ -53723,7 +53729,7 @@ ALTER TABLE `store_pizza_size`
 -- AUTO_INCREMENT for table `store_product_price`
 --
 ALTER TABLE `store_product_price`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `store_topping_dips`

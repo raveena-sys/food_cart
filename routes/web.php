@@ -22,9 +22,6 @@
     Route::get('security', 'HomeController@security');
 
 });*/
-
-
-
 /***************Web routes newly started************/
 
 Route::get('/', ['as' => 'home', 'uses' => 'Front\HomeController@index']);

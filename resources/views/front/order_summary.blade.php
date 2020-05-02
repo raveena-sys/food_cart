@@ -1,6 +1,17 @@
 @extends('layouts.app')
 @section('content')
 
+<style>
+@media (max-width:600px){
+.btn_chng_add {
+    padding: 8px 8px;
+    width: 148px;
+    display: block;
+    font-size: 85%;
+    margin-left: -10px;
+    }
+  }
+</style>
 <div class="container order_summary">
   <form  action="{{url('save_order')}}" method='post' name="save_order" id="save_order">
 
@@ -35,7 +46,7 @@
   <div class="col-lg-6">
     <div class="order_box">
       <h2>ORDER SUMMARY</h2>
-      <div class="order_box_inner">
+      <div class="order_box_inner table-responsive">
         <table class="table">
           <thead>
             <tr>

@@ -1,4 +1,4 @@
-  <div class="col-lg-8">
+  <div class="col-lg-8 ">
     @php
       $cartArray = Session::get('cartItem');
       $subtotal = 0;
@@ -81,7 +81,7 @@
     @endif
   </div>
   @if($subtotal)     
-  <div class="col-lg-4 rightSide">
+  <div class="col-lg-4  col-xs-12">
     
     @if(Session::has('userinfo'))
       <div class="addressBox">
@@ -134,3 +134,12 @@
     </div>
   </div>
   @endif  
+
+  @if(empty($cartArray))
+
+  <script>
+    setTimeout(function(){
+      window.location.href= "{{url('menu/'.Session::get('category_id'))}}";
+    },1000);
+  </script>
+  @endif
