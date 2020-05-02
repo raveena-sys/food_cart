@@ -3,7 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Response;
+use Response, Session;
 use Illuminate\Routing\Controller;
 use App\Repositories\UserRepository;
 
@@ -58,5 +58,26 @@ class UserController extends Controller
     public function changeStatus(Request $request)
     {
         return $this->user->changeStatus($request);
+    }
+
+    /**
+     * Change Social links
+     * @param Request $request
+     * @return Response
+     */
+    public function getSocialLinks(Request $request)
+    {
+        $data = $this->user->socialLink($request);
+        return view('admin::social-icon.edit_social', compact('data'));
+    }
+    public function updateSocialLinks(Request $request)
+    {
+        $status = $this->user->updateSocialLinks($request);
+        if($status['success'] == 1){    
+            Session::flash('message', $status['message']);
+        }else{
+            Session::flash('message', $status['message']);
+        }
+        return redirect('admin/manage-social/edit');
     }
 }

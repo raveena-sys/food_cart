@@ -121,7 +121,18 @@
                     <span class="nav_title">Manage CMS</span>
                 </a>
             </li>
-
+            <li class="{{Request::segment(2) == 'manage-social' ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-social/edit') }}" aria-expanded="false">
+                    <span class="nav_icon"><i class="fa fa-external-link-square"></i> </span>
+                    <span class="nav_title">Manage Social Link</span>
+                </a>
+            </li>
+            <li class="{{Request::segment(2) == 'manage-gst' ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-gst/edit') }}" aria-expanded="false">
+                    <span class="nav_icon"><i class="fa fa-percent"></i> </span>
+                    <span class="nav_title">Manage Store GST </span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

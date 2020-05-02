@@ -475,6 +475,24 @@ class StoreMasterRepository
    }
 
 
+    public function getStoreGST(){
+        try{            
+            $store = $this->storeMaster->where('id', Auth::user()->store_id)->first();
+            return $store;
+        }catch(Exception $e){
+            return false; 
+        }
+    }
+    public function updataStoreGST($request){
+        try{            
+            $store = $this->storeMaster->where('id', Auth::user()->store_id)->update(['gst_per' => $request->gst_per]);
+            return ['success' => true, 'message' => 'GST updated successfully'];
+        }catch(Exception $e){
+            return ['success' => false, 'message' => 'Something went wrong'];
+        }
+    }
+    
+
 
 
 }

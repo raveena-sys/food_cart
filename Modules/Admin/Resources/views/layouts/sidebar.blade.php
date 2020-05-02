@@ -122,10 +122,10 @@
                 </a>
             </li>
 
-            <li class="{{(Request::segment(2) == 'manage-cms' || Request::segment(2) == 'edit-cms') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" href="{{ URL::To('admin/manage-social') }}" aria-expanded="false">
-                    <span class="nav_icon"><i class="icon-a-manage-cms"></i> </span>
-                    <span class="nav_title">Social</span>
+            <li class="{{Request::segment(2) == 'manage-social' ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('admin/manage-social/edit') }}" aria-expanded="false">
+                    <span class="nav_icon"><i class="fa fa-external-link-square"></i> </span>
+                    <span class="nav_title">Manage Social Link</span>
                 </a>
             </li>
         </ul>

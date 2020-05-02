@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\EmailQueue\CreateVerifyAccount;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 use App\Models\User;
+use App\Models\SocialLink;
 use App\Models\StoreMaster;
 use File;
 use DB;
@@ -772,6 +773,35 @@ class UserRepository
             return ['success' => false, 'message' => 'Invalid credential.', 'error' => [], 'data' => []];
         } catch (\Exception $ex) {
             return ['success' => false, 'message' => $ex->getMessage(), 'error' => [], 'data' => []];
+        }
+    }
+
+
+    public function socialLink($request){
+        try{
+            $query = socialLink::query();
+            if($request->segment(1)=='admin'){
+
+                $links= $query->whereNull('store_id')->first();
+            }else{
+
+                $links= $query->where(['store_id'=> Auth::user()->store_id])->first();
+            }
+
+            return $links;
+        }
+        catch(Exception $e){
+            return ['success' => false];
+        }
+    }
+
+    public function updateSocialLinks($request){
+        try{
+            $links = socialLink::updateOrCreate(['id' => $request->social_id], $request->all());
+            return ['success' => true, 'message' => "Social Links updated successfully"];
+        }
+        catch(Exception $e){
+            return ['success' => false, 'message' => "Something went wrong"];
         }
     }
 }
