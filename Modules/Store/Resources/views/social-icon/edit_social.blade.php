@@ -37,17 +37,17 @@ $current ="Edit Social Link";
                             <label>Facebook URL</label>
                             <input type="text" name="fb_url" class="form-control" placeholder="http://facebook.com" value="{{!empty($data->fb_url)?$data->fb_url:''}}">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Whatsapp URL</label>
                             <input type="text" name="whatsapp_url" class="form-control" placeholder="https://whatsapp.com/" value="{{!empty($data->whatsapp_url)?$data->whatsapp_url:''}}">
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label>Twitter URL</label>
                             <input type="text" name="twitter_url" class="form-control" placeholder="https://twitter.com" value="{{!empty($data->twitter_url)?$data->twitter_url:''}}">
                         </div>
                         <div class="form-group">
-                            <label>Insta URL</label>
-                            <input type="text" name="insta_url" class="form-control" placeholder="https://insta.com/" value="{{!empty($data->insta_url)?$data->insta_url:''}}">
+                            <label>Linked URL</label>
+                            <input type="text" name="linkedin_url" class="form-control" placeholder="https://linkedin.com/" value="{{!empty($data->linkedin_url)?$data->linkedin_url:''}}">
                         </div>
                         <div class="btn_row text-center">
                             <a href="{{url('store/manage-social/edit')}}" class="btn btn-outline-light ripple-effect text-uppercase">Cancel</a>

@@ -108,19 +108,6 @@
           $0
         </div>
       </div>
-      @if(Session::has('orderType') && Session::has('orderType') =='delivery')
-      <div class="totalPrice__inner">
-        <div class="left">
-          Delivery fee
-        </div>
-        <div class="right">
-          ${{Session::get('delCharge')}}
-        </div>
-      </div>
-      @php 
-        $subtotal +=  Session::get('delCharge');
-      @endphp
-      @endif
       <div class="totalPrice__inner">
         <div class="left">
           Grand Total

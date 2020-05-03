@@ -86,7 +86,8 @@ $(document).ready(function (e) {
 
 
 $(document).on('click', '.add_item', function(){
-  $('.store_list_inner').addClass('loading');
+
+  $('.store_list_inner').addClass('disabled');
   var product_price = $(this).attr('data-price');  
   var product_id = $(this).attr('data-product_id');  
   UpdateCartQty(product_id, 0, product_price);
@@ -98,7 +99,7 @@ $(document).on('click', '.sub_item', function(){
   var product_id = $(this).attr('data-product_id');
   
   if($('#item_count_'+product_id).val()>1){
-    $('.store_list_inner').addClass('loading');
+    $('.store_list_inner').addClass('disabled');
     UpdateCartQty(product_id, 1, product_price);
   }
   else{
@@ -109,7 +110,7 @@ $(document).on('click', '.sub_item', function(){
 });
 
 $(document).on('click', '.remove_item', function(){
-  $('.store_list_inner').addClass('loading');
+  $('.store_list_inner').addClass('disabled');
   var product_price = $(this).attr('data-price');  
   var product_id = $(this).attr('data-product_id');  
   UpdateCartQty(product_id, 1, product_price);
@@ -119,7 +120,7 @@ $(document).on('click', '.remove_item', function(){
 
 $(document).on('click', '.add_to_cart', function(){
 
-  $('.store_list_inner').addClass('loading');
+  $('.store_list_inner').addClass('disabled');
   var product_price = $(this).attr('data-price');
   var product_id = $(this).attr('data-product_id');
   UpdateCart(product_id, 0, product_price);
@@ -139,22 +140,31 @@ function UpdateCart(product_id, sub=0, product_price, custom_product=0){
         $('.product_item').empty().html(data.product_html);
         $('.sideMenu').removeClass('open');
         $('#confirmdeleteModal').modal('hide');
-        $('.store_list_inner').removeClass('loading');
         if(data.add == 1){
           Command: toastr['error'](data.msg);
         }else{
           Command: toastr['success'](data.msg);
         }
+        setTimeout(function(){
+          $('.store_list_inner').removeClass('disabled');
+
+        },1500);
       }
       else {
           Command: toastr['error'](data.msg);
-          $('.store_list_inner').removeClass('loading');
+          setTimeout(function(){
+            $('.store_list_inner').removeClass('disabled');
+
+          },1500);
 
       }
     },
     error:function(e){
       Command: toastr['error'](data.msg);   
-      $('.store_list_inner').removeClass('loading');
+      setTimeout(function(){
+        $('.store_list_inner').removeClass('disabled');
+
+      },1500);
     }
   })
 }
@@ -188,11 +198,30 @@ $('#checkout_form').validate({
     },
     'zipcode':{
       required:true,
-      number:true
+      number:true,
+      remote: {
+        url: site_url+"/validation/checkzipcode",
+        type: "post",
+        data: {
+           "_token": $('meta[name="csrf-token"]').attr("content"),
+            zipcode: function () {
+                return $("input[name='zipcode']").val();
+            }
+        },
+        dataFilter: function (data) {
+            if (data == "true") {
+                return 'true';
+            } else {
+                return 'false';
+            }
+        }
+      }
     }
   },
   messages:{
-
+    'zipcode':{
+      remote: 'Store does not provide delivery at this area',
+    }
   }, 
   submitHandler:function (form){
     form.submit();
@@ -382,20 +411,31 @@ function UpdateCartQty(product_id, sub=0, product_price){
         $('.cart_item').empty().html(data.html);
         $('.product_item').empty().html(data.product_html);
         $('#confirmdeleteModal').modal('hide');
-        $('.store_list_inner').removeClass('loading');
         if(data.add == 1){
           Command: toastr['error'](data.msg);
         }else{
           Command: toastr['success'](data.msg);
-
         }
+        setTimeout(function(){
+          $('.store_list_inner').removeClass('disabled');
+
+        },1500);
       }
       else {
           Command: toastr['error'](data.msg);
+          setTimeout(function(){
+            $('.store_list_inner').removeClass('disabled');
+
+          },1500);
       }
     },
     error:function(e){
-      Command: toastr['error'](e.msg);      
+      Command: toastr['error'](e.msg);    
+
+      setTimeout(function(){
+        $('.store_list_inner').removeClass('disabled');
+
+      },1500);  
     }
   })
 }; 

@@ -29,7 +29,7 @@
             <div class="dropdown order-type">
               <button class="btn-order-type dropdown-toggle" type="button" data-toggle="dropdown">{{Session::has('orderType')?ucfirst(Session::get('orderType')):''}}
                 <span class="caret"></span></button>
-              @if(isset($store->pickup_delivery))
+              @if(isset($store->pickup_delivery) && Request::segment(1)!=='save_user_detail')
               <ul class="dropdown-menu">
                 @if($store->pickup_delivery == 'pickup' || $store->pickup_delivery == 'both')
                 <li><a href="{{ URL::To('pickup/menu/0/header') }}">Pick Up</a></li>

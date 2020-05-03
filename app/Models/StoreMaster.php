@@ -67,6 +67,10 @@ class StoreMaster  extends Model
     {
         return $this->hasOne('App\Models\Cities', 'id', 'city_id');
     }
+    public function social()
+    {
+        return $this->hasOne('App\Models\SocialLink', 'store_id', 'id');
+    }
 
 
 }

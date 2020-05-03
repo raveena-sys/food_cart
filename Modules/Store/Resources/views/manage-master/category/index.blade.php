@@ -87,7 +87,7 @@
                 </button>
             </div>
             <div class="modal-body field-padd">
-                <form id="add_category_form" method="POST" class="needs-validation" novalidate autocomplete="false" action="{{URL::To('store/manage-category/add')}}">
+                <form id="add_category_form" method="POST" class="needs-validation" novalidate autocomplete="false" action="{{URL::To('store/manage-delivery/add')}}">
                     {{csrf_field()}}
                     <input class="form-control" name="store_id" type="hidden" value="{{Auth::check()?Auth::user()->store_id:0}}">
                     <div class="form-group">
@@ -99,11 +99,12 @@
                         <textarea class="form-control" name="description" type="text" placeholder="Description" maxlength="255"></textarea>
                     </div>
 
-                    <div class="form-group text-center mb-0">
-                        <button id="btnAdd" class="btn btn-danger ripple-effect text-uppercase min-w130" onClick="addCategory()" type="button">ADD<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></button>
-
-                        <!--  -->
-                    </div>
+                    <div class="btn_row text-center">
+                            <a href="{{url('store/manage-delivery/add')}}" class="btn btn-outline-light ripple-effect text-uppercase">Cancel</a>
+                            <button type="submit" class="btn btn-danger ripple-effect text-uppercase " id="btnCms" >Update
+                                <span id="cmsFormLoader" class="spinner-border spinner-border-sm" style="display: none;"></span>
+                            </button>
+                        </div>
                 </form>
                 {!! JsValidator::formRequest('Modules\Admin\Http\Requests\AddCategoryRequest','#add_category_form')
                 !!}

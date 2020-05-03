@@ -89,5 +89,61 @@ class StoreMasterController extends Controller
         return redirect('store/manage-gst/edit');
     }
 
+    public function delivery_zone(){
+        //$data = $this->StoreMasterRepository->getStoreGST();
+        return view('store::manage-delivery.index');
+    }
+
+    public function delivery_zone_add(){
+        //$data = $this->StoreMasterRepository->getStoreGST();
+        return view('store::manage-delivery.add_delivery_zone');
+    }
+
+    public function delivery_zone_list(Request $request){
+        
+        try {
+                $result = $this->StoreMasterRepository->delivery_zone_list($request);
+                return $result['data'];
+            } catch (\Exception $e) {
+                return Response::json(['success' => false, 'message' => $e->getMessage()]);
+            }
+    }
+    public function delivery_zone_addpost(Request $request){
+        if(!empty($request->zip_code) && count($request->zip_code)>1){
+
+            $data = $this->StoreMasterRepository->delivery_zone_add($request);
+            if($data['success'] ==1){
+                Session::flash('message', $data['message']);
+
+            }else{
+                Session::flash('message', $data['message']);
+            }
+            return redirect('store/manage-delivery/');
+        }else{
+            Session::flash('errmessage', 'Please enter postal code');
+            return redirect()->back();
+        }
+    }
+
+
     
+
+    public function delivery_zone_detail($id)
+    {
+        try {
+            $data = $this->StoreMasterRepository->getDeliveryDetail($id);
+
+            return view('store::manage-delivery.add_delivery_zone', compact('data'));
+        } catch (\Exception $e) {
+            return Response::json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+
+
+    public function delivery_zone_status(Request $request)
+    {
+        return $this->StoreMasterRepository->delivery_zone_status($request);
+    }
+
 }

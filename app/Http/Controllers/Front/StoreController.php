@@ -362,9 +362,7 @@ class StoreController extends Controller
             Session::put('cartItem', $cartArr);
 
           }
-          else{
-            $addRemove = 1;
-          }
+         
         }
       }
 

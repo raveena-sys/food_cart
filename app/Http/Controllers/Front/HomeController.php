@@ -55,7 +55,7 @@ class HomeController extends Controller
             } else {
                 Session::put('orderType', 'delivery');
             }
-            Session::put('delCharge', $price);
+            //Session::put('delCharge', $price);
             $category = Category::select('category.*')->join('store_category',function($join){
                 $join->on('category.id', '=', 'store_category.cat_id');
                 $join->where('store_category.store_id', '=', Session::get('store_id'));
@@ -80,6 +80,7 @@ class HomeController extends Controller
             }
             Session::put('store_id', $request->id); 
             $store = StoreMaster::where(['status'=> 'active', 'id'=> $request->id])->first();
+            Session::put('gst_per', $store->gst_per); 
             $cms = $this->cms->where(['page_slug'=>'order_type'])->first();
             $links = SocialLink::where('store_id', Session::get('store_id'))->first();
             return view('front.order_type', compact('store', 'cms', 'links'));

@@ -98,20 +98,20 @@ $subtotal = 0;
                 @endforeach
                 @endif
                 @if($showCart)
-                <?php
-          if(isset($val->price)){
-            $price = $val->price;
-          }else if(isset($val->custom_price)){
-            $price = $val->custom_price;
-          }else{
-            $price = 0;
-          }
-          ?>
                 <div class="countWrap">
                     <button type="button" id="sub" data-product_id="{{isset($val->id)?$val->id:''}}"
-                        class="sub sub_item" data-price="{{isset($v['price'])?$v['price']:0}}">-</button>
+                        class="sub sub_item" data-price="{{isset( $price)? $price:0}}">-</button>
                     <input class="count" type="text" id="item_count_{{isset($val->id)?$val->id:''}}"
                         value="{{isset($quantity)?$quantity:1}}" min="1" max="100">
+                <?php
+                  if(isset($val->price)){
+                    $price = $val->price;
+                  }else if(isset($val->custom_price)){
+                    $price = $val->custom_price;
+                  }else{
+                    $price = 0;
+                  }
+                  ?>
                     <button type="button" id="add" class="add add_to_cart"
                         data-product_id="{{isset($val->id)?$val->id:''}}" data-price="{{$price}}">+
                     </button>

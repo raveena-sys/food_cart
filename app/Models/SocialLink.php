@@ -9,6 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class SocialLink extends Model
 {
     use Notifiable;
-    protected $fillable = ['id', 'store_id', 'fb_url', 'whatsapp_url', 'twitter_url', 'insta_url', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'store_id', 'fb_url', 'whatsapp_url', 'twitter_url', 'linkedin_url', 'created_at', 'updated_at'];
     
 }

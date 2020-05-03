@@ -33,6 +33,7 @@ Route::get('product/{id}', 'Front\StoreController@productDetails');
 Route::post('product', 'Front\StoreController@productCustomiseDetails');
 Route::get('checkout', 'Front\OrderController@checkout');
 Route::get('checkout/user', 'Front\OrderController@checkout_user');
+Route::post('validation/checkzipcode', 'Front\OrderController@checkzipcode');
 
 Route::match(array('GET', 'POST'), 'save_user_detail', 'Front\OrderController@save_user_detail' );
 Route::post('save_order', 'Front\OrderController@save_order');

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Session, DB, PDF;
 use App\Models\Order;
 use App\Models\StoreMaster;
+use App\Models\StorePostalCode;
 
 class OrderController extends Controller
 {
@@ -140,6 +141,23 @@ class OrderController extends Controller
     		Session::flash('error', 'Something went wrong!');
     		return redirect('/save_user_detail');
     	}
+    }
+
+
+    public function checkzipcode(Request $request){
+    	if(Session::has('orderType') && Session::get('orderType')=='delivery'){
+	    	if(!empty($request->zipcode)){
+	    		$zipcode =  StorePostalCode::whereRaw("find_in_set('".$request->zipcode."',postal_code)")->first();
+	    		if(!empty($zipcode)){
+	    			Session::put('delCharge', $zipcode->price);
+	    			return 'true';
+	    		}else{
+	    			return 'false';
+	    		}
+	    	}
+	    }else {
+	    	return 'true';
+	    }
     }
 
     

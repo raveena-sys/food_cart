@@ -76,27 +76,32 @@
             @endphp 
             @endforeach
             @endif
-            <tr>
-              <td>GST(0%)</td>
-              <td>-</td>
-              <td> $0</td>
-            </tr>
-            @if(Session::has('orderType') && Session::has('orderType') =='delivery')
+
+
+            @php
+              $delCharge = Session::has('orderType') && Session::get('orderType') =='delivery'?Session::get('delCharge'):'0';
+            
+            @endphp
             <tr>
               <td>Delivery fee</td>
               <td>-</td>
-              <td> ${{Session::get('delCharge')}}</td>
+              <td> ${{$delCharge}}</td>
             </tr>
             
-            @endif
             @php
-          
-            $total = (float)$subtotal+(float)Session::get('delCharge');
+            $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0;
+            
+            $total = (float)$subtotal+(float)$delCharge+(float)$gst_price;
             @endphp
             <tr>
               <td>Subtotal</td>
               <td>&nbsp;</td>
               <td> ${{$subtotal}}</td>
+            </tr>
+            <tr>
+              <td>GST({{Session::has('gst_per')?Session::get('gst_per'):0}}%)</td>
+              <td>-</td>
+              <td> ${{$gst_price}}</td>
             </tr>
             <tr>
               <td><a href="{{url('checkout/user')}}" class="btn_chng_add">Change Your Address</a></td>

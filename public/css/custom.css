@@ -2232,3 +2232,14 @@ span.text-danger {
         width: 100%;
     }
 }
+
+
+
+
+
+
+/****make content disabled****/
+.container.store_list_inner.disabled{
+    pointer-events: none;
+    opacity: 0.7;
+}

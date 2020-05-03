@@ -266,6 +266,18 @@ Route::group(['prefix' => 'store', 'middleware' => 'Store'], function () {
         Route::post('update-cms-page', ['as' => 'edit-cms', 'uses' => 'CmsController@updateCmsPageDetail']);
     });
     /*================ End Manage CMS Routes ================*/
+
+    /*================ Start Manage CMS Routes ================*/
+    Route::group(['prefix' => 'manage-delivery'], function () {
+        Route::get('/', 'StoreMasterController@delivery_zone');
+        Route::get('list', 'StoreMasterController@delivery_zone_list');
+        Route::get('edit/{id}', 'StoreMasterController@delivery_zone_detail');
+        Route::get('add', 'StoreMasterController@delivery_zone_add');
+        Route::post('add', 'StoreMasterController@delivery_zone_addpost');
+        Route::post('change-status','StoreMasterController@delivery_zone_status');
+    });
+    
+    /*================ End Manage CMS Routes ================*/
     Route::group(['prefix' => 'manage-social'], function () {
         Route::get('edit', 'UserController@getSocialLinks');
         Route::post('update', 'UserController@updateSocialLinks');

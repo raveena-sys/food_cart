@@ -7,11 +7,11 @@
                     <span class="nav_icon"><i class="icon-dashboard"></i></span>
                     <span class="nav_title">Dashboard</span></a>
             </li>
-            <!-- <li class="{{(Request::segment(2) == 'manage-store-master') ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" href="{{ URL::To('admin/manage-store/list') }}">
-                    <span class="nav_icon"><i class="icon-dashboard"></i></span>
-                    <span class="nav_title">Store</span></a>
-            </li> -->
+            <li class="{{(Request::segment(2) == 'manage-delivery') ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-delivery') }}">
+                    <span class="nav_icon"><i class="fa fa-truck"></i></span>
+                    <span class="nav_title">Manage Delivery Zone</span></a>
+            </li>
             <li class="{{(Request::segment(2) == 'orders') ? 'active' : ''}}">
                 <a class="nav-link ripple-effect" href="{{ URL::To('store/orders') }}">
                     <span class="nav_icon"><i class="fa fa-money"></i></span>

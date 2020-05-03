@@ -32,9 +32,9 @@ class UpdateSocialLinkRequest extends FormRequest
     public function rules()
     {
         return [
-            'fb_url' => 'required|regex:/^(https?:\/\/www.)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-            'whatsapp_url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-            'insta_url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'fb_url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            //'whatsapp_url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'linkedin_url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
             'twitter_url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
             
         ];
@@ -44,12 +44,12 @@ class UpdateSocialLinkRequest extends FormRequest
     {
         return [
             'fb_url.required' => 'This field is required',
-            'whatsapp_url.required' => 'This field is required',
-            'insta_url.required' => 'This field is required',
+            //'whatsapp_url.required' => 'This field is required',
+            'linkedin_url.required' => 'This field is required',
             'twitter_url.required' => 'This field is required',
             'fb_url.regex' => 'Please Enter Valid url.',
-            'whatsapp_url.regex' => 'Please Enter Valid url.',
-            'insta_url.regex' => 'Please Enter Valid url.',
+            //'whatsapp_url.regex' => 'Please Enter Valid url.',
+            'linkedin_url.regex' => 'Please Enter Valid url.',
             'twitter_url.regex' => 'Please Enter Valid url.',
         ];
     }

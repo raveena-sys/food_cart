@@ -70,3 +70,24 @@
 	background-color:#803D9B;
 }
 
+.menu__subcategory__inner {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.menu__subcategory__inner .subcategory__name {
+    display: inline-block;
+    border: 2px solid rgb(210, 210, 210);
+    border-radius: 30px;
+    padding: 9px 25px;
+    margin-left: 15px;
+    color: rgb(101, 101, 101);
+    background: #fff;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.menu__subcategory__inner .subcategory__name .close{
+    color: red;
+    font-size: 20px;
+}

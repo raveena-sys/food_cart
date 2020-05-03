@@ -113,20 +113,19 @@
 
                             @endif
 
-
                             <div class="col-sm-12 custom-list-footer">
                                 <div class="">
                                     <ul class="list-inline">
                                         <li>
-                                            <a href="javascript:;"><i class="fa fa-facebook-square"
+                                            <a href="{{isset($val->social->fb_url)?$val->social->fb_url:(javascript)}}" target="_blank"><i class="fa fa-facebook-square"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:;"><i class="fa fa-twitter-square"
+                                            <a href="{{isset($val->social->twitter_url)?$val->social->twitter_url:(javascript)}}" target="_blank"><i class="fa fa-twitter-square"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="javascript:;"><i class="fa fa-linkedin-square"
+                                            <a href="{{isset($val->social->linkedin_url)?$val->social->linkedin_url:(javascript)}}" target="_blank"><i class="fa fa-linkedin-square"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                     </ul>

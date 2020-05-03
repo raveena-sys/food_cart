@@ -10,6 +10,7 @@ use Auth;
 use Datatables;
 use App\Common\Helpers;
 use App\Models\Job;
+use App\Models\StorePostalCode;
 use App\Models\StoreMaster;
 use \DB, Hash, Mail;
 
@@ -32,26 +33,12 @@ class StoreMasterRepository
     public function getList($request)
     {
         try {
-            // $storeMaster = \DB::table('pizza_size_master as pizsize')
-            //     ->join('size_master as sizem', 'pizsize.size_master_id', '=', 'sizem.id')
-            //     ->where('pizsize.status', '!=', 'deleted')
-            //     ->select([
-            //         'pizsize.id', 'pizsize.name', 'pizsize.status', 'pizsize.description',
-            //         'sizem.name as size_name'
-            //     ])->get();
-
-
-
-
-            //     if (!empty($request->category_id)) {
-            //         $storeMaster->where('size_master_id', $request->size_master_id);
-            //     }
+            
             $storeMaster = $this->storeMaster->where('status', '!=', 'deleted');
             if (!empty($request->status)) {
                 $storeMaster->where('status', $request->status);
             }
 
-            //->where(['user_type' => $request->type, 'user_role' => 'employee']);
             $storeMaster = $storeMaster->latest()->get();
             $tableResult = Datatables::of($storeMaster)->addIndexColumn()
 
@@ -62,29 +49,10 @@ class StoreMasterRepository
                             return Str::contains(Str::lower($row['name']), Str::lower(trim($request->name))) ? true : false;
                         });
                     }
-
-                    // if (!empty($request->company)) {
-                    //     $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                    //         return Str::contains(Str::lower($row['company']), Str::lower(trim($request->company))) ? true : false;
-                    //     });
-                    // }
-                    // if (!empty($request->manager)) {
-                    //     $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                    //         return Str::contains(Str::lower($row['manager']), Str::lower(trim($request->manager))) ? true : false;
-                    //     });
-                    // }
                 })
                 ->editColumn('name', function ($data) {
-                    // $imageUrl = getUserImage($data['profile_image'], 'uploads');
                     $userName = $data->name;
-                    // $viewUrl = url('admin/manage-storeMaster-view/' . $data->id);
-                    // $name = '
-                    // <div class="user-img">
-                    //  <img src="' . $imageUrl . '" alt="user-img" class="img-fluid rounded-circle">
-                    // </div>
-                    //  <a  class="theme-color name">' . $userName . '</a>';
-                    return $userName;
-                    //href="' . $viewUrl . '"
+                    return $userName;       
                 })
                 ->editColumn('address1', function ($data) {
                     return $data->address1;
@@ -93,13 +61,7 @@ class StoreMasterRepository
                 ->editColumn('size_name', function ($data) {
                     return $data->size_name;
                 })
-                // ->editColumn('company', function ($category) {
-
-                //     return (!empty($category->employeeDetails) ? ucfirst($category->employeeDetails->company->company_title) : '');
-                // })
-                // ->editColumn('manager', function ($category) {
-                //     return (!empty($category->employeeDetails) ? ucfirst($category->employeeDetails->manager->managerInfo->name) : '');
-                // })
+                
                 ->addColumn('status', function ($row) {
 
                     $status = isset($row->status) ? $row->status : "";
@@ -125,7 +87,6 @@ class StoreMasterRepository
                        </div>';
                     return $btn;
                 })
-                // <a class="dropdown-item" href="javascript:void(0);" onclick="'.$delete.'">Delete</a>
                 ->rawColumns(['status', 'action', 'name'])
                 ->make(true);
 
@@ -491,8 +452,126 @@ class StoreMasterRepository
             return ['success' => false, 'message' => 'Something went wrong'];
         }
     }
+
+
+
+    public function delivery_zone_list($request)
+    {
+        try {            
+            $storeMaster = StorePostalCode::where('status', '!=', 'deleted')->where('store_id', Auth::user()->store_id);
+            if (!empty($request->status)) {
+                $storeMaster->where('status', $request->status);
+            }
+
+            $storeMaster = $storeMaster->latest()->get();
+            $tableResult = Datatables::of($storeMaster)->addIndexColumn()
+
+                ->filter(function ($instance) use ($request) {
+
+                    if (!empty($request->name)) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return Str::contains(Str::lower($row['postal_code']), Str::lower(trim($request->name))) ? true : false;
+                        });
+                    }
+
+                })
+                ->editColumn('postal_code', function ($data) {
+                    $postal_code = $data->postal_code;
+                    
+                    return $postal_code;
+                })               
+                ->editColumn('price', function ($data) {
+                    return $data->price;
+                })
+                ->addColumn('status', function ($row) {
+
+                    $status = isset($row->status) ? $row->status : "";
+                    $checked = ($status == 'active') ? "checked" : "";
+
+                    $btn = "<div class='switch'> <label> <input class='onoffswitch-checkbox switchchange' name='onoffswitch' type='checkbox' data-status='$status' id='category$row->id' $checked  onclick='changeStatus($row->id)' data-tableid='employee-lenderslist'> <span class='lever'></span> </label> </div>";
+                    return $btn;
+                })
+                ->addColumn('action', function ($row) {
+                    $viewUrl = url('store/manage-delivery/view/' . $row->id);
+                    $editURL = url('store/manage-delivery/edit/' . $row->id);
+
+                    $btn = "";
+                    $btn = '<div class="dropdown">
+                           <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               <span class="icon-keyboard_control"></span>
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" href="' . $viewUrl . '"   >View</a>
+                               <a class="dropdown-item" href="' . $editURL . '"   >Edit</a>
+                                <a class="dropdown-item" href="javascript:void(0);"  id=remove' . $row->id . ' data-url=' . url('admin/employee-delete') . ' data-name=' . $row->name . ' data-tableid="data-listing" onclick="deleteCategory(' . $row->id . ')" >Delete</a>
+                           </div>
+                       </div>';
+                    return $btn;
+                })
+                ->rawColumns(['status', 'action', 'postal_code'])
+                ->make(true);
+
+            $response = ['success' => true, 'message' => '', 'error' => [], 'data' => $tableResult];
+            return $response;
+        } catch (\Exception $e) {
+            $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
+            return $response;
+        }
+    }
+
+
+    public function delivery_zone_add($request)
+    {
+        DB::beginTransaction();
+        try {            
+            
+            $post['postal_code']  = implode(',', $request['zip_code']);
+            $post['store_id']  = Auth::user()->store_id;
+            $post['price']    = $request['price'];
+            
+            $store =  StorePostalCode::updateOrCreate(['id' => $request->id], $post);
+
+            DB::commit();
+            $response = ['success' => true, 'message' => 'Delivery Zone added successfully', 'error' => [], 'data' => []];
+           
+            return $response;
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
+            return $response;
+        }
+    }
+
+
+    public function getDeliveryDetail($id)
+    {
+        try {
+            $data = StorePostalCode::where('id', $id)->first();
+            return $data;
+        } catch (\Exception $e) {
+            $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
+            return $response;
+        }
+    }
     
 
 
-
+    /*
+    * Change delivery zone status by Id
+    */
+    public static function delivery_zone_status($request)
+    {
+        try {
+            $userData = StorePostalCode::where(['id' => $request->id])->update(array('status' => $request->status));
+            
+            $message = 'Status successfully changed.';
+            $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
+            
+            return $response;
+        } catch (\Exception $e) {
+            $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
+            return $response;
+        }
+    }
 }
