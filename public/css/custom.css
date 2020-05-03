@@ -1,5 +1,6 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
 }
 
 a,
@@ -14,7 +15,7 @@ button {
 }
 
 .bg-gray {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
 }
 
 .btn.btn-success {
@@ -26,7 +27,7 @@ button {
     border-style: solid;
     border-color: rgb(0, 171, 0);
     border-image: initial;
-    font-size: 14px
+    font-size: 14px;
 }
 
 .btn.btn-success:hover,
@@ -59,7 +60,7 @@ header img {
 }
 
 .home_bg {
-    background-image: url('../img/home_bg.jpg');
+    background-image: url("../img/home_bg.jpg");
     min-height: 86.8vh;
     background-size: cover;
 }
@@ -112,7 +113,7 @@ header img {
 .home_icon_list_details span {
     display: inline-block;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     color: #000;
     vertical-align: middle;
     font-size: 16px;
@@ -137,7 +138,7 @@ footer {
     text-decoration: none;
     font-size: 10px;
     padding-right: 25px;
-    font-weight: 600;
+    font-weight: 500;
     position: relative;
     border-right: solid 1px red;
     padding-left: 23px;
@@ -150,7 +151,7 @@ footer {
 .follow_us span {
     color: #c8c6c6;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .follow_us {
@@ -190,7 +191,7 @@ footer {
     font-size: 22px;
     text-transform: uppercase;
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
     padding: 15px 20px;
     text-align: center;
 }
@@ -208,7 +209,7 @@ footer {
 }
 
 .order_type li::after {
-    content: '';
+    content: "";
     height: 100px;
     width: 2px;
     background-color: #c20f0f;
@@ -229,7 +230,12 @@ footer {
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-weight: 600;
+    font-weight: 500;
+}
+.order_type li a{
+    text-decoration: none;
+    display: block;
+    padding:0 10px;
 }
 
 .contact_us {
@@ -252,7 +258,7 @@ footer {
     margin: 0;
     font-size: 18px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .conact_hd p {
@@ -273,12 +279,12 @@ footer {
     border: none;
     border-bottom: solid 1px #999;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .contact_inner li input::placeholder {
     opacity: 1;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .contact_inner li input:focus {
@@ -300,16 +306,18 @@ footer {
     display: block;
     width: 100%;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 18px;
 }
 
 .store_list {
-    background-image: url('../img/store_bg.jpg');
+    background-image: url("../img/store_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .store_menu_banner {
-    background-image: url('../img/store_menu_bg.jpg');
+    background-image: url("../img/store_menu_bg.jpg");
     height: 220px;
 }
 
@@ -318,7 +326,7 @@ footer {
     text-align: center;
     color: #fff;
     font-size: 25px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
 }
 
@@ -326,7 +334,7 @@ footer {
     text-align: center;
     color: #fff;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     margin: 0;
     padding-bottom: 25px;
 }
@@ -356,14 +364,14 @@ footer {
     font-size: 16px;
     margin: 0;
     padding-top: 15px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .store_list_grid h3 {
     font-size: 16px;
     margin: 0;
     padding-top: 20px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .store_list_grid p {
@@ -384,13 +392,13 @@ footer {
 
 .menu_price {
     margin: 0;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 5px;
 }
 
 .store_list_grid p::after {
-    content: '';
-    background-image: url('../img/marker_pin.png');
+    content: "";
+    background-image: url("../img/marker_pin.png");
     height: 15px;
     width: 10px;
     position: absolute;
@@ -399,23 +407,13 @@ footer {
     top: 12px;
 }
 
-.store_list_grid h2::after {
-    content: '';
-    height: 2px;
-    width: 40px;
-    background-color: red;
-    display: block;
-    margin-top: 7px;
-    margin-bottom: 7px;
-}
-
 .btn_order_now {
     background-color: #f68428;
     border: none;
     color: #fff;
     padding: 7px 12px;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     margin-top: 45px;
     margin-left: 55px;
@@ -427,7 +425,7 @@ footer {
     color: #fb2525;
     padding: 7px 12px;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     margin-left: 55px;
     border: solid 1px #fb2525;
@@ -468,11 +466,11 @@ footer {
 .store_dp_inner h2 {
     margin: 0;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .store_dp_inner h2::after {
-    content: '';
+    content: "";
     height: 3px;
     width: 50px;
     background-color: #fff;
@@ -498,13 +496,13 @@ footer {
 .resta_time h2 {
     margin: 0;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     color: #fb2525;
     text-transform: uppercase;
 }
 
 .resta_time h2::after {
-    content: '';
+    content: "";
     height: 3px;
     width: 50px;
     background-color: #fb2525;
@@ -520,7 +518,7 @@ footer {
 
 .resta_time table tr td {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 7px 0px;
 }
 
@@ -541,8 +539,8 @@ footer {
 }
 
 .slick-prev::before {
-    content: '';
-    background-image: url('../img/prev_arrow_scroll.png');
+    content: "";
+    background-image: url("../img/prev_arrow_scroll.png");
     height: 18px;
     width: 18px;
     background-size: contain;
@@ -552,8 +550,8 @@ footer {
 }
 
 .slick-next::before {
-    content: '';
-    background-image: url('../img/next_arrow_scroll.png');
+    content: "";
+    background-image: url("../img/next_arrow_scroll.png");
     height: 18px;
     width: 18px;
     background-size: contain;
@@ -597,7 +595,7 @@ footer {
 .variable.slider.slick-initialized.slick-slider.slick-dotted span {
     display: inline-block;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     vertical-align: middle;
     margin-left: 2px;
@@ -613,12 +611,12 @@ footer {
     padding-bottom: 8px;
 }
 
-.slick-active div>div {
+.slick-active div > div {
     position: relative;
 }
 
-.slick-active div>div::after {
-    content: '';
+.slick-active div > div::after {
+    content: "";
     height: 2px;
     width: 80px;
     position: absolute;
@@ -642,21 +640,21 @@ footer {
     width: 100%;
 }
 
-.navbar-default .navbar-nav>li {
-    font-weight: 600;
+.navbar-default .navbar-nav > li {
+    font-weight: 500;
 }
 
-.navbar-default .navbar-nav>li img {
+.navbar-default .navbar-nav > li img {
     margin-right: 10px;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav > li > a {
     color: #fff;
     text-transform: uppercase;
     display: inline-block;
 }
 
-.navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav > li > a:hover {
     color: #f83d4c !important;
 }
 
@@ -699,7 +697,7 @@ footer {
     color: #fff;
 }
 
-.navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav > li > a:hover {
     color: #fff;
 }
 
@@ -766,7 +764,7 @@ footer {
 .modal-body h4 {
     font-size: 18px;
     margin-top: 0px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 5px;
 }
 
@@ -777,7 +775,7 @@ footer {
 
 .cstmiz_head {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 0px;
 }
 
@@ -830,14 +828,14 @@ button.close {
 
 .prdct_prc label:nth-child(1) {
     color: #f00 !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     font-size: 20px !important;
     margin: 0 !important;
 }
 
 .prdct_prc label:nth-child(2) {
     color: #333 !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     font-size: 20px !important;
     margin: 0 !important;
 }
@@ -863,10 +861,9 @@ button.close span {
     text-align: center;
 }
 
-
 /*Check box*/
 
-#squarespaceModal input[type="checkbox"]+.label-text:before {
+#squarespaceModal input[type="checkbox"] + .label-text:before {
     content: "\f096";
     font-family: "FontAwesome";
     speak: none;
@@ -881,25 +878,24 @@ button.close span {
     margin-right: 5px;
 }
 
-#squarespaceModal input[type="checkbox"]:checked+.label-text:before {
+#squarespaceModal input[type="checkbox"]:checked + .label-text:before {
     content: "\f14a";
     color: #2980b9;
     animation: effect 250ms ease-in;
 }
 
-#squarespaceModal input[type="checkbox"]:disabled+.label-text {
+#squarespaceModal input[type="checkbox"]:disabled + .label-text {
     color: #aaa;
 }
 
-#squarespaceModal input[type="checkbox"]:disabled+.label-text:before {
+#squarespaceModal input[type="checkbox"]:disabled + .label-text:before {
     content: "\f0c8";
     color: #ccc;
 }
 
-
 /*Radio box*/
 
-#squarespaceModal input[type="radio"]+.label-text:before {
+#squarespaceModal input[type="radio"] + .label-text:before {
     content: "\f10c";
     font-family: "FontAwesome";
     speak: none;
@@ -914,7 +910,7 @@ button.close span {
     margin-right: 5px;
 }
 
-#squarespaceModal input[type="radio"]:checked+.label-text:before {
+#squarespaceModal input[type="radio"]:checked + .label-text:before {
     content: "\f192";
     color: #fb2525;
     animation: effect 250ms ease-in;
@@ -924,19 +920,18 @@ button.close span {
     background-color: #444;
 }
 
-#squarespaceModal input[type="radio"]:disabled+.label-text {
+#squarespaceModal input[type="radio"]:disabled + .label-text {
     color: #aaa;
 }
 
-#squarespaceModal input[type="radio"]:disabled+.label-text:before {
+#squarespaceModal input[type="radio"]:disabled + .label-text:before {
     content: "\f111";
     color: #ccc;
 }
 
-
 /*Radio Toggle*/
 
-#squarespaceModal .toggle input[type="radio"]+.label-text:before {
+#squarespaceModal .toggle input[type="radio"] + .label-text:before {
     content: "\f204";
     font-family: "FontAwesome";
     speak: none;
@@ -951,17 +946,17 @@ button.close span {
     margin-right: 10px;
 }
 
-#squarespaceModal .toggle input[type="radio"]:checked+.label-text:before {
+#squarespaceModal .toggle input[type="radio"]:checked + .label-text:before {
     content: "\f205";
     color: #16a085;
     animation: effect 250ms ease-in;
 }
 
-#squarespaceModal .toggle input[type="radio"]:disabled+.label-text {
+#squarespaceModal .toggle input[type="radio"]:disabled + .label-text {
     color: #aaa;
 }
 
-#squarespaceModal .toggle input[type="radio"]:disabled+.label-text:before {
+#squarespaceModal .toggle input[type="radio"]:disabled + .label-text:before {
     content: "\f204";
     color: #ccc;
 }
@@ -983,7 +978,7 @@ button.close span {
 
 .checkbox label:after,
 .radio label:after {
-    content: '';
+    content: "";
     display: table;
     clear: both;
 }
@@ -993,11 +988,11 @@ button.close span {
     position: relative;
     display: inline-block;
     border: 1px solid #a9a9a9;
-    border-radius: .25em;
+    border-radius: 0.25em;
     width: 1.3em;
     height: 1.3em;
     float: left;
-    margin-right: .5em;
+    margin-right: 0.5em;
 }
 
 .radio .cr {
@@ -1007,7 +1002,7 @@ button.close span {
 .checkbox .cr .cr-icon,
 .radio .cr .cr-icon {
     position: absolute;
-    font-size: .8em;
+    font-size: 0.8em;
     line-height: 0;
     top: 50%;
     left: 20%;
@@ -1022,22 +1017,22 @@ button.close span {
     display: none;
 }
 
-.checkbox label input[type="checkbox"]+.cr>.cr-icon,
-.radio label input[type="radio"]+.cr>.cr-icon {
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
     transform: scale(3) rotateZ(-20deg);
     opacity: 0;
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
 }
 
-.checkbox label input[type="checkbox"]:checked+.cr>.cr-icon,
-.radio label input[type="radio"]:checked+.cr>.cr-icon {
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
     transform: scale(1) rotateZ(0deg);
     opacity: 1;
 }
 
-.checkbox label input[type="checkbox"]:disabled+.cr,
-.radio label input[type="radio"]:disabled+.cr {
-    opacity: .5;
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: 0.5;
 }
 
 .modal-body .checkbox {
@@ -1048,7 +1043,7 @@ button.close span {
 .modal-body .checkbox label {
     padding-left: 0px;
     display: block;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .btn_save {
@@ -1058,7 +1053,7 @@ button.close span {
     padding: 7px 55px;
     font-size: 18px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 5px;
     display: table;
     margin: 0 auto;
@@ -1076,8 +1071,8 @@ button.close span {
     background-color: #e21818;
 }
 
-.cart_sect .table>tbody>tr>td,
-.table>tfoot>tr>td {
+.cart_sect .table > tbody > tr > td,
+.table > tfoot > tr > td {
     vertical-align: middle;
 }
 
@@ -1101,7 +1096,7 @@ button.close span {
     }
     .cart_sect table#cart tbody td {
         display: block;
-        padding: .6rem;
+        padding: 0.6rem;
         min-width: 320px;
     }
     .cart_sect table#cart tbody tr td:first-child {
@@ -1135,7 +1130,7 @@ button.close span {
 
 .checkout_container {
     max-width: 550px;
-    background-color: #efefef;
+    background-color: #fff;
     margin: 70px auto;
     padding: 20px;
 }
@@ -1145,12 +1140,12 @@ button.close span {
     margin-top: 5px;
     margin-bottom: 5px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
     color: #fa0215;
 }
 
 .checkout_container h2::after {
-    content: '';
+    content: "";
     height: 2px;
     background-color: #fa0215;
     width: 50px;
@@ -1162,6 +1157,7 @@ button.close span {
 
 .checkout_container li {
     list-style: none;
+    margin-bottom: 15px;
 }
 
 .checkout_container li label {
@@ -1206,7 +1202,7 @@ button.close span {
     margin: 20px auto;
     display: table;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .order_box {
@@ -1256,7 +1252,7 @@ button.close span {
     border: none;
     padding: 8px 20px;
     color: #fff;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 4px;
 }
 
@@ -1270,7 +1266,7 @@ button.close span {
 
 .pymnt_md label {
     font-size: 16px !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     color: #000;
 }
 
@@ -1301,7 +1297,7 @@ button.close span {
         color: #fff;
         padding: 7px 12px;
         border-radius: 6px;
-        font-weight: 600;
+        font-weight: 500;
         text-transform: uppercase;
         margin-top: 1px;
         margin-left: 73px;
@@ -1332,7 +1328,7 @@ button.close span {
         font-size: 19px;
         text-transform: uppercase;
         margin: 0;
-        font-weight: 600;
+        font-weight: 500;
         padding: 15px 20px;
         text-align: center;
     }
@@ -1350,7 +1346,7 @@ button.close span {
         margin-bottom: 20px;
     }
     .home_bg {
-        background-image: url('../img/home_bg.jpg');
+        background-image: url("../img/home_bg.jpg");
         height: auto;
         background-size: cover;
     }
@@ -1368,7 +1364,7 @@ button.close span {
         text-decoration: none;
         font-size: 10px;
         padding-right: 15px;
-        font-weight: 600;
+        font-weight: 500;
         position: relative;
         border-right: solid 1px red;
         padding-left: 15px;
@@ -1391,7 +1387,8 @@ button.close span {
     max-width: 100%;
     flex-basis: auto;
     background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 2px 4px 0px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px,
+        rgba(0, 0, 0, 0.12) 0px 2px 4px 0px;
     border-radius: 3px;
     margin: 0rem;
     overflow: hidden;
@@ -1415,20 +1412,20 @@ button.close span {
 
 .listGrid .card-footer .btn.btn-success {
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 8px 15px;
 }
 
 .listGrid .card-title {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .countWrap {
     max-width: 120px;
     display: flex;
     align-items: center;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-radius: 4px;
     height: 35px;
 }
@@ -1448,8 +1445,8 @@ button.close span {
 }
 
 .listGrid .img-footer .price {
-    color: #FFF;
-    font-weight: 600;
+    color: #fff;
+    font-weight: 500;
     font-size: 16px;
 }
 
@@ -1476,11 +1473,11 @@ button.close span {
 }
 
 .img-header .food_type.veg {
-    background-image: url('../img/veg.svg');
+    background-image: url("../img/veg.svg");
 }
 
 .img-header .food_type.nonveg {
-    background-image: url('../img/non_veg.svg');
+    background-image: url("../img/non_veg.svg");
 }
 
 .countWrap button {
@@ -1497,8 +1494,8 @@ button.close span {
     font-size: 16px;
     font-weight: bold;
     height: 100%;
-    border-right: 1px solid #CCC;
-    border-left: 1px solid #CCC;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
 }
 
 .cartRight {
@@ -1508,9 +1505,11 @@ button.close span {
 .cartWrapper {
     padding: 10px;
     border-radius: 4px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     max-height: 700px;
     overflow: auto;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
 
 .cartWrapper .cartbox__inner {
@@ -1518,7 +1517,7 @@ button.close span {
 }
 
 .cartWrapper .cartbox__inner:not(:last-child) {
-    border-bottom: 1px dashed #CCC;
+    border-bottom: 1px dashed #ccc;
     padding-bottom: 15px;
 }
 
@@ -1527,16 +1526,17 @@ button.close span {
 }
 
 .cartWrapper .cartbox__inner .cartBox img {
-    width: 100px;
+    width: 78px;
     margin-right: 15px;
-    height: 80px;
+    height: 60px;
     border-radius: 5px;
 }
 
 .cartWrapper .cartbox__inner .cartBox .cartBox__detail h4 {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: bold;
     margin-top: 0;
+    margin-bottom: 5px;
 }
 
 .cartWrapper .cartbox__inner .cartBox .cartBox__detail p {
@@ -1557,10 +1557,10 @@ button.close span {
 }
 
 .totalPrice {
-    background-color: #F0F5FB;
+    background-color: #FFF;
     padding: 20px 15px;
     border-radius: 4px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .needs-validation {
@@ -1576,21 +1576,27 @@ button.close span {
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
+}
+
+.totalPrice__inner:not(:last-child){
+    margin-bottom: 10px;
 }
 
 .totalPrice__inner .left,
 .totalPrice__inner .right {
     font-size: 20px;
-    font-weight: bold;
     color: #333;
 }
 
 .totalPrice .btn {
     margin-top: 15px;
-    padding: 15px 15px;
-    font-size: 18px;
+    padding: 8px 15px;
+    font-size: 15px;
     background-color: #00ab00;
-    color: #FFF;
+    color: #fff;
+    margin-bottom: 0;
+    font-weight: 500;
 }
 
 .checkoutContent {
@@ -1599,10 +1605,10 @@ button.close span {
 
 .checkoutContent .cartbox__inner {
     margin-bottom: 30px;
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px 15px;
     border-radius: 4px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .checkoutContent .cartbox__inner:not(:last-child) {
@@ -1648,10 +1654,10 @@ button.close span {
 }
 
 .checkoutContent .rightSide .addressBox {
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px 15px;
     border-radius: 4px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
     margin-bottom: 20px;
 }
 
@@ -1669,7 +1675,7 @@ button.close span {
 }
 
 .checkoutContent .rightSide .totalPrice {
-    background-color: #FFF;
+    background-color: #fff;
     font-size: 16px;
 }
 
@@ -1679,8 +1685,8 @@ button.close span {
 }
 
 .checkoutContent .btn {
-    padding: 10px;
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 .sideMenu {
@@ -1689,7 +1695,7 @@ button.close span {
     z-index: 999;
     top: 0;
     left: 0;
-    background-color: #FFF;
+    background-color: #fff;
     height: 100vh;
     box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.6);
     left: -400px;
@@ -1725,7 +1731,7 @@ button.close span {
 }
 
 .sideMenu .productItem {
-    color: #AAAAAA;
+    color: #aaaaaa;
     display: block;
     position: relative;
     float: left;
@@ -1741,7 +1747,7 @@ button.close span {
     margin-bottom: 10px;
 }
 
-.sideMenu .productItem input[type=radio] {
+.sideMenu .productItem input[type="radio"] {
     position: absolute;
     visibility: hidden;
 }
@@ -1762,7 +1768,7 @@ button.close span {
     color: #333;
     margin-bottom: 0px;
     margin-top: 5px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .sideMenu .productItem :hover label {
@@ -1776,21 +1782,20 @@ button.close span {
 .sideMenu .productItem .check {
     display: block;
     position: absolute;
-    border: 1px solid #AAAAAA;
+    border: 1px solid #aaaaaa;
     border-radius: 4px;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 5;
-    transition: border .25s linear;
-    -webkit-transition: border .25s linear;
+    transition: border 0.25s linear;
+    -webkit-transition: border 0.25s linear;
 }
 
 .sideMenu .productItem :hover .check {
     border: 1px solid #00ab00;
 }
-
 
 /* .sideMenu ul li .check::before {
 	display: block;
@@ -1806,19 +1811,19 @@ button.close span {
 	  -webkit-transition: background 0.25s linear;
   } */
 
-.sideMenu input[type=radio]:checked~.check {
+.sideMenu input[type="radio"]:checked ~ .check {
     border: 1px solid #00ab00;
 }
 
-.sideMenu input[type=radio]:checked~.check::before {
+.sideMenu input[type="radio"]:checked ~ .check::before {
     background: #00ab00;
 }
 
-.sideMenu input[type=radio]:checked~label {
+.sideMenu input[type="radio"]:checked ~ label {
     color: #00ab00;
 }
 
-.sideMenu input[type=radio]:checked~label .price {
+.sideMenu input[type="radio"]:checked ~ label .price {
     color: #00ab00;
 }
 
@@ -1826,7 +1831,7 @@ button.close span {
     padding: 15px;
 }
 
-.sideMenu .slick-active div>div::after {
+.sideMenu .slick-active div > div::after {
     display: none;
 }
 
@@ -1841,18 +1846,18 @@ button.close span {
     padding: 10px;
     background: #00ab00;
     align-items: center;
-    color: #FFF;
+    color: #fff;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
 .sideMenu .sideMenu__footer .leftSide {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .sideMenu .sideMenu__footer .btn-success {
-    background-color: #FFF;
+    background-color: #fff;
     color: #00ab00;
     outline: none;
 }
@@ -1864,7 +1869,7 @@ button.close span {
     z-index: 1;
     right: -30px;
     background-color: red;
-    color: #FFF;
+    color: #fff;
     text-align: center;
     line-height: 30px;
     margin-left: auto;
@@ -1876,11 +1881,11 @@ button.close span {
 
 .closeSideMenu:hover,
 .closeSideMenu:focus {
-    color: #FFF;
+    color: #fff;
     text-decoration: none;
 }
 
-@media(max-width:360px) {
+@media (max-width: 360px) {
     .sideMenu {
         width: 320px;
         left: -320px;
@@ -1889,6 +1894,8 @@ button.close span {
 
 label.error {
     color: #f90929;
+    font-weight: 400;
+    font-size: 13px;
 }
 
 a img.logo {
@@ -1899,29 +1906,77 @@ span.text-danger {
     color: #f90929;
 }
 
-.subtopnav {
+/* .subtopnav {
     overflow: hidden;
     background-color: #333;
     display: inline-block;
-}
+} */
 
-.subtopnav a {
-    float: left;
-    color: #f2f2f2;
+.menu-nav {
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    padding: 0 15px 0;
+    margin-bottom: 30px;
+    white-space: nowrap;
+    overflow-y: auto;
+    background-color: #fff;
+}
+.menu-nav a {
+    color: #000;
     text-align: center;
-    padding: 14px 16px;
+    padding: 0;
     text-decoration: none;
     font-size: 17px;
+    margin-right: 30px;
+    position: relative;
+    padding: 13px 0;
+    display: inline-block;
 }
 
-.subtopnav a:hover {
-    background-color: #ddd;
-    color: black;
+.menu-nav a:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 3px;
+    background-color: red;
+    bottom: 0;
+    left: 0;
+    transition: ease-in-out 0.2s;
 }
 
-.subtopnav a.active {
-    background-color: #4CAF50;
-    color: white;
+.menu-nav a:hover {
+    transition: ease-in-out 0.3s;
+}
+.menu-nav a:hover:after,
+.menu-nav a.active:after {
+    width: 100%;
+    transition: ease-in-out 0.2s;
+}
+
+.menu__subcategory__inner {
+    margin-bottom: 30px;
+    position: relative;
+}
+.menu__subcategory__inner:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    background-color: rgb(210, 210, 210);
+    height: 1px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.menu__subcategory__inner .subcategory__name {
+    display: inline-block;
+    border: 2px solid rgb(210, 210, 210);
+    border-radius: 30px;
+    padding: 9px 25px;
+    margin-left: 15px;
+    color: rgb(101, 101, 101);
+    background: #fff;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 @media (max-width: 768px) {
@@ -1944,7 +1999,7 @@ span.text-danger {
         height: 250px;
     }
     .btn_order_now {
-        margin: 15px 0 15px 20px!important;
+        margin: 15px 0 15px 20px !important;
     }
 }
 
@@ -1963,5 +2018,217 @@ span.text-danger {
 @media (min-width: 1200px) {
     .container {
         max-width: 1400px !important;
+    }
+}
+
+.custom_listing {
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.2);
+    padding: 15px 0px 0px;
+    background-color: #f6f6f6;
+    min-height: 170px;
+}
+.custom_listing h2 {
+    font-size: 16px;
+    margin: 0;
+    padding-top: 0;
+    font-weight: 500;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+    position: relative;
+    -webkit-box-orient: vertical;
+    max-height: 42px;
+    line-height: 20px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.custom_listing h2:after {
+    content: "";
+    height: 2px;
+    width: 40px;
+    background-color: red;
+    display: block;
+    bottom: 0;
+    position: absolute;
+}
+.custom_listing .dropdown {
+    margin-left: 20px;
+}
+.custom_listing .dropdown .btn {
+    background-color: transparent;
+    font-size: 14px;
+    color: #788898;
+    padding: 0;
+    font-weight: bold;
+}
+.custom_listing .dropdown .btn:active {
+    outline: none;
+    box-shadow: none;
+}
+.custom_listing .dropdown .dropdown-menu {
+    padding: 10px 15px;
+    border: none;
+    width: 268px;
+}
+.custom_listing .dropdown .dropdown-menu ul {
+    margin-bottom: 0px;
+}
+.custom_listing .dropdown .dropdown-menu ul li {
+    padding: 5px 0px;
+    font-size: 13px;
+}
+
+.custom_listing .thumb_img {
+    position: relative;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    border-radius: 7px;
+    height: 130px;
+}
+.custom_listing ul li {
+    position: relative;
+    padding-left: 20px;
+    color: #788898;
+    line-height: 24px;
+}
+.custom_listing ul li.address:after {
+    content: "";
+    background-image: url(../img/marker_pin.png);
+    height: 15px;
+    width: 10px;
+    position: absolute;
+    background-position: top;
+    background-repeat: no-repeat;
+    left: 0;
+    top: 5px;
+}
+
+.custom_listing .thumb_img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.custom_listing .btnOrderNow {
+    background-color: #f68428;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 50px;
+}
+.custom_listing .btnOrderNow img {
+    float: right;
+    margin-top: 4px;
+}
+
+.custom_listing .btnOrderNow:hover {
+    background-color: #f68428;
+}
+
+.custom_listing .custom-list-footer {
+    text-align: right;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 15px;
+    padding: 0 9px;
+}
+.custom_listing .custom-list-footer ul {
+    margin: 0;
+}
+.custom_listing .custom-list-footer ul li {
+    padding-left: 0px;
+}
+.custom_listing .custom-list-footer ul li a {
+    padding: 5px 0;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.custom_listing .custom-list-footer ul li .fa-facebook-square {
+    color: #4064ac;
+}
+
+.fa-twitter-square {
+    color: #5eaade;
+}
+.fa-linkedin-square {
+    color: #0d72a3;
+}
+
+.pr-0 {
+    padding-right: 0;
+}
+.pl-0 {
+    padding-left: 0;
+}
+
+/* menu page css */
+.emptyCart {
+    background-color: #fff;
+}
+.emptyCart h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: red;
+}
+.emptyCart p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1199px) {
+    a img.logo {
+        width: 66px;
+    }
+    .custom_listing .thumb_img {
+        height: 108px;
+    }
+    .custom_listing ul li {
+        font-size: 13px;
+        line-height: 19px;
+    }
+    .custom_listing .btnOrderNow {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 991px) {
+    .custom_listing .thumb_img {
+        margin-bottom: 15px;
+    }
+    .custom_listing .pr-0 {
+        padding-right: 15px;
+    }
+    .custom_listing .pl-0 {
+        padding-left: 15px;
+    }
+    .custom_listing h2 {
+        font-size: 15px;
+    }
+    .custom_listing .btnOrderNow {
+        margin-top: 15px;
+    }
+    .custom_listing .dropdown .dropdown-menu {
+        width: 238px;
+        right: 0;
+        left: auto;
+    }
+    .custom_listing .dropdown .dropdown-menu ul li {
+        padding: 4px 0px;
+        font-size: 12px;
+    }
+    .custom_listing .custom_listing_mdl {
+        min-height: 125px;
+    }
+}
+
+@media (max-width: 575px) {
+    .store_list_inner .col {
+        width: 100%;
     }
 }

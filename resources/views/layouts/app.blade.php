@@ -58,7 +58,12 @@
         Command: toastr['error']("{{ Session::get('error') }}");
     </script>
     @endif
-
+    <script>
+    $('.menu-nav a').click(function() {
+        $('.menu-nav a').removeClass('active')
+        $(this).addClass('active')
+    })
+    </script>
 </body>
 
 </html>
