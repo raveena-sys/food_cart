@@ -35,19 +35,19 @@ $current ="Edit Social Link";
                         <input type="hidden" name="store_id" value="{{!empty($data->store_id)?$data->store_id:''}}">  
                         <div class="form-group">
                             <label>Facebook URL</label>
-                            <input type="text" name="fb_url" class="form-control" placeholder="Facebook URL" value="{{!empty($data->fb_url)?$data->fb_url:''}}">
+                            <input type="text" name="fb_url" class="form-control" placeholder="http://facebook.com" value="{{!empty($data->fb_url)?$data->fb_url:''}}">
                         </div>
                         <div class="form-group">
                             <label>Whatsapp URL</label>
-                            <input type="text" name="whatsapp_url" class="form-control" placeholder="Whatsapp URL" value="{{!empty($data->whatsapp_url)?$data->whatsapp_url:''}}">
+                            <input type="text" name="whatsapp_url" class="form-control" placeholder="https://whatsapp.com/" value="{{!empty($data->whatsapp_url)?$data->whatsapp_url:''}}">
                         </div>
                         <div class="form-group">
                             <label>Twitter URL</label>
-                            <input type="text" name="twitter_url" class="form-control" placeholder="Twitter URL" value="{{!empty($data->twitter_url)?$data->twitter_url:''}}">
+                            <input type="text" name="twitter_url" class="form-control" placeholder="https://twitter.com" value="{{!empty($data->twitter_url)?$data->twitter_url:''}}">
                         </div>
                         <div class="form-group">
                             <label>Insta URL</label>
-                            <input type="text" name="insta_url" class="form-control" placeholder="Insta URL" value="{{!empty($data->insta_url)?$data->insta_url:''}}">
+                            <input type="text" name="insta_url" class="form-control" placeholder="https://insta.com/" value="{{!empty($data->insta_url)?$data->insta_url:''}}">
                         </div>
                         <div class="btn_row text-center">
                             <a href="{{url('admin/dmanage-social/edit')}}" class="btn btn-outline-light ripple-effect text-uppercase">Cancel</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\StoreMaster;
 use App\Models\Category;
 use App\Models\Cms;
+use App\Models\SocialLink;
 use Session;
 use Response;
 
@@ -22,7 +23,9 @@ class HomeController extends Controller
     {
         try {
             $cms = $this->cms->where(['page_slug'=>'home_page'])->first();
-            return view('front.home', compact('cms'));
+            $links = SocialLink::whereNULL('store_id')->first();
+
+            return view('front.home', compact('cms', 'links'));
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -33,7 +36,7 @@ class HomeController extends Controller
         try {
 
         	$data['details'] = StoreMaster::where('status', 'active')->paginate(6);
-
+            $data['links'] = SocialLink::whereNULL('store_id')->first();
             $data['cms'] = $this->cms->where(['page_slug'=>'store_list'])->first();
             return view('front.storelist')->with($data);
         } catch (\Exception $e) {
@@ -58,10 +61,11 @@ class HomeController extends Controller
                 $join->where('store_category.store_id', '=', Session::get('store_id'));
             })->where('status', '=', 'active')/*->where('store_id', Session::get('store_id'))*/->get();
             $cms = $this->cms->where(['page_slug'=>'menu_list'])->first();
+            $links = SocialLink::where('store_id', Session::get('store_id'))->first();
             if($head){
                 return back();
             }
-            return view('front.main_menu', compact('category', 'cms'));
+            return view('front.main_menu', compact('category', 'cms', 'links'));
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -77,7 +81,8 @@ class HomeController extends Controller
             Session::put('store_id', $request->id); 
             $store = StoreMaster::where(['status'=> 'active', 'id'=> $request->id])->first();
             $cms = $this->cms->where(['page_slug'=>'order_type'])->first();
-            return view('front.order_type', compact('store', 'cms'));
+            $links = SocialLink::where('store_id', Session::get('store_id'))->first();
+            return view('front.order_type', compact('store', 'cms', 'links'));
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -87,7 +92,8 @@ class HomeController extends Controller
     public function checkout()
     {
         try {
-            return view('checkout');
+            $links = SocialLink::where('store_id', Session::get('store_id'))->first();
+            return view('checkout', compact('links'));
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -134,7 +140,8 @@ class HomeController extends Controller
     {
         try{
              $cms = $this->cms->where(['page_slug'=>'about_us'])->first();
-             return view('front.about_us', ['cms' => $cms]);
+             $links = SocialLink::whereNULL('store_id')->first();
+             return view('front.about_us', ['cms' => $cms, 'links' => $links]);
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -162,9 +169,9 @@ class HomeController extends Controller
     public function privacyPolicy()
     {
         try
-        {
+        {    $links = SocialLink::whereNULL('store_id')->first();
              $cms = $this->cms->where(['page_slug'=>'privacy_policy'])->first();
-             return view('front.privacy_policy', ['cms' => $cms]);
+             return view('front.privacy_policy', ['cms' => $cms, 'links' => $links]);
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
