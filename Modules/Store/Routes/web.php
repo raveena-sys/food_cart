@@ -266,7 +266,17 @@ Route::group(['prefix' => 'store', 'middleware' => 'Store'], function () {
         Route::post('update-cms-page', ['as' => 'edit-cms', 'uses' => 'CmsController@updateCmsPageDetail']);
     });
     /*================ End Manage CMS Routes ================*/
+    Route::group(['prefix' => 'manage-social'], function () {
+        Route::get('edit', 'UserController@getSocialLinks');
+        Route::post('update', 'UserController@updateSocialLinks');
+        
+    });
 
+    Route::group(['prefix' => 'manage-gst'], function () {
+        Route::get('edit', 'StoreMasterController@getStoreGST');
+        Route::post('update', 'StoreMasterController@updateStoreGST');
+        
+    });
 
 
 });

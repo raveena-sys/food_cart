@@ -251,6 +251,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('print/{id}', 'OrderController@printOrder');
 
     });
+    Route::group(['prefix' => 'manage-social'], function () {
+        Route::get('edit', 'UserController@getSocialLinks');
+        Route::post('update', 'UserController@updateSocialLinks');
+        
+    });
 
     
 

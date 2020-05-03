@@ -146,4 +146,20 @@ class StoreMasterController extends Controller
     {
         return $this->StoreMasterRepository->changeStatus($request);
     }
+
+    public function getStoreGST(Request $request)
+    {
+        $data = $this->StoreMasterRepository->storeGST($request);
+        return view('Store::store-master.edit_gst', compact('data'));
+    }
+    public function updateStoreGST(Request $request)
+    {
+        $status = $this->user->updateStoreGST($request);
+        if($status['success'] == 1){    
+            Session::flash('message', $status['message']);
+        }else{
+            Session::flash('message', $status['message']);
+        }
+        return redirect('admin/manage-social/edit');
+    }
 }

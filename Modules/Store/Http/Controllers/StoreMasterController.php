@@ -15,7 +15,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\Cities;
 use File;
-
+use Session;
 use View;
 
 class StoreMasterController extends Controller
@@ -73,6 +73,20 @@ class StoreMasterController extends Controller
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
+    }
+
+
+    public function getStoreGST(){
+        $data = $this->StoreMasterRepository->getStoreGST();
+        return view('store::store-master.editGST', compact('data'));
+    }
+
+
+    public function updateStoreGST(Request $request)
+    {
+        $status = $this->StoreMasterRepository->updataStoreGST($request);
+        Session::flash('message', $status['message']);
+        return redirect('store/manage-gst/edit');
     }
 
     

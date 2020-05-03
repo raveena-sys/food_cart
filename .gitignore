@@ -1,7 +1,6 @@
 /socket/node_modules
 /public/hot
 /public/storage
-/public/uploads
 /storage/*.key
 /vendor
 .env
@@ -17,3 +16,4 @@ yarn-error.log
 /Gruntfile.js
 /nbproject
 /node_modules
+/resources/views_02_05
