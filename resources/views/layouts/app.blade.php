@@ -63,6 +63,17 @@
         $('.menu-nav a').removeClass('active')
         $(this).addClass('active')
     })
+
+    
+var headerHeight = $('#header').height();
+    $(window).scroll(function(){
+    var e = $('.menu-wrapper'), i = e.offset();
+    e.length > 0 && $(window).scrollTop() >= i.top - headerHeight ? $(".menu-nav").addClass('is-sticky') : $(".menu-nav").removeClass('is-sticky');
+    console.log('test')
+
+    $(".menu-nav").css("width", $('.store_list_inner').width())
+    $(".menu-nav").css("top", headerHeight)
+  })
     </script>
 </body>
 

@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     background-color: #f2f2f2;
 }
 
@@ -65,10 +65,16 @@ header img {
     background-size: cover;
 }
 
+.home_video {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+    padding-top: 150px;
+}
+
 .home_icon {
     max-width: 800px;
     text-align: center;
-    margin: 10% auto;
+    margin: 0 auto;
 }
 
 .home_bg .home_icon {
@@ -84,8 +90,22 @@ header img {
     display: inline-block;
     margin: 20px;
 }
+.homepage .home_icon_list{
+    flex:0 0 50%;
+    background-color: transparent;
+    padding-right: 30px;
+    margin: 0 0 50px;
 
-.home_icon_list:hover {
+}
+.home_icon_list:last-child {
+    padding-right: 0;
+}
+.homepage .home_icon_list a {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.home_icon_list a:hover {
     transition: all 0.7s;
     background-color: rgba(255, 255, 255, 0.85);
     cursor: pointer;
@@ -121,6 +141,11 @@ header img {
 
 .home_icon_list_details span img {
     margin-left: 10px;
+}
+
+.menu-nav.is-sticky{
+    position: fixed;
+    z-index: 99;
 }
 
 footer {
@@ -232,10 +257,10 @@ footer {
     padding-bottom: 10px;
     font-weight: 500;
 }
-.order_type li a{
+.order_type li a {
     text-decoration: none;
     display: block;
-    padding:0 10px;
+    padding: 0 10px;
 }
 
 .contact_us {
@@ -1567,7 +1592,7 @@ button.close span {
 }
 
 .totalPrice {
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px 15px;
     border-radius: 4px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -1586,10 +1611,9 @@ button.close span {
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
 }
 
-.totalPrice__inner:not(:last-child){
+.totalPrice__inner:not(:last-child) {
     margin-bottom: 10px;
 }
 
@@ -2236,6 +2260,32 @@ span.text-danger {
         min-height: 125px;
     }
 }
+@media (max-width: 767px) {
+    .home_video {
+        padding-top: 0;
+    }
+    .homepage .home_icon_list {
+        padding-right: 0;
+    }
+    .order_type {
+        background-color: transparent;
+        margin-top: 100px;
+    }
+    .order_type h2 {
+        margin-bottom: 20px;
+    }
+    .order_type li {
+        margin: 0;
+        padding: 30px 15px;
+        background-color: #fb2525;
+    }
+    .order_type li:not(:last-child) {
+        margin-bottom: 30px;
+    }
+    .home_icon1 {
+        margin-top: 100px !important;
+    }
+}
 
 @media (max-width: 575px) {
     .store_list_inner .col {
@@ -2243,17 +2293,11 @@ span.text-danger {
     }
 }
 
-
-
-
-
-
 /****make content disabled****/
-.container.store_list_inner.disabled{
+.container.store_list_inner.disabled {
     pointer-events: none;
     opacity: 0.7;
 }
-
 
 .btn_chng_add {
     cursor: pointer;

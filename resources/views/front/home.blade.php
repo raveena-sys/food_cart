@@ -20,16 +20,19 @@
     /* margin: 10% auto; */
 }
 </style>
-<section class="home_bg" style= 'background-image: url("{{asset(isset($cms->background_image)?'/uploads/cms/'.$cms->background_image:'/img/home_bg.jpg')}}") !important;'>
+<section class="home_bg homepage" style= 'background-image: url("{{asset(isset($cms->background_image)?'/uploads/cms/'.$cms->background_image:'/img/home_bg.jpg')}}") !important;'>
     <div class="container">
 
       
-<div class="home_video"><video width="370" height="240" controls>
-  <source src="{{asset('img/coverr-apples-1572169622777.mp4')}}" type="video/mp4">
-  <source src="{{asset('img/coverr-apples-1572169622777.mp4')}}" type="video/ogg">
-  Your browser does not support the video tag.
-</video></div>
+
         <div class="home_icon">
+          <div class="home_video">
+          <video width="100%" height="100%" controls>
+            <source src="{{asset('img/coverr-apples-1572169622777.mp4')}}" type="video/mp4">
+            <source src="{{asset('img/coverr-apples-1572169622777.mp4')}}" type="video/ogg">
+            Your browser does not support the video tag.
+          </video>
+          </div>
             
             <div class="home_icon_list">
                 <a href="{{ URL::To('store_list') }}">

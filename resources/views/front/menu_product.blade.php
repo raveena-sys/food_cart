@@ -10,7 +10,7 @@
 
 <div class="container store_list_inner">
 
-    <div class="row">
+    <div class="row menu-wrapper">
         <div class="col-xs-12">
             <div class="menu-nav">
                 @if(!empty($subcategory))
@@ -91,5 +91,7 @@
 </div>
 
 @endsection
+
+
 
 

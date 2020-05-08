@@ -18,9 +18,8 @@
         flex-wrap:wrap;
     }
     .home_icon1 {
-    max-width: 913px;; 
     text-align: center;
-    margin: 10% auto;
+    margin: 150px auto;
     background-color: #08080836;
 }
 .home_icon1 h2 {
