@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- favicon -->
-    <link rel="shortcut icon" href="{{ asset('backend/images/favicon/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" 
+      type="image/png" 
+      href="{{asset('img/logo_black.png')}}">
 
     <link rel="icon" href="{{ asset('backend/images/favicon/favicon.ico') }}" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('backend/images/favicon/apple-touch-icon.png') }}">

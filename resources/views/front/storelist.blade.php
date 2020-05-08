@@ -35,7 +35,7 @@
                             <div class="col-lg-4 col-md-3 pr-0">
                                 <!-- <img src="{{ !empty($val->image)?asset('/uploads/users/'.$val->image):asset('img/store_pic_1.jpg') }}" class="img-responsive"> -->
                                 <div class="thumb_img">
-                                    <img src="http://freefoodcart.com/public/uploads/users/1586967609.jpg"
+                                    <img src="{{getUserImage($val->image,'users')}}"
                                         class="img-responsive">
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                        Open Time <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        Store Timing <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
@@ -83,7 +83,7 @@
                                             if($str!='No' && $currentTime >$value &&  $currentTime <$v){
                                                 $showOrderNow = true;
                                             }
-                                            echo $string[$key] = '<li>'. ucfirst($key) .' '.date("g:i a", strtotime($value)).' to '.date("g:i a", strtotime($v)). '</li>'; 
+                                            echo $string[$key] = '<li>'. ucfirst($key) .': '.date("g:i A", strtotime($value)).' to '.date("g:i A", strtotime($v)). '</li>'; 
                                         }                
                                     }
                                 }
@@ -117,15 +117,15 @@
                                 <div class="">
                                     <ul class="list-inline">
                                         <li>
-                                            <a href="{{isset($val->social->fb_url)?$val->social->fb_url:(javascript)}}" target="_blank"><i class="fa fa-facebook-square"
+                                            <a href="{{isset($val->social->fb_url)?$val->social->fb_url:('javascript:void(0)')}}" target="_blank"><i class="fa fa-facebook-square"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="{{isset($val->social->twitter_url)?$val->social->twitter_url:(javascript)}}" target="_blank"><i class="fa fa-twitter-square"
+                                            <a href="{{isset($val->social->twitter_url)?$val->social->twitter_url:('javascript:void(0)')}}" target="_blank"><i class="fa fa-twitter-square"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a href="{{isset($val->social->linkedin_url)?$val->social->linkedin_url:(javascript)}}" target="_blank"><i class="fa fa-linkedin-square"
+                                            <a href="{{isset($val->social->linkedin_url)?$val->social->linkedin_url:('javascript:void(0)')}}" target="_blank"><i class="fa fa-linkedin-square"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                     </ul>

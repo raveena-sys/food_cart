@@ -47,10 +47,10 @@
             </div>
           </li>
           @if(Session::has('userinfo'))
-          <li>
+          <!-- <li>
             <a class="del_add" href="javascript:"><img src="{{asset('img/map_pin.png')}}">{{Session::has('userinfo')?ucfirst(Session::get('userinfo')['address']).','. ucfirst(Session::get('userinfo')['city']). ' ('. ucfirst(Session::get('userinfo')['state']).') ':''}}</a>
             <button class="btn-chng-add" onclick= window.location.href="{{url('checkout/user')}}">Change</button>
-          </li>
+          </li> -->
           @endif
           <li>
             <a class="" href="{{url('contact_us')}}"><img src="{{asset('img/contact_ico.png')}}"> Contact Us</a>

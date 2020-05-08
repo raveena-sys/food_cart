@@ -31,7 +31,7 @@ class CheckoutRequest extends FormRequest
             'city' => 'required',
             'province' => 'required',
             'province1' => 'required',
-            // 'image' => 'required',
+            'pay_method' => 'required',
         ];
     }
 
@@ -52,6 +52,8 @@ class CheckoutRequest extends FormRequest
             'city.required' => 'city field is required.',
             'province.required' => 'province field is required.',
             'province1.required' => 'province field is required.',
+             'pay_method.required' => 'Payment method is required',
+
 
 
 

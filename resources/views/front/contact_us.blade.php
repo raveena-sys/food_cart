@@ -7,8 +7,8 @@
         <div class="contact_us">
             <div class="conact_hd">
                 <img src="img/send_ico.png">
-                <h2>{{isset($cms->page_title)?ucfirst($cms->page_title):'Get In Touch'}}</h2>
-                <p>{{isset($cms->page_content)?ucfirst($cms->page_content):'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'}} </p>
+                <h2>{!!isset($cms->page_title)?ucfirst($cms->page_title):'Contact Us'!!}</h2>
+                {!!isset($cms->page_content)?'<p>'.ucfirst($cms->page_content).'</p>':''!!} 
                 <div class="clearfix"></div>
             </div>
             <form id="add_contactus_form" method="POST" class="needs-validation" enctype="multipart/form-data" action="{{URL::To('add_contactus')}}">
@@ -19,6 +19,9 @@
                     </li>
                     <li>
                         <input type="text" placeholder="Last Name" name="last_name">
+                    </li>
+                    <li>
+                        <input type="text" placeholder="Company Name" name="company_name">
                     </li>
                     <li>
                         <input type="text" placeholder="Email" name="email">

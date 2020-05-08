@@ -13,19 +13,19 @@
   }
 </style>
 <div class="container order_summary">
-  <form  action="{{url('save_order')}}" method='post' name="save_order" id="save_order">
+  <form  action="{{url('save_order')}}" method='post' name="save_order" id="checkout_form">
 
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <div class="order_box">
       <h2>ORDER REVIEW</h2>
       <div class="order_box_inner">
         <p>
-          Please review your order below, choose a payment type, then click "Place Your Order"
+          Please review your order below, choose a payment type, and then place your order.
         </p>
       </div>
     </div>
 
-    <div class="order_box">
+   <!--  <div class="order_box">
       <h2>ORDER SETTINGS</h2>
       <div class="order_box_inner">
         <h3>Service Method & Location</h3>
@@ -35,15 +35,15 @@
         <p>(Note: Gate code, ring the door bell, etc.)</p>
         <h3>Order Timing - Now</h3>
         <p>
-          Your order will be ready 20 - 30 MINUTES for PICKUP and DELIVERED between 30 - 50 MINUTES.
-          Note: Delivery time may vary based on location, quantity of order and few other factors. 
+          Your order will be ready in 20 - 30 minutes for pickup and delivered between 30 - 50 minutes based on location, quantity of order and few other factors.
+         
         </p>
         <h3>TO PLACE YOUR ORDER, complete the fields below.</h3>
       </div>
-    </div>
+    </div> -->
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-6 pull-right">
     <div class="order_box">
       <h2>ORDER SUMMARY</h2>
       <div class="order_box_inner table-responsive">
@@ -52,7 +52,7 @@
             <tr>
               <th>ITEM</th>
               <th>QTY</th>
-              <th>PRICE</th>
+              <th style="text-align: right;">PRICE</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +68,7 @@
             <tr>
               <td>{{isset($v['name'])?$v['name']:''}}</td>
               <td>{{isset($v['quantity'])?$v['quantity']:0}}</td>
-              <td>${{isset($v['price'])?round($v['price'],2):0}} </td>        
+              <td style="text-align: right;">${{isset($v['price'])?round($v['price'],2):0}} </td>        
             </tr>
             @php
             $subtotal 
@@ -85,10 +85,11 @@
             <tr>
               <td>Delivery fee</td>
               <td>-</td>
-              <td> ${{$delCharge}}</td>
+              <td style="text-align: right;"> ${{$delCharge}}</td>
             </tr>
             
             @php
+            $subtotal += $delCharge;
             $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0;
             
             $total = (float)$subtotal+(float)$delCharge+(float)$gst_price;
@@ -96,27 +97,68 @@
             <tr>
               <td>Subtotal</td>
               <td>&nbsp;</td>
-              <td> ${{$subtotal}}</td>
+              <td style="text-align: right;"> ${{$subtotal}}</td>
             </tr>
             <tr>
               <td>GST({{Session::has('gst_per')?Session::get('gst_per'):0}}%)</td>
               <td>-</td>
-              <td> ${{$gst_price}}</td>
+              <td style="text-align: right;"> ${{$gst_price}}</td>
             </tr>
             <tr>
-              <td><a href="{{url('checkout/user')}}" class="btn_chng_add">Change Your Address</a></td>
+              <td></td>
               <td>&nbsp;</td>
-              <td>Total: <strong> ${{$total}}</strong></td>
+              <td style="text-align: right;">Total: <strong> ${{$total}}</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
+   
+   
 
-  <div class="clearfix"></div>
+    <!-- <a href="{{url('checkout/user')}}" class="btn_chng_add">Change Your Address</a> -->
+  
+  </div>
     @csrf
-    <div class="col-lg-12">
+     <div class="col-lg-6">
+      <div class="checkout_container" style="margin: 0px auto;">
+        <h2>Enter Your Details</h2>
+        <li>
+            <label>Full Name</label>
+            @csrf
+            <input type="text" name="name" id="Name" placeholder="" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['name']:''}}">            
+        </li>
+        <li>
+            <label>Address</label>
+            <input type="text" name="address" id="address" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['address']:''}}">
+        </li>
+        <li>
+            <label>Mobile No</label>
+            <input type="text" name="mobile_no" id="mobile_no" maxlength="12" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['mobile_no']:''}}">
+        </li>
+        <li>
+            <label>Email</label>
+            <input type="email" name="email" id="email" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['email']:''}}">
+        </li>
+        <li>
+            <label>City</label>
+            <input type="text" name="city" id="city" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['city']:''}}">
+        </li>
+        <li>
+            <label>Province</label>
+            <input type="text" name="state" id="state" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['state']:''}}">
+        </li>
+        <li>
+            <label>Postal Code</label>
+            <input type="text" name="zipcode" id="zipcode" maxlength="6" required="" value="{{Session::has('userinfo')?Session::get('userinfo')['zipcode']:''}}">           
+        </li>
+        <li>
+          <label>Additional Notes</label>
+          <textarea name="additional_notes" id="additional_notes">{{Session::has('userinfo')?Session::get('userinfo')['additional_notes']:''}}</textarea>
+        </li>
+      </div>
+    </div>
+    <div class="col-lg-6 pull-left">
       <div class="order_box">
         <h2>PAYMENT INFORMATION</h2>
         <div class="order_box_inner">
@@ -130,8 +172,8 @@
             <li>
               <div class="form-check">
                 <label>
-                  <input type="radio" name="pay_method" value="cod"> 
-                  <span class="label-text">Pay with Cash at the door</span>
+                  <input type="radio" name="pay_method" value="cod" required> 
+                  <span class="label-text">Pay with Cash</span>
                 </label>
                 <input type="hidden" name="subtotal" value="{{$subtotal}}"> 
                 <input type="hidden" name="total" value="{{$total}}"> 
@@ -140,19 +182,26 @@
             <li>
               <div class="form-check">
                 <label>
-                  <input type="radio" name="pay_method" value="card_payment"> <span class="label-text">Pay with Credit / Debit at the door</span>
+                  <input type="radio" name="pay_method" value="card_payment"> <span class="label-text">Pay with Credit / Debit</span>
                 </label>
               </div>
             </li>
             <label id="pay_method-error" class="error" for="pay_method"></label>
           </ul>
+           <button type='submit' name="save_order_btn" id="save_order_btn" class="btn_place_order">Place Order</button>
         </div>
       </div>
+       <!--<a href="{{url('menu/'.session::get('category_id'))}}" class="btn btn-success btn-sm" style="margin-right:10px;">Continue Shopping</a>-->
     </div>
+   
+
+
 
     <div class="col-lg-12">
-      <button type='submit' name="save_order_btn" id="save_order_btn" class="btn_place_order">Place Order</button>
+     
     </div>
   </form>
+
+  
 </div>
 @endsection

@@ -4,7 +4,7 @@
         <ul class="foot_nav">
             <li><a href="{{url('about_us')}}">About Us</a></li>
             <li><a href="{{url('contact_us')}}">Contact Us</a></li>
-            <li><a href="{{url('privacy_policy')}}">Privacy Policy</a></li>
+            <!-- <li><a href="{{url('privacy_policy')}}">Privacy Policy</a></li> -->
         </ul>
 
         <ul class="follow_us">

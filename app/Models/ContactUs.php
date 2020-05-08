@@ -17,6 +17,7 @@ class ContactUs  extends Model
         'first_name',
         'last_name',
         'email',
+        'company_name',
         'phone_number',
         'status',
         'created_at',

@@ -1,9 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="home_bg" style= 'background-image: url("{{asset(isset($cms->background_image)?'/uploads/cms/'.$cms->background_image:'/img/home_bg.jpg')}}") !important;'>>
+<style>
+    .home_video {
+    
+    text-align: center;
+   
+}
+.home_bg .home_icon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 84.8vh; */
+}
+.home_icon {
+    /* max-width: 800px; */
+    text-align: center;
+    /* margin: 10% auto; */
+}
+</style>
+<section class="home_bg" style= 'background-image: url("{{asset(isset($cms->background_image)?'/uploads/cms/'.$cms->background_image:'/img/home_bg.jpg')}}") !important;'>
     <div class="container">
+
+      
+<div class="home_video"><video width="370" height="240" controls>
+  <source src="{{asset('img/coverr-apples-1572169622777.mp4')}}" type="video/mp4">
+  <source src="{{asset('img/coverr-apples-1572169622777.mp4')}}" type="video/ogg">
+  Your browser does not support the video tag.
+</video></div>
         <div class="home_icon">
+            
             <div class="home_icon_list">
                 <a href="{{ URL::To('store_list') }}">
                     <div class="home_icon_list_icon">

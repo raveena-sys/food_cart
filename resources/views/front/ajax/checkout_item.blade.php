@@ -84,12 +84,12 @@
   <div class="col-lg-4  col-xs-12">
     
     @if(Session::has('userinfo'))
-      <div class="addressBox">
+      <!-- <div class="addressBox">
 
        <h4>CURRENT ADDRESS</h4>
        <p>{{Session::has('userinfo')?ucfirst(Session::get('userinfo')['address']).','. ucfirst(Session::get('userinfo')['city']). ' ('. ucfirst(Session::get('userinfo')['state']).') '. Session::get('userinfo')['zipcode']:''}}</p>
        <a href="{{url('checkout/user')}}">Edit Address</a>
-      </div>
+      </div> -->
     @endif
     <div class="totalPrice">
       <div class="totalPrice__inner">
@@ -117,7 +117,7 @@
         </div>
       </div>
 
-      <a href="{{url('checkout/user')}}" class="btn btn-success btn-block">Place Order</a>
+      <a href="{{url('save_user_detail')}}" class="btn btn-success btn-block">Place Order</a>
     </div>
   </div>
   @endif  

@@ -29,7 +29,7 @@ class EditCmsRequest extends FormRequest {
     public function rules() {
         return [
             'page_title' => 'required|remove_spaces|max:150',
-            'page_content' => 'required',
+            //'page_content' => 'required',
         ];
     }
 

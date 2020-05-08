@@ -35,6 +35,9 @@
                     </p>
                     <p style="margin-bottom: 0;"><strong>Email ID: </strong>{{!empty($data['email']) ? ucfirst($data['email']) : ''}}
                     </p>
+                    <p style="margin-bottom: 0;"><strong>Company Name: </strong>{{!empty($data['company_name']) ? ucfirst($data['company_name']) : ''}}
+                    </p>
+                    
                     <p style="margin-bottom: 0;"><strong>Phone Number: </strong>{{!empty($data['phone_number']) ? ucfirst($data['phone_number']) : ''}}
                     </p>
                     

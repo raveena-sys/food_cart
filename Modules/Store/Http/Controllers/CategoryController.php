@@ -48,6 +48,7 @@ class CategoryController extends Controller
 
     public function addCategory(AddCategoryRequest $request)
     {
+
         if ($request->ajax()) {
             try {
                 $result = $this->category->create($request);

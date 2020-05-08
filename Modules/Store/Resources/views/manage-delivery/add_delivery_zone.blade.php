@@ -1,7 +1,7 @@
 @extends('store::layouts.app')
 @section('content')
 <?php
-$current ="Add Delivery Zone";
+$current =!empty($data)?'Edit Delivery Zone':'Add Delivery Zone';
 ?>
 
 <main class="main-content add-page">
@@ -13,7 +13,7 @@ $current ="Add Delivery Zone";
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('store')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{ url()->previous() }}">Manage Delivery Zone</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Delivery Zone</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{!empty($data)?'Edit':'Add'}} Delivery Zone</li>
                     </ol>
                 </nav>
                 <h2 class="page-title text-capitalize">
@@ -24,7 +24,7 @@ $current ="Add Delivery Zone";
         <!-- page title section end -->
         <div class="card">
             <div class="card-header text-center border-0">
-               <h4 class="mb-0">Add Delivery Zone</h4>
+               <h4 class="mb-0">{{!empty($data)?'Edit':'Add'}} Delivery Zone</h4>
             </div>
             <div class="card-body">
                 <div class="inner_cnt">

@@ -80,14 +80,38 @@ class OrderController extends Controller
 	    		Session::flash('error', 'Store selection is required');
 	    		return redirect('store_list');
 	    	}
-	    	if(!Session::has('userinfo')){
+	    	/*if(!Session::has('userinfo')){
 	    		Session::flash('error', 'User information is required');
 	    		return redirect('checkout/user');
-	    	}
+	    	}*/
 
 	    	$store_email = StoreMaster::where('id', Session::get('store_id'))->first();
 	    	date_default_timezone_set('Asia/Kolkata');
+
+	    	
 	    	$order = array(
+	    			'store_id' => Session::get('store_id'),
+	    			'order_type' => Session::get('orderType'),
+	    			'category_id' => Session::get('category_id'),
+	    			'cart_item' => json_encode(Session::get('cartItem')),
+	    			'extra_item' => json_encode(Session::get('cartextra')),
+	    			'name' => $request->name,
+	    			'email' => $request->email,
+	    			'mobile_no' => $request->mobile_no,
+	    			'address' => $request->address,
+	    			'city' => $request->city,
+	    			'state' => $request->state,
+	    			'status' => 1,  
+	    			'subtotal' =>$request['subtotal'],	
+	    			'total' => $request->total, 		
+	    			//'delivery_ins' => $request->delivery_ins, 		
+	    			'delivery_charge' => Session::has('delCharge')?Session::get('delCharge'):0, 		
+	    			'payment_method' => $request->pay_method,    			
+	    			'zipcode' => $request->zipcode,
+	    			'additional_notes' => $request->additional_notes,
+	    			'created_at' => date('Y-m-d H:i:s')
+				);
+	    	/*$order = array(
 	    			'store_id' => Session::get('store_id'),
 	    			'order_type' => Session::get('orderType'),
 	    			'category_id' => Session::get('category_id'),
@@ -103,14 +127,15 @@ class OrderController extends Controller
 	    			'subtotal' => $request['subtotal'],	
 	    			'total' => $request->total, 		
 	    			'delivery_ins' => $request->delivery_ins, 		
-	    			'delivery_charge' => Session::get('delCharge'), 		
+	    			'delivery_charge' => Session::has('delCharge')?Session::get('delCharge'):0, 		
 	    			'payment_method' => $request->pay_method,    			
 	    			'zipcode' => Session::get('userinfo')['zipcode'],
 	    			'additional_notes' => Session::get('userinfo')['additional_notes'],
 	    			'created_at' => date('Y-m-d H:i:s')
-				);
+				);*/
 	    	DB::beginTransaction();
 			$orderdata = Order::create($order);
+
 			DB::commit();
 	    	$pdf = PDF::loadView('front.invoice.order_invoice', compact('orderdata'));
 			$data = [];
@@ -125,6 +150,7 @@ class OrderController extends Controller
             $strC = strlen($orderdata->id);
             $data['subject'] ="Thank you for placing the order!";// "Order Number: #". str_pad($orderdata->id,6,"0", STR_PAD_LEFT);
             $mail = sendMail($data);  
+
             if($mail==1){
 				Session::flush();
 				Session::flash('orderSuccessMsg', 'Order placed successfully, Check your mail to get order detail');

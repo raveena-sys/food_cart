@@ -36,6 +36,7 @@ class ContactUsRepository
             $post['last_name'] = $request['last_name'];
             $post['email'] = $request['email'];
             $post['phone_number'] = $request['phone_number'];
+            $post['company_name'] = $request['company_name'];
 
             $this->ContactUs->create($post);
             $admin_email = User::where('user_role', 'admin')->first();
@@ -43,6 +44,7 @@ class ContactUsRepository
             $data['request'] = 'contact_us';
             $data['name'] = $post['first_name'].' '.$post['last_name'];
             $data['email'] = $post['email'];
+            $data['company_name'] = $post['company_name'];
             $data['admin_email'] = isset($admin_email->email)?$admin_email->email:'raveena1@mailinator.com';
             $data['phone_number'] = $post['phone_number'];
             $data['subject'] = "Customer (Contact Us)";

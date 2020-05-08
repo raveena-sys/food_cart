@@ -213,6 +213,7 @@ class CategoryRepository
             if(isset($request['store_id'])){
                 StoreCategory::updateorCreate(['cat_id'=>$cat->id, 'store_id' => $post['store_id']]);
             }
+
             DB::commit();
             $message = "Category added sucsessfully.";
             $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
