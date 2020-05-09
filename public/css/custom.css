@@ -90,12 +90,11 @@ header img {
     display: inline-block;
     margin: 20px;
 }
-.homepage .home_icon_list{
-    flex:0 0 50%;
+.homepage .home_icon_list {
+    flex: 0 0 50%;
     background-color: transparent;
     padding-right: 30px;
     margin: 0 0 50px;
-
 }
 .home_icon_list:last-child {
     padding-right: 0;
@@ -143,7 +142,7 @@ header img {
     margin-left: 10px;
 }
 
-.menu-nav.is-sticky{
+.menu-nav.is-sticky {
     position: fixed;
     z-index: 99;
 }
@@ -1233,6 +1232,7 @@ button.close span {
 .order_box {
     border: solid 1px #ccc;
     margin-bottom: 20px;
+    background-color: #fff;
 }
 
 .order_box h2 {
@@ -2309,4 +2309,49 @@ span.text-danger {
     border-color: #f68428;
     border-image: initial;
     font-size: 14px;
+}
+
+.viewcart-sm {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .navbar-me{
+        min-height: auto;
+    }
+    .homepage .home_icon_list{
+        flex: 0 0 100%;
+    }
+    .viewcart-sm {
+        display: flex;
+        padding: 10px;
+        background-color: #00ab00;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+    }
+    .viewcart-sm .leftSide {
+        flex: 0 0 50%;
+        font-size: 16px;
+        color: #fff;
+        font-weight: 500;
+    }
+    .viewcart-sm .rightSide {
+        flex: 0 0 50%;
+    }
+    .viewcart-sm .rightSide .btn{
+        padding:6px 15px;
+        font-size: 14px;
+        background-color: transparent;
+        border-color: #fff;
+        color: #fff;
+        width: auto;
+        display: inline-block;
+        float: right;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
 }

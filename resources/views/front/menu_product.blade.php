@@ -9,7 +9,6 @@
 </section>
 
 <div class="container store_list_inner">
-
     <div class="row menu-wrapper">
         <div class="col-xs-12">
             <div class="menu-nav">
@@ -31,6 +30,15 @@
             <div class="cartRight cart_item" style="margin-top:40px">
                 {!!view('front.ajax.cart_item', compact('products'))->render()!!}
             </div>
+        </div>
+    </div>
+
+    <div class="viewcart-sm">
+        <div class="leftSide">
+            Cart : <span> 3 Items </span>
+        </div>
+        <div class="rightSide">
+            <a class="btn btn-success btn-block" href="#">View Cart</a>
         </div>
     </div>
 </div>
