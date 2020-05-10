@@ -44,7 +44,7 @@ $subtotal = 0;
                 </div>
                 <div class="img-footer">
                     <div class="price">
-                        ${{isset($val->custom_price)?round($val->custom_price, 2):(isset($val->price)?round($val->price, 2):'')}}
+                        ${{isset($val->custom_price)?number_format($val->custom_price, 2):(isset($val->price)?number_format($val->price, 2):'0.00')}}
                     </div>
                     @if(isset($val->topping_from))
                     @if($val->topping_from == 'topping_pizza' || $val->topping_from == 'topping_dips' ||
@@ -119,7 +119,7 @@ $subtotal = 0;
                 @else
                 <div class="leftSide">
                     <a href="javascript:void(0);" data-product_id="{{isset($val->id)?$val->id:''}}"
-                        data-price="{{isset($val->custom_price)?round($val->custom_price, 2):(isset($val->price)?round($val->price, 2):'')}}"
+                        data-price="{{isset($val->custom_price)?number_format($val->custom_price, 2):(isset($val->price)?number_format($val->price, 2):'')}}"
                         class="btn btn-success add_to_cart">
                         ADD TO CART
                     </a>

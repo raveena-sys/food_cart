@@ -133,6 +133,12 @@
                     <span class="nav_title">Manage Store GST </span>
                 </a>
             </li>
+            <li class="{{Request::segment(2) == 'manage-coupon' ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-coupon') }}" aria-expanded="false">
+                    <span class="nav_icon"><i class="fa fa-gift"></i> </span>
+                    <span class="nav_title">Manage Disount Coupon </span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

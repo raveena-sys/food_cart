@@ -18,7 +18,7 @@
             <img class="card-img-top img-responsive" src="{{asset('uploads/products')}}/{{isset($product->image)?$product->image:''}}" alt="">
             <div class="img-footer">
               <div class="price">
-                $ {{isset($product->custom_price)?round($product->custom_price, 2):0.00}}
+                $ {{isset($product->custom_price)?number_format($product->custom_price, 2):0.00}}
               </div>
             </div>
           </div>
@@ -35,10 +35,10 @@
         <div class="selectitemSlider">
           @foreach($size_master as $k1 => $v1)
           <div class="productItem sizem_id" data-id="{{$v1->id?$v1->id:''}}">
-            <input type="radio" name="size_master" id="size_{{$v1->id?$v1->id:''}}" value="{{$v1->id?$v1->id:''}}" data-price='{{$v1->custom_price?round($v1->custom_price,2):round($v1->price,2)}}' class="size_master">        
+            <input type="radio" name="size_master" id="size_{{$v1->id?$v1->id:''}}" value="{{$v1->id?$v1->id:''}}" data-price='{{$v1->custom_price?number_format($v1->custom_price,2):number_format($v1->price,2)}}' class="size_master">        
             <label for="size_{{$v1->id?$v1->id:''}}" >
               {{$v1->name?$v1->name:''}}
-              <p class="price">${{$v1->custom_price?round($v1->custom_price,2):0.00}}</p>
+              <p class="price">${{$v1->custom_price?number_format($v1->custom_price,2):0.00}}</p>
             </label>
             <div class="check"></div>
           </div>
@@ -51,13 +51,13 @@
         <div class="selectitemSlider">
           @foreach($crust_master as $k2 => $v2)
           <div class="productItem">
-            <input type="radio"  name="crust_master" id="crust_{{$v2->id?$v2->id:''}}"  value="{{$v2->id?$v2->id:''}}" data-price='{{$v2->custom_price?round($v2->custom_price,2):round($v2->price,2)}}' class="crust_master">
+            <input type="radio"  name="crust_master" id="crust_{{$v2->id?$v2->id:''}}"  value="{{$v2->id?$v2->id:''}}" data-price='{{$v2->custom_price?number_format($v2->custom_price,2):number_format($v2->price,2)}}' class="crust_master">
             <label for="crust_{{$v2->id?$v2->id:''}}">
               <div class="productImg">
                 <!-- <img src="{{asset('img/menu_pic_1.png')}}" class="img-responsive" /> -->
               </div>
               <div>{{$v2->name?$v2->name:''}}</div>
-              <p class="price">${{$v2->custom_price?round($v2->custom_price,2):0.00}}</p>
+              <p class="price">${{$v2->custom_price?number_format($v2->custom_price,2):0.00}}</p>
             </label>
             <div class="check"></div>
           </div>
@@ -70,13 +70,13 @@
         <div class="selectitemSlider">
           @foreach($sauce_master as $k3 => $v3)
           <div class="productItem">
-            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?round($v3->custom_price,2):round($v3->price,2)}}' class="sauce_master">
+            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master">
             <label for="sauce_{{$v3->id?$v3->id:''}}">
               <div class="productImg">
                 <!-- <img src="{{asset('img/menu_pic_1.png')}}" class="img-responsive" /> -->
               </div>
               <div>{{$v3->name?$v3->name:''}}</div>
-              <p class="price">${{$v3->custom_price?round($v3->custom_price,2):0.00}}</p>
+              <p class="price">${{$v3->custom_price?number_format($v3->custom_price,2):0.00}}</p>
             </label>
             <div class="check"></div>
           </div>
@@ -97,8 +97,8 @@
           @foreach($extra_cheese as $key => $val)          
             <tr class="crow" id="cheese_row_{{$val->pizza_size_master}}">
               <td>{{$val->pizzaSize->name}}</td>
-              <td>${{$val->custom_price?round($val->custom_price,2):0.00}}</td>
-              <td><input type="checkbox" name="extra_cheese" id="extra_cheese" class="extra_cheese" value="{{$val->id}}" data-price="{{$val->custom_price?round($val->custom_price,2):round($val->price,2)}}"></td>
+              <td>${{$val->custom_price?number_format($val->custom_price,2):0.00}}</td>
+              <td><input type="checkbox" name="extra_cheese" id="extra_cheese" class="extra_cheese" value="{{$val->id}}" data-price="{{$val->custom_price?number_format($val->custom_price,2):number_format($val->price,2)}}"></td>
             </tr>
             @endforeach
           </tbody>
@@ -120,7 +120,7 @@
             @foreach($dip_master as $k4 => $v4)
             <tr>
               <td>{{$v4->name?$v4->name:''}}  </td>
-              <td>${{$v4->custom_price?round($v4->custom_price,2):0.00}}</td>
+              <td>${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
               <td>
                   <input type='button' value='-' class='qtyminus' field='dip_master_{{$v4->id?$v4->id:''}}' />
                   <input type='text' name='dip_master[{{$v4->id?$v4->id:''}}]'  id='dip_master_{{$v4->id?$v4->id:''}}'  value='0' min="0" class='qty dip_price' data-price="{{$v4->custom_price?$v4->custom_price:$v4->price}}"/>
@@ -158,9 +158,9 @@
       <div class="leftSide">
         <span>1 ITEM</span>
         <span>|</span>
-        <span class='span_price'> ${{isset($product->custom_price)?round($product->custom_price, 2):0.00}}</span>
-        <input type="hidden" name="product_custom_price"  class="product_custom_price" value="{{isset($product->custom_price)?round($product->custom_price, 2):(isset($product->price)?round($product->price, 2):0.00)}}">
-        <input type="hidden" name="product_price"  id="product_price" value="{{isset($product->custom_price)?round($product->custom_price, 2):(isset($product->price)?round($product->price, 2):0)}}">
+        <span class='span_price'> ${{isset($product->custom_price)?number_format($product->custom_price, 2):0.00}}</span>
+        <input type="hidden" name="product_custom_price"  class="product_custom_price" value="{{isset($product->custom_price)?number_format($product->custom_price, 2):(isset($product->price)?number_format($product->price, 2):0.00)}}">
+        <input type="hidden" name="product_price"  id="product_price" value="{{isset($product->custom_price)?number_format($product->custom_price, 2):(isset($product->price)?number_format($product->price, 2):0)}}">
       </div>
       <div class="rightSide">
         <button type="button" data-product_id="{{isset($product->id)?$product->id:''}}" class="btn btn-success custom_add_to_cart">ADD TO CART</button>

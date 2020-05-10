@@ -68,18 +68,18 @@
             <tr>
               <td>{{isset($v['name'])?$v['name']:''}}</td>
               <td>{{isset($v['quantity'])?$v['quantity']:0}}</td>
-              <td style="text-align: right;">${{isset($v['price'])?round($v['price'],2):0}} </td>        
+              <td style="text-align: right;">${{isset($v['price'])?number_format($v['price'],2):0}} </td>        
             </tr>
             @php
             $subtotal 
-            +=(isset($v['price'])?round($v['price'], 2):0);
+            +=(isset($v['price'])?number_format($v['price'], 2):0.00);
             @endphp 
             @endforeach
             @endif
 
 
             @php
-              $delCharge = Session::has('orderType') && Session::get('orderType') =='delivery'?Session::get('delCharge'):'0';
+              $delCharge = Session::has('orderType') && Session::get('orderType') =='delivery'?number_format(Session::get('delCharge'), 2):'0.00';
             
             @endphp
             <tr>
@@ -90,24 +90,24 @@
             
             @php
             $subtotal += $delCharge;
-            $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0;
+            $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0.00;
             
             $total = (float)$subtotal+(float)$delCharge+(float)$gst_price;
             @endphp
             <tr>
               <td>Subtotal</td>
               <td>&nbsp;</td>
-              <td style="text-align: right;"> ${{$subtotal}}</td>
+              <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
             </tr>
             <tr>
               <td>GST({{Session::has('gst_per')?Session::get('gst_per'):0}}%)</td>
               <td>-</td>
-              <td style="text-align: right;"> ${{$gst_price}}</td>
+              <td style="text-align: right;"> ${{number_format($gst_price,2)}}</td>
             </tr>
             <tr>
               <td></td>
               <td>&nbsp;</td>
-              <td style="text-align: right;">Total: <strong> ${{$total}}</strong></td>
+              <td style="text-align: right;">Total: <strong> ${{number_format($total,2)}}</strong></td>
             </tr>
           </tbody>
         </table>
@@ -162,7 +162,7 @@
       <div class="order_box">
         <h2>PAYMENT INFORMATION</h2>
         <div class="order_box_inner">
-          <h3>Balance Due :  ${{$total}}</h3>
+          <h3>Balance Due :  ${{number_format($total,2)}}</h3>
           <p>
             <span style="color:red">*</span>Payment Type
           </p>
@@ -175,8 +175,8 @@
                   <input type="radio" name="pay_method" value="cod" required> 
                   <span class="label-text">Pay with Cash</span>
                 </label>
-                <input type="hidden" name="subtotal" value="{{$subtotal}}"> 
-                <input type="hidden" name="total" value="{{$total}}"> 
+                <input type="hidden" name="subtotal" value="{{number_format($subtotal,2)}}"> 
+                <input type="hidden" name="total" value="{{number_format($total,2)}}"> 
               </div>
             </li>
             <li>

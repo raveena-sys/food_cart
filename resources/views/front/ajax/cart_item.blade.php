@@ -62,10 +62,10 @@
         <button type="button" id="add" class="add add_item" data-product_id="{{isset($v['product_id'])?$v['product_id']:0}}" data-price="{{isset($v['price'])?$v['price']:0}}" data-custom="{{isset($v['custom'])?1:0}}" data-sub="0">+</button>
       </div>
       <div class="rightSide">
-        <span class="price">${{isset($v['price'])?round($v['price'],2):0}}</span>
+        <span class="price">${{isset($v['price'])?number_format($v['price'],2):0}}</span>
         @php
         $subtotal 
-        +=(isset($v['price'])?round($v['price'], 2):0);
+        +=(isset($v['price'])?number_format($v['price'], 2):0.00);
         @endphp
       </div>
     </div>
@@ -81,7 +81,7 @@
         Subtotal
       </div>
       <div class="right">
-        ${{$subtotal}}
+        ${{number_format($subtotal,2)}}
       </div>
     </div>
     <a href="{{url('checkout')}}" class="btn btn-success btn-block">CHECKOUT</a>

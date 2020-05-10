@@ -20,7 +20,7 @@
             <tbody>
             <tr bgcolor="#F0F0F0">
                 <td valign="middle" align="center" style="padding:10px">
-                    <img vspace="0" hspace="0" border="0" align="center" width="150" src="{{asset('img/logo.png')}}" class="logo"') }}" alt="logo" />
+                    <img vspace="0" hspace="0" border="0" align="center" width="150" src="{{asset('img/logo_black.png')}}" class="logo"') }}" alt="logo" />
                 </td>
             </tr>
             <tr>

@@ -267,7 +267,7 @@ Route::group(['prefix' => 'store', 'middleware' => 'Store'], function () {
     });
     /*================ End Manage CMS Routes ================*/
 
-    /*================ Start Manage CMS Routes ================*/
+    /*================ Start Manage delivery Routes ================*/
     Route::group(['prefix' => 'manage-delivery'], function () {
         Route::get('/', 'StoreMasterController@delivery_zone');
         Route::get('list', 'StoreMasterController@delivery_zone_list');
@@ -275,6 +275,16 @@ Route::group(['prefix' => 'store', 'middleware' => 'Store'], function () {
         Route::get('add', 'StoreMasterController@delivery_zone_add');
         Route::post('add', 'StoreMasterController@delivery_zone_addpost');
         Route::post('change-status','StoreMasterController@delivery_zone_status');
+    });
+
+    /*================ Start Manage CMS Routes ================*/
+    Route::group(['prefix' => 'manage-coupon'], function () {
+        Route::get('/', 'CouponController@index');
+        Route::get('list', 'CouponController@list');
+        Route::get('edit/{id}', 'CouponController@detail');
+        Route::get('add', 'CouponController@add');
+        Route::post('create', 'CouponController@create');
+        Route::post('change-status','CouponController@status');
     });
     
     /*================ End Manage CMS Routes ================*/

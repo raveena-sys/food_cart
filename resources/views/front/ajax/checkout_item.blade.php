@@ -55,13 +55,13 @@
 
           </div>
           <div class="rightSide">
-            <span class="price">${{isset($v['price'])?round($v['price'],2):0}}</span>
+            <span class="price">${{isset($v['price'])?number_format($v['price'],2):0.00}}</span>
           </div>
         </div>
       </div>  
       @php
       $subtotal 
-      +=(isset($v['price'])?round($v['price'], 2):0);
+      +=(isset($v['price'])?number_format($v['price'], 2):0.00);
       @endphp 
     @endforeach
     <a href="{{url('menu/'.session::get('category_id'))}}" class="btn btn-success btn-sm">Continue Shopping</a>
@@ -97,7 +97,7 @@
           Sub Total
         </div>
         <div class="right">
-          ${{$subtotal}}
+          ${{number_format($subtotal,2)}}
         </div>
       </div>
       <div class="totalPrice__inner">
@@ -113,7 +113,7 @@
           Grand Total
         </div>
         <div class="right">
-          ${{$subtotal}}
+          ${{number_format($subtotal,2)}}
         </div>
       </div>
 

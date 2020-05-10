@@ -66,7 +66,7 @@
             @foreach($v->topping_master_name as $val1)
             {{$val1}}
             @endforeach
-            ($ {{isset($v->topping_master_price)?$v->topping_master_price:0}})
+            ($ {{isset($v->topping_master_price)?number_format($v->topping_master_price.2):0}})
           </p>
           @endif
           @if(!empty($v->extra_cheese_name))
@@ -77,25 +77,25 @@
           @endif 
         </td>
         <td>{{isset($v->quantity)?$v->quantity:''}}</td>
-        <td>${{isset($v->price)?$v->price:''}}</td> 
+        <td>${{isset($v->price)?number_format($v->price,2):''}}</td> 
     </tr>
     @endforeach
   @endif
   <tr style="padding: 8px;">
     <td>SubTotal:</td>
     <td>&nbsp;</td>
-    <td>${{isset($orderdata->subtotal)?$orderdata->subtotal:''}}</td>
+    <td>${{isset($orderdata->subtotal)?number_format($orderdata->subtotal,2):''}}</td>
   </tr>
   <tr style="padding: 8px;">
     <td>Delivery Charge:</td>
     <td>&nbsp;</td>
-    <td>{{isset($orderdata->delivery_charge)?'$'.$orderdata->delivery_charge:''}}</td>
+    <td>{{isset($orderdata->delivery_charge)?'$'.number_format($orderdata->delivery_charge,2):''}}</td>
   </tr>
   <tr style="padding: 8px;">
     <td></td>
     <td></td>
     <td></td>
-    <td>${{isset($orderdata->total)?$orderdata->total:''}}</td>
+    <td>${{isset($orderdata->total)?number_format($orderdata->total,2):''}}</td>
   </tr>
   
 </table>
