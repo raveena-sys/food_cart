@@ -2355,3 +2355,34 @@ span.text-danger {
         font-weight: 500;
     }
 }
+
+.modal.confirmationEmail,
+.modal.successfulModal {
+	text-align: center
+}
+
+.modal.confirmationEmail .modal-content .modal-body,
+.modal.successfulModal .modal-content .modal-body {
+	padding: 60px
+}
+
+.modal.confirmationEmail .letterIcon,
+.modal.confirmationEmail .checkedIcon,
+.modal.successfulModal .letterIcon,
+.modal.successfulModal .checkedIcon {
+	margin-bottom: 34px
+}
+
+.modal.confirmationEmail h2,
+.modal.successfulModal h2 {
+    margin-bottom: 35px;
+    font-size:28px;
+}
+
+.modal.confirmationEmail p,
+.modal.successfulModal p {
+	font-size: 18px;
+	color: #707070;
+	margin-bottom: 36px
+}
+
