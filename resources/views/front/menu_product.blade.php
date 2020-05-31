@@ -1,7 +1,15 @@
 @extends('layouts.app')
 @section('content')
+<!-- <section class="store_menu_banner"
+    style='background-image: url("{{asset(isset($menubanner->slider_image)?'/uploads/menu_slider/'.$menubanner->slider_image:'/img/home_bg.jpg')}}") !important;'>
+    >
+    <div class="container">
+        <div class="clearfix"></div>
+    </div>
+</section> -->
+
 <section class="store_menu_banner"
-    style='background-image: url("{{asset(isset($cms->header_image)?'/uploads/cms/'.$cms->header_image:'/img/home_bg.jpg')}}") !important;'>
+    style='background-image: url("{{asset(isset($menubanner->slider_image)?'/uploads/menu_slider/'.$menubanner->slider_image:'/img/home_bg.jpg')}}") !important;background-size: cover;background-repeat: no-repeat;'>
     >
     <div class="container">
         <div class="clearfix"></div>
@@ -14,6 +22,7 @@
             <div class="menu-nav">
                 @if(!empty($subcategory))
                 @foreach($subcategory as $val)
+               <!--  <a href="javascript:void(0)" id="{{str_replace(' ', '_', $val->name)}}" class="subcategory">{{$val->name}}</a> -->
                 <a href="#{{str_replace(' ', '_', $val->name)}}" class="subcategory">{{$val->name}}</a>
                 @endforeach
                 @endif
@@ -32,15 +41,9 @@
             </div>
         </div>
     </div>
-
-    <div class="viewcart-sm">
-        <div class="leftSide">
-            Cart : <span> 3 Items </span>
-        </div>
-        <div class="rightSide">
-            <a class="btn btn-success btn-block" href="#">View Cart</a>
-        </div>
-    </div>
+    <div class="viewcart-sm cart_count">
+    {!!view('front.ajax.cart_count')->render()!!}
+    </div>  
 </div>
 
 <div class="sideMenu">

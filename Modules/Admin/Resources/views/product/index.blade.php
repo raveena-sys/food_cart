@@ -58,7 +58,7 @@
                             <th> Price ($) </th>
                             <th> Quantity </th>
                             <th> Topping Form </th>
-                            <th> Description </th>
+                           <!--  <th> Description </th> -->
                             <th><span class="sorting">Status</span></th>
                             <th class="w_130"><span>Action</span></th>
                         </tr>
@@ -162,10 +162,10 @@
                     name: 'topping_from'
                 },
 
-                {
+                /*{
                     data: 'description',
                     name: 'description'
-                },
+                },*/
 
                 {
                     data: 'status',

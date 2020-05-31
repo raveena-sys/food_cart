@@ -35,8 +35,11 @@ class CouponController extends Controller
     }
     public function create(Request $request){
         try {
-            $data = $this->CouponRepository->create($request);            
-            return $data;
+            $data = $this->CouponRepository->create($request);
+            if($data['status'] == 200){
+                Session::flash('successmessage', 'Coupon created successfully');
+                return redirect('store/manage-coupon');
+            }   
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -59,9 +62,9 @@ class CouponController extends Controller
 
 
 
-    public function coupon_zone_status(Request $request)
+    public function status(Request $request)
     {
-        return $this->CouponRepository->coupon_zone_status($request);
+        return $this->CouponRepository->status($request);
     }
 
 }

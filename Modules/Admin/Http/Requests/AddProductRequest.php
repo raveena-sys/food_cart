@@ -10,6 +10,7 @@ namespace Modules\Admin\Http\Requests;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Foundation\Http\FormRequest;
+use Request;
 
 class AddProductRequest extends FormRequest
 {
@@ -31,6 +32,7 @@ class AddProductRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required',
@@ -40,8 +42,10 @@ class AddProductRequest extends FormRequest
             'sub_category_id' => 'required',
             'food_type' => 'required',
             'price' => 'required',
-            //'quantity' => 'required',
+            'quantity' => 'required',
             'topping_from' => 'required',
+            'add_customisation' => 'required',
+            'drink_subcategory[]' => 'required_if:drink_category[],on'
             //'image' => 'required|mimes:jpeg,jpg,png,gif|dimensions:width=270,height=696',
             
             
@@ -58,8 +62,9 @@ class AddProductRequest extends FormRequest
             //'size_master_id.required' => 'This field is required.',
             'food_type.required' => 'This field is required.',
             'price.required' => 'This field is required.',
-            //'quantity.required' => 'This field is required.',
+            'quantity.required' => 'This field is required.',
             'topping_from.required' => 'This field is required.',
+            'add_customisation.required' => 'This field is required.',
             'sub_category_id.required' => 'This field is required.',
             'image.required' => 'This field is required.',
             'image.mimes' => 'Only image can be upload',

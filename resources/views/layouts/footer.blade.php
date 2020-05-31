@@ -24,8 +24,8 @@
         </ul>
     </div>
 </footer>
-<section class="bottom_line">
+<!-- <section class="bottom_line">
     Developed By <a href="https://integratedmarketing.pro"><img src="{{asset('img/integrated_marketting.png')}}"></a></br>
     Copy Right @ <?php echo date('Y'); ?> | All Rights Reserved
-</section>
+</section> -->
 </div>

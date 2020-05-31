@@ -187,6 +187,43 @@ Route::group(['prefix' => 'store', 'middleware' => 'Store'], function () {
         Route::delete('delete/{id}', 'DrinkMasterController@deleteDrinkMaster');
     });
 
+    /*================ Start Manage Product Master Controller Routes ================*/
+    Route::group(['prefix' => 'manage-special-menu'], function () {
+        //Route::get('/{seg}', 'SpecialMenuController@index');
+        Route::get('list/{seg}', 'SpecialMenuController@index');
+        Route::get('list-data', 'SpecialMenuController@getProductList');
+        Route::get('add/{seg}', 'SpecialMenuController@add');
+        Route::post('create', 'SpecialMenuController@create');
+        //Route::get('select', 'SpecialMenuController@getCustomProducts');
+        //Route::post('addselection', 'SpecialMenuController@addselection');
+        Route::get('edit/{seg}/{id}', 'SpecialMenuController@edit');
+
+        //Route::post('update', 'SpecialMenuController@updateProduct');
+        Route::get('sides-image/{seg}/{id}', 'SpecialMenuController@uploadImage');
+        Route::get('view/{seg}/{id}', 'SpecialMenuController@view');
+        Route::post('change-status', 'SpecialMenuController@changeStatus');
+        Route::delete('delete/{id}', 'SpecialMenuController@deleteProduct');
+        
+    });
+
+
+    Route::group(['prefix' => 'manage-sides-menu'], function () {
+        Route::get('', 'SidesController@index');
+        Route::get('list', 'SidesController@sides');
+        Route::get('list-data', 'SidesController@getList');
+        Route::get('add', 'SidesController@add');
+        Route::post('create', 'SidesController@create');
+        /*Route::get('select', 'SidesController@getCustomSides');
+        Route::post('addselection', 'SidesController@addselection');*/
+       
+        Route::post('update', 'SidesController@create');
+        Route::get('detail/{id}', 'SidesController@getProductDetails');
+        Route::get('view/{id}', 'SidesController@viewProduct');
+        Route::post('change-status', 'SidesController@changeStatus');
+        Route::delete('delete/{id}', 'SidesController@deleteProduct');
+        Route::get('sub-category/{id}','SidesController@getSubCategoryList' );
+    });
+
     /*================ Start Manage Topping Dips Controller Routes ================*/
     Route::group(['prefix' => 'manage-topping-dips'], function () {
         Route::get('', 'ToppingDipsController@index');
@@ -241,6 +278,7 @@ Route::group(['prefix' => 'store', 'middleware' => 'Store'], function () {
         Route::get('edit/{id}', 'OrderController@getOrderDetails');
         Route::post('change-status', 'OrderController@changeStatus');
         Route::delete('delete/{id}', 'OrderController@deleteOrder');
+        Route::get('print/{id}', 'OrderController@printOrder');
         Route::get('latest', 'OrderController@getLatestOrder');
     });
 

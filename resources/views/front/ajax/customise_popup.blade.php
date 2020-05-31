@@ -29,6 +29,73 @@
           </div>
 
         </div>
+        @if(!empty($topping_wing_master) && count($topping_wing_master)>0)
+        <h4 class="wings_top">{{isset($toppingName)?$toppingName:''}}</h4>
+        <table class="table table-hover">
+          <tbody>
+            @foreach($topping_wing_master as $ktop5 => $vtop5)
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <label>
+                    <input type="radio" value="{{$vtop5->id?$vtop5->id:0}}" name="topping_wing_master" class="topping_wing_master" data-price='{{$vtop5->custom_price?number_format($vtop5->custom_price,2):number_format($vtop5->price,2)}}'>
+                    
+                    {{$vtop5->name?$vtop5->name:''}} 
+                  </label>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        
+        @endif
+        <input type="hidden" value="{{($product->topping_from)?$product->topping_from:''}}" name="topping_name" class="topping_name" style="opacity: 0;">
+
+         @if(!empty($donairtopping) && count($donairtopping)>0)
+        <h4>Topping</h4>
+        <table class="table table-hover">
+          <tbody>
+            @foreach($donairtopping as $topk => $topv)
+           
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="{{$topv->custom_price?$topv->custom_price:$topv->price}}" name="topping_master[{{$topv->id?$topv->id:''}}]" class="topping_wing_master" >
+                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                    {{$topv->name?$topv->name:''}} (${{$topv->custom_price?$topv->custom_price:'$0.00'}} )
+                  </label>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        @endif
+        @if(!empty($donairsauce) && count($donairsauce)>0)
+        <h4>Sauce</h4>
+        <table class="table table-hover">
+          <tbody>
+            @foreach($donairsauce as $donairk => $donairv)
+            
+            <tr>
+              <td>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="{{$donairv->custom_price?$donairv->custom_price:$donairv->price}}" name="topping_master[{{$donairv->id?$donairv->id:''}}]" class="topping_wing_master" >
+                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                    {{$donairv->name?$donairv->name:''}} (${{$donairv->custom_price?$donairv->custom_price:'$0.00'}} )
+                  </label>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        @endif
+       
+
 
         @if(!empty($size_master)&& count($size_master)>0)
         <h4>Select Pizza Size</h4>
@@ -84,7 +151,7 @@
         </div>
         @endif
         @if(!empty($extra_cheese)  && count($extra_cheese)>0)
-        <h2 class="cstmiz_head show_cheese" style="display: none;">Extra cheese:</h2>
+        <h2 class="cstmiz_head show_cheese" style="display: none;">Extra Cheese:</h2>
         <table class="table table-bordered show_cheese" style="display: none;">
           <thead>
             <tr>
@@ -141,7 +208,7 @@
               <td>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="{{$v5->custom_price?$v5->custom_price:$v5->price}}" name="topping_master[{{$v5->id?$v5->id:''}}]" class="topping_master" >
+                    <input type="checkbox" value="{{$v5->custom_price?$v5->custom_price:$v5->price}}" name="topping_master[{{$v5->id?$v5->id:''}}]" class="topping_master topping_wing_master" >
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                     {{$v5->name?$v5->name:''}} (${{$v5->custom_price?$v5->custom_price:'$0.00'}} )
                   </label>
@@ -152,6 +219,8 @@
           </tbody>
         </table>
         @endif
+
+
       </form>
     </div>
     <div class="sideMenu__footer">

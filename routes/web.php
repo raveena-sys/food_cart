@@ -41,6 +41,11 @@ Route::post('save_order', 'Front\OrderController@save_order');
 Route::get('contact_us', 'Front\ContactUsController@contactus');
 Route::get('get_customise/{id}', 'Front\StoreController@get_customise');
 
+Route::post('comboproduct', 'Front\StoreController@comboProductCustomiseDetails');
+Route::post('comboaddtocart', 'Front\StoreController@comboaddtocart');
+Route::post('get_customise_combo', 'Front\StoreController@get_customise_combo');
+Route::post('reset_cartcombo', 'Front\StoreController@reset_cartcombo');
+
 Route::post('add_contactus', 'Front\ContactUsController@addContactUs');
 
 
@@ -53,6 +58,8 @@ Route::get('privacy_policy', 'Front\HomeController@privacyPolicy');
 
 Route::get('increament_decrement', 'Front\StoreController@increamentCartQty');
 Route::get('pdfDownload', 'Front\OrderController@pdfDownload');
+Route::post('checkcoupon', 'Front\OrderController@checkcoupon');
+Route::post('sidesAddToCart', 'Front\StoreController@sidesAddToCart');
 /***************Web routes newly started************/
 
 

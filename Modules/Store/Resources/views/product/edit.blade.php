@@ -142,7 +142,27 @@
                                 <input type="hidden" name="food_type" value="{{$detail->food_type}}">
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label>Select Required method to add product in cart</label>
+                            <div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="add_customisation_cart" checked="true" name="add_customisation" class="custom-control-input" value="0" @if($detail->add_customisation == '0') checked="true" @endif {{$inputdisable}}>
+                                    <label class="custom-control-label" for="add_customisation_cart">Only Add To Cart</label>
+                                </div>
 
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="add_customisation_cust" name="add_customisation" class="custom-control-input" value="1" @if($detail->add_customisation == '1') checked="true" @endif {{$inputdisable}}>
+                                    <label class="custom-control-label" for="add_customisation_cust">Only Customisation</label>
+                                </div>
+
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="add_customisation_both" name="add_customisation" class="custom-control-input" value="2" @if($detail->add_customisation == '2') checked="true" @endif {{$inputdisable}}>
+                                    <label class="custom-control-label" for="add_customisation_both">Add to Cart and Customisation</label>
+                                </div>
+
+                            </div>
+                        </div>
+                      
                         <div class="form-group">
                             <label>Select Topping Option From </label>
                             <div class="custom-control custom-radio custom-control-inline">
@@ -163,6 +183,10 @@
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="topping_dips" name="topping_from" class="custom-control-input" value="topping_dips" @if($detail->topping_from == 'topping_dips') checked="true" @endif {{$inputdisable}}>
                                 <label class="custom-control-label" for="topping_dips">Dips</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="topping_tops" name="topping_from" class="custom-control-input" value="topping_tops" @if($detail->topping_from == 'topping_tops') checked="true" @endif {{$inputdisable}}>
+                                <label class="custom-control-label" for="topping_tops">Pizza Topping Only</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="topping_donair_shawarma_mediterranean" name="topping_from" class="custom-control-input" value="topping_donair_shawarma_mediterranean" @if($detail->topping_from == 'topping_donair_shawarma_mediterranean') checked="true" @endif {{$inputdisable}}>

@@ -41,8 +41,19 @@
                         <button type="submit" class="btn btn-secondary ripple-effect mr-1" data-toggle="tooltip" data-placement="top" title="Search"><i class="icon-search"></i></button>
                         <button type="reseat" id="clear-search" class="btn btn-outline-danger ripple-effect" data-toggle="tooltip" data-placement="top" title="Reset"><i class="icon-refresh"></i></button>
                     </div>
+                   <!--  <div class="form-group" style="display: none;">
+                        <select class="form-control selectpicker" id="update_status" name="update_status" title="Status">
+                            <option value="processing">Processing</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="btn_clumn mb-3" style="display: none;">
+                        <button type="button" class="btn btn-secondary ripple-effect mr-1" data-toggle="tooltip" data-placement="top" title="Search" onclick="update_status()">Apply</button>
+                    </div> -->
                 </div>
             </form>
+
         </div>
         <!-- filter section end -->
         <!-- table listing start -->
@@ -58,6 +69,7 @@
                             <th> Email </th>
                             <th> Mobile No </th>
                             <th> Total</th>
+                            <th><span class="w_130">Update Status</span></th>
                             <th><span class="sorting">Status</span></th>
                             <th class="w_130"><span>Action</span></th>
                         </tr>
@@ -76,15 +88,6 @@
 
     </div>
 </main>
-<!-- add subadmin -->
-<div class="modal modal-effect" id="addCategoryModal" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="" aria-hidden="true">
-
-</div>
-<!-- Edit subadmin -->
-<div class="modal modal-effect" id="editCategoryModalPopup" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="" aria-hidden="true">
-
-</div>
-
 
 @endsection
 
@@ -151,6 +154,10 @@
                     name: 'total'
                 },
                 {
+                    data: 'status_change',
+                    name: 'status_change'
+                },
+                {
                     data: 'status',
                     name: 'status'
                 },
@@ -184,71 +191,7 @@
 
     })();
 
-    function addCategory() {
-        var formData = $("#add_category_form").serializeArray();
 
-        if ($('#add_category_form').valid()) {
-            $('#btnAdd').prop('disabled', true);
-            $('#btnAddLoader').css("display", '');
-            $.ajax({
-                type: "POST",
-                url: "{{url('store/orders/add')}}",
-                data: formData,
-                success: function(response) {
-                    $('#btnAdd').prop('disabled', false);
-                    $('#btnAddLoader').css('display', 'none');
-                    toastr.clear();
-                    if (response.success) {
-                        Command: toastr['success'](response.message);
-                        $("#addCategoryModal").modal('hide');
-                        $('#category-listing').DataTable().ajax.reload();
-                    }
-                    else {
-                        Command: toastr['error']('Something went wrong.');
-                    }
-                },
-                error: function() {
-                    $('#btnAdd').prop('disabled', false);
-
-                    Command: toastr['error']('Something went wrong.');
-                }
-            });
-        }
-    };
-
-    function changeStatus(id) {
-        bootbox.confirm('Are you sure you want to change the status ?', function(result) {
-            let status = $("#category" + id).data('status');
-            if (result) {
-                if ($("#category" + id).prop("checked") == false) {
-                    status = 'inactive';
-                } else {
-                    status = 'active';
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "{{url('store/product/change-status')}}",
-                    data: {
-                        id: id,
-                        status: status,
-                        _token: "{{csrf_token()}}"
-                    },
-                    success: function(response) {
-                        toastr.clear();
-                        Command: toastr['success'](response.message);
-                        //$('#category-listing').DataTable().ajax.reload();
-                    }
-                });
-            } else {
-                if (status == 'active') {
-                    $('#category' + id).prop('checked', true);
-                } else {
-                    $('#category' + id).prop('checked', false);
-                }
-            }
-        })
-
-    }
 
    
 
@@ -282,11 +225,61 @@
         });
     }
 
-    function showAddCategory() {
-        $('.error-help-block').text('');
-        $('#add_category_form')[0].reset();
-        $('.selectpicker').selectpicker('refresh');
-        $("#addCategoryModal").modal('show');
+    $(document).on('click','.update_status', function(){
+        status = $(this).attr('data-val');
+        id = $(this).attr('data-id');
+        bootbox.confirm('Are you sure you want to change the status ?', function(result) {
+            if (result) {
+                var url = "{{url('store/orders/change-status')}}";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        status: status,
+                        id: id,                       
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#category-listing').DataTable().ajax.reload();
+                            Command: toastr['success'](response.message);
+                        } else {
+                            Command: toastr['error'](response.message);
+                        }
+                    },
+                    error: function() {
+                        Command: toastr['success']('Something went wrong.');
+                    }
+                });
+            }
+        });
+    });
+
+     function getPrint(id){
+        var url = "{{url('store/orders/print')}}";
+        $.ajax({
+            type: "get",
+            url: url + '/' + id,                    
+            success: function(response) {
+                if (response.success) {
+                    print(response.url);
+                } else {
+                    Command: toastr['error'](response.message);
+                }
+            },
+            error: function() {
+                Command: toastr['success']('Something went wrong.');
+            }
+        });
+    }
+
+    function print(doc) {
+        var objFra = document.createElement('iframe');   // Create an IFrame.
+        objFra.style.visibility = "hidden";    // Hide the frame.
+        objFra.src = doc;                      // Set source.
+        document.body.appendChild(objFra);  // Add the frame to the web page.
+        objFra.contentWindow.focus();       // Set focus.
+        objFra.contentWindow.print();      // Print it.
     }
 </script>
 @endsection

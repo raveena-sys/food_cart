@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 use App\Models\DiscountCoupon;
-use Datatables, Response, File;
+use Datatables, Response, File, Str, Auth;
 
 class CouponRepository
 {
 	public function list($request){
 		try{
-			$coupon = DiscountCoupon::where('status', '!=', 'deleted');
+			$coupon = DiscountCoupon::where('status', '!=', 'deleted')->where('store_id',  Auth::user()->store_id);
 
 			if (!empty($request->status)) {
                 $coupon->where('status', $request->status);
@@ -21,7 +21,7 @@ class CouponRepository
 
                     if (!empty($request->name)) {
                         $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                            return Str::contains(Str::lower($row['name']), Str::lower(trim($request->name))) ? true : false;
+                            return Str::contains(Str::lower($row['coupon_code']), Str::lower(trim($request->name))) ? true : false;
                         });
                     }
                 })
@@ -54,9 +54,9 @@ class CouponRepository
                                <span class="icon-keyboard_control"></span>
                            </a>
                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                               <a class="dropdown-item" href="' . $viewUrl . '"   >View</a>
+                               
                                <a class="dropdown-item" href="' . $editURL . '"   >Edit</a>
-                                <a class="dropdown-item" href="javascript:void(0);"  id=remove' . $row->id . ' data-url=' . url('store/manage-coupon') . 'sdata-tableid="data-listing" onclick="deleteCategory(' . $row->id . ')" >Delete</a>
+                                <a class="dropdown-item" href="javascript:void(0);"  id=remove' . $row->id . ' data-url=' . url('store/manage-coupon') . 'sdata-tableid="data-listing" onclick="deleteCoupon(' . $row->id . ')" >Delete</a>
                            </div>
                        </div>';
                     return $btn;
@@ -75,8 +75,6 @@ class CouponRepository
 	}
 	public function create($request){
 		try{  
-
-echo '<pre>'; print_r($request->all()); echo '</pre>';
             $fileName = "";
             $profilePath = public_path() . '/uploads/coupon';
             if (!is_dir($profilePath)) {
@@ -94,6 +92,7 @@ echo '<pre>'; print_r($request->all()); echo '</pre>';
                 $name = $request->coupon_image;
             }
 			$post['coupon_image'] = $name;
+            $post['store_id'] = $request->store_id;
             $post['coupon_code'] = $request->coupon_code;
 			$post['coupon_type'] = $request->discount_type;
 			$post['coupon_amount'] = $request->coupon_amount;
@@ -112,16 +111,21 @@ echo '<pre>'; print_r($request->all()); echo '</pre>';
 			return ['status' => 201, 'message' => 'Something went wrong'];
 		}
 	}
-	public function change_status(){
+	public function status($request){
         try{
-            $coupon = DiscountCoupon::where(['id' => $id])->first();
+            $coupon = DiscountCoupon::where(['id' => $request->id])->first();
 
             if(isset($request->status)){
                 $coupon->status = $request->status;
                 $coupon->save();
             }
-    		
-            return ['status' => 200, 'message' => 'Coupon created successfullys'];
+    	    if($request->status == 'deleted'){
+                $msg = 'Coupon deleted successfully';
+            }else{
+
+                $msg = 'Coupon updated successfully';
+            }
+            return ['status' => 200, 'message' => $msg];
         }catch(Exception $e){
             return ['status' => 201, 'message' => 'Something went wrong'];
         }

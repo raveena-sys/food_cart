@@ -168,7 +168,7 @@ console.log("json", json);
                 }
                 $.ajax({
                     type: "POST",
-                    url: "{{url('store/manage-delivery/change-status')}}",
+                    url: "{{url('store/manage-coupon/change-status')}}",
                     data: {
                         id: id,
                         status: status,
@@ -196,13 +196,13 @@ console.log("json", json);
     /*
      * Delete user by id
      */
-    function deleteCategory(id) {
+    function deleteCoupon(id) {
         bootbox.confirm('Are you sure you want to delete ?', function(result) {
             if (result) {
-                var url = "{{url('store/manage-delivery/delete')}}";
+                var url = "{{url('store/manage-coupon/change-status')}}";
                  $.ajax({
                     type: "POST",
-                    url: "{{url('store/manage-delivery/change-status')}}",
+                    url: url,
                     data: {
                         id: id,
                         status: 'deleted',

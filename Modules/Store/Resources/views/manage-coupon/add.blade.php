@@ -31,10 +31,11 @@ $current =!empty($data)?'Edit Discount Coupon':'Add Discount Coupon';
             <div class="card-body">
                 <div class="inner_cnt">
                     <!-- add list -->
-                    <form enctype="multipart/form-data"  method="POST" class="f-field" id="addCoupon">
+                    <form enctype="multipart/form-data"  method="POST" action="{{url('store/manage-coupon/create')}}" class="f-field" id="addCoupon">
                         {{csrf_field()}}
                                            
                         <input type="hidden" name="id" value="{{isset($data->id)?$data->id:''}}">
+                        <input type="hidden" name="store_id" value="{{Auth::check()?Auth::user()->store_id:''}}">
                         <div class="upload_photo mx-auto text-center col-12">
                             <div class="img-box">
                                 <img src="{{isset($data->coupon_image)?getUserImage($data->coupon_image,'coupon'):getUserImage('','')}}" alt="user-img" class="img-fluid user-img">
@@ -57,19 +58,20 @@ $current =!empty($data)?'Edit Discount Coupon':'Add Discount Coupon';
                         </div>
                         <div class="form-group">
                             <label>Discount Coupon Code</label>
-                            <input type="text" name="coupon_code" class="form-control" placeholder="" value="{{isset($data->coupon_code)?$data->coupon_code:''}}">
+                            <input type="text" name="coupon_code" class="coupon_code form-control" placeholder="" value="{{isset($data->coupon_code)?$data->coupon_code:''}}">
                         </div>
+                        <button type='button'  onclick="generate(6)">Generate</button>
                         <div class="form-group">
                             <label>Discount Coupon Amount</label>
                             <input type="text" name="coupon_amount" class="form-control" placeholder="0" value="{{isset($data->coupon_amount)?$data->coupon_amount:''}}">
                         </div>
                         <div class="form-group">
                             <label>Discount Coupon Expiry Date</label>
-                            <input type="text" name="expired_at" class="form-control" placeholder="YYY-MM-DD" value="{{isset($data->expired_at)?$data->expired_at:''}}">
+                            <input type="text" name="expired_at" id="datepicker" class="form-control" placeholder="YYY-MM-DD" readonly value="{{isset($data->expired_at)?$data->expired_at:''}}">
                         </div>
                         <div class="btn_row text-center">
                             <a href="{{url('store/manage-coupon/add')}}" class="btn btn-outline-light ripple-effect text-uppercase">Cancel</a>
-                            <button type="submit" class="btn btn-danger ripple-effect text-uppercase " id="btnCoupon" onClick="addCoupon()">Update
+                            <button type="submit" class="btn btn-danger ripple-effect text-uppercase " id="btnCoupon" >Update
                                 <span id="cmsFormLoader" class="spinner-border spinner-border-sm" style="display: none;"></span>
                             </button>
                         </div>
@@ -85,120 +87,8 @@ $current =!empty($data)?'Edit Discount Coupon':'Add Discount Coupon';
 
 
 <script type="text/javascript">
- function addCoupon() {
-        var formData = $("#addCoupon").serializeArray();
-        jQuery.each(jQuery('#uploadImage')[0].files, function(i, file) {
-            formData.append('image', file);
-        });
-        if ($('#addCoupon').valid()) {
-            $('#btnCoupon').prop('disabled', true);
-            $('#btnAddLoader').css("display", '');
-            $.ajax({
-                type: "POST",
-                url: "{{url('store/manage-coupon/create')}}",
-                data: formData,
-                success: function(response) {
-                    $('#btnAdd').prop('disabled', false);
-                    $('#btnAddLoader').css('display', 'none');
-                    toastr.clear();
-                    if (response.status) {
-                        Command: toastr['success'](response.message);
-                        $("#addCoupon")[0].reset();
-                        $('#btnCoupon').prop('disabled', false);
-                        $('.user-img').prop('src', response.img);
-                      
-                    }
-                    else {
-                        Command: toastr['error']('Something went wrong.');
-                        $('#btnCoupon').prop('disabled', false);
 
-                    }
-                },
-                error: function() {
-                    $('#btnCoupon').prop('disabled', false);
-
-                    Command: toastr['error']('Something went wrong.');
-                }
-            });
-        }
-    };
-
-    function changeStatus(id) {
-        bootbox.confirm('Are you sure you want to change the status ?', function(result) {
-            let status = $("#category" + id).data('status');
-            if (result) {
-                if ($("#category" + id).prop("checked") == false) {
-                    status = 'inactive';
-                } else {
-                    status = 'active';
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "{{url('store/manage-category/change-status')}}",
-                    data: {
-                        id: id,
-                        status: status,
-                        _token: "{{csrf_token()}}"
-                    },
-                    success: function(response) {
-                        toastr.clear();
-                        Command: toastr['success'](response.message);
-                        //$('#category-listing').DataTable().ajax.reload();
-                    }
-                });
-            } else {
-                if (status == 'active') {
-                    $('#category' + id).prop('checked', true);
-                } else {
-                    $('#category' + id).prop('checked', false);
-                }
-            }
-        })
-
-    }
-
-    function ediCategory(id) {
-        var url = "{{url('store/manage-category/detail')}}";
-        $.ajax({
-            type: "GET",
-            url: url + '/' + id,
-            success: function(response) {
-                $("#editCategoryModalPopup").modal('show');
-                $('#editCategoryModalPopup').html(response);
-
-            }
-        });
-    }
-
-    /*
-     * Delete user by id
-     */
-    function deleteCategory(id) {
-        bootbox.confirm('Are you sure you want to delete ?', function(result) {
-            if (result) {
-                var url = "{{url('store/manage-coupon/delete')}}";
-                $.ajax({
-                    type: "DELETE",
-                    url: url + '/' + id,
-                    data: {
-                        '_token': "{{csrf_token()}}",
-                        user_type: 'employee'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            $('#category-listing').DataTable().ajax.reload();
-                            Command: toastr['success'](response.message);
-                        } else {
-                            Command: toastr['error'](response.message);
-                        }
-                    },
-                    error: function() {
-                        Command: toastr['success']('Something went wrong.');
-                    }
-                });
-            }
-        });
-    }
+ 
      $("#uploadImage").change(function(e) {   
 
         readURL(this);
@@ -211,6 +101,22 @@ $current =!empty($data)?'Edit Discount Coupon':'Add Discount Coupon';
             $('.user-img_text').val(e.target.result);
         }
         reader.readAsDataURL(input.files[0]);                
+    }
+    $(document).ready(function(){
+      
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+        }
+        );
+    })
+    function generate(length) {
+       var result           = '';
+       var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+       var charactersLength = characters.length;
+       for ( var i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+       }
+       $('.coupon_code').val(result);
     }
 
 </script>

@@ -11,6 +11,7 @@ class DiscountCoupon extends Model
     protected $table = 'discount_coupon';
     protected $fillable = [
         'id',
+        'store_id',
         'coupon_image',
         'coupon_code',
         'coupon_type',

@@ -39,7 +39,22 @@
                         <input  type="hidden" name="food_type" value="{{$detail->food_type}}" {{$inputreadonly}}>
                         @endif
                     </div>
+                <div class="form-group">
+                        <label>Topping Type</label>
 
+                        <select class="form-control selectpicker1" name="topping_type" id="comanyList" title="Select Topping Type" data-size="4" {{$inputdisable}}>
+
+                            <option value="topping"  @if("topping" == $detail->topping_type) selected="selected" @endif>Topping</option>
+
+                            <option value="sauce"  @if("sauce" == $detail->topping_type) selected="selected" @endif>Sauce</option>
+
+
+
+                        </select>
+                        @if($inputreadonly)
+                        <input  type="hidden" name="food_type" value="{{$detail->food_type}}" {{$inputreadonly}}>
+                        @endif
+                    </div>
 
 
                 <div class="form-group">

@@ -115,7 +115,53 @@
                     </li>
                 </ul>
             </li>
-             <li class="{{(Request::segment(2) == 'manage-cms' || Request::segment(2) == 'edit-cms') ? 'active' : ''}}">
+            <li class="{{Request::segment(2) == 'manage-coupon' ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-coupon') }}" aria-expanded="false">
+                    <span class="nav_icon"><i class="fa fa-gift"></i> </span>
+                    <span class="nav_title">Manage Disount Coupon </span>
+                </a>
+            </li>
+
+
+            <li class="{{Request::segment(2) == 'manage-special-menu' ? 'active' : ''}}">
+                <a class="nav-link ripple-effect" role="button" data-toggle="collapse" href="#ManageMaster3" aria-expanded="false" aria-controls="ManageMaster3">
+                    <span class="nav_icon"><i class="fa fa-gift"></i></span>
+                    <span class="nav_title">Manage Special Menu</span>
+                </a>
+                <ul class="list-unstyled collapse in-collapse " data-parent="#sideSubMenu" id="ManageMaster3">
+
+
+                    <li class="ripple-effect {{(Request::segment(1) == '1') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ URL::To('store/manage-special-menu/list/1') }}">
+                            <span> Double/Triple Product</span>
+                        </a>
+                    </li>
+                    <li class="ripple-effect {{(Request::segment(2) == 'product') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ URL::To('store/manage-special-menu/list/2') }}">
+                            <span> Sides Products</span>
+                        </a>
+                    </li>
+                    <li class="ripple-effect {{(Request::segment(2) == 'drink') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ URL::To('store/manage-special-menu/list/3') }}">
+                            <span> Drink Products</span>
+                        </a>
+                    </li>
+                    <!-- <li class="ripple-effect {{(Request::segment(2) == 'product') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ URL::To('store/manage-special-menu/list/2') }}">
+                            <span> Sides Image</span>
+                        </a>
+                    </li> -->
+                    <!-- <li class="ripple-effect {{(Request::segment(2) == 'product') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ URL::To('store/manage-pizza-crust') }}">
+                            <span> Add Double/Triple Product</span>
+                        </a>
+                    </li> -->
+
+                </ul>
+            </li>
+
+
+            <li class="{{(Request::segment(2) == 'manage-cms' || Request::segment(2) == 'edit-cms') ? 'active' : ''}}">
                 <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-cms') }}" aria-expanded="false">
                     <span class="nav_icon"><i class="icon-a-manage-cms"></i> </span>
                     <span class="nav_title">Manage CMS</span>
@@ -133,12 +179,7 @@
                     <span class="nav_title">Manage Store GST </span>
                 </a>
             </li>
-            <li class="{{Request::segment(2) == 'manage-coupon' ? 'active' : ''}}">
-                <a class="nav-link ripple-effect" href="{{ URL::To('store/manage-coupon') }}" aria-expanded="false">
-                    <span class="nav_icon"><i class="fa fa-gift"></i> </span>
-                    <span class="nav_title">Manage Disount Coupon </span>
-                </a>
-            </li>
+            
         </ul>
     </div>
 </aside>

@@ -8,6 +8,7 @@ use App\Models\StoreMaster;
 use App\Models\Category;
 use App\Models\Cms;
 use App\Models\SocialLink;
+use App\Models\DiscountCoupon;
 use Session;
 use Response;
 
@@ -36,6 +37,7 @@ class HomeController extends Controller
         try {
 
         	$data['details'] = StoreMaster::where('status', 'active')->paginate(6);
+            $data['coupon'] = DiscountCoupon::where('status', 'active')->get();
             $data['links'] = SocialLink::whereNULL('store_id')->first();
             $data['cms'] = $this->cms->where(['page_slug'=>'store_list'])->first();
             return view('front.storelist')->with($data);
@@ -55,7 +57,6 @@ class HomeController extends Controller
             } else {
                 Session::put('orderType', 'delivery');
             }
-            //Session::put('delCharge', $price);
             $category = Category::select('category.*')->join('store_category',function($join){
                 $join->on('category.id', '=', 'store_category.cat_id');
                 $join->where('store_category.store_id', '=', Session::get('store_id'));

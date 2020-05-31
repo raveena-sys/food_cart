@@ -118,6 +118,26 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Select Required method to add product in cart</label>
+                            <div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="add_customisation_cart" checked="true" name="add_customisation" class="custom-control-input" value="0">
+                                    <label class="custom-control-label" for="add_customisation_cart">Only Add To Cart</label>
+                                </div>
+
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="add_customisation_cust" name="add_customisation" class="custom-control-input" value="1">
+                                    <label class="custom-control-label" for="add_customisation_cust">Only Customisation</label>
+                                </div>
+
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="add_customisation_both" name="add_customisation" class="custom-control-input" value="2">
+                                    <label class="custom-control-label" for="add_customisation_both">Add to Cart and Customisation</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Select Topping Option From </label>
                             <div>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -134,7 +154,10 @@
                                     <input type="radio" id="topping_wing_flavour" name="topping_from" class="custom-control-input" value="topping_wing_flavour">
                                     <label class="custom-control-label" for="topping_wing_flavour">Wing Flavour</label>
                                 </div>
-
+                                <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="topping_tops" name="topping_from" class="custom-control-input" value="topping_tops" >
+                                <label class="custom-control-label" for="topping_tops">Pizza Topping Only</label>
+                            </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="topping_dips" name="topping_from" class="custom-control-input" value="topping_dips"> <label class="custom-control-label" for="topping_dips">Dips</label>
                                 </div>

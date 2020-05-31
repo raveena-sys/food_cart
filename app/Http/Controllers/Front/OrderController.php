@@ -12,6 +12,7 @@ use Session, DB, PDF;
 use App\Models\Order;
 use App\Models\StoreMaster;
 use App\Models\StorePostalCode;
+use App\Models\DiscountCoupon;
 
 class OrderController extends Controller
 {
@@ -87,7 +88,17 @@ class OrderController extends Controller
 
 	    	$store_email = StoreMaster::where('id', Session::get('store_id'))->first();
 	    	date_default_timezone_set('Asia/Kolkata');
+	    	$discount = '0.00';
+	    	if(Session::has('discount') && Session::has('coupon_type')){
+	    		$coupon_type = Session::get('coupon_type');
+	    		if($coupon_type == 'fixed_discount'){
+	              $discount = '$'.number_format(Session::get('discount'),2);
+	            }else{
+	              
+	              $discount = Session::get('discount').'%';
 
+	            }
+	    	}
 	    	
 	    	$order = array(
 	    			'store_id' => Session::get('store_id'),
@@ -95,6 +106,8 @@ class OrderController extends Controller
 	    			'category_id' => Session::get('category_id'),
 	    			'cart_item' => json_encode(Session::get('cartItem')),
 	    			'extra_item' => json_encode(Session::get('cartextra')),
+	    			'discount' => $discount,
+	    			'gst' => $request->gst_price,
 	    			'name' => $request->name,
 	    			'email' => $request->email,
 	    			'mobile_no' => $request->mobile_no,
@@ -105,34 +118,12 @@ class OrderController extends Controller
 	    			'subtotal' =>$request['subtotal'],	
 	    			'total' => $request->total, 		
 	    			//'delivery_ins' => $request->delivery_ins, 		
-	    			'delivery_charge' => Session::has('delCharge')?Session::get('delCharge'):0, 		
+	    			'delivery_charge' => Session::has('deliveryCharge')?Session::get('deliveryCharge'):0, 		
 	    			'payment_method' => $request->pay_method,    			
 	    			'zipcode' => $request->zipcode,
 	    			'additional_notes' => $request->additional_notes,
 	    			'created_at' => date('Y-m-d H:i:s')
 				);
-	    	/*$order = array(
-	    			'store_id' => Session::get('store_id'),
-	    			'order_type' => Session::get('orderType'),
-	    			'category_id' => Session::get('category_id'),
-	    			'cart_item' => json_encode(Session::get('cartItem')),
-	    			'extra_item' => json_encode(Session::get('cartextra')),
-	    			'name' => Session::get('userinfo')['name'],
-	    			'email' => Session::get('userinfo')['email'],
-	    			'mobile_no' => Session::get('userinfo')['mobile_no'],
-	    			'address' => Session::get('userinfo')['address'],
-	    			'city' => Session::get('userinfo')['city'],
-	    			'state' => Session::get('userinfo')['state'],
-	    			'status' => 1,  
-	    			'subtotal' => $request['subtotal'],	
-	    			'total' => $request->total, 		
-	    			'delivery_ins' => $request->delivery_ins, 		
-	    			'delivery_charge' => Session::has('delCharge')?Session::get('delCharge'):0, 		
-	    			'payment_method' => $request->pay_method,    			
-	    			'zipcode' => Session::get('userinfo')['zipcode'],
-	    			'additional_notes' => Session::get('userinfo')['additional_notes'],
-	    			'created_at' => date('Y-m-d H:i:s')
-				);*/
 	    	DB::beginTransaction();
 			$orderdata = Order::create($order);
 
@@ -173,19 +164,47 @@ class OrderController extends Controller
     public function checkzipcode(Request $request){
     	if(Session::has('orderType') && Session::get('orderType')=='delivery'){
 	    	if(!empty($request->zipcode)){
-	    		$zipcode =  StorePostalCode::whereRaw("find_in_set('".$request->zipcode."',postal_code)")->first();
+	    		$zipcode =  StorePostalCode::whereRaw("find_in_set('".$request->zipcode."',postal_code) <> 0" )->first();
 	    		if(!empty($zipcode)){
-	    			Session::put('delCharge', $zipcode->price);
-	    			return 'true';
+	    			Session::put('deliveryCharge', $zipcode->price);
+	    			$html = view('front.ajax.order_summary')->render();
+	    			return response()->json(['status' => 'true', 'message' => 'Delivery charges added', 'html' => $html]);
 	    		}else{
-	    			return 'false';
+	    			Session::forget('deliveryCharge');
+	    			$html = view('front.ajax.order_summary')->render();
+	    			return response()->json(['status' => 'false', 'message' => 'Store does not provide delivery at this area.', 'html' => $html]);
 	    		}
 	    	}
 	    }else {
-	    	return 'true';
+	    	$html = view('front.ajax.order_summary')->render();
+	    	return response()->json(['status' => 'true', 'message' => 'Store does not provide delivery at this area.', 'html' => $html]);
 	    }
     }
 
-    
+    public function checkcoupon(Request $request){
+    	if(!empty($request->coupon)){
+    		$coupon =  DiscountCoupon::where(['coupon_code' => $request->coupon, 'store_id' =>Session::get('store_id')])->first();
+
+	    	if(!empty($coupon)){
+	    		if($coupon->expired_at.' 23:59:59' >= date('Y-m-d H:i:s')){
+	    			Session::put('discount',$coupon->coupon_amount );
+	    			Session::put('coupon_type',$coupon->coupon_type );
+	    			Session::put('coupon_code',$coupon->coupon_code );
+		    		$html = view('front.ajax.checkout_item')->render();
+		    		return response()->json(['status' => 200, 'message'=> 'Coupon added successfully', 'html' => $html]);	
+	    		}else{
+	    			Session::forget('discount' );
+	    			Session::forget('coupon_type');
+	    			Session::forget('coupon_code');
+	    			$html = view('front.ajax.checkout_item')->render();
+	    			return response()->json(['status' => 201, 'message'=> 'Coupon '.$request->coupon.' has been expired!', 'html' => $html]);
+	    		}
+	    	}else{
+	    		return response()->json(['status' => 201, 'message'=> 'Coupon '.$request->coupon.' does not exist!']);
+	    	}
+    	}else {
+	    	return response()->json(['status' => 201, 'message'=> 'Please enter Coupon!']);
+	    }
+    }	
 
 }

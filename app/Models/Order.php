@@ -25,6 +25,8 @@ class Order extends Model
         'total',    
         'delivery_ins',    
         'delivery_charge',    
+        'discount',    
+        'gst',    
     	'status',	
     	'created_at',
     	'updated_at'

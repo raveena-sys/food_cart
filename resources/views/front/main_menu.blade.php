@@ -50,11 +50,11 @@
             </ul> -->
             
           
-            @foreach($category as $data)
+            @foreach($category as $key => $data)
             <div class="home_icon_list">
-                <a href="{{ URL::To('menu/'.$data->id) }}">
+                <a {{$key>2?'href=javascript:void(0)':"href=" .URL::To("menu/".$data->id)}}>
                     <div class="home_icon_list_icon">
-                        <img src="{{ asset('img/pick-up.png')}}" />
+                        <div class="menu_icon"><img src="{{asset(isset($data->image)?'/uploads/menu_images/'.$data->image:'/img/pick-up.png')}}" /></div>
                     </div>
                     <div class="home_icon_list_details">
                         <span>{{$data->name}}</span>

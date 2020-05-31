@@ -1,4 +1,4 @@
-@extends('store::layouts.app')
+$request->segment(1)@extends('store::layouts.app')
 @section('content')
 <?php $current = 'Edit Store Details  '; ?>
 <main class="main-content add-page">
@@ -244,15 +244,11 @@
                             
                         </div>
 
-                    
-
-
-                  
 
                         <div class="form-group text-center mb-0">
                             <button id="btnAdd" class="btn btn-danger ripple-effect text-uppercase min-w130" type="submit">UPDATE<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></button>
 
-                            <a id="btnCancel" class="btn btn-danger ripple-effect text-uppercase min-w130" href="{{ URL::To('store/manage-store') }}">Cancel<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></a>
+                            <a id="btnCancel" class="btn btn-danger ripple-effect text-uppercase min-w130" href="{{ URL::To('store/manage-store/edit/'.Auth::user()->store_id) }}">Cancel<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></a>
 
                             <!--  -->
                         </div>

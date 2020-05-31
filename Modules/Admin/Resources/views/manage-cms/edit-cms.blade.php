@@ -32,11 +32,31 @@ $current ="Edit". ' ' . $data->page_name;
                     <form enctype="multipart/form-data"  method="POST" class="f-field" action="{{ url('admin/manage-cms/update-cms-page') }}">
                         {{csrf_field()}}
                         <input type="hidden" name="cms_id" value="{{$data->id}}">
+                        @if($data->page_slug=='home_page')
+                        <div class="form-group">
+                            <label>Banner Video </label>
+                        </div>  
+                        <div class="upload_photo col-12">
+                            <div class="img-box">
+                                @if($data->home_video)
+                                <video width="100%" height="100%" controls>
+                                    <source src="{{getUserImage($data->home_video,'cms')}}" type="video/mp4" class="img-fluid box-circle-vid">
+                                    <source src="{{getUserImage($data->home_video,'cms')}}" type="video/ogg" class="img-fluid box-circle-vid">
+                                    Your browser does not support the video tag.
+                                  </video>
+                                @endif
+                            </div>
+                           <!--  <label class="mb-0 ripple-effect" for="uploadHomeVideo"> -->
+                                <input type="file" name="home_video" id="uploadHomeVideo" accept="video/*" value="">
+                               <!--  <i class="icon-photo_camera"></i>
+                            </label> -->
+                        </div>
+                        @endif
                         @if($data->page_slug=='home_page' || $data->page_slug=='order_type'|| $data->page_slug=='menu_list')
                         <div class="form-group">
                             <label>Background Image (Image dimension must be (1348*799))</label>
                         </div>  
-                        <div class="upload_photo mx-auto text-center col-12">
+                        <div class="upload_photo col-12">
                             <div class="img-box">
                                 <img src="{{getUserImage($data->background_image,'cms')}}" alt="user-img" class="img-fluid rounded-circle-back">
                             </div>
