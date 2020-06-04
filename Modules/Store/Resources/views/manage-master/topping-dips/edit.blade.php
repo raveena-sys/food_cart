@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title font-libre-bold w-100 text-center">Edit Pizza Sauce</h4>
+            <h4 class="modal-title font-libre-bold w-100 text-center">Edit Topping Dips</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="icon-clear"></i>
             </button>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label>Price</label>
-                    <input class="form-control" type="text" name="price" placeholder="Price" value="{{$detail->price}}">
+                    <input class="form-control" type="text" name="price" placeholder="Price" value="{{$detail->custom_price}}">
                 </div>
                 <div class="form-group">
                     <label>Description</label>

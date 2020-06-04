@@ -354,6 +354,7 @@ class StoreMasterRepository
             }catch(Exception $e){
 
             }
+            
             return redirect('admin/manage-store')->with('success',  $message);
         } catch (\Exception $e) {
             DB::rollback();

@@ -105,7 +105,14 @@
 
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Topping Type</label>
 
+                        <select class="form-control selectpicker" name="topping_type" id="comanyList" title="Select Topping Type" data-size="4">
+                            <option value="topping">Topping</option>
+                            <option value="sauce">Sauce</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label>Name</label>
                         <input class="form-control" name="name" type="text" placeholder="Name" maxlength="250">

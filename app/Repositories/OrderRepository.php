@@ -100,6 +100,17 @@ class OrderRepository
                 ->editColumn('total', function ($data) {
                     return '$'.$data->total;
                 })
+                ->addColumn('status_change', function ($data) {
+                    $status_change = '<div class="dropup"><button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">'.$data->status.'
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              <li><a href="javascript:void(0)" class="btn btn-default update_status" data-id = '.$data->id.' data-val="processing">Processing</a></li>
+                              <li><a href="javascript:void(0)" class="btn btn-default update_status" data-id = '.$data->id.' data-val="completed">Completed</a></li>
+                              <li><a href="javascript:void(0)" class="btn btn-default update_status" data-id = '.$data->id.' data-val="cancelled">Cancelled</a></li>
+                              <li class="divider"></li>
+                            </ul></div>';
+                        return $status_change;
+                })
                 ->editColumn('status', function ($data) {
                     return ucfirst($data->status);
                 })
@@ -119,14 +130,14 @@ class OrderRepository
                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                <a class="dropdown-item" href="' . $viewUrl . '"   >View</a>
                                
-                               <a class="dropdown-item" onclick="getPrint('.$row->id.')">Print Order</a>
+                               <a class="dropdown-item"  href="javascript:void(0); "onclick="getPrint('.$row->id.')">Print Order</a>
                                <!--a class="dropdown-item" href="' . $editURL . '"   >Edit</a-->
                                 <a class="dropdown-item" href="javascript:void(0);"  id=remove' . $row->id . ' data-url=' . url('admin/employee-delete') . ' data-name=' . $row->name . ' data-tableid="data-listing" onclick="deleteOrder(' . $row->id . ')" >Delete</a>
                            </div>
                        </div>';
                     return $btn;
                 })
-                ->rawColumns(['status', 'action', 'name'])
+                ->rawColumns(['status_change','status', 'action', 'name'])
                 ->make(true);
 
             $response = ['success' => true, 'message' => '', 'error' => [], 'data' => $tableResult];
@@ -196,13 +207,13 @@ class OrderRepository
     public static function changeStatus($request)
     {
         try {
-            $userData = StoreMaster::where(['id' => $request->id])->select('id', 'name', 'description', 'status')->first();
+            $userData = Order::where(['id' => $request->id])->first();
             if (!empty($userData)) {
                 $userData->update(array('status' => $request->status));
                 $message = 'Status successfully changed.';
                 $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
             } else {
-                $response = ['success' => false, 'message' => 'Store does not found.', 'error' => [], 'data' => []];
+                $response = ['success' => false, 'message' => 'Order does not found.', 'error' => [], 'data' => []];
             }
             return $response;
         } catch (\Exception $e) {

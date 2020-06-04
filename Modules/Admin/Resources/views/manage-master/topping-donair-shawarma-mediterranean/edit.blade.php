@@ -24,7 +24,20 @@
 
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Topping Type</label>
 
+                        <select class="form-control selectpicker1" name="topping_type" id="comanyList" title="Select Topping Type" data-size="4">
+
+                            <option value="topping"  @if("topping" == $detail->topping_type) selected="selected" @endif>Topping</option>
+
+                            <option value="sauce"  @if("sauce" == $detail->topping_type) selected="selected" @endif>Sauce</option>
+
+
+
+                        </select>
+                        
+                    </div>
 
 
                 <div class="form-group">

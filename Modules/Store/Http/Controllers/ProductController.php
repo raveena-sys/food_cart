@@ -8,6 +8,11 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Http\Requests\AddProductRequest;
 use Modules\Admin\Http\Requests\EditProductRequest;
 use App\Repositories\ProductRepository;
+use App\Repositories\PizzaSauceRepository;
+use App\Repositories\PizzaSizeRepository;
+use App\Repositories\PizzaCrustRepository;
+use App\Repositories\ToppingWingFlavourRepository;
+use App\Repositories\ToppingDonairShawarmaMediterraneanRepository;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use File;
@@ -18,10 +23,20 @@ use View;
 class ProductController extends Controller
 {
     private $ProductRepository;
+    private $PizzaSauce;
+    private $PizzaCrust;
+    private $PizzaSize;
+    private $ToppingWing;
+    private $ToppingDonair;
 
-    public function __construct(ProductRepository $ProductRepository)
+    public function __construct(ProductRepository $ProductRepository, PizzaSauceRepository $PizzaSauce, PizzaCrustRepository $PizzaCrust , PizzaSizeRepository $PizzaSize, ToppingWingFlavourRepository $ToppingWing,  ToppingDonairShawarmaMediterraneanRepository $ToppingDonair)
     {
         $this->ProductRepository = $ProductRepository;
+        $this->PizzaSauce = $PizzaSauce;
+        $this->PizzaCrust = $PizzaCrust;
+        $this->PizzaSize = $PizzaSize;
+        $this->ToppingWing = $ToppingWing;
+        $this->ToppingDonair = $ToppingDonair;
     }
 
     /**
@@ -43,19 +58,46 @@ class ProductController extends Controller
             }
         }
     }
-    public function addProduct()
+    public function addProduct(Request $request)
     {
+        $pizzaSauce = $this->PizzaSauce->getList($request);
+        $data['sauce']= $pizzaSauce['data']->getData()->data;
+
+        $pizzaCrust = $this->PizzaCrust->getList($request);
+        $data['crust']= $pizzaCrust['data']->getData()->data;
+
+        $pizzaSize = $this->PizzaSize->getList($request);
+        $data['size']= $pizzaSize['data']->getData()->data;
+
+        $toppingWing = $this->ToppingWing->getList($request);
+        $data['toppingWing']= $toppingWing['data']->getData()->data;
+        
+        $toppingDonair = $this->ToppingDonair->getList($request);
+        $data['toppingDonair']= $toppingDonair['data']->getData()->data;        
         $adminDetail = Auth::user();
-        return view('store::product.add', ['adminDetail' => $adminDetail]);
+        return view('store::product.add', ['adminDetail' => $adminDetail, 'topping'=> $data]);
     }
 
-    public function getEditProductDetails($id)
+    public function getEditProductDetails(Request $request, $id)
     {
         try {
+             $pizzaSauce = $this->PizzaSauce->getList($request);
+            $data1['sauce']= $pizzaSauce['data']->getData()->data;
 
+            $pizzaCrust = $this->PizzaCrust->getList($request);
+            $data1['crust']= $pizzaCrust['data']->getData()->data;
+
+            $pizzaSize = $this->PizzaSize->getList($request);
+            $data1['size']= $pizzaSize['data']->getData()->data;
+
+            $toppingWing = $this->ToppingWing->getList($request);
+            $data1['toppingWing']= $toppingWing['data']->getData()->data;
+            
+            $toppingDonair = $this->ToppingDonair->getList($request);
+            $data1['toppingDonair']= $toppingDonair['data']->getData()->data;      
             $data = $this->ProductRepository->getDetail($id);
             // print_r($data);            die;
-            return view('store::product.edit', ['detail' => $data]);
+            return view('store::product.edit', ['detail' => $data , 'topping'=> $data1]);
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -73,6 +115,7 @@ class ProductController extends Controller
     }
     public function updateProduct(EditProductRequest $request)
     {
+
         try {
             return $data = $this->ProductRepository->update($request);
         } catch (\Exception $e) {

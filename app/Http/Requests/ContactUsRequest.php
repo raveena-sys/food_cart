@@ -26,7 +26,8 @@ class ContactUsRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|check_email_format|email|regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/',
+            //'email' => 'required|check_email_format|email|regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/',
+            'email' => 'required|email',
             'phone_number' => 'required|numeric|digits_between:9,13',
             'company_name' => 'required',
 

@@ -55,6 +55,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>Topping Type</label>
+                        <div class="row">
+                            <div class="pr-2 col ">
+                                <strong>{{ucwords(str_replace('_', ' ', $category->topping_type))}}</strong>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>Description</label>
                         <div class="row">
                             <div class="pr-2 col ">

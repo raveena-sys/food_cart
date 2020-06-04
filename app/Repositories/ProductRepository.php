@@ -11,6 +11,7 @@ use Datatables;
 use App\Common\Helpers;
 use App\Models\Job;
 use App\Models\Product;
+use App\Models\SpecialProduct;
 use App\Models\StoreProductPrice;
 use \DB;
 use File;
@@ -61,7 +62,7 @@ class ProductRepository
                     ]);
                 }
                 
-                $query->orderby('prd.id', 'desc');
+                $query->where('prd.special_cat', 0)->orderby('prd.id', 'desc');
 
             if (!empty($request->status)) {
                 $query->where('status', $request->status);
@@ -93,7 +94,7 @@ class ProductRepository
                 })
         
                 ->editColumn('store_name', function ($data) {
-                    return isset($data->store_name)?$data->store_name:'Admin';
+                    return isset($data->store)?$data->store:'Admin';
                 })
 
                 ->editColumn('size_name', function ($data) {
@@ -127,7 +128,10 @@ class ProductRepository
                         $result = "Wing Flavour Toppings";
                     }
                     if ($data->topping_from == "topping_dips") {
-                        $result = "Other Toppings";
+                        $result = "Dips Toppings";
+                    }
+                    if ($data->topping_from == "topping_tops") {
+                        $result = "Only Pizza Toppings";
                     }
                     if ($data->topping_from == "topping_donair_shawarma_mediterranean") {
                         $result = "Donair Shawarma Mediterranean";
@@ -293,7 +297,11 @@ class ProductRepository
             $post['sub_category_id'] = $request['sub_category_id'];
             $post['size_master_id'] = $request['size_master_id'];
             $post['food_type'] = $request['food_type'];
-
+            $post['customise_required'] = isset($request['customise_required'])?$request['customise_required']:'';
+            $post['pizza_size'] = isset($request['pizza_size'])?$request['pizza_size']:'';
+            $post['pizza_sauce'] = isset($request['pizza_sauce'])?$request['pizza_sauce']:'';
+            $post['pizza_crust'] = isset($request['pizza_crust'])?$request['pizza_crust']:'';
+            $post['common_topping'] = isset($request['common_topping'])?$request['common_topping']:'';
             $post1 =array();
             if(Auth::user()->user_type == 'admin'){
                 $post['price'] = $request['price'];
@@ -315,6 +323,7 @@ class ProductRepository
                 }
             }
             $post['quantity'] = $request['quantity'];
+            $post['add_customisation'] = $request['add_customisation'];
             $post['topping_from'] = $request['topping_from'];
             $post['description'] = $request['description'];
             $post['created_by']     = $userData->id;
@@ -323,7 +332,7 @@ class ProductRepository
             $category->update($post);
             
             DB::commit();
-            $message = "Product successfully updated.";
+            $message = "Product successfully updated1.";
             $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
             // return $response;
             $segment = $request->segment(1);
@@ -364,13 +373,30 @@ class ProductRepository
             if(isset($request['store_id'])){
                 $post['store_id'] = $request['store_id'];
             }
+            $size_master_id = array();
+            if(isset($request['size_master_price'])){
 
+                foreach ($request['size_master_price'] as $key => $value) {
+                    $size_master_id[$key]['id'] = $value;
+                    $size_master_id[$key]['price'] = $request['size_price'][$key];
+                    $size_master_id[$key]['size'] = $request['size'][$key];
+                }
+                $post['size_master_price'] = json_encode($size_master_id);
+            }
+            $post['customise_required'] = isset($request['customise_required'])?$request['customise_required']:'';
+            $post['pizza_size'] = isset($request['pizza_size'])?$request['pizza_size']:'';
+            $post['pizza_sauce'] = isset($request['pizza_sauce'])?$request['pizza_sauce']:'';
+            $post['pizza_crust'] = isset($request['pizza_crust'])?$request['pizza_crust']:'';
+            $post['common_topping'] = isset($request['common_topping'])?$request['common_topping']:'';
+            
             $post['sub_category_id'] = $request['sub_category_id'];
-            $post['size_master_id'] = $request['size_master_id'];
+            $post['size_master_id'] = isset($request['size_master_id'])?$request['size_master_id']:0;
+            $post['special_cat'] = isset($request['special_cat'])?$request['special_cat']:0;
             $post['food_type'] = $request['food_type'];
-            $post['price'] = $request['price'];
+            $post['price'] = isset($request['price'])?$request['price']:0;
             $post['quantity'] = $request['quantity'];
             $post['topping_from'] = $request['topping_from'];
+            $post['add_customisation'] = $request['add_customisation'];
             $post['description'] = $request['description'];
             $post['created_by']     = $userData->id;
             $post['updated_by']     = $userData->id;
@@ -463,5 +489,254 @@ class ProductRepository
             return $response;
         }
     }
+
+
+
+    public function createSpecialProduct($request)
+    {
+
+        DB::beginTransaction();
+        try {
+            $userData = Auth::user();
+
+            $fileName = "";
+            $profilePath = public_path() . '/uploads/products';
+            if (!is_dir($profilePath)) {
+                File::makeDirectory($profilePath, $mode = 0777, true, true);
+            }
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $fileName = $file->getClientOriginalName();
+                $fileExtension = strtolower($file->getClientOriginalExtension());
+                $name = time().'.'.$fileExtension;
+                $imageExist = public_path() . '/uploads/products/' . $name;
+                $request->file('image')->move($profilePath, $name);
+
+                $post['thumb_image'] = $name;
+                $post['image'] = $name;
+            }
+
+            $post['name'] = $request['name'];
+
+            if(isset($request['store_id'])){
+                $post['store_id'] = $request['store_id'];
+            }
+            $size_master_id = array();
+
+            if(isset($request['size_master_price'])){
+
+                foreach ($request['size_master_price'] as $key => $value) {
+                    if(!empty( $request['size_price'][$key])){
+
+                    $size_master_id[$key]['id'] = $value;
+                    $size_master_id[$key]['price'] = $request['size_price'][$key];
+                    $size_master_id[$key]['size'] = $request['size'][$key];
+                    }
+                }
+                $post['size_master_price'] = json_encode($size_master_id);
+            }
+            $post['custom_product'] = isset($request['custom_product'])?implode(',',$request['custom_product']):'';
+            
+            
+            $post['size_master_price'] = json_encode($size_master_id);
+            $post['food_type'] = $request['food_type'];
+            $post['quantity'] = $request['quantity'];
+            $post['topping_from'] = $request['topping_from'];
+            $post['add_customisation'] = $request['add_customisation'];
+            $post['special_cat'] = isset($request['special_cat'])?$request['special_cat']:0;
+            $post['price'] = isset($request['price'])?$request['price']:0;
+
+            $post['description'] = $request['description'];
+            $post['created_by']     = $userData->id;
+            $post['updated_by']     = $userData->id;
+            if(isset($request['drink_category'])){
+                //echo 2;die;
+                $post['section_name'] = $request['section_name'];
+                foreach ($request['drink_category'] as $key => $value) {
+                    if(isset($request['drink_subcategory']) && !empty($request['drink_subcategory'][$key])){
+                        $post['sub_category_id'] = $request['drink_subcategory'][$key];
+                        $products = $this->product->create($post);
+                        if(isset($request['store_id'])){
+                
+                            $post1['store_id'] = Auth::user()->store_id;
+                            $post1['product_id'] = $products->id;
+                            $post1['custom_price'] = $products->price;           
+                            StoreProductPrice::updateOrCreate(['product_id'=>$post1['product_id'], 'store_id'=>$post1['store_id']], $post1);
+                        }  
+                    }                        
+                }
+                
+            }else{
+                $post['sub_category_id'] = $request['sub_category_id'];
+                $products = Product::updateOrCreate(['id'=>$request->id],  $post);
+                //echo '<pre>'; print_r($products ); echo '</pre>';
+                if(isset($request['store_id'])){
+                    
+                    $post1['store_id'] = Auth::user()->store_id;
+                    $post1['product_id'] = $products->id;
+                    $post1['custom_price'] = $products->price;DB::enableQueryLog();           
+                    $store_data = StoreProductPrice::updateOrCreate(['product_id'=>$post1['product_id'], 'store_id'=>$post1['store_id']], $post1);
+                }
+            }
+            
+            DB::commit();
+            $message = "Product added sucsessfully.";
+            $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
+            //return $response;
+            $segment = $request->segment(1);
+            $segmentProduct = $request->segment_name;
+            
+            return redirect($segment.'/manage-special-menu/list/'.$segmentProduct)->with('success',  $message);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
+            return $response;
+        }
+    }
+
+
+    public function getSpecialProductList($request)
+    {
+        try {
+
+DB::enableQueryLog();
+            $query = \DB::table('product as prd')->select([
+                    'prd.id', 'prd.name', 'prd.status', 'prd.description', 'prd.price', 'prd.quantity', 'prd.topping_from',
+                    'prd.sub_category_id', 'prd.food_type', 'sbcat.category_id', 'sbcat.name as sub_name',
+                     'cat.name as category_name', 'sm.name as store_name', 
+                    ])->join('sub_category as sbcat', 'prd.sub_category_id', '=', 'sbcat.id');
+            $query->join('category as cat', 'sbcat.category_id', '=', 'cat.id')->where('prd.status', '!=', 'deleted');
+            $query->leftjoin('store_master as sm', 'sm.id', '=', 'prd.store_id');
+            $query->where('prd.special_cat', $request->seg)->orderby('prd.id', 'desc');
+
+            if (!empty($request->status)) {
+                $query->where('prd.status', $request->status);
+            }
+
+            if (!empty($request->category_id)) {
+                $query->where('category_id', $request->category_id);
+            }
+            $product = $query->get();
+            $tableResult = Datatables::of($product)->addIndexColumn()
+
+                ->filter(function ($instance) use ($request) {
+
+                    if (!empty($request->name)) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return Str::contains(Str::lower($row['name']), Str::lower(trim($request->name))) ? true : false;
+                        });
+                    }
+
+                })
+                ->editColumn('name', function ($data) {
+                   
+                    $userName = $data->name;
+                  
+                    return $userName;
+                })
+                ->editColumn('description', function ($data) {
+                    return str_limit($data->description, 30);
+                })
+        
+                ->editColumn('store_name', function ($data) {
+                    return isset($data->store_name)?$data->store_name:'Admin';
+                })
+
+                ->editColumn('sub_name', function ($data) {
+                    return $data->sub_name;
+                })
+
+               /* ->editColumn('price', function ($data) {
+                    if(Auth::user()->user_type == 'store')
+                    {
+                        return round($data->custom_price,2);
+                    }else{
+                        return round($data->price,2);
+                    }
+                })*/
+
+                ->editColumn('quantity', function ($data) {
+                    return $data->quantity;
+                })
+
+                ->editColumn('topping_from', function ($data) {
+                    $result = $data->topping_from;
+
+                    if ($data->topping_from == "topping_pizza") {
+                        $result = "Pizza Toppings";
+                    }
+                    if ($data->topping_from == "topping_wing_flavour") {
+                        $result = "Wing Flavour Toppings";
+                    }
+                    if ($data->topping_from == "topping_dips") {
+                        $result = "Other Toppings";
+                    }
+                    if ($data->topping_from == "topping_donair_shawarma_mediterranean") {
+                        $result = "Donair Shawarma Mediterranean";
+                    }
+
+                    if ($data->topping_from == "none") {
+                        $result = "Not Required";
+                    }
+
+
+                    return $result;
+                })
+                ->editColumn('category_name', function ($data) {
+                    return $data->category_name;
+                })
+
+
+                ->addColumn('status', function ($row) {
+                    $show="onclick='changeStatus($row->id)'";
+                    if(Auth::user()->user_type == 'store'){
+                        $show = 'disabled';
+                    }
+                    $status = isset($row->status) ? $row->status : "";
+                    $checked = ($status == 'active') ? "checked" : "";
+
+                    $btn = "<div class='switch'> <label> <input class='onoffswitch-checkbox switchchange' name='onoffswitch' type='checkbox' data-status='$status' id='category$row->id' $checked  $show data-tableid='employee-lenderslist'> <span class='lever'></span> </label> </div>";
+                    return $btn;
+                })
+                ->addColumn('action', function ($row) use ($request) {
+                    if(Auth::user()->user_type == 'store')
+                    {
+                        $viewUrl = url('store/manage-special-menu/view/' .$request->seg.'/'. $row->id);
+                        $editURL = url('store/manage-special-menu/edit/' .$request->seg.'/'. $row->id);
+                    }else{
+                        $viewUrl = url('admin/manage-special-menu/view/' .$request->seg.'/'. $row->id);
+                        $editURL = url('admin/manage-special-menu/edit/' .$request->seg.'/'. $row->id);
+                    }
+
+                    $btn = "";
+
+                    $btn = '<div class="dropdown">
+                           <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               <span class="icon-keyboard_control"></span>
+                           </a>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                               <a class="dropdown-item" href="' . $viewUrl . '"   >View</a>
+                               <a class="dropdown-item" href="' . $editURL . '"   >Edit</a>';
+                               /*if(Auth::user()->user_type=='store'){
+
+                                $btn .= '<a href="javascript:void(0);" onclick="showEditProductPrice('.$row->id.')" class="dropdown-item">Edit Price</a>';
+                               }*/
+                                $btn .= '<a class="dropdown-item" href="javascript:void(0);"  id=remove' . $row->id . ' data-url=' . url('admin/employee-delete') . ' data-name=' . $row->name . ' data-tableid="data-listing" onclick="deleteCategory(' . $row->id . ')" >Delete</a>
+                           </div>
+                       </div>';
+                    return $btn;
+                })
+                ->rawColumns(['status', 'action', 'name'])
+                ->make(true);
+
+            $response = ['success' => true, 'message' => '', 'error' => [], 'data' => $tableResult];
+            return $response;
+        } catch (\Exception $e) {
+            $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
+            return $response;
+        }
+    }
+
+
 
 }

@@ -249,6 +249,7 @@ class ToppingDonairShawarmaMediterraneanRepository
             $post['description'] = $request['description'];
             $post['name'] = $request['name'];
             $post['food_type'] = $request['food_type'];
+            $post['topping_type'] = $request['topping_type'];
             $post['price'] = $request['price'];
 
             $post['created_by']     = $userData->id;

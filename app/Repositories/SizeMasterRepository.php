@@ -86,9 +86,9 @@ class SizeMasterRepository
                 ->editColumn('short_name', function ($data) {
                     return $data['short_name'];
                 })
-                ->editColumn('description', function ($data) {
+                /*->editColumn('description', function ($data) {
                     return $data['description'];
-                })
+                })*/
 
                 ->editColumn('value', function ($data) {
                     return $data['value'];

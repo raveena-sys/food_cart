@@ -15,6 +15,7 @@ class ToppingDonairShawarmaMediterranean extends Model
         'name',
         'price',
         'store_id',
+        'topping_type',
         'description',
         'thumb_image',
         'image',

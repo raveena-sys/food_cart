@@ -14,7 +14,58 @@
             <p>{{isset($v['description'])?$v['description']:''}}</p>
           </div>
         </div>
-        <div class="container">
+        @if(isset($v['special']))
+        <div class="containers">
+          @if(!empty($v['extra']))
+          @foreach($v['extra'] as $key=> $value1)
+
+          {!!isset($value1['product_name'])?'<p><strong>Pizza Type:</strong> '.$value1['product_name'].'</p>':''!!}
+          {!!isset($value1['size_master_name'])?'<p><strong>Pizza Size:</strong> '.$value1['size_master_name'].'</p>':''!!}
+
+          {!!isset($value1['crust_master_name'])?'<p><strong>Pizza Crust:</strong> '.$value1['crust_master_name'].'</p>':''!!}
+
+          {!!isset($value1['sauce_master_name'])?'<p><strong>Pizza Sauce:</strong> '.$value1['sauce_master_name'].'</p>':''!!}
+
+          @if(!empty($value1['dip_master_name']))
+          <p>
+            <strong>Dips:</strong>
+            @foreach($value1['dip_master_name'] as $val)
+            {{$val}}
+            @endforeach
+            <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
+          </p>
+          @endif
+
+          @if(!empty($value1['topping_master_name']))
+          <p>
+            <strong>{{(!empty($value1['topping_from']) && $value1['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
+            @foreach($value1['topping_master_name'] as $val1)
+            {{$val1}}
+            @endforeach
+            <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
+          </p>
+          @endif
+          @if(!empty($value1['topping_sauce_master_name']))
+          <p>
+            <strong>Sauce:</strong>
+            @foreach($value1['topping_sauce_master_name'] as $val1)
+            {{$val1}}
+            @endforeach
+            <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
+          </p>
+          @endif
+          @if(!empty($value1['extra_cheese_name']))
+          <p>
+            <strong>Cheese:</strong>Extra Cheese
+             <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
+          </p>
+          @endif
+          <hr>
+          @endforeach
+          @endif
+        </div>
+        @else
+        <div class="containers">
 
           {!!isset($v['size_master_name'])?'<p><strong>Pizza Size:</strong> '.$v['size_master_name'].'</p>':''!!}
 
@@ -34,8 +85,17 @@
 
           @if(!empty($v['topping_master_name']))
           <p>
-            <strong>Toppings:</strong>
+            <strong>{{(!empty($v['topping_from']) && $v['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
             @foreach($v['topping_master_name'] as $val1)
+            {{$val1}}
+            @endforeach
+            <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
+          </p>
+          @endif
+          @if(!empty($v['topping_sauce_master_name']))
+          <p>
+            <strong>Sauce:</strong>
+            @foreach($v['topping_sauce_master_name'] as $val1)
             {{$val1}}
             @endforeach
             <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
@@ -47,6 +107,7 @@
           </p>
           @endif
         </div>
+        @endif
         <div class="cartBox-footer">
           <div class="countWrap">
             <button type="button" id="sub" data-product_id="{{isset($v['product_id'])?$v['product_id']:0}}" data-price="{{isset($v['price'])?$v['price']:0}}" class="sub_item" data-custom="{{isset($v['custom'])?1:0}}">-</button>
@@ -55,16 +116,29 @@
 
           </div>
           <div class="rightSide">
-            <span class="price">${{isset($v['price'])?round($v['price'],2):0}}</span>
+            <span class="price">${{isset($v['price'])?number_format($v['price'],2):0.00}}</span>
           </div>
         </div>
       </div>  
       @php
       $subtotal 
-      +=(isset($v['price'])?round($v['price'], 2):0);
+      +=(isset($v['price'])?number_format($v['price'], 2):0.00);
+      $total = $subtotal; 
       @endphp 
     @endforeach
-    <a href="{{url('menu/'.session::get('category_id'))}}" class="btn btn-success btn-sm">Continue Shopping</a>
+      <div class="row">
+        <div class="col-md-5">
+          <a href="{{url('menu/'.session::get('category_id'))}}" class="btn btn-success btn-sm">Continue Shopping</a>
+        </div>
+        <div class="col-md-5">
+          
+          <input class="form-control" name="coupon_code" id="coupon_code" placeholder="Coupon Code" value="{{Session::has('coupon_code')?Session::get('coupon_code'):''}}">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success btn-sm" name="apply" id="applyCoupon">Apply</button>
+            
+        </div>
+      </div>
     @else
       <div class="">
         <div class="col-lg-12">
@@ -97,7 +171,7 @@
           Sub Total
         </div>
         <div class="right">
-          ${{$subtotal}}
+          ${{number_format($subtotal,2)}}
         </div>
       </div>
       <div class="totalPrice__inner">
@@ -105,19 +179,36 @@
           Discount
         </div>
         <div class="right">
-          $0
+          @if(Session::has('discount'))
+          @php
+            $discount = Session::get('discount');
+            $coupon_type = Session::get('coupon_type');
+            if($coupon_type == 'fixed_discount'){
+
+              $total = $subtotal-$discount;
+              echo '$'.number_format($discount,2);
+            }else{
+              $total = $subtotal-(($subtotal*$discount)/100);
+              echo $discount.'%';
+
+            }
+          @endphp
+          @else
+          ${{number_format(0,2)}}
+          @endif
         </div>
       </div>
       <div class="totalPrice__inner">
         <div class="left">
-          Grand Total
+          Total
         </div>
         <div class="right">
-          ${{$subtotal}}
+          
+          ${{number_format($total,2)}}
         </div>
       </div>
 
-      <a href="{{url('save_user_detail')}}" class="btn btn-success btn-block">Place Order</a>
+      <a href="{{url('save_user_detail')}}" class="btn btn-success btn-block">Checkout <!-- Place Order --></a>
     </div>
   </div>
   @endif  

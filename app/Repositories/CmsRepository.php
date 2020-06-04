@@ -27,13 +27,25 @@ class CmsRepository {
 
         try {
             $model =  $this->cms->where('id',$request['cms_id'])->first();
-
-            $fileName = "";
             $profilePath = public_path() . '/uploads/cms';
 
             if (!is_dir($profilePath)) {
                 File::makeDirectory($profilePath, $mode = 0777, true, true);
             }
+            $videoName = "";
+            if ($request->hasFile('home_video')) {
+                $file = $request->file('home_video');
+                $videoName = $file->getClientOriginalName();
+                $fileExtension = strtolower($file->getClientOriginalExtension());
+                $name = time().'.'.$fileExtension;
+                $imageExist = public_path() . '/uploads/cms/' . $name;
+                $request->file('home_video')->move($profilePath, $name);
+
+                $model->home_video = $name;
+            }
+
+
+            
             if ($request->hasFile('header_image')) {
                 $file = $request->file('header_image');
                 $fileName = $file->getClientOriginalName();
@@ -45,9 +57,7 @@ class CmsRepository {
                 $model->header_image = $name;
             }
 
-            if (!is_dir($profilePath)) {
-                File::makeDirectory($profilePath, $mode = 0777, true, true);
-            }
+           
             if ($request->hasFile('background_image')) {
                 $file = $request->file('background_image');
                 $fileName = $file->getClientOriginalName();
@@ -58,9 +68,7 @@ class CmsRepository {
 
                 $model->background_image = $name;
             }
-            if (!is_dir($profilePath)) {
-                File::makeDirectory($profilePath, $mode = 0777, true, true);
-            }
+          
             if ($request->hasFile('side_image')) {
                 $file = $request->file('side_image');
                 $fileName = $file->getClientOriginalName();

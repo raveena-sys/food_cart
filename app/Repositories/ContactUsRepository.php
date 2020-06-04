@@ -45,12 +45,12 @@ class ContactUsRepository
             $data['name'] = $post['first_name'].' '.$post['last_name'];
             $data['email'] = $post['email'];
             $data['company_name'] = $post['company_name'];
-            $data['admin_email'] = isset($admin_email->email)?$admin_email->email:'raveena1@mailinator.com';
+            $data['admin_email'] = 'raveenajadon304@gmail.com';//isset($admin_email->email)?$admin_email->email:'raveena1@mailinator.com';
             $data['phone_number'] = $post['phone_number'];
             $data['subject'] = "Customer (Contact Us)";
             $mail = sendMail($data);  
             DB::commit();
-            $message = "Contact us added sucsessfully.";
+            $message = "Message has been sent successfully!";
             $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
             //return $response;
             return redirect('/')->with('success',  $message);

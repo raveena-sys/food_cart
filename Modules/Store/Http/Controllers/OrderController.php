@@ -12,7 +12,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use File;
 use DB;
-use View;
+use View,PDF;
 
 class OrderController extends Controller
 {
@@ -133,5 +133,22 @@ class OrderController extends Controller
         return json_encode($cities);
     }
 
+    public function printOrder($id)
+    {
+        try {
+            $orderdata = $this->OrderRepository->getDetail($id);
+            $pdf = PDF::loadView('front.invoice.order_invoice', compact('orderdata'));
+            $path = 'public/uploads/order_invoice';
+            $file = '/'.str_pad($orderdata->id,6,"0", STR_PAD_LEFT).'.pdf';
+            if(!file_exists($path)){
+                mkdir($path, 0777, true);
+            }
+            $res = $pdf->save($path.$file);
+            return Response::json(['success' => true, 'url' => url($path.$file)]);
+           
+        } catch (\Exception $e) {
+            return Response::json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 
 }
