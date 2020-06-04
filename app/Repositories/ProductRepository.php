@@ -94,7 +94,7 @@ class ProductRepository
                 })
         
                 ->editColumn('store_name', function ($data) {
-                    return isset($data->store_name)?$data->store_name:'Admin';
+                    return isset($data->store)?$data->store:'Admin';
                 })
 
                 ->editColumn('size_name', function ($data) {
@@ -297,7 +297,11 @@ class ProductRepository
             $post['sub_category_id'] = $request['sub_category_id'];
             $post['size_master_id'] = $request['size_master_id'];
             $post['food_type'] = $request['food_type'];
-
+            $post['customise_required'] = isset($request['customise_required'])?$request['customise_required']:'';
+            $post['pizza_size'] = isset($request['pizza_size'])?$request['pizza_size']:'';
+            $post['pizza_sauce'] = isset($request['pizza_sauce'])?$request['pizza_sauce']:'';
+            $post['pizza_crust'] = isset($request['pizza_crust'])?$request['pizza_crust']:'';
+            $post['common_topping'] = isset($request['common_topping'])?$request['common_topping']:'';
             $post1 =array();
             if(Auth::user()->user_type == 'admin'){
                 $post['price'] = $request['price'];
@@ -328,7 +332,7 @@ class ProductRepository
             $category->update($post);
             
             DB::commit();
-            $message = "Product successfully updated.";
+            $message = "Product successfully updated1.";
             $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
             // return $response;
             $segment = $request->segment(1);
@@ -379,6 +383,12 @@ class ProductRepository
                 }
                 $post['size_master_price'] = json_encode($size_master_id);
             }
+            $post['customise_required'] = isset($request['customise_required'])?$request['customise_required']:'';
+            $post['pizza_size'] = isset($request['pizza_size'])?$request['pizza_size']:'';
+            $post['pizza_sauce'] = isset($request['pizza_sauce'])?$request['pizza_sauce']:'';
+            $post['pizza_crust'] = isset($request['pizza_crust'])?$request['pizza_crust']:'';
+            $post['common_topping'] = isset($request['common_topping'])?$request['common_topping']:'';
+            
             $post['sub_category_id'] = $request['sub_category_id'];
             $post['size_master_id'] = isset($request['size_master_id'])?$request['size_master_id']:0;
             $post['special_cat'] = isset($request['special_cat'])?$request['special_cat']:0;
@@ -516,13 +526,18 @@ class ProductRepository
             if(isset($request['size_master_price'])){
 
                 foreach ($request['size_master_price'] as $key => $value) {
+                    if(!empty( $request['size_price'][$key])){
+
                     $size_master_id[$key]['id'] = $value;
                     $size_master_id[$key]['price'] = $request['size_price'][$key];
                     $size_master_id[$key]['size'] = $request['size'][$key];
+                    }
                 }
                 $post['size_master_price'] = json_encode($size_master_id);
             }
             $post['custom_product'] = isset($request['custom_product'])?implode(',',$request['custom_product']):'';
+            
+            
             $post['size_master_price'] = json_encode($size_master_id);
             $post['food_type'] = $request['food_type'];
             $post['quantity'] = $request['quantity'];

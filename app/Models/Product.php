@@ -29,6 +29,12 @@ class Product extends Model
         'special_cat',
         'custom_product',
         'section_name',
+        'customise_required',
+        'pizza_size',
+        'pizza_sauce',
+        'pizza_crust',
+        'common_topping',
+
         'topping_from', // radio button: 'none','topping_pizza','topping_wing_flavour','topping_donair_shawarma_mediterranean','topping_dips'
         'created_at',
         'updated_at',

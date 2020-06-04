@@ -675,9 +675,13 @@ class StoreController extends Controller
 
 
 
-   /**
-  *Add product details in session for special deals product
-  */
+/**
+*Create session of selected Customise option's  
+*
+*@param $request (selected product id)
+*
+*@return json response of html with session cart item
+*/
 
   public function comboProductCustomiseDetails(Request $request){
       
@@ -902,15 +906,261 @@ class StoreController extends Controller
    }
 
 
-   public function comboaddtocart(Request $request){
-      if(Session::has('cartCombo')){
+
+/**
+*Create session of selected product which has not required Customisation
+*
+*@param $request (selected product id)
+*
+*@return json response of html with session cart item
+*/
+
+  public function comboProductSelectionDetails(Request $request){
+      $req = $request->all();      
+      $seg = $request->input('seg');
+      $c_prod = $request->input('c_prod');
+      $sessionkey = $request->input('key');
+      $cartArr = Session::has('cartCombo')?Session::get('cartCombo'):[];
+      if($request->required_customise=='on'){
+        unset($cartArr[$sessionkey]);
+        Session::put('cartCombo', $cartArr);
+        $cartSession= Session::get('cartCombo');
+        return json_encode(array('status'=>true, 'cart'=>$cartSession ));
+      }else{
+        $product = Product::where('id', $request->product_id)->where('status', 'active')->first();
+
+        
+        $extra = array();
+        $cart = array();
+        $addPrice =0;
+        //$addPrice = isset($request->product_custom_price)?$request->product_custom_price:(0);
+        if(isset($product)){
+          //prepare customise items
+          if(isset($req['custom'])){
+            $price = 0;
+            $tm_price = 0;
+            $cart['custom'] = $req['custom'];
+            if($product->topping_from == 'topping_pizza' || $product->topping_from == 'topping_dips')
+            {
+              if(isset($req['extra_cheese'])){
+
+                $cart['extra_cheese'] = PizzaExtraCheese::where('id', $req['extra_cheese'])->first();
+                $cart['extra_cheese_name'] = $cart['extra_cheese']->price; 
+                if($cart['extra_cheese']->price){   
+                  $addPrice = (float)$addPrice+(float)$cart['extra_cheese']->price; 
+
+                }
+
+              }
+
+              if(isset($product->pizza_size)){
+
+                $pizzaSizeName = PizzaSizeMaster::select('pizza_size_master.name', 'store_pizza_size.custom_price as price')->where('pizza_size_master.status', 'active')->join('store_pizza_size',
+                  function($join){
+                    $join->on('store_pizza_size.size_id', '=', 'pizza_size_master.id');
+                    $join->where('store_pizza_size.store_id', '=', Session::get('store_id'));
+                  })->where('pizza_size_master.id',  $product->pizza_size)->first();
+
+                $cart['size_master'] = $product->pizza_size;
+                $cart['size_master_price'] = $pizzaSizeName['price'];
+                $cart['size_master_name'] = $pizzaSizeName['name'];
+
+                if($pizzaSizeName['price']){              
+                  $addPrice = (float)$addPrice+(float)$pizzaSizeName['price'];
+                  
+                }
+              }
+
+              if(isset($product->pizza_crust)){
+
+                $pizzaCrustName = PizzaCrustMaster::select('pizza_crust_master.name', 'store_pizza_crust.custom_price as price')->where('pizza_crust_master.status', 'active')
+                  ->join('store_pizza_crust',
+                    function($join){
+                      $join->on('store_pizza_crust.crust_id', '=', 'pizza_crust_master.id');
+                      $join->where('store_pizza_crust.store_id', '=', Session::get('store_id'));
+                  })->where('pizza_crust_master.id',  $product->pizza_crust)->first();
+
+                $cart['crust_master'] = $product->pizza_crust;
+                $cart['crust_master_price'] = $pizzaCrustName['price'];
+                $cart['crust_master_name'] = $pizzaCrustName['name'];
+                if($pizzaCrustName['price']){       
+                  $addPrice = (float)$addPrice+(float)$pizzaCrustName['price'];
+                }
+                
+              }
+
+              if(isset($product->pizza_sauce)){
+
+                $pizzaSauceName = PizzaSauceMaster::select('pizza_sauce_master.name', 'store_pizza_sauce.custom_price as price')->where('pizza_sauce_master.status', 'active')->join('store_pizza_sauce',
+                    function($join){
+                      $join->on('store_pizza_sauce.sauce_id', '=', 'pizza_sauce_master.id');
+                      $join->where('store_pizza_sauce.store_id', '=', Session::get('store_id'));
+                  })->where('pizza_sauce_master.id',  $product->pizza_sauce)->first();
+
+
+                $cart['sauce_master'] = $product->pizza_sauce;
+                $cart['sauce_master_name'] = $pizzaSauceName['name'];
+                $cart['sauce_master_price'] = $pizzaSauceName['price'];
+                if($pizzaSauceName['price']){       
+                  $addPrice = (float)$addPrice+(float)$pizzaSauceName['price'];
+                }
+              }
+              $td_names = array();
+
+              if(isset($req['dip_master']) && !empty($req['dip_master'])){
+                foreach($req['dip_master'] as $k => $v){
+                  $td_name = ToppingDips::select('topping_dips.name', 'store_topping_dips.custom_price as price')->join('store_topping_dips',
+                    function($join){
+                      $join->on('store_topping_dips.top_dip_id', '=', 'topping_dips.id');
+                      $join->where('store_topping_dips.store_id', '=', Session::get('store_id'));
+                  })->where('topping_dips.id',  $k)->first(); 
+
+
+
+                  if($v>0){
+                    $price = $price+($td_name->price*$v);
+                    $cart['dip_master_price'] = $price;
+                    $cart['dip_master_name'][] = $td_name->name.' ('.$v.'), ($'.$price.')';    
+                  }   
+                }
+                if($price){
+                  $addPrice += (float)$price;
+                }
+                
+              }
+
+              
+              if(isset($req['topping_master'])){
+                foreach($req['topping_master'] as $k => $v){
+                  $td_name = ToppingPizza::select('topping_pizza.name', 'store_topping_pizza.custom_price as price')->join('store_topping_pizza',
+                    function($join){
+                      $join->on('store_topping_pizza.top_pizza_id', '=', 'topping_pizza.id');
+                      $join->where('store_topping_pizza.store_id', '=', Session::get('store_id'));
+                  })->where('topping_pizza.id',  $k)->first(); 
+
+                  $tm_price = $tm_price+$td_name->price;
+                  $cart['topping_master_price'] = $tm_price;
+                  $cart['topping_master'] = $k;
+                  $cart['topping_master_name'][] = $td_name->name/*.' ('.$v.'),'*/;   
+                  $tm_name[] =$td_name;    
+                } 
+                if($tm_price){
+                  $addPrice += (float)$tm_price;  
+                }    
+              }
+
+              
+            }
+            $tdsm_price = 0;
+            if($product->topping_from == 'topping_donair_shawarma_mediterranean')
+            {
+              
+              //foreach($req['topping_master'] as $k1 => $v1){
+                $td_name = ToppingDonairShawarmaMediterranean::select('topping_donair_shawarma_mediterranean.name', 'store_topping_donair.custom_price as price')->where('topping_donair_shawarma_mediterranean.status', 'active')->join('store_topping_donair',
+              function($join){
+                $join->on('store_topping_donair.top_donair_id', '=', 'topping_donair_shawarma_mediterranean.id');
+                $join->where('store_topping_donair.store_id', '=', Session::get('store_id'));
+            })->where('topping_donair_shawarma_mediterranean.id',  $product->common_topping)->first();    
+
+                $tdsm_price = $tdsm_price+$td_name->price;
+                $cart['topping_master_price'] = $tdsm_price;
+                $cart['topping_master'] = $product->common_topping;
+                $cart['topping_master_name'][] = $td_name->name/*.' ('.$v1.'),'*/;   
+                $tm_name[] =$td_name;    
+              //} 
+              if($tdsm_price){
+                $addPrice += (float)$tdsm_price;
+              }
+            }
+            $twf_price = 0;
+            if($product->topping_from == 'topping_wing_flavour')
+            {
+              //foreach($req['topping_master'] as $key => $val){
+                $td_name = ToppingWingFlavour::select('topping_wing_flavour.name', 'store_topping_wing.custom_price as price')->where('topping_wing_flavour.status', 'active')->join('store_topping_wing',
+              function($join){
+                $join->on('store_topping_wing.top_wing_id', '=', 'topping_wing_flavour.id');
+                $join->where('store_topping_wing.store_id', '=', Session::get('store_id'));
+            })->where('topping_wing_flavour.id', $product->common_topping)->first();    
+
+                $twf_price = $twf_price+$td_name->price;
+                $cart['topping_master_price'] = $twf_price;
+                $cart['topping_master'] =$product->common_topping;
+                $cart['topping_master_name'][] = $td_name->name/*.' ('.$val.'),'*/;   
+                $tm_name[] =$td_name;    
+              //} 
+              if($twf_price){
+                $addPrice += (float)$twf_price;
+              }
+            }
+            if(!empty($cart)){
+              
+              $extra = json_encode($cart);
+            }
+     
+          }
+
+          $addProduct = true;
+          if(!empty($cartArr) && count($cartArr)>0){
+            //Existing cart customisation
+            
+            $key=1;
+            for($i=1; $i<=count($cartArr); $i++){
+            //foreach ($cartArr as $key => $value) {
+              //$price_ded = (isset($addPrice)?$addPrice:$req['product_custom_price'])/*/$value['quantity']*/;
+              //product exist in cart
+
+              if(isset($cartArr[$sessionkey])){
+                unset($cartArr[$sessionkey]);
+              }
+            }
+          }
+
+           //add product in cart
+          if($addProduct){
+
+            $priceadd = (isset($addPrice)?$addPrice:(isset($req['product_custom_price'])?$req['product_custom_price']:$req['product_price']));
+            $cart['product_id'] = $product->id;
+            $cart['product_name'] = $product->name;
+            $cart['price'] = 0;//$priceadd;
+            $cart['quantity'] = 1;
+            $cart['image'] = $product->thumb_image;
+            $cart['name'] = $product->name;
+            $cart['description'] = $product->description;
+            Session::put('cartextra', $extra);
+            $cart['extra'] = $extra;
+            if(!empty($cart) && count($cart)>0){
+              $cartArr[$sessionkey] = $cart;
+              Session::put('cartCombo', $cartArr);
+              $msg = 'Item added successfully';
+               $addRemove = 2;
+            }
+          }
+        }
+        
+        $cartSession= Session::get('cartCombo');
+        return json_encode(array('status'=>true, 'cart'=>$cartSession ));
+      }
+   }
+
+
+
+/**
+*Add to cart functionality for Combo (Double/Triple) product  
+*
+*@param $request (selected product id)
+*
+*@return json response of html with session cart item
+*/
+  public function comboaddtocart(Request $request){
+    
+     /* if(Session::has('cartCombo')){
         $custCartCount = Session::get('cartCombo');
         if($request->selectlength!=count($custCartCount)){
           return json_encode(array('status'=>false, 'msg' => 'Please Select Pizza and Customize'));
         }
       }else{
         return json_encode(array('status'=>false, 'msg' => 'Please Select Pizza and Customize'));
-      } 
+      } */
       $id = $request->product_id;      
       $price = $request->price;      
       //Subcategory ids
@@ -976,8 +1226,38 @@ class StoreController extends Controller
       return json_encode(array('status'=>true, 'msg' => $msg,  'html'=> $html, 'product_html' => $product_html, 'cart_count' => $cart_count, 'add' =>  $addRemove));
    }
 
+/**
+*Check Product has customise option or not which has required customisation on double/ triple combo products 
+*
+*@param $request (selected product id)
+*
+*@return json response true if exist customised data false if not 
+*/
+public function CheckProductCutomise(Request $request){
+  if(Session::has('cartCombo')){
+    $customiseCart = Session::get('cartCombo');
+    $selectedProductID = $request->selectedProdId;
+    foreach ($customiseCart as $key => $value) {
+      if($selectedProductID ==$value['product_id']){
+        return Response::json(['status' => true, 'msg' => '']);
+      }
+    }
+    return Response::json(['status' => false, 'msg' => 'Please select toppings for your '.$request->pizza.' pizza']);
+   
+  }else{
+    return json_encode(array('status'=>false, 'msg' => 'Please select toppings for your '.$request->pizza.' pizza'));
+  } 
+}
 
 
+
+/**
+*Add to cart functionality for Sides product  
+*
+*@param $request (selected product id)
+*
+*@return json response of html with session cart item
+*/
 
   public function sidesAddToCart(Request $request){
 

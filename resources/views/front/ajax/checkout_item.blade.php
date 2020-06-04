@@ -65,7 +65,7 @@
           @endif
         </div>
         @else
-        <div class="container">
+        <div class="containers">
 
           {!!isset($v['size_master_name'])?'<p><strong>Pizza Size:</strong> '.$v['size_master_name'].'</p>':''!!}
 
@@ -208,7 +208,7 @@
         </div>
       </div>
 
-      <a href="{{url('save_user_detail')}}" class="btn btn-success btn-block">Place Order</a>
+      <a href="{{url('save_user_detail')}}" class="btn btn-success btn-block">Checkout <!-- Place Order --></a>
     </div>
   </div>
   @endif  

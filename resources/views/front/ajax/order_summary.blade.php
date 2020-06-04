@@ -31,7 +31,11 @@
             @endphp 
             @endforeach
             @endif
-
+            <tr>
+              <td><strong>Subtotal</strong></td>
+              <td>&nbsp;</td>
+              <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
+            </tr>
             
             @php
               $deliveryCharge = Session::has('orderType') && Session::get('orderType') =='delivery'?number_format(Session::get('deliveryCharge'), 2):'0.00';
@@ -48,6 +52,15 @@
 
               }
             @endphp
+            
+            
+            @php
+            $subtotal += $deliveryCharge;
+            $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0.00;
+            
+            $total = (float)$subtotal+(float)$gst_price;
+            @endphp
+            
             <tr>
               <td>Delivery fee</td>
               <td>-</td>
@@ -58,18 +71,6 @@
               <td>-</td>
               <td style="text-align: right;"> {{$discount_val}}</td>
             </tr>
-            
-            @php
-            $subtotal += $deliveryCharge;
-            $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0.00;
-            
-            $total = (float)$subtotal+(float)$gst_price;
-            @endphp
-            <tr>
-              <td>Subtotal</td>
-              <td>&nbsp;</td>
-              <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
-            </tr>
             <tr>
               <td>GST({{Session::has('gst_per')?Session::get('gst_per'):0}}%)</td>
               <td>-</td>
@@ -78,7 +79,7 @@
             <tr>
               <td></td>
               <td>&nbsp;</td>
-              <td style="text-align: right;">Total: <strong> ${{number_format($total,2)}}</strong></td>
+              <td style="text-align: right;"><strong> Total:  ${{number_format($total,2)}}</strong></td>
             </tr>
           </tbody>
         </table>

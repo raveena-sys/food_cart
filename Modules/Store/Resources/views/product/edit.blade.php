@@ -142,6 +142,11 @@
                                 <input type="hidden" name="food_type" value="{{$detail->food_type}}">
                             @endif
                         </div>
+                        <div class="custom-control custom-radio custom-control-inline" >
+                            <input class="custom-control-input" name="customise_required" type="checkbox"  id="customise_required" @if(isset($detail->customise_required) && $data->customise_required == 'on') selected="checked" @endif>
+                            <label class="custom-control-label" for="customise_required">Checked To make Customise Options required </label>
+                        </div>
+
                         <div class="form-group">
                             <label>Select Required method to add product in cart</label>
                             <div>
@@ -166,35 +171,89 @@
                         <div class="form-group">
                             <label>Select Topping Option From </label>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="none" checked="true" name="topping_from" class="custom-control-input" value="none" @if($detail->topping_from == 'none') checked="true" @endif {{$inputdisable}} >
+                                <input type="radio" id="none" checked="true" name="topping_from" class="custom-control-input topping_option" value="none" @if($detail->topping_from == 'none') checked="true" @endif {{$inputdisable}} >
                                 <label class="custom-control-label" for="none">Not Required</label>
                             </div>
 
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="topping_pizza" name="topping_from" class="custom-control-input" value="topping_pizza" @if($detail->topping_from == 'topping_pizza') checked="true" @endif {{$inputdisable}}>
+                                <input type="radio" id="topping_pizza" name="topping_from" class="custom-control-input topping_option" value="topping_pizza" @if($detail->topping_from == 'topping_pizza') checked="true" @endif {{$inputdisable}}>
                                 <label class="custom-control-label" for="topping_pizza">Pizza</label>
                             </div>
 
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="topping_wing_flavour" name="topping_from" class="custom-control-input" value="topping_wing_flavour" @if($detail->topping_from == 'topping_wing_flavour') checked="true" @endif {{$inputdisable}}>
+                                <input type="radio" id="topping_wing_flavour" name="topping_from" class="custom-control-input topping_option" value="topping_wing_flavour" @if($detail->topping_from == 'topping_wing_flavour') checked="true" @endif {{$inputdisable}}>
                                 <label class="custom-control-label" for="topping_wing_flavour">Wing Flavour</label>
                             </div>
 
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="topping_dips" name="topping_from" class="custom-control-input" value="topping_dips" @if($detail->topping_from == 'topping_dips') checked="true" @endif {{$inputdisable}}>
+                                <input type="radio" id="topping_dips" name="topping_from" class="custom-control-input topping_option" value="topping_dips" @if($detail->topping_from == 'topping_dips') checked="true" @endif {{$inputdisable}}>
                                 <label class="custom-control-label" for="topping_dips">Dips</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="topping_tops" name="topping_from" class="custom-control-input" value="topping_tops" @if($detail->topping_from == 'topping_tops') checked="true" @endif {{$inputdisable}}>
+                                <input type="radio" id="topping_tops" name="topping_from" class="custom-control-input topping_option" value="topping_tops" @if($detail->topping_from == 'topping_tops') checked="true" @endif {{$inputdisable}}>
                                 <label class="custom-control-label" for="topping_tops">Pizza Topping Only</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="topping_donair_shawarma_mediterranean" name="topping_from" class="custom-control-input" value="topping_donair_shawarma_mediterranean" @if($detail->topping_from == 'topping_donair_shawarma_mediterranean') checked="true" @endif {{$inputdisable}}>
+                                <input type="radio" id="topping_donair_shawarma_mediterranean" name="topping_from" class="custom-control-input topping_option" value="topping_donair_shawarma_mediterranean" @if($detail->topping_from == 'topping_donair_shawarma_mediterranean') checked="true" @endif {{$inputdisable}}>
                                 <label class="custom-control-label" for="topping_donair_shawarma_mediterranean">Donair shawarma mediterranean</label>
                             </div>
                             @if($inputdisable)
                                 <input type="hidden" name="topping_from" value="{{$detail->topping_from}}">
                             @endif
+                        </div>
+                        <div class="form-group default_topping"  {{$detail->topping_from == 'none'?'style=display:none;':'style=display:block;'}}>
+                            <label>Select topping to show when no customisation created by user </label>
+                            <div class="form-group topping_pizza topping_dips hide_options" {{$detail->topping_from == 'topping_pizza' || $detail->topping_from == 'topping_dips'?'style=display:block;':'style=display:none;'}}>
+                               
+                               <label >Pizza Size</label>
+                               <select class="form-control selectpicker" name="pizza_size" id="pizza_size" title="Select size" data-size="4" >
+                            
+                                    @foreach($topping['size'] as $size)
+                                    <option value="{{$size->id}}" @if(isset($detail->pizza_size) && $size->id == $detail->pizza_size) selected="selected" @endif>{{$size->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        
+                            <div class="form-group topping_pizza topping_dips hide_options" {{$detail->topping_from == 'topping_pizza' || $detail->topping_from == 'topping_dips'?'style=display:block;':'style=display:none;'}}>
+                                <label  >Pizza Sauce </label>
+                                <select class="form-control selectpicker" name="pizza_sauce" id="pizza_sauce" title="Select Sauce" data-size="4" >
+                            
+                                    @foreach($topping['sauce'] as $sauce)
+                                    <option value="{{$sauce->id}}" @if(isset($detail->pizza_sauce) && $sauce->id == $detail->pizza_sauce) selected="selected" @endif>{{$sauce->name}}</option>
+                                    @endforeach
+                                </select>
+                                
+                            </div>
+                            
+                            <div class="form-group topping_pizza topping_dips hide_options" {{$detail->topping_from == 'topping_pizza' || $detail->topping_from == 'topping_dips'?'style=display:block;':'style=display:none;'}}>   
+                               <label  >Pizza Crust</label>
+                               <select class="form-control selectpicker" name="pizza_crust" id="pizza_crust" title="Select Crust" >
+                            
+                                    @foreach($topping['crust'] as $crust)
+                                    <option value="{{$crust->id}}" @if(isset($detail->pizza_crust) && $crust->id == $detail->pizza_crust) selected="selected" @endif>{{$crust->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group topping_wing_flavour hide_options"  {{$detail->topping_from == 'topping_wing_flavour'?'style=display:block;':'style=display:none;'}}>
+                               <label >Topping Wing Flavour</label>
+                               <select class="form-control selectpicker" name="common_topping" id="topping_wing_flavour" title="Select Topping Wing Flavour" >
+                            
+                                    @foreach($topping['toppingWing'] as $toppingWing)
+                                    <option value="{{$toppingWing->id}}" @if(isset($detail->common_topping) && $toppingWing->id == $detail->common_topping) selected="selected" @endif>{{$toppingWing->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group topping_donair_shawarma_mediterranean hide_options" {{$detail->topping_from == 'topping_donair_shawarma_mediterranean'?'style=display:block;':'style=display:none;'}}>
+                         
+                               <label >Topping Donair Shawarna Meditarrean</label>
+                               <select class="form-control selectpicker" name="common_topping" id="topping_donair" title="Select Topping Donair Shawarna Meditarrean" >
+                            
+                                    @foreach($topping['toppingDonair'] as $toppingDonair)
+                                    <option value="{{$toppingDonair->id}}" @if(isset($detail->common_topping) && $toppingDonair->id == $detail->common_topping) selected="selected" @endif>{{$toppingDonair->name}}</option>
+                                    @endforeach
+                                </select>
+                            
+                            </div>
                         </div>
                         <div class="form-group text-center mb-0">
                             <button id="btnAdd" class="btn btn-danger ripple-effect text-uppercase min-w130" type="submit">UPDATE<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></button>

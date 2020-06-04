@@ -38,7 +38,7 @@
               <td>
                 <div class="checkbox">
                   <label>
-                    <input type="radio" value="{{$vtop5->id?$vtop5->id:0}}" name="topping_wing_master" class="topping_wing_master" data-price='{{$vtop5->custom_price?number_format($vtop5->custom_price,2):number_format($vtop5->price,2)}}'>
+                    <input type="radio" value="{{$vtop5->id?$vtop5->id:0}}" name="topping_wing_master" class="topping_wing_master" data-price='{{$vtop5->custom_price?number_format($vtop5->custom_price,2):number_format($vtop5->price,2)}}' {{isset($product->common_topping) && !empty($product->common_topping) && $product->common_topping==$vtop5->id?'checked':''}}>
                     
                     {{$vtop5->name?$vtop5->name:''}} 
                   </label>
@@ -62,7 +62,7 @@
               <td>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="{{$topv->custom_price?$topv->custom_price:$topv->price}}" name="topping_master[{{$topv->id?$topv->id:''}}]" class="topping_wing_master" >
+                    <input type="checkbox" value="{{$topv->custom_price?$topv->custom_price:$topv->price}}" name="topping_master[{{$topv->id?$topv->id:''}}]" class="topping_wing_master" {{isset($product->common_topping) && !empty($product->common_topping) && $product->common_topping==$topv->id?'checked':''}}>
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                     {{$topv->name?$topv->name:''}} (${{$topv->custom_price?$topv->custom_price:'$0.00'}} )
                   </label>
@@ -83,7 +83,7 @@
               <td>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="{{$donairv->custom_price?$donairv->custom_price:$donairv->price}}" name="topping_master[{{$donairv->id?$donairv->id:''}}]" class="topping_wing_master" >
+                    <input type="checkbox" value="{{$donairv->custom_price?$donairv->custom_price:$donairv->price}}" name="topping_master[{{$donairv->id?$donairv->id:''}}]" class="topping_wing_master" {{isset($product->common_topping) && !empty($product->common_topping) && $product->common_topping==$donairv->id?'checked':''}}>
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                     {{$donairv->name?$donairv->name:''}} (${{$donairv->custom_price?$donairv->custom_price:'$0.00'}} )
                   </label>
@@ -102,7 +102,7 @@
         <div class="selectitemSlider">
           @foreach($size_master as $k1 => $v1)
           <div class="productItem sizem_id" data-id="{{$v1->id?$v1->id:''}}">
-            <input type="radio" name="size_master" id="size_{{$v1->id?$v1->id:''}}" value="{{$v1->id?$v1->id:''}}" data-price='{{$v1->custom_price?number_format($v1->custom_price,2):number_format($v1->price,2)}}' class="size_master">        
+            <input type="radio" name="size_master" id="size_{{$v1->id?$v1->id:''}}" value="{{$v1->id?$v1->id:''}}" data-price='{{$v1->custom_price?number_format($v1->custom_price,2):number_format($v1->price,2)}}' class="size_master" {{isset($product->pizza_size) && !empty($product->pizza_size) && $product->pizza_size==$v1->id?'checked':''}}>        
             <label for="size_{{$v1->id?$v1->id:''}}" >
               {{$v1->name?$v1->name:''}}
               <p class="price">${{$v1->custom_price?number_format($v1->custom_price,2):0.00}}</p>
@@ -118,7 +118,7 @@
         <div class="selectitemSlider">
           @foreach($crust_master as $k2 => $v2)
           <div class="productItem">
-            <input type="radio"  name="crust_master" id="crust_{{$v2->id?$v2->id:''}}"  value="{{$v2->id?$v2->id:''}}" data-price='{{$v2->custom_price?number_format($v2->custom_price,2):number_format($v2->price,2)}}' class="crust_master">
+            <input type="radio"  name="crust_master" id="crust_{{$v2->id?$v2->id:''}}"  value="{{$v2->id?$v2->id:''}}" data-price='{{$v2->custom_price?number_format($v2->custom_price,2):number_format($v2->price,2)}}' class="crust_master" {{isset($product->pizza_crust) && !empty($product->pizza_crust) && $product->pizza_crust==$v2->id?'checked':''}}>
             <label for="crust_{{$v2->id?$v2->id:''}}">
               <div class="productImg">
                 <!-- <img src="{{asset('img/menu_pic_1.png')}}" class="img-responsive" /> -->
@@ -137,7 +137,7 @@
         <div class="selectitemSlider">
           @foreach($sauce_master as $k3 => $v3)
           <div class="productItem">
-            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master">
+            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master" {{isset($product->sauce_master) && !empty($product->sauce_master) && $product->sauce_master==$v3->id?'checked':''}}>
             <label for="sauce_{{$v3->id?$v3->id:''}}">
               <div class="productImg">
                 <!-- <img src="{{asset('img/menu_pic_1.png')}}" class="img-responsive" /> -->
@@ -180,7 +180,7 @@
             <tr>
               <th>Item</th>
               <th>Cost</th>
-              <th>Quantity</th>
+              <th class="text-center">Quantity</th>
             </tr>
           </thead>
           <tbody>
@@ -188,7 +188,7 @@
             <tr>
               <td>{{$v4->name?$v4->name:''}}  </td>
               <td>${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
-              <td>
+              <td class="text-center">
                   <input type='button' value='-' class='qtyminus' field='dip_master_{{$v4->id?$v4->id:''}}' />
                   <input type='text' name='dip_master[{{$v4->id?$v4->id:''}}]'  id='dip_master_{{$v4->id?$v4->id:''}}'  value='0' min="0" class='qty dip_price' data-price="{{$v4->custom_price?$v4->custom_price:$v4->price}}"/>
                   <input type='button' value='+' class='qtyplus' field='dip_master_{{$v4->id?$v4->id:''}}'  />

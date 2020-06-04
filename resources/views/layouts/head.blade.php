@@ -18,7 +18,7 @@
 
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}" type="text/css"> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+   <!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"> -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/jquery.mCustomScrollbar.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/tempusdominus-bootstrap-4.min.css')}}" type="text/css">
@@ -29,7 +29,8 @@
 
 
     <script src="{{ asset('js/jquery.min.js')}}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script src="{{ asset('js/bootstrap/bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
     <script src="{{ asset('js/slick.js')}}"></script>
     <script src="{{ asset('js/toastr.min.js')}}"></script>

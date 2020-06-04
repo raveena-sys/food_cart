@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group has-error">
                     <label>Price</label>
-                    <input class="form-control" name="price" type="text" placeholder="Price" maxlength="250"  value="{{$detail->price}}">
+                    <input class="form-control" name="price" type="text" placeholder="Price" maxlength="250"  value="{{$detail->custom_price}}">
                 </div>
                 <div class="form-group">
                     <label>Description</label>

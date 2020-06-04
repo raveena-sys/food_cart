@@ -42,9 +42,11 @@ Route::get('contact_us', 'Front\ContactUsController@contactus');
 Route::get('get_customise/{id}', 'Front\StoreController@get_customise');
 
 Route::post('comboproduct', 'Front\StoreController@comboProductCustomiseDetails');
+Route::post('comboProductSelectionDetails', 'Front\StoreController@comboProductSelectionDetails');
 Route::post('comboaddtocart', 'Front\StoreController@comboaddtocart');
 Route::post('get_customise_combo', 'Front\StoreController@get_customise_combo');
 Route::post('reset_cartcombo', 'Front\StoreController@reset_cartcombo');
+Route::post('CheckProductCutomise', 'Front\StoreController@CheckProductCutomise');
 
 Route::post('add_contactus', 'Front\ContactUsController@addContactUs');
 

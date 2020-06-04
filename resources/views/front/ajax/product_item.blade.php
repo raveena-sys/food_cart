@@ -157,16 +157,16 @@ $trHtml ='';
                                 </tr>
                                 <tr>
                                   <!-- <th>#</th> -->
-                                  <th class="text-center">Size</th>
+                                  <th>Size</th>
                                   <th class="text-center">$</th>
                                   <th class="text-center">Select</th>
                                 </tr>
                                 @if(!empty($val->size_master_price))
                                 @foreach(json_decode($val->size_master_price) as $k => $v)
                                 <tr>
-                                    <td>{{$v->size}}</td>
-                                    <td>${{$v->price}}</td>
-                                    <td>
+                                    <td >{{$v->size}}</td>
+                                    <td class="text-center">${{$v->price}}</td>
+                                    <td class="text-center">
                                         <input type="radio" value="{{$v->id}}" name="special_prod_add{{$val->id}}" class="special_prod_add{{$val->id}}" data-price="{{$v->price}}" >
                                     </td>
                                 </tr>
@@ -233,12 +233,13 @@ $trHtml ='';
                                             @endphp
 
                                             Customize your {{$numberFormatter->format($i)}} Pizza</label>
-                                            <select name="special_prod_id[]" class="form-control customize_select_option" id="customize_select{{$val->id}}_{{$i}}">
+                                            <select name="special_prod_id[]" class="form-control customize_select_option" id="customize_select{{$val->id}}_{{$i}}" data-pizza="{{$numberFormatter->format($i)}}" data-key="{{$i}}">
                                               <option value="">Please Select</option>
                                              
                                               @foreach($products as $val1)
+                                             
                                                 @if(in_array($val1->id, explode(',',$val->custom_product)))
-                                                <option value="{{$val1->id}}">{{$val1->name}}</option>
+                                                <option value="{{$val1->id}}" data-required="{{$val1->customise_required}}" >{{$val1->name}}</option>
                                                 @endif
                                               @endforeach
                                             </select>
@@ -418,8 +419,8 @@ $trHtml ='';
                             </tr>
                             <tr>
                               <!-- <th>#</th> -->
-                              <th class="text-center">Name</th>
-                              <th class="text-center">Info</th>
+                              <th >Name</th>
+                              <th >Info</th>
                               <th class="text-center">Price($)</th>
                               <th class="text-center">Select</th>
                             </tr>
@@ -428,8 +429,8 @@ $trHtml ='';
                               <tr>
                                 <td>{{$val->name}}</td>
                                 <td>{{$val->description}}</td>
-                                <td>{{($val->custom_price)?number_format($val->custom_price,2):$val->price}}</td>
-                                <td>
+                                <td class="text-center">{{($val->custom_price)?number_format($val->custom_price,2):$val->price}}</td>
+                                <td class="text-center">
                                     <input type='checkbox' value="{{$val->id}}" name="sides_prod_add{{$val->id}}" class="sides_prod_add" data-price="{{$val->price}}" >
                                 </td>
                               </tr>
@@ -473,10 +474,9 @@ $trHtml ='';
                       @endif
                     @endif
 
-                </div>    
+                  </div>    
                 
                 </div>
-           
                 
             </div>
         </div>

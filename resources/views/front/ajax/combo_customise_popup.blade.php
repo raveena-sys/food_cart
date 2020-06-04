@@ -36,7 +36,7 @@
         <div class="selectitemSlider">
           @foreach($crust_master as $k2 => $v2)
           <div class="productItem">
-            <input type="radio"  name="crust_master" id="crust_{{$v2->id?$v2->id:''}}"  value="{{$v2->id?$v2->id:''}}" data-price='{{$v2->custom_price?number_format($v2->custom_price,2):number_format($v2->price,2)}}' class="crust_master">
+            <input type="radio"  name="crust_master" id="crust_{{$v2->id?$v2->id:''}}"  value="{{$v2->id?$v2->id:''}}" data-price='{{$v2->custom_price?number_format($v2->custom_price,2):number_format($v2->price,2)}}' class="crust_master" {{isset($product->pizza_crust) && !empty($product->pizza_crust) && $product->pizza_crust==$v2->id?'checked':''}}>
             <label for="crust_{{$v2->id?$v2->id:''}}">
               <div class="productImg">
                 <!-- <img src="{{asset('img/menu_pic_1.png')}}" class="img-responsive" /> -->
@@ -55,7 +55,7 @@
         <div class="selectitemSlider">
           @foreach($sauce_master as $k3 => $v3)
           <div class="productItem">
-            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master">
+            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master" {{isset($product->pizza_sauce) && !empty($product->pizza_sauce) && $product->pizza_sauce==$v3->id?'checked':''}}>
             <label for="sauce_{{$v3->id?$v3->id:''}}">
               <div class="productImg">
               </div>
@@ -97,7 +97,7 @@
             <tr>
               <th>Item</th>
               <th>Cost</th>
-              <th>Quantity</th>
+              <th class="text-center">Quantity</th>
             </tr>
           </thead>
           <tbody>
@@ -105,7 +105,7 @@
             <tr>
               <td>{{$v4->name?$v4->name:''}}  </td>
               <td>${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
-              <td>
+              <td class="text-center">
                   <input type='button' value='-' class='qtyminus' field='dip_master_{{$v4->id?$v4->id:''}}' />
                   <input type='text' name='dip_master[{{$v4->id?$v4->id:''}}]'  id='dip_master_{{$v4->id?$v4->id:''}}'  value='0' min="0" class='qty dip_price' data-price="{{$v4->custom_price?$v4->custom_price:$v4->price}}"/>
                   <input type='button' value='+' class='qtyplus' field='dip_master_{{$v4->id?$v4->id:''}}'  />
@@ -125,7 +125,7 @@
               <td>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="{{$v5->custom_price?$v5->custom_price:$v5->price}}" name="topping_master[{{$v5->id?$v5->id:''}}]" class="topping_master" >
+                    <input type="checkbox" value="{{$v5->custom_price?$v5->custom_price:$v5->price}}" name="topping_master[{{$v5->id?$v5->id:''}}]" class="topping_master">
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                     {{$v5->name?$v5->name:''}} (${{$v5->custom_price?$v5->custom_price:'$0.00'}} )
                   </label>

@@ -25,22 +25,6 @@
       </div>
     </div>
 
-   <!--  <div class="order_box">
-      <h2>ORDER SETTINGS</h2>
-      <div class="order_box_inner">
-        <h3>Service Method & Location</h3>
-        <h4>DELIVERY to test</h4>
-        <p>Delivery Instructions For Driver</p>
-        <textarea name="delivery_ins"></textarea>
-        <p>(Note: Gate code, ring the door bell, etc.)</p>
-        <h3>Order Timing - Now</h3>
-        <p>
-          Your order will be ready in 20 - 30 minutes for pickup and delivered between 30 - 50 minutes based on location, quantity of order and few other factors.
-         
-        </p>
-        <h3>TO PLACE YOUR ORDER, complete the fields below.</h3>
-      </div>
-    </div> -->
   </div>
 
 

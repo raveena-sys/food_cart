@@ -168,7 +168,7 @@ class OrderController extends Controller
 	    		if(!empty($zipcode)){
 	    			Session::put('deliveryCharge', $zipcode->price);
 	    			$html = view('front.ajax.order_summary')->render();
-	    			return response()->json(['status' => 'true', 'message' => 'Delivery charges added', 'html' => $html]);
+	    			return response()->json(['status' => 'true', 'message' => 'Delivery charges applied', 'html' => $html]);
 	    		}else{
 	    			Session::forget('deliveryCharge');
 	    			$html = view('front.ajax.order_summary')->render();
@@ -177,7 +177,7 @@ class OrderController extends Controller
 	    	}
 	    }else {
 	    	$html = view('front.ajax.order_summary')->render();
-	    	return response()->json(['status' => 'true', 'message' => 'Store does not provide delivery at this area.', 'html' => $html]);
+	    	return response()->json(['status' => 'true', 'message' => '', 'html' => $html]);
 	    }
     }
 

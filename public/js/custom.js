@@ -33,6 +33,7 @@ $(document).ready(function (e) {
     variableWidth: true
   });
 });
+*/
 $(document).ready(function (e) {
   $(window).scroll(function () {
     if ($(this).scrollTop() > 30) {
@@ -41,7 +42,7 @@ $(document).ready(function (e) {
       $(".navbar-me").removeClass("fixed-me");
     }
   });
-});*/
+});
 //jQuery(document).ready(function () {
   // This button will increment the value
   $(document).on('click', '.qtyplus', function (e) {
@@ -351,9 +352,33 @@ $(document).on('click', '.customise_special_prod', function (){
     }
 });
 
+//Save customise options On change of products that doesn't need customisation on combo (double/triple) product category
+$(document).on('change', '.customize_select_option', function(){
+  var required = $(this).find(':selected').data('required');
+    var key = $(this).attr('data-key');
+    $.ajax({
+      url: site_url+'/comboProductSelectionDetails',
+      type: 'post', 
+      data: {product_id: $(this).find(':selected').val(), "_token": $('meta[name="csrf-token"]').attr("content"), 'custom':'custom', 'required_customise':required, 'key':key},
+      success:function(res){
+        var data = JSON.parse(res);
+        if(data.status){
+          //$('#add_special_product'+comboprodid).modal('show');
+          //$('.sideMenu').removeClass('open');  
+
+        }
+        else {
+          Command: toastr['error'](data.msg);
+        }
+      },
+      error:function(e){
+        Command: toastr['error'](data.msg);      
+      }
+    })
+
+});
 
 //Save customise option on special product
-
 $(document).on('click', '.custom_save', function(){
   var pizzaid = $(this).attr('data-product_id');
   var key = $(this).attr('data-key');
@@ -370,7 +395,6 @@ $(document).on('click', '.custom_save', function(){
     data: formData,
     success:function(res){
       var data = JSON.parse(res);
-
       if(data.status){
         $('#add_special_product'+comboprodid).modal('show');
         $('.sideMenu').removeClass('open');  
@@ -384,8 +408,6 @@ $(document).on('click', '.custom_save', function(){
       Command: toastr['error'](data.msg);      
     }
   })
-
-
 });
 
 //add special item customise add to cart button
@@ -393,42 +415,93 @@ $(document).on('click', '.add_combo', function (){
   
   var product_id = $(this).attr('data-product_id');
   var selectlength = $('#select_combo_pizza'+product_id).find('.customize_select_option').length;
-  var price = $(this).attr('data-price');
-      
-  $.ajax({
-    url: site_url+'/comboaddtocart',
-    type: 'post', 
-    data: {
-      "_token": $('meta[name="csrf-token"]').attr("content"),
-      product_id:product_id,
-      selectlength:selectlength,
-      price:price
-    },
-    success:function(res){
-      var data = JSON.parse(res);
+  var countProduct = 0;
+  var out = true;
+  $('#select_combo_pizza'+product_id).find('.customize_select_option').each(function(value, index){
 
-      if(data.status){
-        $('#customize_addcart_error'+product_id).text('');
-        //$('#add_special_product'+product_id).modal('hide');
-        $('.sideMenu').removeClass('open');
-        $('.cart_item').empty().html(data.html);
-        $('.product_item').empty().html(data.product_html);
-        $('.cart_count').empty().html(data.cart_count);
-        //Command: toastr['success'](data.msg);
-        window.location.reload();
-        $('#add_special_product'+product_id+' button.close').trigger('click');
-       /* $('.modal.in').modal('hide');
-        $('.modal-backdrop').remove();*/
-      }
-      else {
-        $('#customize_addcart_error'+product_id).text(data.msg);
-          //Command: toastr['error'](data.msg);
-      }
-    },
-    error:function(e){
-      Command: toastr['error'](data.msg);      
+    var pizza = $(this).data('pizza');
+    var selectedProdId = $(this).find(':selected').val();
+    if(selectedProdId==''|| selectedProdId=='undefined'){
+      $('#customize_addcart_error'+product_id).text('Please select '+pizza+' pizza');  
+      out =false;
+      return false;      
     }
-  })
+    var required = $(this).find(':selected').data('required')
+    if(required=='on'){
+      out =false;
+      $.ajax({
+        url: site_url+'/CheckProductCutomise',
+        type: 'post', 
+        async:false,
+        data: {
+          "_token": $('meta[name="csrf-token"]').attr("content"),
+          selectedProdId:selectedProdId,
+          pizza:pizza
+        },
+        success:function(data){
+          
+          //var data = JSON.parse(res);
+          if(data.status){
+            out =true;
+            $('#customize_addcart_error'+product_id).text('');
+          }
+          else {
+            $('#customize_addcart_error'+product_id).text(data.msg);
+            out =false;
+            return false;  
+                
+          }
+          return out;
+        },
+        error:function(e){
+          Command: toastr['error'](e); 
+            return false;      
+
+        }
+      })
+      return out;
+     // $('#customize_addcart_error'+product_id).text('Please choose toppings for your '+pizza+' pizza');  
+    }
+  });
+  var price = $(this).attr('data-price');
+  if(out){
+
+    $.ajax({
+      url: site_url+'/comboaddtocart',
+      type: 'post', 
+      data: {
+        "_token": $('meta[name="csrf-token"]').attr("content"),
+        product_id:product_id,
+        selectlength:selectlength,
+        price:price,
+        countProduct:countProduct
+      },
+      success:function(res){
+        var data = JSON.parse(res);
+
+        if(data.status){
+          $('#customize_addcart_error'+product_id).text('');
+          //$('#add_special_product'+product_id).modal('hide');
+          $('.sideMenu').removeClass('open');
+          $('.cart_item').empty().html(data.html);
+          $('.product_item').empty().html(data.product_html);
+          $('.cart_count').empty().html(data.cart_count);
+          //Command: toastr['success'](data.msg);
+          window.location.reload();
+          $('#add_special_product'+product_id+' button.close').trigger('click');
+         /* $('.modal.in').modal('hide');
+          $('.modal-backdrop').remove();*/
+        }
+        else {
+          $('#customize_addcart_error'+product_id).text(data.msg);
+            //Command: toastr['error'](data.msg);
+        }
+      },
+      error:function(e){
+        Command: toastr['error'](data.msg);      
+      }
+    })
+  }   
 });
 
 
@@ -583,9 +656,7 @@ $(document).on('click', '.add_cart_product', function(){
 
 
 function UpdateCartQty(product_id, sub=0, product_price){
-  /*var id = $(this).attr('data-product_id');
-  var price = $(this).attr('data-price');
-  var sub = $(this).attr('data-sub');*/
+
   var seg = $('#url_param').val();
   $.ajax({
     url: site_url+'/increament_decrement',
@@ -628,15 +699,6 @@ function UpdateCartQty(product_id, sub=0, product_price){
     }
   })
 }; 
-
-
-/*$(document).on('click', ".subcategory", function() {
-  var id = $(this).attr('href');
-
-    $('html,body').animate({
-        scrollTop: $(id).offset().top},
-        'slow');
-});*/
 
 $(document).on('click', '.read_less', function(){
   id = $(this).attr('id');
@@ -741,8 +803,7 @@ $(document).on('click', '.order_multiple', function(){
     var values = [];
     $(".sides_prod_add:checked").each(function() {
        values.push( {
-         id: $( this ).val()/*,
-         price: $( this ).data( 'price' )*/
+         id: $( this ).val()
        });
     });      
     sidesAddToCart(values);
@@ -800,24 +861,6 @@ function sidesAddToCart(values){
     }
   })
 }
-/*function onScroll(event){
-    var scrollPos = $(document).scrollTop();
-    $('#menu-center a').each(function () {
-        var currLink = $(this);
-        var refElement = $(currLink.attr("href"));
-        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-            $('#menu-center ul li a').removeClass("active"); //added to remove active class from all a elements
-            currLink.addClass("active");
-        }
-        else{
-            currLink.removeClass("active");
-        }
-    });
-}
-
-$('html, body').stop().animate({
-  'scrollTop': $target.offset().top+2;
-});
 $(document).ready(function(){
   $('.subcategory').on('click', function(event) {
       $(this).parent().find('a').removeClass('active');
@@ -826,56 +869,12 @@ $(document).ready(function(){
   
   $(window).on('scroll', function() {
       $('.sub_cat_list').each(function() {
-          if($(window).scrollTop() >= $(this).offset().top) {
-              var id = $(this).attr('id');
+          if($(window).scrollTop() >= $(this).offset().top-$('.is-sticky').height()) {
               $('.subcategory').removeClass('active');
+              var id = $(this).attr('id');
               $('.subcategory[href="#'+ id +'"]').addClass('active');
+             
           }
       });
   });
-});*/
-
-
-$(document).ready(function () {
-    $(window).on('scroll', function() {
-         $('.subcategory').each(function(){
-            $(this).removeClass('active');
-        })
-         console.log($(window).height(), $(window).scrollTop());
-    $('a[href^="'+window.location.hash+'"]').addClass('active');  
-    });
-    
-    //smoothscroll
-    $('a[href^="#"]').on('click',function (e) {
-      e.preventDefault();
-        $('a').each(function(){
-            $(this).removeClass('active');
-        })
-    $(this).addClass('active'); 
-
-      var target = this.hash,
-            menu = target;
-      $target = $(target);
-      $('html, body').stop().animate({
-          'scrollTop': $target.offset().top+25
-      }, 500, 'swing', function () {
-          window.location.hash = target;
-      });
-  });
-
 });
-
-function onScroll(event){
-    var scrollPos = $(document).scrollTop();
-    $('.subcategory').each(function () {
-        var currLink = $(this);
-        var refElement = $(currLink.attr("href"));
-        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-            $('#menu-center ul li a').removeClass("active"); //added to remove active class from all a elements
-            currLink.addClass("active");
-        }
-        else{
-            currLink.removeClass("active");
-        }
-    });
-}
