@@ -68,11 +68,22 @@ var headerHeight = $('#header').height();
     $(window).scroll(function(){
     var e = $('.menu-wrapper'), i = e.offset();
     e.length > 0 && $(window).scrollTop() >= i.top - headerHeight ? $(".menu-nav").addClass('is-sticky') : $(".menu-nav").removeClass('is-sticky');
-    console.log('test')
+   
 
     $(".menu-nav").css("width", $('.store_list_inner').width())
     $(".menu-nav").css("top", headerHeight)
   })
+
+  
+  $(document).ready(function(){
+      var scrollTopOffest = $("#header").outerHeight(true) + $('#menuNav').outerHeight(true);
+    $( "a.subcategory" ).click(function( event ) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - scrollTopOffest}, 500);
+
+        console.log(event)
+    });
+});
     </script>
 </body>
 

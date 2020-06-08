@@ -866,6 +866,8 @@ $(document).ready(function(){
       $(this).parent().find('a').removeClass('active');
       $(this).addClass('active');
   });
+
+
   
   $(window).on('scroll', function() {
       $('.sub_cat_list').each(function() {

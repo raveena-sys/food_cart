@@ -9,16 +9,14 @@ $trHtml ='';
   @if(!empty($subcategory))
 
     @foreach($subcategory as $value)
-    <div class="row">
-        <div class="col-md-12 sub_cat_list" id="{{str_replace(' ', '_', $value->name)}}">
+    <div class="row" id="{{str_replace(' ', '_', $value->name)}}">
+        <div class="col-md-12 sub_cat_list">
             <div class="menu__subcategory__inner">
                 <span class="subcategory__name">{{$value->name}}</span>
             </div>
         </div>
 
-    </div>
-
-    <div class="row">
+ 
 
         @foreach($products as $val)
         @php

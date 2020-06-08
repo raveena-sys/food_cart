@@ -19,7 +19,7 @@
 <div class="container store_list_inner">
     <div class="row menu-wrapper">
         <div class="col-xs-12">
-            <div class="menu-nav">
+            <div class="menu-nav" id="menuNav">
                 @if(!empty($subcategory))
                 @foreach($subcategory as $val)
                <!--  <a href="javascript:void(0)" id="{{str_replace(' ', '_', $val->name)}}" class="subcategory">{{$val->name}}</a> -->
