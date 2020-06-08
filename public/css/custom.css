@@ -826,12 +826,12 @@ button.close {
 
 .img-div-wrap {
     width: 100%;
+    height: 160px;
 }
 
 .img-div-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 .btn_xtr_topping {
