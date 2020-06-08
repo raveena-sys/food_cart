@@ -1423,7 +1423,7 @@ button.close span {
     border-radius: 3px;
     margin: 0rem;
     overflow: hidden;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     height: 95%;
 }
 
@@ -1439,7 +1439,7 @@ button.close span {
 .listGrid .card-footer {
     display: flex;
     justify-content: space-between;
-    padding: 10px 15px;
+    padding: 12px 15px 20px 15px;
 }
 
 .listGrid .card-footer .btn.btn-success {
@@ -2017,6 +2017,9 @@ span.text-danger {
     font-weight: 500;
     font-size: 16px;
 }
+.modal{z-index: 9999999; top: 10%;}
+
+.modal.orderCompleteModal{ z-index: 9999999; top: 10%; }
 
 @media (max-width: 768px) {
     footer {
@@ -2225,10 +2228,11 @@ span.text-danger {
     border-left: 1px solid #333 !important;
     border-right: 1px solid #333 !important;
 }
+.img-wrap {
+    height: 280px;
+}
+.img-wrap img{ height: 100%; }
 
-/*.menu__subcategory__inner.test {
-    margin-top: 170px;
-}*/
 
 @media(max-width: 1366px){
 	.home_icon{
@@ -2237,7 +2241,7 @@ span.text-danger {
 	.home_icon_list_details{ padding: 12px !important; }
 	.home_icon_list_details span{ font-size: 14px; }
 	.home_icon_list_details span img{ margin-left: 5px; }
-	.special-type{ padding-top: 15px !important; }
+	.special-type{ padding-top: 12px !important; }
 }
 
 /* ----------- iPad Pro ----------- */
@@ -2656,17 +2660,17 @@ a img.logo {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px #fff; 
   border-radius: 10px;
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #00ab00; 
+  background: #b7b7b7; 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #00ab00; 
+  background: grey; 
 }

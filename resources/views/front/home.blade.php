@@ -107,7 +107,34 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<div class="modal fade successfulModal" data-keyboard="true" tabindex="-1" role="dialog" id="confirmOrderModal" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered modal-md">
+		<div class="modal-content">
+			<div class="modal-content-inner">
+				<div class="modal-header">
+					<a href="javascript:void(0);" class="close" data-dismiss="modal" aria-label="Close">
+						<i class="fa fa-close"></i>
+					</a>
+				</div>
+				<div class="modal-body">
+					<img src="{{asset('img/checked.svg')}}" class="img-fluid checkedIcon" />
+					<h2>Order Complete </h2>
+					<p>
+            @if(Session::has('orderSuccessMsg'))
+            {{Session::get('orderSuccessMsg')}}
+            @endif
+					</p>
+
+          <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" >Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 @if( Session::has('orderSuccessMsg'))
    <script type="text/javascript">
       $(document).ready(function() {
