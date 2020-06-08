@@ -62,6 +62,7 @@ Route::get('increament_decrement', 'Front\StoreController@increamentCartQty');
 Route::get('pdfDownload', 'Front\OrderController@pdfDownload');
 Route::post('checkcoupon', 'Front\OrderController@checkcoupon');
 Route::post('sidesAddToCart', 'Front\StoreController@sidesAddToCart');
+Route::get('scroll', 'Front\HomeController@scroll');
 /***************Web routes newly started************/
 
 

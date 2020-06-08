@@ -90,8 +90,13 @@ function sendMail($data)
                 });
                 break;
             case "contact_us":
+                Mail::send('emails.thankyou', ['data' => $data], function ($message) use ($data) {
+                    $message->to($data['email'])
+                        ->from(env('FROM_EMAIL'), 'FoodCart')
+                        ->subject($data['subject']);
+                });
                 Mail::send('emails.contact_us', ['data' => $data], function ($message) use ($data) {
-                    $message->to($data['admin_email'])
+                    $message->to('info@freefoodcart.com')
                         ->from(env('FROM_EMAIL'), 'FoodCart')
                         ->subject($data['subject']);
                 });

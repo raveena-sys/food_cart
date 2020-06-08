@@ -32,8 +32,7 @@
                     <button id="btnAdd" class="btn btn-danger ripple-effect text-uppercase min-w130" type="submit">Send<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></button>
                 </div>
             </form>
-            {!! JsValidator::formRequest('App\Http\Requests\ContactUsRequest','#add_contactus_form')
-            !!}
+            
         </div>
 
         <div class="clearfix"></div>

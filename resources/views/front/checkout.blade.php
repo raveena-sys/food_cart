@@ -456,4 +456,16 @@
     </div>
   </div>
 </div>
+@section('js')
+<script>
+if (window.name == "reloader") {
+    window.name = "";
+    location.reload();
+}
+
+window.onbeforeunload = function() {
+    window.name = "reloader"; 
+}
+</script>
+ @endsection('js')
 @endsection

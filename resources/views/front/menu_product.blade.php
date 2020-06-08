@@ -20,6 +20,7 @@
     <div class="row menu-wrapper">
         <div class="col-xs-12">
             <div class="menu-nav">
+                <a href="{{url(Session::get('orderType').'/menu/0')}}" class="subcategory">Home</a>
                 @if(!empty($subcategory))
                 @foreach($subcategory as $val)
                <!--  <a href="javascript:void(0)" id="{{str_replace(' ', '_', $val->name)}}" class="subcategory">{{$val->name}}</a> -->
@@ -29,13 +30,13 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="row spaceer">
+        <div class="col-lg-8 col-md-8">
             <div class="product_item">
                 {!!view('front.ajax.product_item', compact('products', 'subcategory'))->render()!!}
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-4">
             <div class="cartRight cart_item" style="margin-top:40px">
                 {!!view('front.ajax.cart_item', compact('products'))->render()!!}
             </div>
@@ -100,7 +101,18 @@
         </div>
     </div>
 </div>
+@section('js')
+<script>
+if (window.name == "reloader") {
+    window.name = "";
+    location.reload();
+}
 
+window.onbeforeunload = function() {
+    window.name = "reloader"; 
+}
+</script>
+ @endsection('js')       
 @endsection
 
 

@@ -10,7 +10,7 @@
     <input type="hidden" value="{{Request::segment(1)}}" id="url_param"> 
    @foreach($cartArray as $k => $v)
 
-   <div class="cartbox__inner">
+   <div class="cartbox__inner" id="scroll_{{$k}}">
     <div class="cartBox">
       <img src="{{isset($v['image'])?asset('uploads/products/'.$v['image']):''}}" />
       <div class="cartBox__detail">
@@ -53,9 +53,8 @@
         @if(!empty($value1['dip_master_name']))
         <p>
           <strong>Dips:</strong>
-          @foreach($value1['dip_master_name'] as $val)
-          {{$val}}
-          @endforeach
+          {{implode(", ",$value1['dip_master_name'])}}
+          
           <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
         </p>
         @endif
@@ -63,15 +62,14 @@
         @if(!empty($value1['topping_master_name']))
         <p>
           <strong>Toppings:</strong>
-          @foreach($value1['topping_master_name'] as $val1)
-          {{$val1}}
-          @endforeach
+          {{implode(', ', $value1['topping_master_name'])}}
+          
           <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
         </p>
         @endif
         @if(!empty($value1['extra_cheese_name']))
         <p>
-          <strong>Cheese:</strong>Extra Cheese
+          <strong>Cheese:</strong> Extra Cheese
            <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
         </p>
         @endif
@@ -93,9 +91,8 @@
       @if(!empty($v['dip_master_name']))
       <p>
         <strong>Dips:</strong>
-        @foreach($v['dip_master_name'] as $val)
-        {{$val}}
-        @endforeach
+        {{implode(", ",$v['dip_master_name'])}}
+          
         <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
       </p>
       @endif
@@ -104,25 +101,25 @@
       <p>
         <strong>
       {{(!empty($v['topping_from']) && $v['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
-        @foreach($v['topping_master_name'] as $val1)
-        {{$val1}}
-        @endforeach
+        {{implode(', ', $v['topping_master_name'])}}
+        <!-- @foreach($v['topping_master_name'] as $val1)
+        {{rtrim($val1, ", ")}}
+        @endforeach -->
         <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
       </p>
       @endif
       @if(!empty($v['topping_sauce_master_name']))
       <p>
         <strong>
-      Sauce:</strong>
-        @foreach($v['topping_sauce_master_name'] as $val1)
-        {{$val1}}
-        @endforeach
+      Sauces:</strong>
+      {{implode(', ', $v['topping_sauce_master_name'])}}
+        
         <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
       </p>
       @endif
       @if(!empty($v['extra_cheese_name']))
       <p>
-        <strong>Cheese:</strong>Extra Cheese
+        <strong>Cheese:</strong> Extra Cheese
          <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
       </p>
       @endif
@@ -153,7 +150,7 @@
   <div class="totalPrice">
     <div class="totalPrice__inner">
       <div class="left">
-        Subtotal
+        Subtotal:
       </div>
       <div class="right">
         ${{number_format($subtotal,2)}}

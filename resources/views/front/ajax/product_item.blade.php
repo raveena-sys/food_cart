@@ -30,7 +30,7 @@ $trHtml ='';
 
         @if($val->sub_category_id == $value->id )
         @if($val->special_cat == 0 )
-        <div class="col-lg-4 col-sm-6 col-xs-12" id="prod_{{$val->sub_category_id}}">
+        <div class="col-lg-4 col-md-6 col-xs-6" id="prod_{{$val->sub_category_id}}">
             <div class="card listGrid">
                 <div class="imgWrapper">
                   <div class="img-header">
@@ -104,24 +104,64 @@ $trHtml ='';
                         @endif
                       @endforeach
                     @endif
-                    
-                      @if($val->add_customisation == 0 || $val->add_customisation == 2)
-                        <div class="leftSide">
-                          <a href="javascript:void(0);" data-product_id="{{isset($val->id)?$val->id:''}}"
-                              data-price="{{isset($val->custom_price)?number_format($val->custom_price, 2):(isset($val->price)?number_format($val->price, 2):'')}}"
-                              class="btn btn-success add_to_cart">
-                              ADD TO CART
-                          </a>
-                        </div>
-                      @endif
-                      @if($val->add_customisation == 1)
-                        <div class="leftSide">
-                          <a href="javascript:void(0);" 
-                              data-id="{{isset($val->id)?$val->id:0}}"
-                              class="btn btn-success customise_item">
-                              Customize
-                          </a>
-                        </div>
+                      @if(strtolower($value->name)=='breads' || strtolower($value->name)=='bread')
+                        @if($val->add_customisation == 0 || $val->add_customisation == 2)
+                          @if($showCart)
+                          <div class="countWrap">
+                            <button type="button" id="sub" data-product_id="{{isset($val->id)?$val->id:''}}"
+                                class="sub sub_item" data-price="{{isset( $price)? $price:0}}">-</button>
+                            <input class="count" type="text" id="item_count_{{isset($val->id)?$val->id:''}}" value="{{isset($quantity)?$quantity:1}}" min="1" max="100">
+                            <?php
+                              if(isset($val->price)){
+                                $price = $val->price;
+                              }else if(isset($val->custom_price)){
+                                $price = $val->custom_price;
+                              }else{
+                                $price = 0;
+                              }
+                            ?>
+                            <button type="button" id="add" class="add add_to_cart"
+                                data-product_id="{{isset($val->id)?$val->id:''}}" data-price="{{$price}}">+
+                            </button>
+                          </div>
+                          @else
+                          <div class="leftSide">
+                            <a href="javascript:void(0);" data-product_id="{{isset($val->id)?$val->id:''}}"
+                                data-price="{{isset($val->custom_price)?number_format($val->custom_price, 2):(isset($val->price)?number_format($val->price, 2):'')}}"
+                                class="btn btn-success add_to_cart">
+                                ADD TO CART
+                            </a>
+                          </div>
+                          @endif
+                        @endif
+                        @if($val->add_customisation == 1)
+                          <div class="leftSide">
+                            <a href="javascript:void(0);" 
+                                data-id="{{isset($val->id)?$val->id:0}}"
+                                class="btn btn-success customise_item">
+                                Customize
+                            </a>
+                          </div>
+                        @endif
+                      @else
+                        @if($val->add_customisation == 0 || $val->add_customisation == 2)
+                          <div class="leftSide">
+                            <a href="javascript:void(0);" data-product_id="{{isset($val->id)?$val->id:''}}"
+                                data-price="{{isset($val->custom_price)?number_format($val->custom_price, 2):(isset($val->price)?number_format($val->price, 2):'')}}"
+                                class="btn btn-success add_to_cart">
+                                ADD TO CART
+                            </a>
+                          </div>
+                        @endif
+                        @if($val->add_customisation == 1)
+                          <div class="leftSide">
+                            <a href="javascript:void(0);" 
+                                data-id="{{isset($val->id)?$val->id:0}}"
+                                class="btn btn-success customise_item">
+                                Customize
+                            </a>
+                          </div>
+                        @endif
                       @endif
                   </div>
             </div>
@@ -129,7 +169,7 @@ $trHtml ='';
 
         @elseif($val->special_cat==1)
         <div class="special-type">
-            <div class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="col-lg-6 col-sm-6 col-xs-6">
             <div class="img-header">
                         @if(isset($val->food_type) && $val->food_type == 'non_veg')
                         <div class="food_type nonveg">
@@ -144,27 +184,27 @@ $trHtml ='';
                     src="{{asset('uploads/products')}}/{{isset($val->image)?$val->image:''}}" alt="">
             </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-xs-12" id="prod_{{$val->sub_category_id}}">
+            <div class="col-lg-6 col-md-6 col-xs-6" id="prod_{{$val->sub_category_id}}">
                 <div class="card listGrid">
                     <div class="imgWrapper">
                         
                         <table class="table table-bordered  table-hover menutbl">
                             <tbody>
                                 <tr>
-                                    <th colspan="4" style="background: #333; padding: 12px!important; color: #fff;">
+                                    <th class="panel_border" colspan="4" style="background: #333; padding: 12px!important; color: #fff;">
                                         <h2 class="panel-title text-center"> {{isset($val->name)?$val->name:''}}</h2>
                                     </th>
                                 </tr>
                                 <tr>
-                                  <!-- <th>#</th> -->
-                                  <th>Size</th>
+                                  
+                                  <th class="text-center">Size</th>
                                   <th class="text-center">$</th>
                                   <th class="text-center">Select</th>
                                 </tr>
                                 @if(!empty($val->size_master_price))
                                 @foreach(json_decode($val->size_master_price) as $k => $v)
                                 <tr>
-                                    <td >{{$v->size}}</td>
+                                    <td class="text-center">{{$v->size}}</td>
                                     <td class="text-center">${{$v->price}}</td>
                                     <td class="text-center">
                                         <input type="radio" value="{{$v->id}}" name="special_prod_add{{$val->id}}" class="special_prod_add{{$val->id}}" data-price="{{$v->price}}" >
@@ -285,7 +325,7 @@ $trHtml ='';
           $sidesKey = true;
           @endphp
         @elseif($val->special_cat==3)
-        <div class="col-lg-4 col-sm-6 col-xs-12" id="prod_{{$val->sub_category_id}}">
+        <div class="col-lg-4 col-md-6 col-xs-6" id="prod_{{$val->sub_category_id}}">
             <div class="card listGrid">
                 <div class="imgWrapper">
                   <div class="img-header">

@@ -6,7 +6,7 @@
           <thead>
             <tr>
               <th>ITEM</th>
-              <th>QTY</th>
+              <th>QUANTITY</th>
               <th style="text-align: right;">PRICE</th>
             </tr>
           </thead>
@@ -32,7 +32,7 @@
             @endforeach
             @endif
             <tr>
-              <td><strong>Subtotal</strong></td>
+              <td><strong>Product Subtotal:</strong></td>
               <td>&nbsp;</td>
               <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
             </tr>
@@ -47,13 +47,22 @@
                 $subtotal = $subtotal-$discount;
                 $discount_val = '$'.number_format($discount,2);
               }else{
-                $subtotal = $subtotal-(($subtotal*$discount)/100);
-                $discount_val = $discount.'%';
+                $discountPrice = ($subtotal*$discount)/100;
+                $subtotal = $subtotal-$discountPrice;
+                $discount_val = '$'.number_format($discountPrice,2);
 
               }
             @endphp
-            
-            
+            <tr>
+              <td>Discount:</td>
+              <td>&nbsp;</td>
+              <td style="text-align: right;"> {{$discount_val}}</td>
+            </tr>
+            <tr>
+              <td><strong>Product Total:</strong></td>
+              <td>&nbsp;</td>
+              <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
+            </tr>
             @php
             $subtotal += $deliveryCharge;
             $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0.00;
@@ -62,18 +71,18 @@
             @endphp
             
             <tr>
-              <td>Delivery fee</td>
+              <td>Delivery fee:</td>
               <td>-</td>
-              <td style="text-align: right;"> ${{$deliveryCharge}}</td>
+              <td style="text-align: right;"> ${{number_format($deliveryCharge,2)}}</td>
             </tr>
             <tr>
-              <td>Discount</td>
-              <td>-</td>
-              <td style="text-align: right;"> {{$discount_val}}</td>
+              <td><strong>Subtotal:</strong></td>
+              <td>&nbsp;</td>
+              <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
             </tr>
             <tr>
               <td>GST({{Session::has('gst_per')?Session::get('gst_per'):0}}%)</td>
-              <td>-</td>
+              <td>&nbsp;</td>
               <td style="text-align: right;"> ${{number_format($gst_price,2)}}</td>
             </tr>
             <tr>
@@ -102,7 +111,7 @@
               <div class="form-check">
                 <label>
                   <input type="radio" name="pay_method" value="cod" required> 
-                  <span class="label-text">Pay with Cash</span>
+                  <span class="label-text">Pay with Paypal</span>
                 </label>
                 <input type="hidden" name="subtotal" value="{{isset($subtotal)?number_format($subtotal,2):0}}"> 
                 <input type="hidden" name="gst_price" value="{{isset($gst_price)?number_format($gst_price,2):'0.00'}}"> 

@@ -53,7 +53,7 @@
         <input type="hidden" value="{{($product->topping_from)?$product->topping_from:''}}" name="topping_name" class="topping_name" style="opacity: 0;">
 
          @if(!empty($donairtopping) && count($donairtopping)>0)
-        <h4>Topping</h4>
+        <h4>Toppings</h4>
         <table class="table table-hover">
           <tbody>
             @foreach($donairtopping as $topk => $topv)
@@ -64,7 +64,7 @@
                   <label>
                     <input type="checkbox" value="{{$topv->custom_price?$topv->custom_price:$topv->price}}" name="topping_master[{{$topv->id?$topv->id:''}}]" class="topping_wing_master" {{isset($product->common_topping) && !empty($product->common_topping) && $product->common_topping==$topv->id?'checked':''}}>
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                    {{$topv->name?$topv->name:''}} (${{$topv->custom_price?$topv->custom_price:'$0.00'}} )
+                    {{$topv->name?$topv->name:''}} <!-- (${{$topv->custom_price?$topv->custom_price:'$0.00'}} ) -->
                   </label>
                 </div>
               </td>
@@ -74,7 +74,7 @@
         </table>
         @endif
         @if(!empty($donairsauce) && count($donairsauce)>0)
-        <h4>Sauce</h4>
+        <h4>Sauces</h4>
         <table class="table table-hover">
           <tbody>
             @foreach($donairsauce as $donairk => $donairv)
@@ -85,7 +85,7 @@
                   <label>
                     <input type="checkbox" value="{{$donairv->custom_price?$donairv->custom_price:$donairv->price}}" name="topping_master[{{$donairv->id?$donairv->id:''}}]" class="topping_wing_master" {{isset($product->common_topping) && !empty($product->common_topping) && $product->common_topping==$donairv->id?'checked':''}}>
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                    {{$donairv->name?$donairv->name:''}} (${{$donairv->custom_price?$donairv->custom_price:'$0.00'}} )
+                    {{$donairv->name?$donairv->name:''}} <!-- (${{$donairv->custom_price?$donairv->custom_price:'$0.00'}} ) -->
                   </label>
                 </div>
               </td>
@@ -137,7 +137,7 @@
         <div class="selectitemSlider">
           @foreach($sauce_master as $k3 => $v3)
           <div class="productItem">
-            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master" {{isset($product->sauce_master) && !empty($product->sauce_master) && $product->sauce_master==$v3->id?'checked':''}}>
+            <input type="radio" name="sauce_master"  id="sauce_{{$v3->id?$v3->id:''}}"  value="{{$v3->id?$v3->id:''}}" data-price='{{$v3->custom_price?number_format($v3->custom_price,2):number_format($v3->price,2)}}' class="sauce_master topping_wing_master" {{isset($product->sauce_master) && !empty($product->sauce_master) && $product->sauce_master==$v3->id?'checked':''}}>
             <label for="sauce_{{$v3->id?$v3->id:''}}">
               <div class="productImg">
                 <!-- <img src="{{asset('img/menu_pic_1.png')}}" class="img-responsive" /> -->
@@ -155,17 +155,17 @@
         <table class="table table-bordered show_cheese" style="display: none;">
           <thead>
             <tr>
-              <th>Size</th>
-              <th>Cost</th>
-              <th>Action</th>
+              <th class="text-center">Size</th>
+              <th class="text-center">Cost</th>
+              <th class="text-center">Select</th>
             </tr>
           </thead>
           <tbody>  
           @foreach($extra_cheese as $key => $val)          
             <tr class="crow" id="cheese_row_{{$val->pizza_size_master}}">
-              <td>{{$val->pizzaSize->name}}</td>
-              <td>${{$val->custom_price?number_format($val->custom_price,2):0.00}}</td>
-              <td><input type="checkbox" name="extra_cheese" id="extra_cheese" class="extra_cheese" value="{{$val->id}}" data-price="{{$val->custom_price?number_format($val->custom_price,2):number_format($val->price,2)}}"></td>
+              <td class="text-center">{{$val->pizzaSize->name}}</td>
+              <td class="text-center">${{$val->custom_price?number_format($val->custom_price,2):0.00}}</td>
+              <td class="text-center"><input type="checkbox" name="extra_cheese" id="extra_cheese" class="extra_cheese" value="{{$val->id}}" data-price="{{$val->custom_price?number_format($val->custom_price,2):number_format($val->price,2)}}"></td>
             </tr>
             @endforeach
           </tbody>
@@ -178,16 +178,16 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Cost</th>
+              <th class="text-center">Item</th>
+              <th class="text-center">Cost</th>
               <th class="text-center">Quantity</th>
             </tr>
           </thead>
           <tbody>
             @foreach($dip_master as $k4 => $v4)
             <tr>
-              <td>{{$v4->name?$v4->name:''}}  </td>
-              <td>${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
+              <td class="">{{$v4->name?$v4->name:''}}  </td>
+              <td class="text-center">${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
               <td class="text-center">
                   <input type='button' value='-' class='qtyminus' field='dip_master_{{$v4->id?$v4->id:''}}' />
                   <input type='text' name='dip_master[{{$v4->id?$v4->id:''}}]'  id='dip_master_{{$v4->id?$v4->id:''}}'  value='0' min="0" class='qty dip_price' data-price="{{$v4->custom_price?$v4->custom_price:$v4->price}}"/>
@@ -208,7 +208,7 @@
               <td>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="{{$v5->custom_price?$v5->custom_price:$v5->price}}" name="topping_master[{{$v5->id?$v5->id:''}}]" class="topping_master topping_wing_master" >
+                    <input type="checkbox" value="{{$v5->custom_price?$v5->custom_price:$v5->price}}" name="topping_master[{{$v5->id?$v5->id:''}}]" class="topping_master " >
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                     {{$v5->name?$v5->name:''}} (${{$v5->custom_price?$v5->custom_price:'$0.00'}} )
                   </label>
@@ -230,8 +230,9 @@
         <span class='span_price'> ${{isset($product->custom_price)?number_format($product->custom_price, 2):0.00}}</span>
         <input type="hidden" name="product_custom_price"  class="product_custom_price" value="{{isset($product->custom_price)?number_format($product->custom_price, 2):(isset($product->price)?number_format($product->price, 2):0.00)}}">
         <input type="hidden" name="product_price"  id="product_price" value="{{isset($product->custom_price)?number_format($product->custom_price, 2):(isset($product->price)?number_format($product->price, 2):0)}}">
+        <div class="error topping_error"></div>
       </div>
       <div class="rightSide">
-        <button type="button" data-product_id="{{isset($product->id)?$product->id:''}}" class="btn btn-success custom_add_to_cart">ADD TO CART</button>
+        <button type="button" data-product_id="{{isset($product->id)?$product->id:''}}" class="btn btn-success custom_add_to_cart">ADD TO CART</bsutton>
       </div>
     </div>

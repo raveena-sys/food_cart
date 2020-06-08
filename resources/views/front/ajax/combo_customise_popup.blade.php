@@ -72,17 +72,17 @@
         <table class="table table-bordered show_cheese" >
           <thead>
             <tr>
-              <th>Size</th>
-              <th>Cost</th>
-              <th>Action</th>
+              <th class="text-center">Size</th>
+              <th class="text-center">Cost</th>
+              <th class="text-center">Action</th>
             </tr>
           </thead>
           <tbody>  
           @foreach($extra_cheese as $key => $val)          
             <tr class="crow" id="cheese_row_{{$val->pizza_size_master}}">
-              <td>{{$val->pizzaSize->name}}</td>
-              <td>${{$val->custom_price?number_format($val->custom_price,2):0.00}}</td>
-              <td><input type="checkbox" name="extra_cheese" id="extra_cheese" class="extra_cheese" value="{{$val->id}}" data-price="{{$val->custom_price?number_format($val->custom_price,2):number_format($val->price,2)}}"></td>
+              <td class="text-center">{{$val->pizzaSize->name}}</td>
+              <td class="text-center">${{$val->custom_price?number_format($val->custom_price,2):0.00}}</td>
+              <td class="text-center"><input type="checkbox" name="extra_cheese" id="extra_cheese" class="extra_cheese" value="{{$val->id}}" data-price="{{$val->custom_price?number_format($val->custom_price,2):number_format($val->price,2)}}"></td>
             </tr>
             @endforeach
           </tbody>
@@ -95,16 +95,16 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Cost</th>
+              <th class="text-center">Item</th>
+              <th class="text-center">Cost</th>
               <th class="text-center">Quantity</th>
             </tr>
           </thead>
           <tbody>
             @foreach($dip_master as $k4 => $v4)
             <tr>
-              <td>{{$v4->name?$v4->name:''}}  </td>
-              <td>${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
+              <td class="">{{$v4->name?$v4->name:''}}  </td>
+              <td class="text-center">${{$v4->custom_price?number_format($v4->custom_price,2):0.00}}</td>
               <td class="text-center">
                   <input type='button' value='-' class='qtyminus' field='dip_master_{{$v4->id?$v4->id:''}}' />
                   <input type='text' name='dip_master[{{$v4->id?$v4->id:''}}]'  id='dip_master_{{$v4->id?$v4->id:''}}'  value='0' min="0" class='qty dip_price' data-price="{{$v4->custom_price?$v4->custom_price:$v4->price}}"/>
@@ -145,6 +145,8 @@
         <span class='span_price'> $0.00<?php //isset($price)?$price:'0.00';?></span>
         <input type="hidden" name="product_custom_price"  class="product_custom_price" value="0.00">
         <input type="hidden" name="product_price"  id="product_price" value="0.00">
+
+        <div class="error topping_error"></div>
       </div>
       <div class="rightSide">
         <button type="button" data-key={{$sessionkey}} data-product_id="{{isset($product->id)?$product->id:''}}" data-combo_product_id="{{isset($prodid)?$prodid:'0'}}" class="btn btn-success custom_save">Save</button>

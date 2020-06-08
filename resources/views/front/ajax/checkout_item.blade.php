@@ -6,7 +6,7 @@
 
     @if(!empty($cartArray))
     @foreach($cartArray as $k => $v)
-      <div class="cartbox__inner">
+      <div class="cartbox__inner" id="scroll_{{$k}}">
         <div class="cartBox">
           <img src="{{!empty($v['image'])?asset('uploads/products/'.$v['image']):asset('img/no-image.jpg')}}" />
           <div class="cartBox__detail">
@@ -29,9 +29,10 @@
           @if(!empty($value1['dip_master_name']))
           <p>
             <strong>Dips:</strong>
-            @foreach($value1['dip_master_name'] as $val)
-            {{$val}}
-            @endforeach
+            {{implode(', ',$value1['dip_master_name'])}}
+            <!-- @foreach($value1['dip_master_name'] as $val)
+            {{rtrim($val,",")}}</br>
+            @endforeach -->
             <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
           </p>
           @endif
@@ -39,24 +40,21 @@
           @if(!empty($value1['topping_master_name']))
           <p>
             <strong>{{(!empty($value1['topping_from']) && $value1['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
-            @foreach($value1['topping_master_name'] as $val1)
-            {{$val1}}
-            @endforeach
+            {{implode(', ',$value1['topping_master_name'])}}
             <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
           </p>
           @endif
           @if(!empty($value1['topping_sauce_master_name']))
           <p>
-            <strong>Sauce:</strong>
-            @foreach($value1['topping_sauce_master_name'] as $val1)
-            {{$val1}}
-            @endforeach
+            <strong>Sauces:</strong>
+             {{implode(', ', $value1['topping_sauce_master_name'])}}
+            
             <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
           </p>
           @endif
           @if(!empty($value1['extra_cheese_name']))
           <p>
-            <strong>Cheese:</strong>Extra Cheese
+            <strong>Cheese:</strong> Extra Cheese
              <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
           </p>
           @endif
@@ -76,9 +74,7 @@
           @if(!empty($v['dip_master_name']))
           <p>
             <strong>Dips:</strong>
-            @foreach($v['dip_master_name'] as $val)
-            {{$val}}
-            @endforeach
+            {{implode(', ',$v['dip_master_name'])}}
             <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
           </p>
           @endif
@@ -86,24 +82,19 @@
           @if(!empty($v['topping_master_name']))
           <p>
             <strong>{{(!empty($v['topping_from']) && $v['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
-            @foreach($v['topping_master_name'] as $val1)
-            {{$val1}}
-            @endforeach
+           {{implode(', ',$v['topping_master_name'])}}
             <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
           </p>
           @endif
           @if(!empty($v['topping_sauce_master_name']))
           <p>
-            <strong>Sauce:</strong>
-            @foreach($v['topping_sauce_master_name'] as $val1)
-            {{$val1}}
-            @endforeach
+            <strong>Sauces:</strong>{{implode(', ',$v['topping_sauce_master_name'])}}
             <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
           </p>
           @endif
           @if(!empty($v['extra_cheese_name']))
           <p>
-            <strong>Extra cheese</strong> <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
+            <strong>Cheese:</strong> Extra Cheese <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
           </p>
           @endif
         </div>
@@ -128,7 +119,7 @@
     @endforeach
       <div class="row">
         <div class="col-md-5">
-          <a href="{{url('menu/'.session::get('category_id'))}}" class="btn btn-success btn-sm">Continue Shopping</a>
+          <a href="{{url(Session::get('orderType').'/menu/0')}}" class="btn btn-success btn-sm">Continue Shopping</a>
         </div>
         <div class="col-md-5">
           
@@ -161,14 +152,14 @@
       <!-- <div class="addressBox">
 
        <h4>CURRENT ADDRESS</h4>
-       <p>{{Session::has('userinfo')?ucfirst(Session::get('userinfo')['address']).','. ucfirst(Session::get('userinfo')['city']). ' ('. ucfirst(Session::get('userinfo')['state']).') '. Session::get('userinfo')['zipcode']:''}}</p>
+       <p>{{Session::has('userinfo')?ucfirst(Session::get('userinfo')['address']).",". ucfirst(Session::get('userinfo')['city']). ' ('. ucfirst(Session::get('userinfo')['state']).') '. Session::get('userinfo')['zipcode']:''}}</p>
        <a href="{{url('checkout/user')}}">Edit Address</a>
       </div> -->
     @endif
     <div class="totalPrice">
       <div class="totalPrice__inner">
         <div class="left">
-          Sub Total
+          Sub Total:
         </div>
         <div class="right">
           ${{number_format($subtotal,2)}}
@@ -176,7 +167,7 @@
       </div>
       <div class="totalPrice__inner">
         <div class="left">
-          Discount
+          Discount:
         </div>
         <div class="right">
           @if(Session::has('discount'))
@@ -188,8 +179,9 @@
               $total = $subtotal-$discount;
               echo '$'.number_format($discount,2);
             }else{
-              $total = $subtotal-(($subtotal*$discount)/100);
-              echo $discount.'%';
+              $discountPrice = ($subtotal*$discount)/100;
+              $total = $subtotal-$discountPrice;
+              echo '$'.number_format($discountPrice,2);
 
             }
           @endphp
@@ -200,7 +192,7 @@
       </div>
       <div class="totalPrice__inner">
         <div class="left">
-          Total
+          Total:
         </div>
         <div class="right">
           
