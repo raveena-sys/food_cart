@@ -147,7 +147,6 @@ header img {
     position: fixed;
     z-index: 9999;
     transition: 0.5s;
-    top: 0 !important;
 }
 
 
@@ -1539,7 +1538,7 @@ button.close span {
 
 .cartRight {
     position: sticky;
-	top:70px;
+	top:170px;
 }
 
 .cartWrapper {

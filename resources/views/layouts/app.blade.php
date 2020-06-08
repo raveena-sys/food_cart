@@ -64,7 +64,7 @@
     })
 
     
-var headerHeight = $('#header').height();
+  var headerHeight = $('#header').height();
     $(window).scroll(function(){
     var e = $('.menu-wrapper'), i = e.offset();
     e.length > 0 && $(window).scrollTop() >= i.top - headerHeight ? $(".menu-nav").addClass('is-sticky') : $(".menu-nav").removeClass('is-sticky');
@@ -79,9 +79,12 @@ var headerHeight = $('#header').height();
       var scrollTopOffest = $("#header").outerHeight(true) + $('#menuNav').outerHeight(true);
     $( "a.subcategory" ).click(function( event ) {
         event.preventDefault();
-        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - scrollTopOffest}, 500);
+        
 
-        console.log(event)
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - scrollTopOffest}, 1000);
+     
+
+        console.log(scrollTopOffest)
     });
 });
     </script>
