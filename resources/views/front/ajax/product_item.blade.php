@@ -28,7 +28,7 @@ $trHtml ='';
 
         @if($val->sub_category_id == $value->id )
         @if($val->special_cat == 0 )
-        <div class="col-lg-4 col-md-6 col-xs-6" id="prod_{{$val->sub_category_id}}">
+        <div class="col-lg-4 col-md-6" id="prod_{{$val->sub_category_id}}">
             <div class="card listGrid">
                 <div class="imgWrapper">
                   <div class="img-header">
@@ -169,7 +169,7 @@ $trHtml ='';
         <div class="col-sm-12">
         <div class="special-type">
         <div class="row">
-            <div class="col-lg-6 col-sm-6 col-xs-6">
+            <div class="col-lg-6 col-sm-6">
               <div class="img-header">
                           @if(isset($val->food_type) && $val->food_type == 'non_veg')
                           <div class="food_type nonveg">
@@ -184,7 +184,7 @@ $trHtml ='';
                       src="{{asset('uploads/products')}}/{{isset($val->image)?$val->image:''}}" alt="">
               </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-xs-6" id="prod_{{$val->sub_category_id}}">
+            <div class="col-lg-6 col-md-6" id="prod_{{$val->sub_category_id}}">
                 <div class="card listGrid mb-0">
                     <div class="imgWrapper">
                         
@@ -327,7 +327,7 @@ $trHtml ='';
           $sidesKey = true;
           @endphp
         @elseif($val->special_cat==3)
-        <div class="col-lg-4 col-md-6 col-xs-6" id="prod_{{$val->sub_category_id}}">
+        <div class="col-lg-4 col-md-6" id="prod_{{$val->sub_category_id}}">
             <div class="card listGrid">
                 <div class="imgWrapper">
                   <div class="img-header">
