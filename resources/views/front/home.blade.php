@@ -51,9 +51,20 @@
                         <img src="{{asset('img/check_sample.png')}}" />
                     </div>-->
                     <div class="home_icon_list_details">
-                        <span>{{isset($cms->left_content)?ucfirst($cms->left_content):'Check Sample Website'}}</span>
+                        <span>{{isset($cms->left_content)?ucfirst($cms->left_content):'Sample Website'}}</span>
                         <span>
                             <img src="{{asset('img/next_arrow.png')}}" /></span>
+                    </div>
+                </a>
+            </div>
+            <div class="home_icon_list">
+                <a href="{{ URL::To('about_us') }}">
+                    <!--<div class="home_icon_list_icon">
+                        <img src="{{asset('img/contact_us.png')}}" />
+                    </div>-->
+                    <div class="home_icon_list_details">
+                        <span>About Us</span>
+                        <span><img src="{{asset('img/next_arrow.png')}}" /></span>
                     </div>
                 </a>
             </div>

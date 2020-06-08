@@ -91,18 +91,20 @@ $(document).on('click', '.add_item', function(){
   //$('.store_list_inner').addClass('disabled');
   var product_price = $(this).attr('data-price');  
   var product_id = $(this).attr('data-product_id');  
-  UpdateCartQty(product_id, 0, product_price);
+  var scroll_id = $(this).parents('.cartbox__inner').attr('id');  
+  UpdateCartQty(scroll_id, product_id, 0, product_price);
 });
 
 
 $(document).on('click', '.sub_item', function(){
   var product_price = $(this).attr('data-price');
   var product_id = $(this).attr('data-product_id');
+  var scroll_id = $(this).parents('.cartbox__inner').attr('id');  
   
   //if($('#item_count_'+product_id).val()>1){
   if($('#item_count_'+product_id).val()>=1){
     //$('.store_list_inner').addClass('disabled');
-    UpdateCartQty(product_id, 1, product_price);
+    UpdateCartQty(scroll_id,product_id, 1, product_price);
   }
   /*else{
     $('.remove_item').attr('data-product_id', product_id);
@@ -115,7 +117,9 @@ $(document).on('click', '.remove_item', function(){
   //$('.store_list_inner').addClass('disabled');
   var product_price = $(this).attr('data-price');  
   var product_id = $(this).attr('data-product_id');  
-  UpdateCartQty(product_id, 1, product_price);
+  var scroll_id = $(this).parents('.cartbox__inner').attr('id');  
+
+  UpdateCartQty(scroll_id, product_id, 1, product_price);
 });
 
 
@@ -141,6 +145,7 @@ function UpdateCart(product_id, sub=0, product_price, custom_product=0){
         $('.cart_item').empty().html(data.html);
         $('.product_item').empty().html(data.product_html);
         $('.cart_count').empty().html(data.cart_count);
+        $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
         $('.sideMenu').removeClass('open');
         $('#confirmdeleteModal').modal('hide');
         /*if(data.add == 1){
@@ -528,6 +533,8 @@ $(document).on('click', '.custom_add_to_cart', function (){
           $('.cart_item').empty().html(data.html);
           $('.product_item').empty().html(data.product_html);
           $('.cart_count').empty().html(data.cart_count);
+          $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
+        
           $('.sideMenu').removeClass('open');
           $('#confirmdeleteModal').modal('hide');
           
@@ -545,20 +552,20 @@ $(document).on('click', '.custom_add_to_cart', function (){
     var msg='';
     var topping_from = $('.topping_name').val();
     if(topping_from=='topping_tops'){
-      msg = 'Please choose topping';
+      msg = 'Please choose toppings';
     }else if(topping_from=='topping_wing_flavour'){
-      msg = 'Please choose wing flavour';
+      msg = 'Please choose wing flavours';
     }else if(topping_from=='topping_donair_shawarma_mediterranean'){
-      msg = 'Please choose topping and sauce';
+      msg = 'Please choose toppings and sauces';
     }else if(topping_from=='topping_dips'){
       msg = 'Please choose dips';
     }else if(topping_from=='topping_pizza'){
-      msg = 'Please choose toppings';
+      msg = 'Please choose pizza customisation';
     }
     
-
-    confirm(msg);
-    return;
+    $('.topping_error').text(msg);
+    //confirm(msg);
+    return false;
   }
 }); 
 
@@ -650,12 +657,15 @@ $(document).on('click', '.add_cart_product', function(){
   $('#cheese_row_'+id).show();
 });
 
+/*//Hide customise popup on click on body
+$(document).on('click','#mainContent', function(){
+  $('.sideMenu').removeClass('open');
+});*/
 
 
 
 
-
-function UpdateCartQty(product_id, sub=0, product_price){
+function UpdateCartQty(scroll_id, product_id, sub=0, product_price){
 
   var seg = $('#url_param').val();
   $.ajax({
@@ -670,7 +680,15 @@ function UpdateCartQty(product_id, sub=0, product_price){
         $('.cart_item').empty().html(data.html);
         $('.product_item').empty().html(data.product_html);
          $('.cart_count').empty().html(data.cart_count);
+         console.log(scroll_id);
+       /*  $('.cartWrapper').animate({
+            scrollTop: $('#'+scroll_id).offset().top - $('div').offset().top + $('div').scrollTop();
+        });​*/
+         $('.cartWrapper').scrollTop(
+            $('#'+scroll_id).offset().top - $('.cartWrapper').offset().top + $('.cartWrapper').scrollTop()-10
+        );
         $('#confirmdeleteModal').modal('hide');
+
         /*if(data.add == 1){
           Command: toastr['error'](data.msg);
         }else{
@@ -700,6 +718,7 @@ function UpdateCartQty(product_id, sub=0, product_price){
   })
 }; 
 
+//Read more and read less in product list
 $(document).on('click', '.read_less', function(){
   id = $(this).attr('id');
   if($('.short_content_'+id).is(':visible')){
@@ -712,6 +731,7 @@ $(document).on('click', '.read_less', function(){
   }
 });
 
+//read more and read less in cart
 $(document).on('click', '.read_less_check', function(){
   id = $(this).attr('id');
   if($('.short_content_check_'+id).is(':visible')){
@@ -724,54 +744,7 @@ $(document).on('click', '.read_less_check', function(){
   }
 });
 
-
-
-/*$(document).on('keypress', '#zipcode', function()
-{
-  setTimeout(function(){
-
-    checkZipcode();
-  },1000);
-});
-$(document).on('focus', '#zipcode', function()
-{
-  setTimeout(function(){
-
-    checkZipcode();
-  },1000);
-});*/
-/*function checkZipcode(){
-  $.ajax({
-    url: site_url+"/validation/checkzipcode",
-    type: "post",
-    data: {
-      "_token": $('meta[name="csrf-token"]').attr("content"),
-      zipcode: function () {
-          return $("input[name='zipcode']").val();
-      }
-    },
-    success: function (data) {
-      if (data.status=='true') {
-        if(typeof data.html != 'undefined'){
-          
-          $('.order_cart_summary').empty().html(data.html);
-          if(data.status == 'true'){
-
-            toastr.clear();
-            Command: toastr['success'](data.message);
-          }
-        }
-      } else {
-          //$('.order_cart_summary').empty().html(data.html);
-         
-         
-      }
-    },error: function(e){
-      console.log(e);
-    }
-  });
-}
-*/
+//Apply coupon code
 $(document).on('click', '#applyCoupon', function(){
   var coupon = $('#coupon_code').val();
   $.ajax({
@@ -795,7 +768,7 @@ $(document).on('click', '#applyCoupon', function(){
   });
 })
 
-
+//add to cart on sides product
 $(document).on('click', '.order_multiple', function(){
   $inputlength = $('.sides_prod_add:checked').length;
   if($inputlength>0){
@@ -832,6 +805,8 @@ function sidesAddToCart(values){
         $('.cart_item').empty().html(data.html);
         $('.product_item').empty().html(data.product_html);
         $('.cart_count').empty().html(data.cart_count);
+        $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
+        
         $('.sideMenu').removeClass('open');
         $('#confirmdeleteModal').modal('hide');
         /*if(data.add == 1){
@@ -861,6 +836,7 @@ function sidesAddToCart(values){
     }
   })
 }
+
 $(document).ready(function(){
   $('.subcategory').on('click', function(event) {
       $(this).parent().find('a').removeClass('active');
@@ -875,8 +851,69 @@ $(document).ready(function(){
               $('.subcategory').removeClass('active');
               var id = $(this).attr('id');
               $('.subcategory[href="#'+ id +'"]').addClass('active');
-             
+          }
+          if ($(".menu-nav").addClass('is-sticky')) {
+   
+            $('.navbar-me').css('margin-top','-85px');
+          }
+          else if($(".menu-nav").removeClass('is-sticky')){
+            $('.navbar-me').css('margin-top','0px');
           }
       });
   });
+
 });
+
+$(document).ready(function(){
+  $('#add_contactus_form').validate({
+    rules:{
+      first_name: 
+      {
+        'required':true
+      },
+      last_name: 
+      {
+        'required':true
+      },
+      email: 
+      {
+        'required':true,
+        'email':true
+      },
+      phone_number: 
+      {
+        'required':true,
+        'number':true,
+        'range':[9,13],
+      },
+      company_name: 
+      {
+        'required':true
+      },
+    },messages:{
+      'first_name':{
+        'required':'First Name field is required.',
+      },
+      'last_name':{
+        'required':'Last Name field is required.'
+      },
+      'email':{
+        'email': 'Please enter a valid email address.',
+        'required':'Email field is required.'
+      },
+      'company_name':{
+        'required':'Company Name field is required.',
+      },
+      'phone_number':{
+        'required' :'Contact Number field is required.',
+        'number' :'Please enter a valid contact number.',
+        'range' :'Please enter a valid contact number.',
+      }
+    },submitHandler:function(form){
+      form.submit();
+    }
+  })
+});
+
+
+

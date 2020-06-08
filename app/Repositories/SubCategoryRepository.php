@@ -35,33 +35,30 @@ class SubCategoryRepository
     public function getList($request)
     {
         try {
-
-            // $SubCategory = $this->SubCategory->where('status', '!=', 'deleted');
-            // $SubCategory = \DB::table('category')->get();
-
-            $SubCategory = \DB::table('sub_category as subcat');
-                $SubCategory->join('category as cat', 'subcat.category_id', '=', 'cat.id');
+    
+            $query = \DB::table('sub_category as subcat')->join('category as cat', 'subcat.category_id', '=', 'cat.id');
                 if(Auth::user()->user_type=='store'){
                     
-                    $SubCategory->join('store_category',function($join){
+                    $query->join('store_category',function($join){
                         $join->on('store_category.cat_id', '=', 'cat.id');
                         $join->where('store_category.store_id', Auth::user()->store_id);
                     });
                 }
-                $SubCategory->where('subcat.status', '!=', 'deleted')
+                $query->where('subcat.status', '!=', 'deleted')
                 ->select([
                     'subcat.id', 'subcat.name', 'subcat.status', 'subcat.description', 'subcat.thumb_image',
                     'cat.name as category_name', 'subcat.category_id as category_id'
-                ])->orderby('id', 'desc')->get();
+                ]);
+            
 
             if (!empty($request->status)) {
-                $SubCategory =   $SubCategory->where('status', '==', Str::lower(trim($request->status)));
+                $query->where('subcat.status', Str::lower(trim($request->status)));
             }
 
             if (!empty($request->category_id)) {
-                $SubCategory = $SubCategory->where('category_id', $request->category_id);
+                $query->whereIN('subcat.category_id', $request->category_id);
             }
-
+            $SubCategory = $query->orderby('subcat.id', 'desc')->get();
             $tableResult = Datatables::of($SubCategory)->addIndexColumn()
 
                 ->filter(function ($instance) use ($request) {

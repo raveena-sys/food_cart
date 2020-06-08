@@ -1,6 +1,7 @@
 @extends('store::layouts.app')
 @section('content')
-<?php $current = Request::segment(4)==1?'Add Double/Triple Product':(Request::segment(4)==2?'Add Sides Product':'Add Drink Product');  ?>
+<?php $currentAdd = Request::segment(3)=='edit'?'Edit':'Add'; 
+$current = Request::segment(4)==1?$currentAdd.' Double/Triple Product':(Request::segment(4)==2?$currentAdd.' Sides Product':$currentAdd.' Drink Product');  ?>
 <main class="main-content add-page">
     <div class="container-fluid">
         <!-- page title section start -->
@@ -23,7 +24,7 @@
         <!-- page title section end -->
         <div class="card">
             <div class="card-header text-center border-0 align-items-center">
-                <h4 class="mb-0">Add {{Request::segment(4)==1?'Double/Triple Product':(Request::segment(4)==2?'Sides Product':'Drink Product')}}</h4>
+                <h4 class="mb-0">{{Request::segment(3)=='edit'?'Edit':'Add'}} {{Request::segment(4)==1?'Double/Triple Product':(Request::segment(4)==2?'Sides Product':'Drink Product')}}</h4>
             </div>
             <div class="card-body">
                 <div class="inner_cnt">
@@ -39,23 +40,17 @@
                             </label>
                         </div>
                         <input type="file" name="image" id="uploadImage" accept="image/*" style="visibility: hidden;position:absolute;">
-                        <!-- <p><strong>Note:</strong>Image size must be of 696*270</p> -->
                         <input type="text" style="visibility: hidden;position:absolute;" name="oldimage" id="oldimage" value="{{isset($detail->image)?$detail->image:''}}">
                         <div class="form-group">
                             <label>Name</label>
                             <input class="form-control" maxlength="250" name="name" type="text" placeholder="Name" value="{{isset($detail->name)?$detail->name:''}}">
                             <input  name="store_id" type="hidden" value="{{Auth::check()? Auth::user()->store_id:""}}">
-
                             <input  name="special_cat" type="hidden" value="{{Request::segment(4)}}">
                         </div>
 
 
 
                         @if(Request::segment(4)==3)
-                        <!-- <div class="form-group">
-                            <label>Section Name</label>
-                            <input class="form-control" maxlength="250" name="section_name" type="text" placeholder="Cans, 500ML, 1000ML etc." value="{{isset($detail->section_name)?$detail->section_name:''}}">
-                        </div> -->
                         <div class="form-group">
                             <label>Categories </label>                            
                             <div class="row"> 
@@ -73,8 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                       
+                                    <div class="form-group">     
                                         
                                         @php
                                         $sub_category_query = \App\Models\SubCategory::query();
@@ -115,7 +109,7 @@
                             @php
                                 $query = \App\Models\Product::query();
                                 $product = $query->select('product.id', 'product.name')->join('store_product_price','store_product_price.product_id', '=', 'product.id')->where('product.status', 'active')->where('product.special_cat', 0)->where('store_product_price.store_id', Auth::user()->store_id)->get();
-
+                                $detail->cat_id = 
                             @endphp
                             <select class="form-control selectpicker" name="custom_product[]" id="custom_product" title="Select Product" data-size="4" multiple="">
                                 
@@ -126,7 +120,7 @@
                         </div>
                         <div class="form-group" {{(Request::segment(4)==1)?'style=display:none;':''}}>
                             <label>Price</label>
-                            <input class="form-control" name="price" max="10000" type="number" placeholder="Price" value="{{(Request::segment(4)==1)?0:''}}">
+                            <input class="form-control" name="price" max="10000" type="number" placeholder="Price" value="{{(Request::segment(4)==1)?0:$data->custom_price}}">
                         </div>
                         <div class="form-group">
                             <label>Quantity</label>
@@ -168,7 +162,7 @@
                         <input type="hidden" name="segment_name" value="{{Request::segment(4)}}">
 
                         <div class="form-group col-md-12" style="{{$display}}">
-                            <label>Size </label>
+                            <label>Price for each Size </label>
                             @php
                             $size_master_query = \App\Models\PizzaSizeMaster::query();
                             $size_master_query_result = $size_master_query->where('status', 'active')->get();

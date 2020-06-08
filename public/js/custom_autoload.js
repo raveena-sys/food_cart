@@ -5,7 +5,7 @@ setInterval(function(){
 		success:function(response){
 
 			console.log("response", response.success);
-			$('#category-listing').DataTable().ajax.reload();
+			$('.orderTable').DataTable().ajax.reload();
 			if(response.success){
 
   				var x = document.getElementById("myAudio");

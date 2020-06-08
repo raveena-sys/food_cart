@@ -155,6 +155,7 @@ class StoreController extends Controller
 
             if(isset($req['dip_master']) && !empty($req['dip_master'])){
               foreach($req['dip_master'] as $k => $v){
+                $dipprice = 0;
                 $td_name = ToppingDips::select('topping_dips.name', 'store_topping_dips.custom_price as price')->join('store_topping_dips',
                   function($join){
                     $join->on('store_topping_dips.top_dip_id', '=', 'topping_dips.id');
@@ -165,8 +166,9 @@ class StoreController extends Controller
 
                 if($v>0){
                   $price = $price+($td_name->price*$v);
+                  $dipprice = $td_name->price*$v;
                   $cart['dip_master_price'] = $price;
-                  $cart['dip_master_name'][] = $td_name->name.' ('.$v.'), ($'.$price.')';    
+                  $cart['dip_master_name'][] = $td_name->name.' ('.$v.'), ($'.$dipprice.')';    
                 }   
               }
               if($price){
@@ -187,7 +189,7 @@ class StoreController extends Controller
                 $tm_price = $tm_price+$td_name->price;
                 $cart['topping_master_price'] = $tm_price;
                 $cart['topping_master'] = $k;
-                $cart['topping_master_name'][] = $td_name->name/*.' ('.$v.'),'*/;   
+                $cart['topping_master_name'][] = $td_name->name /*.' ('.$v.'),'*/;   
                 $tm_name[] =$td_name;    
               } 
               if($tm_price){
@@ -210,7 +212,7 @@ class StoreController extends Controller
                 if($td_name->topping_type =='sauce'){
                   $cart['topping_sauce_master_name'][] = $td_name->name/*.' ('.$v1.'),'*/;   
                 }else{
-                  $cart['topping_master_name'][] = $td_name->name/*.' ('.$v1.'),'*/;   
+                  $cart['topping_master_name'][] = $td_name->name /*.' ('.$v1.'),'*/;   
                 }
                 $tdsm_price = $tdsm_price+$td_name->price;
                 $cart['topping_master_price'] = $tdsm_price;
@@ -234,7 +236,7 @@ class StoreController extends Controller
               $twf_price = $twf_price+$td_name->price;
               $cart['topping_master_price'] = $twf_price;
               $cart['topping_master'] =  $req['topping_wing_master'];
-              $cart['topping_master_name'][] = $td_name->name/*.' ('.$val.'),'*/;   
+              $cart['topping_master_name'][] = $td_name->name /*.' ('.$val.'),'*/;   
               $tm_name[] =$td_name;    
             //} 
             if($twf_price){
@@ -406,7 +408,7 @@ class StoreController extends Controller
     *Get product list of selected menu 
     */
    public function getStoreMasterList($id){
-
+     
         try {
             Session::put('category_id', $id);
             $menubanner = Category::where('id', $id)->first();
@@ -806,7 +808,7 @@ class StoreController extends Controller
                 $tm_price = $tm_price+$td_name->price;
                 $cart['topping_master_price'] = $tm_price;
                 $cart['topping_master'] = $k;
-                $cart['topping_master_name'][] = $td_name->name/*.' ('.$v.'),'*/;   
+                $cart['topping_master_name'][] = $td_name->name /*.' ('.$v.'),'*/;   
                 $tm_name[] =$td_name;    
               } 
               if($tm_price){
@@ -830,7 +832,7 @@ class StoreController extends Controller
               $tdsm_price = $tdsm_price+$td_name->price;
               $cart['topping_master_price'] = $tdsm_price;
               $cart['topping_master'] = $k1;
-              $cart['topping_master_name'][] = $td_name->name/*.' ('.$v1.'),'*/;   
+              $cart['topping_master_name'][] = $td_name->name /*.' ('.$v1.'),'*/;   
               $tm_name[] =$td_name;    
             } 
             if($tdsm_price){
@@ -850,7 +852,7 @@ class StoreController extends Controller
               $twf_price = $twf_price+$td_name->price;
               $cart['topping_master_price'] = $twf_price;
               $cart['topping_master'] = $key;
-              $cart['topping_master_name'][] = $td_name->name/*.' ('.$val.'),'*/;   
+              $cart['topping_master_name'][] = $td_name->name /*.' ('.$val.'),'*/;   
               $tm_name[] =$td_name;    
             } 
             if($twf_price){
@@ -1041,7 +1043,7 @@ class StoreController extends Controller
                   $tm_price = $tm_price+$td_name->price;
                   $cart['topping_master_price'] = $tm_price;
                   $cart['topping_master'] = $k;
-                  $cart['topping_master_name'][] = $td_name->name/*.' ('.$v.'),'*/;   
+                  $cart['topping_master_name'][] = $td_name->name /*.' ('.$v.'),'*/;   
                   $tm_name[] =$td_name;    
                 } 
                 if($tm_price){
@@ -1065,7 +1067,7 @@ class StoreController extends Controller
                 $tdsm_price = $tdsm_price+$td_name->price;
                 $cart['topping_master_price'] = $tdsm_price;
                 $cart['topping_master'] = $product->common_topping;
-                $cart['topping_master_name'][] = $td_name->name/*.' ('.$v1.'),'*/;   
+                $cart['topping_master_name'][] = $td_name->name /*.' ('.$v1.'),'*/;   
                 $tm_name[] =$td_name;    
               //} 
               if($tdsm_price){
@@ -1085,7 +1087,7 @@ class StoreController extends Controller
                 $twf_price = $twf_price+$td_name->price;
                 $cart['topping_master_price'] = $twf_price;
                 $cart['topping_master'] =$product->common_topping;
-                $cart['topping_master_name'][] = $td_name->name/*.' ('.$val.'),'*/;   
+                $cart['topping_master_name'][] = $td_name->name /*.' ('.$val.'),'*/;   
                 $tm_name[] =$td_name;    
               //} 
               if($twf_price){

@@ -87,7 +87,7 @@ class OrderController extends Controller
 	    	}*/
 
 	    	$store_email = StoreMaster::where('id', Session::get('store_id'))->first();
-	    	date_default_timezone_set('Asia/Kolkata');
+	    	date_default_timezone_set('MST');
 	    	$discount = '0.00';
 	    	if(Session::has('discount') && Session::has('coupon_type')){
 	    		$coupon_type = Session::get('coupon_type');

@@ -40,7 +40,7 @@
                         $companys = \App\Models\Category::query();
                         $companys1 = $companys->where('status', '!=', 'deleted')->get();
                         @endphp
-                        <select class="form-control selectpicker" name="category_id" id="category_id" title="Select Category" data-size="4" multiple="">
+                        <select class="form-control selectpicker" name="category_id[]" id="category_id" title="Select Category" data-size="4" multiple="">
                             @foreach($companys1 as $compay)
                             <option value="{{$compay->id}}">{{$compay->name}}</option>
                             @endforeach

@@ -59,7 +59,7 @@
         <!-- table listing start -->
         <div class="common-table">
             <div class="table-responsive">
-                <table class="table" id="category-listing">
+                <table class="orderTable table" id="category-listing">
                     <thead>
                         <tr>
                             <th class="w_80"><span class="sorting">S.No.</span></th>

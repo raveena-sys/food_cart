@@ -136,6 +136,14 @@ class HomeController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }*/
+    public function scroll()
+    {
+        try {
+            return view('scroll');
+        } catch (\Exception $e) {
+            return Response::json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
 
 
     public function aboutUs()

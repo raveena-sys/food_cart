@@ -555,7 +555,7 @@ class ProductRepository
                 foreach ($request['drink_category'] as $key => $value) {
                     if(isset($request['drink_subcategory']) && !empty($request['drink_subcategory'][$key])){
                         $post['sub_category_id'] = $request['drink_subcategory'][$key];
-                        $products = $this->product->create($post);
+                        $products = Product::updateOrCreate(['id'=>$request->id],  $post);
                         if(isset($request['store_id'])){
                 
                             $post1['store_id'] = Auth::user()->store_id;
