@@ -3,13 +3,16 @@ $cartArray = Session::get('cartItem');
 $subtotal = 0;
 $sidesKey =false;
 $trHtml ='';
+$searchArray = array(' ', '&');
+$replaceArray = array('_', 'and');
 @endphp
 
 @if(!empty($products) && count($products)>0)
   @if(!empty($subcategory))
 
     @foreach($subcategory as $value)
-    <section id="{{str_replace(' ', '_', $value->name)}}">
+
+    <section id="{{str_replace($searchArray, $replaceArray, $value->name)}}">
         <div class="sub_cat_list">
             <div class="menu__subcategory__inner">
                 <span class="subcategory__name">{{$value->name}}</span>

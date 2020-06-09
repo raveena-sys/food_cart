@@ -21,10 +21,14 @@
         <div class="col-xs-12">
             <div class="menu-nav"  id="menuNav">
                 <a href="{{url(Session::get('orderType').'/menu/0')}}" class="subcategory">Home</a>
+                @php
+                $searchArray = array(' ', '&');
+                $replaceArray = array('_', 'and');
+                @endphp
                 @if(!empty($subcategory))
                 @foreach($subcategory as $val)
                <!--  <a href="javascript:void(0)" id="{{str_replace(' ', '_', $val->name)}}" class="subcategory">{{$val->name}}</a> -->
-                <a href="#{{str_replace(' ', '_', $val->name)}}" class="subcategory">{{$val->name}}</a>
+                <a href="#{{str_replace($searchArray, $replaceArray, $val->name)}}" class="subcategory">{{$val->name}}</a>
                 @endforeach
                 @endif
             </div>
