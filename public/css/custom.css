@@ -8,6 +8,13 @@ button,
 input {
     outline: none;
 }
+.mb-0{
+    margin-bottom: 0px !important;
+}
+
+a:hover, a:focus{
+    text-decoration: none;
+}
 
 a,
 button {
@@ -124,6 +131,7 @@ header img {
 .home_icon_list_details {
     background-color: #0c0c0ccc;
     padding: 15px;
+    white-space: nowrap;
 }
 
 .home_icon_list_icon {
@@ -145,7 +153,7 @@ header img {
 
 .menu-nav.is-sticky {
     position: fixed;
-    z-index: 9999;
+    z-index: 99;
     transition: 0.5s;
 }
 
@@ -1422,7 +1430,7 @@ button.close span {
     margin: 0rem;
     overflow: hidden;
     margin-bottom: 15px;
-    height: 95%;
+    /* height: 95%; */
 }
 
 .listGrid .card-body {
@@ -2230,6 +2238,12 @@ span.text-danger {
     height: 280px;
 }
 .img-wrap img{ height: 100%; }
+
+.selectItemModal .card-footer{
+ padding: 12px 0 20px 0;
+ justify-content: center;
+}
+
 
 
 @media(max-width: 1366px){

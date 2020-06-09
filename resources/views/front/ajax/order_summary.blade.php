@@ -6,7 +6,7 @@
           <thead>
             <tr>
               <th>ITEM</th>
-              <th>QUANTITY</th>
+              <th style="text-align:center">QUANTITY</th>
               <th style="text-align: right;">PRICE</th>
             </tr>
           </thead>
@@ -22,7 +22,7 @@
             @foreach($cartArray as $k => $v)
             <tr>
               <td>{{isset($v['name'])?$v['name']:''}}</td>
-              <td>{{isset($v['quantity'])?$v['quantity']:0}}</td>
+              <td style="text-align:center">{{isset($v['quantity'])?$v['quantity']:0}}</td>
               <td style="text-align: right;">${{isset($v['price'])?number_format($v['price'],2):0}} </td>        
             </tr>
             @php

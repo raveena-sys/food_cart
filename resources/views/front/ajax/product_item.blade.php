@@ -252,8 +252,8 @@ $trHtml ='';
 
                     </div>    
                       
-                        <div class="modal fade" data-keyboard="true" tabindex="-1" role="dialog" id="add_special_product{{isset($val->id)?$val->id:''}}" aria-hidden="true" data-backdrop="static">
-                          <div class="modal-dialog modal-dialog-centered modal-md">
+                        <div class="modal fade selectItemModal" data-keyboard="true" tabindex="-1" role="dialog" id="add_special_product{{isset($val->id)?$val->id:''}}" aria-hidden="true" data-backdrop="static">
+                          <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                               <div class="modal-content-inner">
                                 <div class="modal-header">
@@ -265,7 +265,7 @@ $trHtml ='';
                                   <form method="post" id="select_combo_pizza{{isset($val->id)?$val->id:''}}">
                                     <div class="row">
                                       @for($i=1; $i<=$val->quantity; $i++)
-                                      <div class="{{$val->quantity>2?'col-sm-4':'col-sm-6'}}">
+                                      <div class="{{$val->quantity>2?'col col-sm-12 col-md-4':'col col-sm-12 col-md-6'}}">
                                           <div class="text-center">
                                             <label>
                                             @php
