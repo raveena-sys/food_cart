@@ -884,7 +884,8 @@ $(document).ready(function(){
       {
         'required':true,
         'number':true,
-        'range':[9,13],
+        'minlength':9,
+        'maxlength':13,
       },
       company_name: 
       {
@@ -907,7 +908,8 @@ $(document).ready(function(){
       'phone_number':{
         'required' :'Contact Number field is required.',
         'number' :'Please enter a valid contact number.',
-        'range' :'Please enter a valid contact number.',
+        'minlength' :'Please enter a valid contact number.',
+        'maxlength' :'Please enter a valid contact number.',
       }
     },submitHandler:function(form){
       form.submit();

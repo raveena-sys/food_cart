@@ -53,7 +53,7 @@ class ContactUsRepository
             $message = "Message has been sent successfully!";
             $response = ['success' => true, 'message' => $message, 'error' => [], 'data' => []];
             //return $response;
-            return redirect('/')->with('success',  $message);
+            return redirect('/contact_us')->with('success',  $message);
         } catch (\Exception $e) {
             DB::rollback();
             $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];

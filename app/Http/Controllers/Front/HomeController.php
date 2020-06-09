@@ -31,7 +31,14 @@ class HomeController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-
+    /**
+    * function to get stores list 
+    *
+    * @param 
+    *
+    * @return Store list view
+    *
+    */
     public function getstores()
     {
         try {
@@ -47,55 +54,88 @@ class HomeController extends Controller
     }
 
 
-
+    /**
+    * function to get stores menu (Category List) 
+    *
+    * @param $orderType, $price, $head
+    *
+    * @return Store menu list view
+    *
+    */
     public function mainMenu($orderType, $price, $head='')
     {
         try {
+            if(Session::has('store_id')){
             
-            if ($orderType == "pickup" || $orderType == "delivery") {
-                Session::put('orderType', $orderType);
-            } else {
-                Session::put('orderType', 'delivery');
+                if ($orderType == "pickup" || $orderType == "delivery") {
+                    Session::put('orderType', $orderType);
+                } else {
+                    Session::put('orderType', 'delivery');
+                }
+                $category = Category::select('category.*')->join('store_category',function($join){
+                    $join->on('category.id', '=', 'store_category.cat_id');
+                    $join->where('store_category.store_id', '=', Session::get('store_id'));
+                })->where('status', '=', 'active')/*->where('store_id', Session::get('store_id'))*/->get();
+                $cms = $this->cms->where(['page_slug'=>'menu_list'])->first();
+                $links = SocialLink::where('store_id', Session::get('store_id'))->first();
+                if($head){
+                    return back();
+                }
+                return view('front.main_menu', compact('category', 'cms', 'links'));
+            }else{
+                return redirect(url('store_list'));
             }
-            $category = Category::select('category.*')->join('store_category',function($join){
-                $join->on('category.id', '=', 'store_category.cat_id');
-                $join->where('store_category.store_id', '=', Session::get('store_id'));
-            })->where('status', '=', 'active')/*->where('store_id', Session::get('store_id'))*/->get();
-            $cms = $this->cms->where(['page_slug'=>'menu_list'])->first();
-            $links = SocialLink::where('store_id', Session::get('store_id'))->first();
-            if($head){
-                return back();
-            }
-            return view('front.main_menu', compact('category', 'cms', 'links'));
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-
+    /**
+    * function to get Order Type page 
+    *
+    * @param $request 
+    *
+    * @return Order Type view
+    *
+    */
     public function order_type(Request $request)
     {
-        try {      
-            $storeID = Session::get('store_id'); 
-            if($storeID != $request->id){
-                Session::forget('cartItem');
-            }
-            Session::put('store_id', $request->id); 
-            $store = StoreMaster::where(['status'=> 'active', 'id'=> $request->id])->first();
-            Session::put('gst_per', $store->gst_per); 
-            $cms = $this->cms->where(['page_slug'=>'order_type'])->first();
-            $links = SocialLink::where('store_id', Session::get('store_id'))->first();
-            return view('front.order_type', compact('store', 'cms', 'links'));
+        try {   
+                $storeID = Session::get('store_id'); 
+                if($storeID != $request->id){
+                    Session::forget('cartItem');
+                }
+                Session::put('store_id', $request->id); 
+                if(Session::has('store_id')){   
+                    $store = StoreMaster::where(['status'=> 'active', 'id'=> $request->id])->first();
+                    Session::put('gst_per', $store->gst_per); 
+                    $cms = $this->cms->where(['page_slug'=>'order_type'])->first();
+                    $links = SocialLink::where('store_id', Session::get('store_id'))->first();
+                    return view('front.order_type', compact('store', 'cms', 'links'));
+                }else{
+                    return redirect(url('store_list'));
+                }
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
- 
+    /**
+    * function to get Checkout page 
+    *
+    * @param $request 
+    *
+    * @return Checkout page
+    *
+    */
     public function checkout()
     {
         try {
-            $links = SocialLink::where('store_id', Session::get('store_id'))->first();
-            return view('checkout', compact('links'));
+            if(Session::has('store_id')){   
+                $links = SocialLink::where('store_id', Session::get('store_id'))->first();
+                return view('checkout', compact('links'));
+            }else{
+                return redirect(url('store_list'));
+            }
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
@@ -136,16 +176,17 @@ class HomeController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }*/
-    public function scroll()
-    {
-        try {
-            return view('scroll');
-        } catch (\Exception $e) {
-            return Response::json(['success' => false, 'message' => $e->getMessage()]);
-        }
-    }
+   
 
 
+    /**
+    * function to get AboutUs page 
+    *
+    * @param $request 
+    *
+    * @return AboutUs page
+    *
+    */
     public function aboutUs()
     {
         try{
@@ -186,7 +227,7 @@ class HomeController extends Controller
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-    public function getData(Request $request)
+    /*public function getData(Request $request)
     {
 
         $food_type_master_id = $request->input('food_type_master_id');
@@ -204,6 +245,6 @@ class HomeController extends Controller
 
         $data = array('status' => "Success", "message" => 'Record inserted successfully.', "Link" => '<a href = "insert">Click Here</a> to go back.');
         return json_encode($data);
-    }
+    }*/
 
 }

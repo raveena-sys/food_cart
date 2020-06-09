@@ -52,7 +52,7 @@ $current ="Edit". ' ' . $data->page_name;
                             </label> -->
                         </div>
                         @endif
-                        @if($data->page_slug=='home_page' || $data->page_slug=='order_type'|| $data->page_slug=='menu_list')
+                        @if($data->page_slug=='home_page' || $data->page_slug=='order_type' ||  $data->page_slug=='contact_us'|| $data->page_slug=='menu_list')
                         <div class="form-group">
                             <label>Background Image (Image dimension must be (1348*799))</label>
                         </div>  

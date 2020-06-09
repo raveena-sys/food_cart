@@ -410,7 +410,7 @@ class StoreController extends Controller
    public function getStoreMasterList($id){
      
         try {
-            Session::put('category_id', $id);
+          if(Session::has('store_id')){            Session::put('category_id', $id);
             $menubanner = Category::where('id', $id)->first();
             $subcategory_ids = SubCategory::getConcatSubcategory($id);
 
@@ -423,6 +423,9 @@ class StoreController extends Controller
 
             $cms = Cms::where(['page_slug'=>'menu_products'])->first();
             return view('front.menu_product', compact('products','subcategory', 'subcategory_ids', 'cms', 'menubanner')) ;
+          }else{
+            return redirect(url('store_list'));
+          }
         } catch (\Exception $e) {
             $response = ['success' => false, 'message' => '', 'error' => [array('message' => $e->getMessage())], 'data' => []];
             return $response;
