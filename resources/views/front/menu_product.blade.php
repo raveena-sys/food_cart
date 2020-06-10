@@ -20,7 +20,7 @@
     <div class="row menu-wrapper">
         <div class="col-xs-12">
             <div class="menu-nav"  id="menuNav">
-                <a href="{{url(Session::get('orderType').'/menu/0')}}" class="subcategory">Home</a>
+                <a href="{{url(Session::get('orderType').'/menu/0')}}" class="">Home</a>
                 @php
                 $searchArray = array(' ', '&');
                 $replaceArray = array('_', 'and');
