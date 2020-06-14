@@ -20,6 +20,7 @@ $(document).ready(function (e) {
       }
     }
   })
+  $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
 });
 /*$(document).ready(function (e) {
   $('.selectitemSlider').slick({
@@ -259,10 +260,33 @@ $(document).on('click', '.customise_item', function () {
         var data = JSON.parse(res);
         if(data.status ==1){
           $('.sideMenu').empty().html(data.html)
+          changeCustomization();
           $('.sideMenu').addClass('open');
-          $('.selectitemSlider').slick({
-            slidesToShow: 2,
-            slidesToScroll: 2
+          $('.selectitemSlider').each(function(){
+            var slickIndex = parseInt($(this).find("input[type=radio]:checked").attr('data-index'));            
+            if(slickIndex == 'undefined' || isNaN(slickIndex) == true){
+              slickIndex = 0;
+            }
+            var $carousel = $(this).slick({
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              initialSlide:slickIndex,
+              //focusOnSelect:true,
+              //focusOnChange:true
+            });
+            //document.getElementsByClassName('slick-next')[0].click()
+            console.log($(this).find("input[type=radio]:checked").parents('slick-slide').attr('class'));
+            //$(this).find("input[type=radio]:checked").parents('slick-slide')[0].click();
+            $carousel.slick( "goTo", slickIndex );
+            /*$(this).on('afterChange', function (event, slick, currentSlide) {
+              if (currentSlide === slickIndex) {
+                  console.log('First element');
+                  $(this).eq(currentSlide).addClass('first-slide-is-active');
+              } else {
+                  $(this).eq(currentSlide).removeClass('first-slide-is-active');
+              }
+            });*/
+           
           });
         }
         else {
@@ -491,6 +515,8 @@ $(document).on('click', '.add_combo', function (){
           $('.cart_item').empty().html(data.html);
           $('.product_item').empty().html(data.product_html);
           $('.cart_count').empty().html(data.cart_count);
+          $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
+        
           //Command: toastr['success'](data.msg);
           window.location.reload();
           $('#add_special_product'+product_id+' button.close').trigger('click');
@@ -560,7 +586,7 @@ $(document).on('click', '.custom_add_to_cart', function (){
     }else if(topping_from=='topping_dips'){
       msg = 'Please choose dips';
     }else if(topping_from=='topping_pizza'){
-      msg = 'Please choose pizza customisation';
+      msg = 'Please select other options';
     }
     
     $('.topping_error').text(msg);
@@ -577,7 +603,6 @@ $(document).on('change', '.sauce_master', function (){
 $(document).on('change', '.size_master', function (){
   changeCustomization();
 });
-
 $(document).on('change', '.crust_master', function (){
   changeCustomization();
 });
@@ -650,6 +675,7 @@ $(document).on('click', '.sizem_id', function(){
   $('#cheese_row_'+id).show();
 });
 
+
 $(document).on('click', '.add_cart_product', function(){
   var id = $(this).attr('data-id');
   $('.show_cheese').show();
@@ -657,14 +683,8 @@ $(document).on('click', '.add_cart_product', function(){
   $('#cheese_row_'+id).show();
 });
 
-/*//Hide customise popup on click on body
-$(document).on('click','#mainContent', function(){
-  $('.sideMenu').removeClass('open');
-});*/
 
-
-
-
+//Increament decreament and remove item from cart
 function UpdateCartQty(scroll_id, product_id, sub=0, product_price){
 
   var seg = $('#url_param').val();
@@ -785,7 +805,7 @@ $(document).on('click', '.order_multiple', function(){
   }
 });
 
-
+//Add to cart for product of category sides
 function sidesAddToCart(values){
   //var segment = $('#url_param').val();
   $.ajax({
@@ -863,7 +883,7 @@ function sidesAddToCart(values){
 //   });
 
 // });
-
+//Contact form validation
 $(document).ready(function(){
   $('#add_contactus_form').validate({
     rules:{
@@ -891,25 +911,31 @@ $(document).ready(function(){
       {
         'required':true
       },
+      'interest[]':{
+        required:true
+      }
     },messages:{
       'first_name':{
-        'required':'First Name field is required.',
+        'required':'First Name is required.',
       },
       'last_name':{
-        'required':'Last Name field is required.'
+        'required':'Last Name is required.'
       },
       'email':{
         'email': 'Please enter a valid email address.',
-        'required':'Email field is required.'
+        'required':'Email is required.'
       },
       'company_name':{
-        'required':'Company Name field is required.',
+        'required':'Company Name is required.',
       },
       'phone_number':{
-        'required' :'Contact Number field is required.',
+        'required' :'Contact Number is required.',
         'number' :'Please enter a valid contact number.',
         'minlength' :'Please enter a valid contact number.',
         'maxlength' :'Please enter a valid contact number.',
+      },
+      'interest[]':{
+        'required':'This field is required'
       }
     },submitHandler:function(form){
       form.submit();

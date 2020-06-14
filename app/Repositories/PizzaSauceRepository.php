@@ -138,6 +138,7 @@ class PizzaSauceRepository
                 $sauce = $query->select('pizza_sauce_master.*', 'store_pizza_sauce.custom_price as custom_price')->first();
             }
             else{
+                
                 $sauce = $query->select('pizza_sauce_master.*')->first();
             }
             return $sauce; 

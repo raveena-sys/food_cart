@@ -76,54 +76,52 @@
         <hr>
         @endforeach
         @endif
-    </div>
-
-
+      </div>
     @else
-    <div class="containers">
+      <div class="containers">
 
-      {!!isset($v['size_master_name'])?'<p><strong>Pizza Size:</strong> '.$v['size_master_name'].'</p>':''!!}
+        {!!isset($v['size_master_name'])?'<p><strong>Pizza Size:</strong> '.$v['size_master_name'].'</p>':''!!}
 
-      {!!isset($v['crust_master_name'])?'<p><strong>Pizza Crust:</strong> '.$v['crust_master_name'].'</p>':''!!}
+        {!!isset($v['crust_master_name'])?'<p><strong>Pizza Crust:</strong> '.$v['crust_master_name'].'</p>':''!!}
 
-      {!!isset($v['sauce_master_name'])?'<p><strong>Pizza Sauce:</strong> '.$v['sauce_master_name'].'</p>':''!!}
+        {!!isset($v['sauce_master_name'])?'<p><strong>Pizza Sauce:</strong> '.$v['sauce_master_name'].'</p>':''!!}
 
-      @if(!empty($v['dip_master_name']))
-      <p>
-        <strong>Dips:</strong>
-        {{implode(", ",$v['dip_master_name'])}}
+        @if(!empty($v['dip_master_name']))
+        <p>
+          <strong>Dips:</strong>
+          {{implode(", ",$v['dip_master_name'])}}
+            
+          <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
+        </p>
+        @endif
+
+        @if(!empty($v['topping_master_name']))
+        <p>
+          <strong>
+        {{(!empty($v['topping_from']) && $v['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
+          {{implode(', ', $v['topping_master_name'])}}
+          <!-- @foreach($v['topping_master_name'] as $val1)
+          {{rtrim($val1, ", ")}}
+          @endforeach -->
+          <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
+        </p>
+        @endif
+        @if(!empty($v['topping_sauce_master_name']))
+        <p>
+          <strong>
+        Sauces:</strong>
+        {{implode(', ', $v['topping_sauce_master_name'])}}
           
-        <!-- (${{isset($v['dip_master_price'])?$v['dip_master_price']:0}}) -->
-      </p>
-      @endif
-
-      @if(!empty($v['topping_master_name']))
-      <p>
-        <strong>
-      {{(!empty($v['topping_from']) && $v['topping_from']=='topping_wing_flavour')?"Wings Flavour":"Toppings"}}:</strong>
-        {{implode(', ', $v['topping_master_name'])}}
-        <!-- @foreach($v['topping_master_name'] as $val1)
-        {{rtrim($val1, ", ")}}
-        @endforeach -->
-        <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
-      </p>
-      @endif
-      @if(!empty($v['topping_sauce_master_name']))
-      <p>
-        <strong>
-      Sauces:</strong>
-      {{implode(', ', $v['topping_sauce_master_name'])}}
-        
-        <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
-      </p>
-      @endif
-      @if(!empty($v['extra_cheese_name']))
-      <p>
-        <strong>Cheese:</strong> Extra Cheese
-         <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
-      </p>
-      @endif
-    </div>
+          <!-- ($ {{isset($v['topping_master_price'])?$v['topping_master_price']:0}}) -->
+        </p>
+        @endif
+        @if(!empty($v['extra_cheese_name']))
+        <p>
+          <strong>Cheese:</strong> Extra Cheese
+           <!-- (${{isset($v['extra_cheese_name'])?$v['extra_cheese_name']:0}}) -->
+        </p>
+        @endif
+      </div>
     @endif
 
 

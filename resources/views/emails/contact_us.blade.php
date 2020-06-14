@@ -37,7 +37,17 @@
                     </p>
                     <p style="margin-bottom: 0;"><strong>Company Name: </strong>{{!empty($data['company_name']) ? ucfirst($data['company_name']) : ''}}
                     </p>
-                    
+                    <p style="margin-bottom: 0;"><strong>Areas of Interest: </strong>
+                        @if(!empty($data['interest_area']))
+                        @php
+                        $area_of_interest = explode(', ',$data['interest_area'])
+                        @endphp
+                        @foreach($area_of_interest as $k => $v)
+                        <p>{!!ucfirst(str_replace('_', ' ', $v))!!}</p>
+                        @endforeach
+                        @endif
+
+                    </p>
                     <p style="margin-bottom: 0;"><strong>Phone Number: </strong>{{!empty($data['phone_number']) ? ucfirst($data['phone_number']) : ''}}
                     </p>
                     

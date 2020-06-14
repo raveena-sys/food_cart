@@ -7,8 +7,6 @@ use Illuminate\Support\Str;
 
 use Datatables;
 use App\Common\Helpers;
-use App\Http\Requests\ContactUsRequest;
-
 use App\Models\ContactUs;
 use App\Models\User;
 use \DB;
@@ -37,6 +35,7 @@ class ContactUsRepository
             $post['email'] = $request['email'];
             $post['phone_number'] = $request['phone_number'];
             $post['company_name'] = $request['company_name'];
+            $post['interest_area'] = implode(', ', $request['interest']);
 
             $this->ContactUs->create($post);
             $admin_email = User::where('user_role', 'admin')->first();
@@ -45,6 +44,7 @@ class ContactUsRepository
             $data['name'] = $post['first_name'].' '.$post['last_name'];
             $data['email'] = $post['email'];
             $data['company_name'] = $post['company_name'];
+            $data['interest_area'] = $post['interest_area'];
             $data['admin_email'] = 'raveenajadon304@gmail.com';//isset($admin_email->email)?$admin_email->email:'raveena1@mailinator.com';
             $data['phone_number'] = $post['phone_number'];
             $data['subject'] = "Customer (Contact Us)";

@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label>Price</label>
-                    <input class="form-control" type="text" name="price" placeholder="Price" value="{{$detail->price}}" maxlength="250">
+                    <input class="form-control" type="text" name="price" placeholder="Price" value="{{isset($detail->custom_price)?$detail->custom_price:$detail->price}}" maxlength="250">
                 </div>
                 <div class="form-group">
                     <label>Description</label>

@@ -20,6 +20,7 @@ class ContactUs  extends Model
         'company_name',
         'phone_number',
         'status',
+        'interest_area',
         'created_at',
         'updated_at',
         'created_by',

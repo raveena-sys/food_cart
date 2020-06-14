@@ -36,6 +36,7 @@
               <td>&nbsp;</td>
               <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
             </tr>
+            <input type="hidden" name="product_subtotal" value="{{isset($subtotal)?number_format($subtotal,2):0}}"> 
             
             @php
               $deliveryCharge = Session::has('orderType') && Session::get('orderType') =='delivery'?number_format(Session::get('deliveryCharge'), 2):'0.00';
@@ -53,6 +54,7 @@
 
               }
             @endphp
+            <input type="hidden" name="discount_val" value="{{isset($discount_val)?$discount_val:0}}"> 
             <tr>
               <td>Discount:</td>
               <td>&nbsp;</td>
@@ -63,6 +65,7 @@
               <td>&nbsp;</td>
               <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
             </tr>
+            <input type="hidden" name="product_total" value="{{isset($subtotal)?number_format($subtotal,2):0}}"> 
             @php
             $subtotal += $deliveryCharge;
             $gst_price = Session::has('gst_per') && Session::get('gst_per')>0?(Session::get('gst_per')*$subtotal)/100:0.00;
@@ -81,7 +84,7 @@
               <td style="text-align: right;"> ${{number_format($subtotal,2)}}</td>
             </tr>
             <tr>
-              <td>GST({{Session::has('gst_per')?Session::get('gst_per'):0}}%)</td>
+              <td>GST ({{Session::has('gst_per')?Session::get('gst_per'):0}}%):</td>
               <td>&nbsp;</td>
               <td style="text-align: right;"> ${{number_format($gst_price,2)}}</td>
             </tr>
@@ -101,7 +104,7 @@
       <div class="order_box">
         <h2>PAYMENT INFORMATION</h2>
         <div class="order_box_inner">
-          <h3>Balance Due :  ${{isset($total)?number_format($total,2):0}}</h3>
+          <h3>Balance Due:  ${{isset($total)?number_format($total,2):0}}</h3>
           <p>
             <span style="color:red">*</span>Payment Type
           </p>
@@ -110,7 +113,7 @@
             <li>
               <div class="form-check">
                 <label>
-                  <input type="radio" name="pay_method" value="cod" required> 
+                  <input type="radio" name="pay_method" value="paypal" required> 
                   <span class="label-text">Pay with Paypal</span>
                 </label>
                 <input type="hidden" name="subtotal" value="{{isset($subtotal)?number_format($subtotal,2):0}}"> 
@@ -121,7 +124,7 @@
             <li>
               <div class="form-check">
                 <label>
-                  <input type="radio" name="pay_method" value="card_payment"> <span class="label-text">Pay with Credit / Debit</span>
+                  <input type="radio" name="pay_method" value="card_payment"> <span class="label-text">Pay with Credit/ Debit</span>
                 </label>
               </div>
             </li>

@@ -46,7 +46,7 @@ class ContactUsController extends Controller
         }
     }
 
-    public function addContactUs(ContactUsRequest $request)
+    public function addContactUs(Request $request)
     {
 
         try {

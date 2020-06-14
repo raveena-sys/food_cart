@@ -28,7 +28,53 @@
                     </li>
                     <li>
                         <input type="text" placeholder="Contact Number" name="phone_number">
-                    </li>
+                    </li>  
+                    <div class="contact_checkbox">
+                        <label>Areas of Interest</label>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input type="checkbox" name="interest[]" value="online_delivery_cart"> 
+                            <span class="label-text">Online Delivery Cart</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="android_&_iOS_applications"> <span class="label-text">Android & iOS Applications</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="social_media_marketing"> <span class="label-text">Social Media Marketing</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="reputation_management"> <span class="label-text">Reputation Management</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="search_engine_optimization"> <span class="label-text">Search Engine Optimization</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="search_engine_marketing"> <span class="label-text">Search Engine Marketing</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="restaurant_branding"> <span class="label-text">Restaurant Branding</span>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="interest[]" value="food_&_beverage_marketing Kit"> <span class="label-text">Food & Beverage Marketing Kit</span>
+                            </label>
+                        </div>
+                        <label id="interest[]-error" class="error" for="interest[]"></label>
+                    </div> 
+
                     <button id="btnAdd" class="btn btn-danger ripple-effect text-uppercase min-w130" type="submit">Send<span id="btnAddLoader" class="spinner-border spinner-border-sm" style="display: none;"></span></button>
                 </div>
             </form>

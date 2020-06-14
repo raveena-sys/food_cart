@@ -88,7 +88,7 @@ class OrderController extends Controller
 
 	    	$store_email = StoreMaster::where('id', Session::get('store_id'))->first();
 	    	date_default_timezone_set('MST');
-	    	$discount = '0.00';
+	    	/*$discount = '0.00';
 	    	if(Session::has('discount') && Session::has('coupon_type')){
 	    		$coupon_type = Session::get('coupon_type');
 	    		if($coupon_type == 'fixed_discount'){
@@ -98,7 +98,7 @@ class OrderController extends Controller
 	              $discount = Session::get('discount').'%';
 
 	            }
-	    	}
+	    	}*/
 	    	
 	    	$order = array(
 	    			'store_id' => Session::get('store_id'),
@@ -106,8 +106,9 @@ class OrderController extends Controller
 	    			'category_id' => Session::get('category_id'),
 	    			'cart_item' => json_encode(Session::get('cartItem')),
 	    			'extra_item' => json_encode(Session::get('cartextra')),
-	    			'discount' => $discount,
+	    			'discount' => $request->discount_val,
 	    			'gst' => $request->gst_price,
+	    			'gst_per' => Session::has('gst_per')?Session::get('gst_per'):0,
 	    			'name' => $request->name,
 	    			'email' => $request->email,
 	    			'mobile_no' => $request->mobile_no,
@@ -116,6 +117,9 @@ class OrderController extends Controller
 	    			'state' => $request->state,
 	    			'status' => 1,  
 	    			'subtotal' =>$request['subtotal'],	
+
+	    			'product_subtotal' =>$request['product_subtotal'],	
+	    			'product_total' =>$request['product_total'],	
 	    			'total' => $request->total, 		
 	    			//'delivery_ins' => $request->delivery_ins, 		
 	    			'delivery_charge' => Session::has('deliveryCharge')?Session::get('deliveryCharge'):0, 		
@@ -144,7 +148,7 @@ class OrderController extends Controller
 
             if($mail==1){
 				Session::flush();
-				Session::flash('orderSuccessMsg', 'Order placed successfully, Check your mail to get order detail');
+				Session::flash('orderSuccessMsg', 'Your order has been placed successfully. Please check your email for confirmation and other details. Thank you!');
 		    	return redirect('/');
 
             }else{

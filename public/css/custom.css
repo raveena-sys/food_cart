@@ -301,7 +301,7 @@ footer {
     margin-bottom: 20px;
 }
 
-.contact_inner li {
+.contact_inner li, .contact_inner .contact_checkbox{
     list-style: none;
     display: block;
     padding: 15px 40px;

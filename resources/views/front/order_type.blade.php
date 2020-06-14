@@ -66,7 +66,7 @@
             </div>
             <div class="home_icon_list">
                @if($store->pickup_delivery == 'delivery' || $store->pickup_delivery == 'both')
-                <a href="{{ URL::To('pickup/menu/0') }}">
+                <a href="{{ URL::To('delivery/menu/0') }}">
                     <div class="home_icon_list_icon">
                         <div class="menu_icon"><img src="{{ asset('images/Delivery.png')}}" /></div>
                     </div>

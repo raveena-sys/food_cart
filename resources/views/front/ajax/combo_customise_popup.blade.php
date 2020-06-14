@@ -146,7 +146,7 @@
         <input type="hidden" name="product_custom_price"  class="product_custom_price" value="0.00">
         <input type="hidden" name="product_price"  id="product_price" value="0.00">
 
-        <div class="error topping_error"></div>
+        <div class="error topping_error" style="color:red;"></div>
       </div>
       <div class="rightSide">
         <button type="button" data-key={{$sessionkey}} data-product_id="{{isset($product->id)?$product->id:''}}" data-combo_product_id="{{isset($prodid)?$prodid:'0'}}" class="btn btn-success custom_save">Save</button>
