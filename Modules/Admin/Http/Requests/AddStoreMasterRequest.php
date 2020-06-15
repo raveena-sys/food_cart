@@ -55,8 +55,8 @@ class AddStoreMasterRequest extends FormRequest
             'password' => 'required|min:8',
             'phone_number' => [
                 'required',
-                'numeric',
-                'digits_between:9,13',
+                //'numeric',
+                //'digits_between:9,13',
                 Rule::unique('users')->where(function ($query)  {
                     return $query->where('status', '!=', 'deleted');
                     }
@@ -92,7 +92,7 @@ class AddStoreMasterRequest extends FormRequest
             'password.min' => 'Please enter atleast 8 characters',
 
             'phone_number.required' => 'This field is required.',
-            'phone_number.numeric' => 'Please Enter phone number in digits',
+            //'phone_number.numeric' => 'Please Enter phone number in digits',
             'phone_number.unique' => 'The phone number has already been taken.',
             'phone_number.digits_between' => 'Phone number must be between 9 and 13 digits.',
             'phone_number_country_code.required' => ' This field is required.',

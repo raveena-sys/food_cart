@@ -58,8 +58,8 @@ class EditStoreMasterRequest extends FormRequest
             ],
             'phone_number' => [
                 'required',
-                'numeric',
-                'digits_between:9,13',
+                //'numeric',
+                //'digits_between:9,13',
                 Rule::unique('users')->where(function ($query) use($id) {
                         return $query->where('id', '<>', $id)->where('status', '<>', 'deleted');
                     }
@@ -87,8 +87,8 @@ class EditStoreMasterRequest extends FormRequest
             'email.email' => 'Please enter valid email Id.',
             //'email.check_user_deleted' => 'Email has already been taken.',
             'phone_number.required' => 'This field is required.',
-            'phone_number.numeric' => 'Please Enter phone number in digits',
-            'phone_number.digits_between' => 'Phone number must be between 9 and 13 digits.',
+            //'phone_number.numeric' => 'Please Enter phone number in digits',
+            //'phone_number.digits_between' => 'Phone number must be between 9 and 13 digits.',
             'phone_number_country_code.required' => ' This field is required.',
             'image.required' => 'This field is required.',
             'image.size' => 'Profile image size should not greater than 2 MB.',

@@ -98,7 +98,7 @@
                             <li><img src="{{asset('img/star.png')}}"></li>
                             <li><img src="{{asset('img/star.png')}}"></li> -->
                                     <li class="address">
-                                        {{isset($val->address1)?'#'.$val->address1. ', '. $val->city->name.' '.$val->state->name.' | ':''}}
+                                        {{isset($val->address1)?'#'.$val->address1. ', '. $val->city->name.', '.$val->state->name. ', '.$val->pincode.' | ':''}}
                                         {{isset($val->phone_number)?$val->phone_number:''}}
 
                                     </li>

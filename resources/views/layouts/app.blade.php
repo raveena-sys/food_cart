@@ -75,14 +75,12 @@
   })
 
   
-  $(document).ready(function(){
-      var scrollTopOffest = $("#header").outerHeight(true) + $('#menuNav').outerHeight(true);
-    $( "a.subcategory" ).click(function( event ) {
-        event.preventDefault();
-        
+    $(document).ready(function(){
+        var scrollTopOffest = $("#header").outerHeight(true) + $('#menuNav').outerHeight(true);
+        $( "a.subcategory" ).click(function( event ) {
+        event.preventDefault();       
 
-        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - scrollTopOffest}, 1000);
-     
+        $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - scrollTopOffest}, 1000);     
 
         console.log(scrollTopOffest)
     });

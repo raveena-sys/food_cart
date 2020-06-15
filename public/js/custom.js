@@ -275,8 +275,8 @@ $(document).on('click', '.customise_item', function () {
               //focusOnChange:true
             });
             //document.getElementsByClassName('slick-next')[0].click()
-            console.log($(this).find("input[type=radio]:checked").parents('slick-slide').attr('class'));
-            //$(this).find("input[type=radio]:checked").parents('slick-slide')[0].click();
+            console.log($(this).find("input[type=radio]:checked").parents('.slick-slide').attr('data-slick-index'));
+            $(this).find("input[type=radio]:checked").parents('.slick-slide')[0].click();
             $carousel.slick( "goTo", slickIndex );
             /*$(this).on('afterChange', function (event, slick, currentSlide) {
               if (currentSlide === slickIndex) {
