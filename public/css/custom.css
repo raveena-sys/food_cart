@@ -2686,3 +2686,46 @@ a img.logo {
 ::-webkit-scrollbar-thumb:hover {
   background: grey; 
 }
+
+/* about us page css start */
+
+.about-us-page p{ font-size: 16px;line-height: 30px;}
+.about-us-page h2{
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #000;
+}
+.about-us-page h3{
+    font-size: 18px;
+    color: #00ab00;
+    /* color: #ff0000; */
+}
+.about-us-page .btn{
+    margin-bottom: 15px;
+}
+.about-us-page section{
+    padding: 20px 30px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.about-us-page ul{
+    list-style-image: url('../images/icon_li.png');
+    padding-left: 25px;
+}
+.about-us-page ul li{
+    font-size: 16px; margin-bottom: 10px;
+}
+.about-us-page .img-sec{
+    border-radius: 5px;
+    box-shadow: 0 0 8px 5px rgba(0,0,0,0.08);
+}
+.about-us-page .mb-2{
+   margin-bottom: 15px;
+}
+.about-us-page .sub-heading{
+    font-size: 16px;
+    color: #a2a0a0;
+}
+
+/* about us page css end */
