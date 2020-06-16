@@ -63,6 +63,9 @@ Route::get('pdfDownload', 'Front\OrderController@pdfDownload');
 Route::post('checkcoupon', 'Front\OrderController@checkcoupon');
 Route::post('sidesAddToCart', 'Front\StoreController@sidesAddToCart');
 Route::get('scroll', 'Front\HomeController@scroll');
+Route::get('integrated_digital_marketting', 'Front\HomeController@integrated_digital_marketting');
+Route::get('branded_food_ordering_platform', 'Front\HomeController@branded_food_ordering_platform');
+Route::get('digital_brochure', 'Front\HomeController@digital_brochure');
 /***************Web routes newly started************/
 
 

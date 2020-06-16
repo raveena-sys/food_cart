@@ -141,34 +141,34 @@ class HomeController extends Controller
         }
     }
 
-    /*public function ordersummary()
+    public function digital_brochure()
     {
         try {
-            return view('ordersummary');
+            return view('front.digital_brochure');
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function cartpage()
+    public function branded_food_ordering_platform()
     {
         try {
-            return view('cartpage');
+            return view('front.branded_food_ordering_platform');
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function topping()
+    public function integrated_digital_marketting()
     {
         try {
-            return view('topping_master');
+            return view('front.integrated_digital_marketting');
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function aboutus()
+ /*   public function aboutus()
     {
         try {
             return view('about_us');
