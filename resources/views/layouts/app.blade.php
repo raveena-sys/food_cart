@@ -85,6 +85,10 @@
         console.log(scrollTopOffest)
     });
 });
+
+$(document).ready(function(){
+  $('.aboutUsSlider').slick();
+});
     </script>
 </body>
 

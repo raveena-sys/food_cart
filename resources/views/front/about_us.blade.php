@@ -41,14 +41,21 @@
                     <a class="btn btn-success" title="Launching soon" data-toggle="tooltip">Franchise Development</a>
                 </div>
                 <div class="col-lg-6">
-                    <img src="{{asset('images/rice_bowl.jpg')}}" class="img-responsive img-sec">
+                <div class="aboutUsSlider">
+                    <div class="item"> <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec"></div>
+                    <div class="item"> <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec"></div>
+                    <div class="item"> <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec"></div>
+                    <div class="item"> <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec"></div>
+                    <div class="item"> <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec"></div>
+                </div>
+                   
                 </div>
             </div>
         </section>
         <section>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{asset('images/rice_bowl.jpg')}}" class="img-responsive img-sec">
+                    <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec">
                 </div>
                 <div class="col-lg-6">
                     <h2>
@@ -100,7 +107,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <img src="{{asset('images/rice_bowl.jpg')}}" class="img-responsive img-sec">
+                    <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec">
                 </div>
             </div>
         </section>
@@ -108,7 +115,7 @@
         <section>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{asset('images/rice_bowl.jpg')}}" class="img-responsive img-sec">
+                    <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec">
                 </div>
                 <div class="col-lg-6">
                     <h2>
@@ -205,7 +212,7 @@
                     <a class="btn btn-success" href="http://freefoodcart.com/contact_us">Contact Us Today!</a>
                 </div>
                 <div class="col-lg-6">
-                    <img src="{{asset('images/rice_bowl.jpg')}}" class="img-responsive img-sec">
+                    <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec">
                 </div>
 
             </div>
@@ -214,7 +221,7 @@
         <section>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{asset('images/rice_bowl.jpg')}}" class="img-responsive img-sec">
+                    <img src="{{asset('images/dummy.jpg')}}" class="img-responsive img-sec">
                 </div>
                 <div class="col-lg-6">
                     <h2 class="mb-2">

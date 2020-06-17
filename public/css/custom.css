@@ -2710,11 +2710,15 @@ a img.logo {
     border-radius: 10px;
 }
 .about-us-page ul{
-    list-style-image: url('../images/icon_li.png');
-    padding-left: 25px;
+    padding-left: 0;
 }
 .about-us-page ul li{
     font-size: 16px; margin-bottom: 10px;
+    background: url('../images/icon_li.png') no-repeat left 5px; /* <-- change `left` & `top` too for extra control */
+    padding: 3px 0px 3px 28px;;
+    /* reset styles (optional): */
+    list-style: none;
+    margin: 0;
 }
 .about-us-page .img-sec{
     border-radius: 5px;
@@ -2727,5 +2731,7 @@ a img.logo {
     font-size: 16px;
     color: #a2a0a0;
 }
-
+.aboutUsSlider .item:after{
+    display: none;
+}
 /* about us page css end */
