@@ -18,7 +18,7 @@
 
 <div class="container store_list_inner">
     <div class="row menu-wrapper">
-        <div class="col-xs-12">
+        <div class="col-xs-12 scroll-menu">
             <div class="menu-nav"  id="menuNav">
                 <a href="{{url(Session::get('orderType').'/menu/0')}}" class="">Home</a>
                 @php

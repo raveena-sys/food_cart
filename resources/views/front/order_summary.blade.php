@@ -68,7 +68,7 @@
         </li>
       </div>
     </div>
-    <div class="order_cart_summary">
+    <div class="col-lg-6 order_cart_summary">
         {!!view('front.ajax.order_summary')->render()!!}
 </div>
    

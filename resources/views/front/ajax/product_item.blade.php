@@ -13,7 +13,7 @@ $replaceArray = array('_', 'and');
     @foreach($subcategory as $value)
 
     <section id="{{str_replace($searchArray, $replaceArray, $value->name)}}">
-        <div class="sub_cat_list">
+        <div class="sub_cat_list" id="{{str_replace($searchArray, $replaceArray, $value->name)}}">
             <div class="menu__subcategory__inner">
                 <span class="subcategory__name">{{$value->name}}</span>
             </div>

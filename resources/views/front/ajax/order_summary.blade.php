@@ -1,4 +1,4 @@
-    <div class="col-lg-6">
+    <div class="col-lg-12">
     <div class="order_box">
       <h2>ORDER SUMMARY</h2>
       <div class="order_box_inner table-responsive">
@@ -100,7 +100,7 @@
     <!-- <a href="{{url('checkout/user')}}" class="btn_chng_add">Change Your Address</a> -->
   
   </div>
-    <div class="col-lg-6">
+    <div class="col-lg-12">
       <div class="order_box">
         <h2>PAYMENT INFORMATION</h2>
         <div class="order_box_inner">

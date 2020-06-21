@@ -123,8 +123,8 @@
                             <td class="title ">
                                 <img src="{{asset('img/logo_black.png')}}" style="width:100px; max-width:100px;">
                             </td>
-                            <td>&nbsp;</td>
-                            <td >
+                            <td style="width:33%; max-width:100px;">&nbsp;</td>
+                            <td style="width:33%; max-width:100px;">
                                 Invoice #: {{str_pad($orderdata->id,6,"0", STR_PAD_LEFT)}}
                                 <br>
                                 Time Of Order: {{isset($orderdata->created_at)?date('h:i A', strtotime($orderdata->created_at)):''}}
@@ -140,13 +140,14 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td>
+                            <td style="width:33%; max-width:100px;">
                              Restaurant:
-                            </td>
-                            <td>
+                            </br>
                              {{isset($orderdata->store->name)?$orderdata->store->name:''}}       
                             </td>
-                            <td >
+                            <td style="width:33%; max-width:100px;">&nbsp;
+                            </td>
+                            <td style="width:33%; max-width:100px;">
                                 {{isset($orderdata->name)?$orderdata->name:''}}<br>
                                 {{isset($orderdata->mobile_no)?$orderdata->mobile_no:''}}<br>
                                 {{isset($orderdata->email)?$orderdata->email:''}}<br>

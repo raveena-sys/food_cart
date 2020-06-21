@@ -20,7 +20,9 @@ $(document).ready(function (e) {
       }
     }
   })
-  $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
+  if($("div").hasClass('cartWrapper')){
+    $(".cartWrapper").scrollTop($('.cartWrapper')[0].scrollHeight);
+  }
 });
 /*$(document).ready(function (e) {
   $('.selectitemSlider').slick({
@@ -36,12 +38,46 @@ $(document).ready(function (e) {
 });
 */
 $(document).ready(function (e) {
+  if ($(window).scrollTop() > 30) {
+      $(".navbar-me").addClass("fixed-me");
+    } else {
+      $(".navbar-me").removeClass("fixed-me");
+    }
   $(window).scroll(function () {
     if ($(this).scrollTop() > 30) {
       $(".navbar-me").addClass("fixed-me");
     } else {
       $(".navbar-me").removeClass("fixed-me");
     }
+    $('.sub_cat_list').each(function() {
+      if($(window).scrollTop() >= $(this).offset().top-150) {
+        $('.subcategory').removeClass('active');
+        var id = $(this).attr('id');
+        $('.subcategory[href="#'+ id +'"]').addClass('active');        
+      }
+    });
+     if( $('.scroll-menu').length ){ 
+        // Dynamically set the width of #ds-sub-menu li by adding the widths of all the contained li's
+        var totalWidth = $(".scroll-menu").outerWidth()
+
+        $('.scroll-menu div').css('width', totalWidth);
+
+        var myScrollPos = $('.scroll-menu .active').offset().left + $('.scroll-menu .active').outerWidth(true) / 2 + $('.scroll-menu .menu-nav').scrollLeft() - $('.scroll-menu .menu-nav').width() / 2;
+
+        $('.scroll-menu .menu-nav').scrollLeft(myScrollPos);
+
+        $(window).on("orientationchange",function(){
+            var totalWidth = $(".scroll-menu").outerWidth()
+
+            $('.scroll-menu div').css('width', totalWidth);
+
+            var myScrollPos = $('.scroll-menu .active').offset().left + $('.scroll-menu .active').outerWidth(true) / 2 + $('.scroll-menu .menu-nav').scrollLeft() - $('.scroll-menu .menu-nav').width() / 2;
+
+            $('.scroll-menu .menu-nav').scrollLeft(myScrollPos);
+
+        });
+    }
+
   });
 });
 //jQuery(document).ready(function () {
@@ -535,10 +571,6 @@ $(document).on('click', '.add_combo', function (){
   }   
 });
 
-
-
-
-
 //add item to cart on normal product customise add to cart button
 $(document).on('click', '.custom_add_to_cart', function (){
   var input = $('.topping_wing_master:checked').length;
@@ -667,7 +699,7 @@ function changeCustomization(){
   $('.product_custom_price').val(price.toFixed(2));
 }
 
-
+//Get extra cheese on change of size master id
 $(document).on('click', '.sizem_id', function(){
   var id = $(this).attr('data-id');
   $('.show_cheese').show();
@@ -857,32 +889,6 @@ function sidesAddToCart(values){
   })
 }
 
-// $(document).ready(function(){
-//   $('.subcategory').on('click', function(event) {
-//       $(this).parent().find('a').removeClass('active');
-//       $(this).addClass('active');
-//   });
-
-
-  
-//   $(window).on('scroll', function() {
-//       $('.sub_cat_list').each(function() {
-//           if($(window).scrollTop() >= $(this).offset().top-$('.is-sticky').height()) {
-//               $('.subcategory').removeClass('active');
-//               var id = $(this).attr('id');
-//               $('.subcategory[href="#'+ id +'"]').addClass('active');
-//           }
-//           if ($(".menu-nav").addClass('is-sticky')) {
-   
-//             $('.navbar-me').css('margin-top','-85px');
-//           }
-//           else if($(".menu-nav").removeClass('is-sticky')){
-//             $('.navbar-me').css('margin-top','0px');
-//           }
-//       });
-//   });
-
-// });
 //Contact form validation
 $(document).ready(function(){
   $('#add_contactus_form').validate({

@@ -141,34 +141,34 @@ class HomeController extends Controller
         }
     }
 
-    public function digital_brochure()
+    /*public function ordersummary()
     {
         try {
-            return view('front.digital_brochure');
+            return view('ordersummary');
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function branded_food_ordering_platform()
+    public function cartpage()
     {
         try {
-            return view('front.branded_food_ordering_platform');
+            return view('cartpage');
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
-    public function integrated_digital_marketting()
+    public function topping()
     {
         try {
-            return view('front.integrated_digital_marketting');
+            return view('topping_master');
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
- /*   public function aboutus()
+    public function aboutus()
     {
         try {
             return view('about_us');
@@ -193,6 +193,26 @@ class HomeController extends Controller
              $cms = $this->cms->where(['page_slug'=>'about_us'])->first();
              $links = SocialLink::whereNULL('store_id')->first();
              return view('front.about_us', ['cms' => $cms, 'links' => $links]);
+        } catch (\Exception $e) {
+            return Response::json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    public function integrated_digital_marketing()
+    {
+        try{
+             $cms = $this->cms->where(['page_slug'=>'about_us'])->first();
+             $links = SocialLink::whereNULL('store_id')->first();
+             return view('front.integrated_digital_marketing', ['cms' => $cms, 'links' => $links]);
+        } catch (\Exception $e) {
+            return Response::json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+     public function branded_food_ordering_platform()
+    {
+        try{
+             $cms = $this->cms->where(['page_slug'=>'about_us'])->first();
+             $links = SocialLink::whereNULL('store_id')->first();
+             return view('front.branded_food_ordering_platform', ['cms' => $cms, 'links' => $links]);
         } catch (\Exception $e) {
             return Response::json(['success' => false, 'message' => $e->getMessage()]);
         }
